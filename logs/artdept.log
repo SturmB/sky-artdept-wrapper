@@ -1,0 +1,1582 @@
+2016-04-01 08:48:02,465 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-01 08:48:06,846 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-01 08:48:13,177 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:13,177 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:13,200 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:13,200 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:13,200 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:13,379 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:13,379 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:13,379 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:13,379 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:13,379 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:13,571 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:13,571 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:13,571 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:13,571 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:13,571 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:13,779 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:13,779 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:13,779 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:13,779 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:13,779 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:13,947 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:13,947 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:13,947 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:13,947 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:13,947 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:14,131 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:14,131 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:14,131 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:14,131 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:14,131 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:15,555 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:15,555 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 08:48:15,555 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:15,555 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:15,556 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 08:48:15,843 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 08:48:15,843 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 08:48:15,843 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:15,843 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:15,843 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 08:48:19,298 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-01 08:48:19,298 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-01 08:48:19,299 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-01 08:48:19,299 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-01 08:48:19,314 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 08:48:19,315 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 08:48:19,316 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 08:48:19,335 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@7a27a90f)
+2016-04-01 08:48:19,335 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-01 08:48:19,335 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-01 08:48:19,337 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-01 08:48:19,337 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 08:48:19,337 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@7a27a90f)
+2016-04-01 08:48:19,337 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 08:48:19,338 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-01 08:48:19,359 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-01 08:48:19,569 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-01 08:48:19,569 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-01 08:48:19,569 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: d61a8d8b-2d48-4495-b8bf-fa5a80e04b85)
+2016-04-01 08:48:19,644 DEBUG i.c.s.t.JobManager [Thread-4] In the middle of getting a Job.
+2016-04-01 08:48:19,644 DEBUG i.c.s.t.JobManager [Thread-4] Job_Completed: null
+2016-04-01 08:48:19,648 TRACE i.c.s.t.JobManager [Thread-4] exit with(info.chrismcgee.sky.beans.Job@4f903a09)
+2016-04-01 08:48:19,650 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-01 08:48:19,650 TRACE i.c.s.a.ArtDept [Thread-4] exit with(10)
+2016-04-01 08:48:19,650 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-01 08:48:19,681 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 6569
+2016-04-01 08:48:19,686 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/425000.TXT
+2016-04-01 08:48:19,700 TRACE i.c.s.a.ArtDept [Thread-4] Pattern file exists! Reading from it now.
+2016-04-01 08:48:19,707 TRACE i.c.s.a.ArtDept [Thread-4] Upper Pattern is: 
+2016-04-01 08:48:19,707 TRACE i.c.s.a.ArtDept [Thread-4]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-01 08:48:19,708 DEBUG i.c.s.a.ArtDept [Thread-4] Between mods, sb is currently FACETIME BUSIENESS RESOUR
+2016-04-01 08:48:19,708 DEBUG i.c.s.a.ArtDept [Thread-4] After second mod, sb is: FACETIME BUSIENESS RESOUR
+2016-04-01 08:48:19,708 DEBUG i.c.s.a.ArtDept [Thread-4] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-01 08:48:19,708 DEBUG i.c.s.a.ArtDept [Thread-4] Company Name: FACETIME BUSIENESS RESOUR with a length of 25
+2016-04-01 08:48:19,708 DEBUG i.c.s.a.ArtDept [Thread-4] Company PO: 30814 with a length of 5
+2016-04-01 08:48:19,709 DEBUG i.c.s.a.ArtDept [Thread-4] Shipping Date:  with a length of 0
+2016-04-01 08:48:19,709 DEBUG i.c.s.a.ArtDept [Thread-4] CSR: michelle
+2016-04-01 08:48:19,709 DEBUG i.c.s.a.ArtDept [Thread-4] Credit Card? true
+2016-04-01 08:48:19,709 DEBUG i.c.s.a.ArtDept [Thread-4] Ship Days: 3
+2016-04-01 08:48:19,709 TRACE i.c.s.a.ArtDept [Thread-4] Setting the Job bean's properties.
+2016-04-01 08:48:19,709 DEBUG i.c.s.a.ArtDept [Thread-4] This is an AA order.
+2016-04-01 08:48:19,709 DEBUG i.c.s.a.ArtDept [Thread-4] Bean set (inside readText).
+2016-04-01 08:48:19,709 TRACE i.c.s.a.ArtDept [Thread-4] exit with(info.chrismcgee.sky.beans.Job@4f903a09)
+2016-04-01 08:48:19,709 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 08:48:19,710 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 08:48:19,710 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 08:48:19,711 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 08:48:19,711 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 08:48:19,711 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 08:48:19,712 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 08:48:19,726 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(scriptRunner)
+2016-04-01 08:48:19,726 DEBUG i.c.s.a.ScriptManager [Thread-4] Username will be apache
+2016-04-01 08:48:19,726 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompany: ACCENTS
+2016-04-01 08:48:19,763 DEBUG i.c.s.a.ScriptManager [Thread-4] Got shipDate: 12/30/99
+2016-04-01 08:48:19,763 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerName: FACETIME BUSIENESS RESOUR
+2016-04-01 08:48:19,763 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerPO: 30814
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] Got overruns: false
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] Got sampleShelf: false
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-01 08:48:19,764 TRACE i.c.s.a.ScriptManager [Thread-4] Prepare the AppleScript file to be executed.
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] scriptFolder and scriptFile variables set.
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 01. Getting Product ID: T-P8
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 02. Getting Product Detail: T-P8
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 03. Getting Quantity: 1000
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 04. Getting Flags: 0
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 05. Getting Reorder ID: 
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 06. Getting Packing Instructions: 
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 07. Getting Package Quantity: 25
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 08. Getting Case Quantity: 500
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 09. Getting Label Quantity: 0
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] 10. Getting Label Text: 
+2016-04-01 08:48:19,764 DEBUG i.c.s.a.ScriptManager [Thread-4] Reading the Proofing script into a string.
+2016-04-01 08:48:19,769 DEBUG i.c.s.a.ScriptManager [Thread-4] Setting the script engine.
+2016-04-01 08:48:19,935 TRACE i.c.s.a.ScriptManager [Thread-4] Running the script and evaluating the result.
+2016-04-01 08:48:52,932 DEBUG i.c.s.a.ScriptManager [Thread-4] 7
+2016-04-01 08:48:52,932 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 08:48:52,932 TRACE i.c.s.a.ScriptManager [Thread-4] Cancel button pressed.
+2016-04-01 08:48:52,932 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 08:48:52,932 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@7a27a90f)
+2016-04-01 08:48:52,932 TRACE i.c.u.ConnectionManager [Thread-4] entry params(Closing connection)
+2016-04-01 08:48:52,933 TRACE i.c.s.a.ArtDept [Thread-4] exit with(callScript)
+2016-04-01 08:48:52,937 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 08:48:52,937 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 08:48:55,505 TRACE i.c.s.a.ArtDept$9 [AWT-EventQueue-0] Cancel button pressed
+2016-04-01 09:05:46,872 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-01 09:05:48,188 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-01 09:05:51,048 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:51,049 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:05:51,049 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:51,049 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:51,050 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:05:51,194 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:51,194 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:05:51,195 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:51,195 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:51,195 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:05:51,426 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:51,426 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:05:51,427 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:51,427 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:51,427 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:05:51,658 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:51,659 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:05:51,659 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:51,659 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:51,659 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:05:51,851 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:51,851 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:05:51,851 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:51,851 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:51,852 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:05:52,010 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:52,010 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:05:52,010 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:52,011 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:52,011 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:05:52,954 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:52,955 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 09:05:52,955 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:52,955 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:52,955 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 09:05:53,234 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:05:53,234 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 09:05:53,235 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:05:53,235 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:05:53,235 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 09:05:53,714 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-01 09:05:53,714 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-01 09:05:53,714 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-01 09:05:53,715 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-01 09:05:53,715 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 09:05:53,716 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 09:05:53,716 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@38bff00d)
+2016-04-01 09:05:53,716 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-01 09:05:53,716 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-01 09:05:53,716 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 09:05:53,718 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-01 09:05:53,718 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 09:05:53,718 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@38bff00d)
+2016-04-01 09:05:53,718 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 09:05:53,719 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-01 09:05:53,742 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-01 09:05:53,965 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-01 09:05:53,965 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-01 09:05:53,965 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 9a3e7f78-8a76-4936-87e8-bcc334e3d906)
+2016-04-01 09:05:54,048 DEBUG i.c.s.t.JobManager [Thread-4] In the middle of getting a Job.
+2016-04-01 09:05:54,049 DEBUG i.c.s.t.JobManager [Thread-4] Job_Completed: null
+2016-04-01 09:05:54,050 TRACE i.c.s.t.JobManager [Thread-4] exit with(info.chrismcgee.sky.beans.Job@44f3651d)
+2016-04-01 09:05:54,052 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-01 09:05:54,053 TRACE i.c.s.a.ArtDept [Thread-4] exit with(10)
+2016-04-01 09:05:54,053 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-01 09:05:54,056 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 6569
+2016-04-01 09:05:54,061 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/425000.TXT
+2016-04-01 09:05:54,076 TRACE i.c.s.a.ArtDept [Thread-4] Pattern file exists! Reading from it now.
+2016-04-01 09:05:54,083 TRACE i.c.s.a.ArtDept [Thread-4] Upper Pattern is: 
+2016-04-01 09:05:54,083 TRACE i.c.s.a.ArtDept [Thread-4]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-01 09:05:54,083 DEBUG i.c.s.a.ArtDept [Thread-4] Between mods, sb is currently FACETIME BUSIENESS RESOUR
+2016-04-01 09:05:54,083 DEBUG i.c.s.a.ArtDept [Thread-4] After second mod, sb is: FACETIME BUSIENESS RESOUR
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Company Name: FACETIME BUSIENESS RESOUR with a length of 25
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Company PO: 30814 with a length of 5
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Shipping Date:  with a length of 0
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] CSR: michelle
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Credit Card? true
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Ship Days: 3
+2016-04-01 09:05:54,084 TRACE i.c.s.a.ArtDept [Thread-4] Setting the Job bean's properties.
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] This is an AA order.
+2016-04-01 09:05:54,084 DEBUG i.c.s.a.ArtDept [Thread-4] Bean set (inside readText).
+2016-04-01 09:05:54,084 TRACE i.c.s.a.ArtDept [Thread-4] exit with(info.chrismcgee.sky.beans.Job@44f3651d)
+2016-04-01 09:05:54,087 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(scriptRunner)
+2016-04-01 09:05:54,087 DEBUG i.c.s.a.ScriptManager [Thread-4] Username will be apache
+2016-04-01 09:05:54,087 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompany: ACCENTS
+2016-04-01 09:05:54,127 DEBUG i.c.s.a.ScriptManager [Thread-4] Got shipDate: 12/30/99
+2016-04-01 09:05:54,128 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerName: FACETIME BUSIENESS RESOUR
+2016-04-01 09:05:54,128 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerPO: 30814
+2016-04-01 09:05:54,128 DEBUG i.c.s.a.ScriptManager [Thread-4] Got overruns: false
+2016-04-01 09:05:54,129 DEBUG i.c.s.a.ScriptManager [Thread-4] Got sampleShelf: false
+2016-04-01 09:05:54,129 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-01 09:05:54,130 TRACE i.c.s.a.ScriptManager [Thread-4] Prepare the AppleScript file to be executed.
+2016-04-01 09:05:54,130 DEBUG i.c.s.a.ScriptManager [Thread-4] scriptFolder and scriptFile variables set.
+2016-04-01 09:05:54,130 DEBUG i.c.s.a.ScriptManager [Thread-4] 01. Getting Product ID: T-P8
+2016-04-01 09:05:54,130 DEBUG i.c.s.a.ScriptManager [Thread-4] 02. Getting Product Detail: T-P8
+2016-04-01 09:05:54,130 DEBUG i.c.s.a.ScriptManager [Thread-4] 03. Getting Quantity: 1000
+2016-04-01 09:05:54,130 DEBUG i.c.s.a.ScriptManager [Thread-4] 04. Getting Flags: 0
+2016-04-01 09:05:54,130 DEBUG i.c.s.a.ScriptManager [Thread-4] 05. Getting Reorder ID: 
+2016-04-01 09:05:54,131 DEBUG i.c.s.a.ScriptManager [Thread-4] 06. Getting Packing Instructions: 
+2016-04-01 09:05:54,131 DEBUG i.c.s.a.ScriptManager [Thread-4] 07. Getting Package Quantity: 25
+2016-04-01 09:05:54,131 DEBUG i.c.s.a.ScriptManager [Thread-4] 08. Getting Case Quantity: 500
+2016-04-01 09:05:54,131 DEBUG i.c.s.a.ScriptManager [Thread-4] 09. Getting Label Quantity: 0
+2016-04-01 09:05:54,131 DEBUG i.c.s.a.ScriptManager [Thread-4] 10. Getting Label Text: 
+2016-04-01 09:05:54,131 DEBUG i.c.s.a.ScriptManager [Thread-4] Reading the Proofing script into a string.
+2016-04-01 09:05:54,135 DEBUG i.c.s.a.ScriptManager [Thread-4] Setting the script engine.
+2016-04-01 09:05:54,159 TRACE i.c.s.a.ScriptManager [Thread-4] Running the script and evaluating the result.
+2016-04-01 09:06:16,290 DEBUG i.c.s.a.ScriptManager [Thread-4] 7
+2016-04-01 09:06:16,290 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 09:06:16,290 TRACE i.c.s.a.ScriptManager [Thread-4] Cancel button pressed.
+2016-04-01 09:06:16,290 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 09:06:16,290 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@38bff00d)
+2016-04-01 09:06:16,291 TRACE i.c.u.ConnectionManager [Thread-4] entry params(Closing connection)
+2016-04-01 09:06:16,291 TRACE i.c.s.a.ArtDept [Thread-4] exit with(callScript)
+2016-04-01 09:06:16,295 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 09:06:16,296 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 09:06:16,296 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:06:16,296 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:06:16,296 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:06:16,296 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:06:16,297 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 09:06:19,972 TRACE i.c.s.a.ArtDept$9 [AWT-EventQueue-0] Cancel button pressed
+2016-04-01 09:15:43,668 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-01 09:15:44,902 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-01 09:15:45,306 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:45,306 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:15:45,307 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:45,307 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:45,307 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:15:45,379 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:45,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:15:45,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:45,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:45,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:15:45,587 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:45,588 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:15:45,588 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:45,588 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:45,588 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:15:45,779 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:45,780 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:15:45,780 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:45,780 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:45,780 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:15:45,947 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:45,948 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:15:45,948 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:45,948 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:45,948 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:15:46,091 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:46,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:15:46,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:46,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:46,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:15:47,091 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:47,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 09:15:47,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:47,092 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:47,093 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 09:15:47,283 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 09:15:47,284 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 09:15:47,284 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:15:47,284 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:15:47,284 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 09:15:47,819 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-01 09:15:47,819 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-01 09:15:47,820 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-01 09:15:47,820 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-01 09:15:47,820 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 09:15:47,821 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 09:15:47,821 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@7297da65)
+2016-04-01 09:15:47,822 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-01 09:15:47,822 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-01 09:15:47,822 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 09:15:47,823 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-01 09:15:47,823 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 09:15:47,824 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@7297da65)
+2016-04-01 09:15:47,824 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 09:15:47,824 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-01 09:15:47,848 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-01 09:15:48,076 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-01 09:15:48,077 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-01 09:15:48,077 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 7d590f77-0320-46c6-9366-d970b9e76f54)
+2016-04-01 09:15:48,153 DEBUG i.c.s.t.JobManager [Thread-4] In the middle of getting a Job.
+2016-04-01 09:15:48,153 DEBUG i.c.s.t.JobManager [Thread-4] Job_Completed: null
+2016-04-01 09:15:48,155 TRACE i.c.s.t.JobManager [Thread-4] exit with(info.chrismcgee.sky.beans.Job@2ca447fb)
+2016-04-01 09:15:48,157 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-01 09:15:48,157 TRACE i.c.s.a.ArtDept [Thread-4] exit with(10)
+2016-04-01 09:15:48,158 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-01 09:15:48,165 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 6569
+2016-04-01 09:15:48,170 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/425000.TXT
+2016-04-01 09:15:48,218 TRACE i.c.s.a.ArtDept [Thread-4] Pattern file exists! Reading from it now.
+2016-04-01 09:15:48,226 TRACE i.c.s.a.ArtDept [Thread-4] Upper Pattern is: 
+2016-04-01 09:15:48,226 TRACE i.c.s.a.ArtDept [Thread-4]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-01 09:15:48,227 DEBUG i.c.s.a.ArtDept [Thread-4] Between mods, sb is currently Facetime Busieness Resour
+2016-04-01 09:15:48,227 DEBUG i.c.s.a.ArtDept [Thread-4] After second mod, sb is: Facetime Busieness Resour
+2016-04-01 09:15:48,227 DEBUG i.c.s.a.ArtDept [Thread-4] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-01 09:15:48,227 DEBUG i.c.s.a.ArtDept [Thread-4] Company Name: Facetime Busieness Resour with a length of 25
+2016-04-01 09:15:48,227 DEBUG i.c.s.a.ArtDept [Thread-4] Company PO: 30814 with a length of 5
+2016-04-01 09:15:48,227 DEBUG i.c.s.a.ArtDept [Thread-4] Shipping Date:  with a length of 0
+2016-04-01 09:15:48,228 DEBUG i.c.s.a.ArtDept [Thread-4] CSR: michelle
+2016-04-01 09:15:48,228 DEBUG i.c.s.a.ArtDept [Thread-4] Credit Card? true
+2016-04-01 09:15:48,228 DEBUG i.c.s.a.ArtDept [Thread-4] Ship Days: 3
+2016-04-01 09:15:48,228 TRACE i.c.s.a.ArtDept [Thread-4] Setting the Job bean's properties.
+2016-04-01 09:15:48,228 DEBUG i.c.s.a.ArtDept [Thread-4] This is an AA order.
+2016-04-01 09:15:48,228 DEBUG i.c.s.a.ArtDept [Thread-4] Bean set (inside readText).
+2016-04-01 09:15:48,228 TRACE i.c.s.a.ArtDept [Thread-4] exit with(info.chrismcgee.sky.beans.Job@2ca447fb)
+2016-04-01 09:15:48,230 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(scriptRunner)
+2016-04-01 09:15:48,231 DEBUG i.c.s.a.ScriptManager [Thread-4] Username will be apache
+2016-04-01 09:15:48,231 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompany: ACCENTS
+2016-04-01 09:15:48,271 DEBUG i.c.s.a.ScriptManager [Thread-4] Got shipDate: 12/30/99
+2016-04-01 09:15:48,271 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerName: Facetime Busieness Resour
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerPO: 30814
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] Got overruns: false
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] Got sampleShelf: false
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-01 09:15:48,272 TRACE i.c.s.a.ScriptManager [Thread-4] Prepare the AppleScript file to be executed.
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] scriptFolder and scriptFile variables set.
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] 01. Getting Product ID: T-P8
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] 02. Getting Product Detail: T-P8
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] 03. Getting Quantity: 1000
+2016-04-01 09:15:48,272 DEBUG i.c.s.a.ScriptManager [Thread-4] 04. Getting Flags: 0
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] 05. Getting Reorder ID: 
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] 06. Getting Packing Instructions: 
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] 07. Getting Package Quantity: 25
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] 08. Getting Case Quantity: 500
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] 09. Getting Label Quantity: 0
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] 10. Getting Label Text: 
+2016-04-01 09:15:48,273 DEBUG i.c.s.a.ScriptManager [Thread-4] Reading the Proofing script into a string.
+2016-04-01 09:15:48,278 DEBUG i.c.s.a.ScriptManager [Thread-4] Setting the script engine.
+2016-04-01 09:15:48,303 TRACE i.c.s.a.ScriptManager [Thread-4] Running the script and evaluating the result.
+2016-04-01 09:16:10,809 DEBUG i.c.s.a.ScriptManager [Thread-4] 7
+2016-04-01 09:16:10,809 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 09:16:10,810 TRACE i.c.s.a.ScriptManager [Thread-4] Cancel button pressed.
+2016-04-01 09:16:10,810 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 09:16:10,810 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@7297da65)
+2016-04-01 09:16:10,810 TRACE i.c.u.ConnectionManager [Thread-4] entry params(Closing connection)
+2016-04-01 09:16:10,811 TRACE i.c.s.a.ArtDept [Thread-4] exit with(callScript)
+2016-04-01 09:16:10,813 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 09:16:10,815 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 09:16:10,815 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 09:16:10,815 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 09:16:10,815 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 09:16:10,815 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 09:16:10,816 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 09:16:13,322 TRACE i.c.s.a.ArtDept$9 [AWT-EventQueue-0] Cancel button pressed
+2016-04-01 11:33:37,665 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-01 11:33:39,118 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-01 11:33:42,460 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:42,460 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:33:42,482 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:42,482 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:42,482 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:33:42,580 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:42,581 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:33:42,581 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:42,581 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:42,581 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:33:42,740 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:42,741 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:33:42,741 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:42,741 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:42,741 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:33:42,812 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:42,813 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:33:42,813 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:42,813 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:42,813 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:33:43,012 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:43,013 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:33:43,013 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:43,013 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:43,013 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:33:43,252 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:43,253 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:33:43,253 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:43,253 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:43,253 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:33:44,486 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:44,486 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 11:33:44,486 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:44,487 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:44,487 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 11:33:44,732 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:33:44,733 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 11:33:44,733 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:33:44,733 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:33:44,733 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 11:33:45,580 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-01 11:33:45,580 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-01 11:33:45,581 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-01 11:33:45,581 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-01 11:33:45,588 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 11:33:45,590 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 11:33:45,603 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:33:45,608 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@d9e88e7)
+2016-04-01 11:33:45,608 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-01 11:33:45,608 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-01 11:33:45,610 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-01 11:33:45,610 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:33:45,610 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@d9e88e7)
+2016-04-01 11:33:45,611 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:33:45,611 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-01 11:33:45,667 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-01 11:33:46,002 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-01 11:33:46,002 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-01 11:33:46,002 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 61e6dbb9-6321-4a85-8a9f-358fb2a3748c)
+2016-04-01 11:33:46,063 TRACE i.c.s.t.JobManager [Thread-4] exit
+2016-04-01 11:33:46,070 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-01 11:33:46,070 ERROR i.c.s.a.ArtDept [Thread-4] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:509) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:457) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:432) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:177) [bin/:?]
+2016-04-01 11:33:46,071 TRACE i.c.s.a.ArtDept [Thread-4] exit with(0)
+2016-04-01 11:33:46,071 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-01 11:33:46,072 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 8439
+2016-04-01 11:33:46,077 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/466427.TXT
+2016-04-01 11:41:04,678 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-01 11:41:05,951 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-01 11:41:11,578 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:11,579 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:11,579 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:11,580 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:11,580 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:12,164 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:12,164 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:12,164 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:12,164 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:12,164 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:12,380 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:12,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:12,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:12,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:12,380 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:12,756 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:12,756 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:12,756 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:12,756 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:12,756 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:13,748 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 11:41:13,748 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:13,748 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:13,748 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:13,749 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:13,908 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 11:41:13,908 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:13,908 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:13,908 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:13,908 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:14,059 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 11:41:14,060 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:14,060 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:14,060 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:14,060 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:19,108 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:19,108 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:19,108 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:19,108 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:19,108 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:19,252 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:19,252 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:19,252 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:19,252 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:19,252 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:19,403 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:19,404 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:19,404 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:19,404 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:19,404 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:19,516 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:19,516 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:19,516 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:19,516 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:19,516 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:19,708 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:19,708 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:41:19,708 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:19,708 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:19,708 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:41:20,644 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:20,644 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 11:41:20,644 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:20,645 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:20,645 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 11:41:20,812 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-01 11:41:20,812 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-01 11:41:20,812 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:41:20,812 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:41:20,812 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-01 11:41:21,347 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-01 11:41:21,348 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-01 11:41:21,348 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-01 11:41:21,348 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-01 11:41:21,349 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 11:41:21,349 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:41:21,350 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:41:21,350 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-01 11:41:21,350 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-01 11:41:21,350 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 11:41:21,351 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-01 11:41:21,352 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:41:21,352 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:41:21,352 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:41:21,352 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-01 11:41:21,378 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-01 11:41:21,622 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-01 11:41:21,622 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-01 11:41:21,622 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:41:21,665 TRACE i.c.s.t.JobManager [Thread-4] exit
+2016-04-01 11:41:21,671 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-01 11:41:21,671 ERROR i.c.s.a.ArtDept [Thread-4] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:509) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:457) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:432) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:177) [bin/:?]
+2016-04-01 11:41:21,672 TRACE i.c.s.a.ArtDept [Thread-4] exit with(0)
+2016-04-01 11:41:21,672 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-01 11:41:21,674 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 8439
+2016-04-01 11:41:21,679 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/466427.TXT
+2016-04-01 11:41:21,693 TRACE i.c.s.a.ArtDept [Thread-4] Pattern file exists! Reading from it now.
+2016-04-01 11:41:21,725 TRACE i.c.s.a.ArtDept [Thread-4] Upper Pattern is: 
+2016-04-01 11:41:21,725 TRACE i.c.s.a.ArtDept [Thread-4]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-01 11:41:21,725 DEBUG i.c.s.a.ArtDept [Thread-4] Between mods, sb is currently Blue Rose Promotions
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] After second mod, sb is: Blue Rose Promotions
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] Company Name: Blue Rose Promotions with a length of 20
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] Company PO: 3409 with a length of 4
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] Shipping Date:  with a length of 0
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] CSR: michelle
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] Credit Card? true
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] Ship Days: 5
+2016-04-01 11:41:21,726 TRACE i.c.s.a.ArtDept [Thread-4] Setting the Job bean's properties.
+2016-04-01 11:41:21,726 DEBUG i.c.s.a.ArtDept [Thread-4] This is an AA order.
+2016-04-01 11:41:21,727 DEBUG i.c.s.a.ArtDept [Thread-4] Bean set (inside readText).
+2016-04-01 11:41:21,727 TRACE i.c.s.a.ArtDept [Thread-4] exit with(info.chrismcgee.sky.beans.Job@77826af3)
+2016-04-01 11:41:21,729 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(scriptRunner)
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Username will be apache
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompany: ACCENTS
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got shipDate: 
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerName: Blue Rose Promotions
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerPO: 3409
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got overruns: false
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got sampleShelf: false
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-01 11:41:21,730 TRACE i.c.s.a.ScriptManager [Thread-4] Prepare the AppleScript file to be executed.
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] scriptFolder and scriptFile variables set.
+2016-04-01 11:41:21,730 ERROR i.c.s.a.ScriptManager [Thread-4] Null Pointer to the Order Detail List. Creating one now.
+2016-04-01 11:41:21,730 DEBUG i.c.s.a.ScriptManager [Thread-4] Reading the Proofing script into a string.
+2016-04-01 11:41:21,734 DEBUG i.c.s.a.ScriptManager [Thread-4] Setting the script engine.
+2016-04-01 11:41:21,928 TRACE i.c.s.a.ScriptManager [Thread-4] Running the script and evaluating the result.
+2016-04-01 11:43:09,863 DEBUG i.c.s.a.ScriptManager [Thread-4] 253402207200000@466427@Blue Rose Promotions@1459525282649@T-N10 - DK BLUE@T-N10-DKBLUE_Anthem@6@1@1000@0@1@false@3409@466427_T-N10-DKBLUE_Anthem_THUMB.jpg@2@@@50@2500@@@false@CM@@253402207200000@466427@Blue Rose Promotions@1459525282649@T-N10 - DK BLUE@T-N10-DKBLUE_CareMore@6@1@2500@0@1@false@3409@466427_T-N10-DKBLUE_CareMore_THUMB.jpg@2@@@50@2500@@@false@CM@
+2016-04-01 11:43:09,864 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,864 DEBUG i.c.s.a.ScriptManager [Thread-4] 9999-12-30
+2016-04-01 11:43:09,864 DEBUG i.c.s.a.ScriptManager [Thread-4] 466427
+2016-04-01 11:43:09,865 DEBUG i.c.s.a.ScriptManager [Thread-4] Blue Rose Promotions
+2016-04-01 11:43:09,868 DEBUG i.c.s.a.ScriptManager [Thread-4] Apr 1, 2016 11:41:22 AM EDT
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] T-N10 - DK BLUE
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] T-N10-DKBLUE_Anthem
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 6
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 1
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 1000
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 0
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 1
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] false
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 3409
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 466427_T-N10-DKBLUE_Anthem_THUMB.jpg
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 2
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 50
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 2500
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] false
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] CM
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,869 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-01 11:43:09,869 TRACE i.c.s.a.ScriptManager [Thread-4] First, place the day's info into the Day table.  This should only insert one row.
+2016-04-01 11:43:09,952 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,952 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,952 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,952 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,952 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,953 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,956 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,957 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,957 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,957 DEBUG i.c.s.b.Day [Thread-4] Day of week is: 4
+2016-04-01 11:43:09,957 DEBUG i.c.s.b.Day [Thread-4] Sunday is: 7
+2016-04-01 11:43:09,957 DEBUG i.c.s.b.Day [Thread-4] Saturday is: 6
+2016-04-01 11:43:09,961 TRACE i.c.s.t.DayManager [Thread-4] entry params(dayExists)
+2016-04-01 11:43:09,961 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:09,962 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:09,962 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:09,962 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:09,966 TRACE i.c.s.t.DayManager [Thread-4] exit with(true)
+2016-04-01 11:43:09,971 TRACE i.c.s.a.ScriptManager [Thread-4] 9999-12-30 already exists in the Day table. Setting it to INCOMPLETE.
+2016-04-01 11:43:09,971 TRACE i.c.s.t.DayManager [Thread-4] entry params(Setting the date in the Day table as NOT completed (null the 'day_completed' field.)
+2016-04-01 11:43:09,971 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:09,971 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:09,971 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:09,971 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:09,975 TRACE i.c.s.t.DayManager [Thread-4] exit with(true)
+2016-04-01 11:43:09,975 TRACE i.c.s.a.ScriptManager [Thread-4] Next, set the Job info bean.
+2016-04-01 11:43:09,989 TRACE i.c.s.a.ScriptManager [Thread-4] As part of setting the Job bean, set its OrderDetail List with OrderDetail beans.
+2016-04-01 11:43:09,990 ERROR i.c.s.a.ScriptManager [Thread-4] Could not parse Label Quantity into an integer. Setting it to 0 instead.
+2016-04-01 11:43:09,991 ERROR i.c.s.a.ScriptManager [Thread-4] Could not parse Label Quantity into an integer. Setting it to 0 instead.
+2016-04-01 11:43:09,991 TRACE i.c.s.a.ScriptManager [Thread-4] All of the items in this job are Digital Proofs only: false
+2016-04-01 11:43:09,992 TRACE i.c.s.t.JobManager [Thread-4] entry params(getRow (JobManager))
+2016-04-01 11:43:09,992 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:09,992 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:09,993 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:09,993 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:10,005 TRACE i.c.s.t.JobManager [Thread-4] exit
+2016-04-01 11:43:10,006 DEBUG i.c.s.a.ScriptManager [Thread-4] INSERTing a new Job entry into the Job table.
+2016-04-01 11:43:10,006 TRACE i.c.s.t.JobManager [Thread-4] entry params(insert (JobManager))
+2016-04-01 11:43:10,006 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:10,006 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:10,006 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:10,006 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:10,166 TRACE i.c.s.t.DayManager [Thread-4] entry params(Setting the date in the Day table as NOT completed (null the 'day_completed' field.)
+2016-04-01 11:43:10,166 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:10,166 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:10,166 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:10,166 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:10,169 TRACE i.c.s.t.DayManager [Thread-4] exit with(true)
+2016-04-01 11:43:10,169 TRACE i.c.s.t.JobManager [Thread-4] exit with(true)
+2016-04-01 11:43:10,169 DEBUG i.c.s.a.ScriptManager [Thread-4] Job id 466427 was inserted/updated!
+2016-04-01 11:43:10,169 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(addDummyEntries (when bean doesn't exist yet) (ScriptManager))
+2016-04-01 11:43:10,511 DEBUG i.c.s.a.ScriptManager [Thread-4] Comparing T-N10-DKBLUE_Anthem (incoming item) to T-N10-DKBLUE_Anthem (existing file in directory).
+2016-04-01 11:43:10,511 DEBUG i.c.s.a.ScriptManager [Thread-4] Found a match. Removing from the existing File list. (Will not be added as a dummy item to the database.)
+2016-04-01 11:43:10,511 DEBUG i.c.s.a.ScriptManager [Thread-4] Comparing T-N10-DKBLUE_Anthem (incoming item) to T-N10-DKBLUE_CareMore (existing file in directory).
+2016-04-01 11:43:10,514 DEBUG i.c.s.a.ScriptManager [Thread-4] Comparing T-N10-DKBLUE_CareMore (incoming item) to T-N10-DKBLUE_CareMore (existing file in directory).
+2016-04-01 11:43:10,514 DEBUG i.c.s.a.ScriptManager [Thread-4] Found a match. Removing from the existing File list. (Will not be added as a dummy item to the database.)
+2016-04-01 11:43:10,514 TRACE i.c.s.a.ScriptManager [Thread-4] exit with(addDummyEntries (ScriptManager))
+2016-04-01 11:43:10,514 DEBUG i.c.s.a.ScriptManager [Thread-4] INSERTing a new OrderDetail entry into the Job table.
+2016-04-01 11:43:10,529 TRACE i.c.s.t.OrderDetailManager [Thread-4] entry params(insert (OrderDetail))
+2016-04-01 11:43:10,530 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:10,530 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:10,530 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:10,530 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:10,631 TRACE i.c.s.t.OrderDetailManager [Thread-4] exit with(true)
+2016-04-01 11:43:10,631 DEBUG i.c.s.a.ScriptManager [Thread-4] INSERTing a new OrderDetail entry into the Job table.
+2016-04-01 11:43:10,631 TRACE i.c.s.t.OrderDetailManager [Thread-4] entry params(insert (OrderDetail))
+2016-04-01 11:43:10,631 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:10,631 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:10,631 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-01 11:43:10,631 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 94dd1682-8b48-492b-9ce1-07c4105338c8)
+2016-04-01 11:43:10,662 TRACE i.c.s.t.OrderDetailManager [Thread-4] exit with(true)
+2016-04-01 11:43:10,662 DEBUG i.c.s.a.ScriptManager [Thread-4] At least one row was inserted/updated!
+2016-04-01 11:43:10,662 TRACE i.c.s.a.ScriptManager [Thread-4] Completed main section.
+2016-04-01 11:43:10,662 TRACE i.c.s.a.ScriptManager [Thread-4] exit with(true)
+2016-04-01 11:43:10,662 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-01 11:43:10,662 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@199c1bbf)
+2016-04-01 11:43:10,662 TRACE i.c.u.ConnectionManager [Thread-4] entry params(Closing connection)
+2016-04-01 11:43:10,668 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-01 11:43:10,668 TRACE i.c.s.a.ArtDept [Thread-4] exit with(callScript)
+2016-04-01 11:43:10,669 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-01 11:43:10,670 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-01 11:43:10,670 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-01 11:43:10,670 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-01 11:43:10,670 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-01 11:43:10,670 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-01 11:43:17,950 TRACE i.c.s.a.ArtDept$9 [AWT-EventQueue-0] Cancel button pressed
+2016-04-04 13:53:14,512 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-04 13:53:17,776 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-04 13:54:28,666 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:28,666 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:54:28,667 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:28,667 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:28,667 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:54:28,845 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:28,846 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:54:28,846 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:28,846 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:28,846 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:54:28,997 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:28,998 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:54:28,998 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:28,998 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:28,998 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:54:29,165 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:29,166 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:54:29,166 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:29,166 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:29,166 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:54:29,325 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:29,326 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:54:29,326 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:29,326 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:29,326 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:54:29,533 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:29,534 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:54:29,534 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:29,534 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:29,534 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:54:30,630 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:30,630 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-04 13:54:30,630 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:30,631 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:30,631 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-04 13:54:30,886 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-04 13:54:30,886 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-04 13:54:30,886 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:54:30,886 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:54:30,886 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-04 13:54:31,445 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 13:54:31,445 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 13:54:31,446 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 13:54:31,446 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-04 13:54:31,446 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 13:54:31,447 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-04 13:54:31,447 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 13:54:31,448 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-04 13:54:31,448 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-04 13:54:31,448 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 13:54:31,449 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-04 13:54:31,449 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-04 13:54:31,449 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 13:54:31,449 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-04 13:54:31,449 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-04 13:54:31,537 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-04 13:54:31,911 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-04 13:54:31,911 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-04 13:54:31,911 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: 2a934896-cb67-4b10-b333-ae7be70cdd1f)
+2016-04-04 13:54:31,984 TRACE i.c.s.t.JobManager [Thread-4] exit
+2016-04-04 13:54:31,991 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-04 13:54:31,992 ERROR i.c.s.a.ArtDept [Thread-4] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 13:54:31,993 TRACE i.c.s.a.ArtDept [Thread-4] exit with(0)
+2016-04-04 13:54:31,993 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-04 13:54:31,995 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 6968
+2016-04-04 13:54:32,001 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 13:54:32,035 TRACE i.c.s.a.ArtDept [Thread-4] Pattern file exists! Reading from it now.
+2016-04-04 13:54:32,071 TRACE i.c.s.a.ArtDept [Thread-4] Upper Pattern is: 
+2016-04-04 13:54:32,071 TRACE i.c.s.a.ArtDept [Thread-4]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Between mods, sb is currently ID America
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] After second mod, sb is: ID America
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Company Name: ID America with a length of 10
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Company PO: 3376716955 with a length of 10
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Shipping Date:  with a length of 0
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] CSR: alex
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Credit Card? true
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] Ship Days: 3
+2016-04-04 13:54:32,072 TRACE i.c.s.a.ArtDept [Thread-4] Setting the Job bean's properties.
+2016-04-04 13:54:32,072 DEBUG i.c.s.a.ArtDept [Thread-4] This is an AA order.
+2016-04-04 13:54:32,073 DEBUG i.c.s.a.ArtDept [Thread-4] Bean set (inside readText).
+2016-04-04 13:54:32,073 TRACE i.c.s.a.ArtDept [Thread-4] exit with(info.chrismcgee.sky.beans.Job@358cff79)
+2016-04-04 13:54:32,075 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(scriptRunner)
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Username will be apache
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompany: ACCENTS
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got shipDate: 
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerName: ID America
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerPO: 3376716955
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got overruns: false
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got sampleShelf: false
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 13:54:32,076 TRACE i.c.s.a.ScriptManager [Thread-4] Prepare the AppleScript file to be executed.
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] scriptFolder and scriptFile variables set.
+2016-04-04 13:54:32,076 ERROR i.c.s.a.ScriptManager [Thread-4] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 13:54:32,076 DEBUG i.c.s.a.ScriptManager [Thread-4] Reading the Proofing script into a string.
+2016-04-04 13:54:32,081 DEBUG i.c.s.a.ScriptManager [Thread-4] Setting the script engine.
+2016-04-04 13:54:32,209 TRACE i.c.s.a.ScriptManager [Thread-4] Running the script and evaluating the result.
+2016-04-04 13:56:03,659 ERROR i.c.s.a.ScriptManager [Thread-4] An error occurred with the script. Line number: -1
+javax.script.ScriptException: Adobe InDesign CC 2015 got an error: The variable result is not defined.
+	at apple.applescript.AppleScriptEngine.evalScript(Native Method) ~[?:1.8.0_74]
+	at apple.applescript.AppleScriptEngine.eval(AppleScriptEngine.java:368) ~[?:1.8.0_74]
+	at apple.applescript.AppleScriptEngine.eval(AppleScriptEngine.java:339) ~[?:1.8.0_74]
+	at info.chrismcgee.sky.artdept.ScriptManager.scriptRunner(ScriptManager.java:199) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:483) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 13:56:10,302 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-04 13:56:10,302 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 13:56:10,302 TRACE i.c.u.ConnectionManager [Thread-4] entry params(Closing connection)
+2016-04-04 13:56:10,303 TRACE i.c.s.a.ArtDept [Thread-4] exit with(callScript)
+2016-04-04 13:56:10,305 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 13:56:10,306 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 13:56:10,306 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 13:56:10,307 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 13:56:10,307 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 13:56:10,307 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 13:56:10,307 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:05:09,069 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:05:09,070 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:09,070 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:09,070 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:09,070 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:09,261 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:05:09,262 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:09,262 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:09,262 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:09,262 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:09,445 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:05:09,446 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:09,446 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:09,446 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:09,446 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:09,605 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:05:09,606 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:09,606 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:09,606 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:09,606 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:09,733 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:05:09,734 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:09,734 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:09,734 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:09,734 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:09,917 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:05:09,918 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:09,918 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:09,918 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:09,918 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:10,597 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 14:05:10,597 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 14:05:10,598 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 14:05:10,598 TRACE i.c.s.a.ArtDept [Thread-5] entry params(callScript)
+2016-04-04 14:05:10,598 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:05:10,598 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:05:10,598 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:05:10,598 TRACE i.c.u.ConnectionManager [Thread-5] entry params(setDBType)
+2016-04-04 14:05:10,598 TRACE i.c.u.ConnectionManager [Thread-5] exit with(setDBType)
+2016-04-04 14:05:10,598 TRACE i.c.s.t.JobManager [Thread-5] entry params(getJob (JobManager))
+2016-04-04 14:05:10,598 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:05:10,599 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:05:10,599 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:05:10,599 TRACE i.c.u.ConnectionManager [Thread-5] entry params(openConnection)
+2016-04-04 14:05:10,599 TRACE i.c.u.ConnectionManager [Thread-5] Using Micrososft SQL Server.
+2016-04-04 14:05:10,599 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:05:10,921 TRACE i.c.u.ConnectionManager [Thread-5] exit with(true)
+2016-04-04 14:05:10,921 DEBUG i.c.u.ConnectionManager [Thread-5] Connection opened
+2016-04-04 14:05:10,921 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 174365e2-b0d2-47da-bada-270fd8f21220)
+2016-04-04 14:05:10,934 TRACE i.c.s.t.JobManager [Thread-5] exit
+2016-04-04 14:05:10,935 TRACE i.c.s.a.ArtDept [Thread-5] entry params(getHighestProofNumber)
+2016-04-04 14:05:10,936 ERROR i.c.s.a.ArtDept [Thread-5] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 14:05:10,936 TRACE i.c.s.a.ArtDept [Thread-5] exit with(0)
+2016-04-04 14:05:10,936 TRACE i.c.s.a.ArtDept [Thread-5] entry params(readText)
+2016-04-04 14:05:10,938 TRACE i.c.s.a.ArtDept [Thread-5] The length of the associated text file is: 6968
+2016-04-04 14:05:10,939 DEBUG i.c.s.a.ArtDept [Thread-5] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 14:05:10,964 TRACE i.c.s.a.ArtDept [Thread-5] Pattern file exists! Reading from it now.
+2016-04-04 14:05:10,966 TRACE i.c.s.a.ArtDept [Thread-5] Upper Pattern is: 
+2016-04-04 14:05:10,967 TRACE i.c.s.a.ArtDept [Thread-5]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 14:05:10,967 DEBUG i.c.s.a.ArtDept [Thread-5] Between mods, sb is currently ID America
+2016-04-04 14:05:10,967 DEBUG i.c.s.a.ArtDept [Thread-5] After second mod, sb is: ID America
+2016-04-04 14:05:10,967 DEBUG i.c.s.a.ArtDept [Thread-5] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 14:05:10,967 DEBUG i.c.s.a.ArtDept [Thread-5] Company Name: ID America with a length of 10
+2016-04-04 14:05:10,967 DEBUG i.c.s.a.ArtDept [Thread-5] Company PO: 3376716955 with a length of 10
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ArtDept [Thread-5] Shipping Date:  with a length of 0
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ArtDept [Thread-5] CSR: alex
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ArtDept [Thread-5] Credit Card? true
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ArtDept [Thread-5] Ship Days: 3
+2016-04-04 14:05:10,968 TRACE i.c.s.a.ArtDept [Thread-5] Setting the Job bean's properties.
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ArtDept [Thread-5] This is an AA order.
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ArtDept [Thread-5] Bean set (inside readText).
+2016-04-04 14:05:10,968 TRACE i.c.s.a.ArtDept [Thread-5] exit with(info.chrismcgee.sky.beans.Job@360cd8d8)
+2016-04-04 14:05:10,968 TRACE i.c.s.a.ScriptManager [Thread-5] entry params(scriptRunner)
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ScriptManager [Thread-5] Username will be apache
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ScriptManager [Thread-5] Got pCompany: ACCENTS
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ScriptManager [Thread-5] Got shipDate: 
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ScriptManager [Thread-5] Got customerName: ID America
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ScriptManager [Thread-5] Got customerPO: 3376716955
+2016-04-04 14:05:10,968 DEBUG i.c.s.a.ScriptManager [Thread-5] Got overruns: false
+2016-04-04 14:05:10,969 DEBUG i.c.s.a.ScriptManager [Thread-5] Got sampleShelf: false
+2016-04-04 14:05:10,969 DEBUG i.c.s.a.ScriptManager [Thread-5] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 14:05:10,969 TRACE i.c.s.a.ScriptManager [Thread-5] Prepare the AppleScript file to be executed.
+2016-04-04 14:05:10,969 DEBUG i.c.s.a.ScriptManager [Thread-5] scriptFolder and scriptFile variables set.
+2016-04-04 14:05:10,969 ERROR i.c.s.a.ScriptManager [Thread-5] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 14:05:10,969 DEBUG i.c.s.a.ScriptManager [Thread-5] Reading the Proofing script into a string.
+2016-04-04 14:05:11,063 DEBUG i.c.s.a.ScriptManager [Thread-5] Setting the script engine.
+2016-04-04 14:05:11,066 TRACE i.c.s.a.ScriptManager [Thread-5] Running the script and evaluating the result.
+2016-04-04 14:05:54,795 DEBUG i.c.s.a.ScriptManager [Thread-5] 7
+2016-04-04 14:05:54,796 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:05:54,796 TRACE i.c.s.a.ScriptManager [Thread-5] Cancel button pressed.
+2016-04-04 14:05:54,796 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:05:54,796 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:05:54,796 TRACE i.c.u.ConnectionManager [Thread-5] entry params(Closing connection)
+2016-04-04 14:05:54,796 TRACE i.c.s.a.ArtDept [Thread-5] exit with(callScript)
+2016-04-04 14:05:54,798 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:05:54,808 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 14:05:54,808 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:05:54,808 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:05:54,809 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:05:54,809 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:05:54,809 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:08:31,902 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:08:31,902 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:08:31,902 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:08:31,903 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:08:31,903 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:08:32,046 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:08:32,046 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:08:32,046 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:08:32,046 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:08:32,046 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:08:32,214 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:08:32,214 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:08:32,214 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:08:32,214 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:08:32,214 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:08:32,382 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:08:32,382 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:08:32,382 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:08:32,383 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:08:32,383 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:08:32,518 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:08:32,518 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:08:32,518 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:08:32,519 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:08:32,519 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:08:32,774 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:08:32,774 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:08:32,774 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:08:32,774 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:08:32,775 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:08:33,742 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 14:08:33,742 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 14:08:33,742 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 14:08:33,743 TRACE i.c.s.a.ArtDept [Thread-6] entry params(callScript)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] entry params(getInstance)
+2016-04-04 14:08:33,743 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] entry params(setDBType)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] exit with(setDBType)
+2016-04-04 14:08:33,743 TRACE i.c.s.t.JobManager [Thread-6] entry params(getJob (JobManager))
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] entry params(getInstance)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] entry params(getConnection)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] entry params(openConnection)
+2016-04-04 14:08:33,743 TRACE i.c.u.ConnectionManager [Thread-6] Using Micrososft SQL Server.
+2016-04-04 14:08:33,744 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:08:34,147 TRACE i.c.u.ConnectionManager [Thread-6] exit with(true)
+2016-04-04 14:08:34,147 DEBUG i.c.u.ConnectionManager [Thread-6] Connection opened
+2016-04-04 14:08:34,147 TRACE i.c.u.ConnectionManager [Thread-6] exit with(ConnectionID:3 ClientConnectionId: fb369c5f-afea-4269-8efa-547ac4d74466)
+2016-04-04 14:08:34,163 TRACE i.c.s.t.JobManager [Thread-6] exit
+2016-04-04 14:08:34,163 TRACE i.c.s.a.ArtDept [Thread-6] entry params(getHighestProofNumber)
+2016-04-04 14:08:34,164 ERROR i.c.s.a.ArtDept [Thread-6] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 14:08:34,164 TRACE i.c.s.a.ArtDept [Thread-6] exit with(0)
+2016-04-04 14:08:34,164 TRACE i.c.s.a.ArtDept [Thread-6] entry params(readText)
+2016-04-04 14:08:34,166 TRACE i.c.s.a.ArtDept [Thread-6] The length of the associated text file is: 6968
+2016-04-04 14:08:34,167 DEBUG i.c.s.a.ArtDept [Thread-6] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 14:08:34,286 TRACE i.c.s.a.ArtDept [Thread-6] Pattern file exists! Reading from it now.
+2016-04-04 14:08:34,518 TRACE i.c.s.a.ArtDept [Thread-6] Upper Pattern is: 
+2016-04-04 14:08:34,518 TRACE i.c.s.a.ArtDept [Thread-6]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 14:08:34,518 DEBUG i.c.s.a.ArtDept [Thread-6] Between mods, sb is currently ID America
+2016-04-04 14:08:34,518 DEBUG i.c.s.a.ArtDept [Thread-6] After second mod, sb is: ID America
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Company Name: ID America with a length of 10
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Company PO: 3376716955 with a length of 10
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Shipping Date:  with a length of 0
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] CSR: alex
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Credit Card? true
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Ship Days: 3
+2016-04-04 14:08:34,519 TRACE i.c.s.a.ArtDept [Thread-6] Setting the Job bean's properties.
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] This is an AA order.
+2016-04-04 14:08:34,519 DEBUG i.c.s.a.ArtDept [Thread-6] Bean set (inside readText).
+2016-04-04 14:08:34,519 TRACE i.c.s.a.ArtDept [Thread-6] exit with(info.chrismcgee.sky.beans.Job@7fb4b8f3)
+2016-04-04 14:08:34,520 TRACE i.c.s.a.ScriptManager [Thread-6] entry params(scriptRunner)
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Username will be apache
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got pCompany: ACCENTS
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got shipDate: 
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got customerName: ID America
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got customerPO: 3376716955
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got overruns: false
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got sampleShelf: false
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 14:08:34,520 TRACE i.c.s.a.ScriptManager [Thread-6] Prepare the AppleScript file to be executed.
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] scriptFolder and scriptFile variables set.
+2016-04-04 14:08:34,520 ERROR i.c.s.a.ScriptManager [Thread-6] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 14:08:34,520 DEBUG i.c.s.a.ScriptManager [Thread-6] Reading the Proofing script into a string.
+2016-04-04 14:08:34,524 DEBUG i.c.s.a.ScriptManager [Thread-6] Setting the script engine.
+2016-04-04 14:08:34,525 TRACE i.c.s.a.ScriptManager [Thread-6] Running the script and evaluating the result.
+2016-04-04 14:09:39,441 DEBUG i.c.s.a.ScriptManager [Thread-6] 7
+2016-04-04 14:09:39,442 DEBUG i.c.s.a.ScriptManager [Thread-6] 
+2016-04-04 14:09:39,442 TRACE i.c.s.a.ScriptManager [Thread-6] Cancel button pressed.
+2016-04-04 14:09:39,442 TRACE i.c.u.ConnectionManager [Thread-6] entry params(getInstance)
+2016-04-04 14:09:39,442 TRACE i.c.u.ConnectionManager [Thread-6] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:09:39,442 TRACE i.c.u.ConnectionManager [Thread-6] entry params(Closing connection)
+2016-04-04 14:09:39,442 TRACE i.c.s.a.ArtDept [Thread-6] exit with(callScript)
+2016-04-04 14:09:39,442 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:09:39,448 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 14:09:39,448 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:09:39,449 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:09:39,449 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:09:39,449 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:09:39,449 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:12:51,756 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:12:51,757 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:12:51,757 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:12:51,757 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:12:51,757 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:12:52,132 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:12:52,132 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:12:52,133 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:12:52,133 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:12:52,133 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:12:52,340 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:12:52,341 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:12:52,341 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:12:52,341 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:12:52,341 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:12:52,540 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:12:52,541 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:12:52,541 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:12:52,541 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:12:52,541 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:12:52,716 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:12:52,716 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:12:52,717 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:12:52,717 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:12:52,717 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:12:52,940 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:12:52,941 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:12:52,941 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:12:52,941 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:12:52,941 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:12:54,652 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 14:12:54,652 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 14:12:54,652 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 14:12:54,653 TRACE i.c.s.a.ArtDept [Thread-7] entry params(callScript)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] entry params(getInstance)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:12:54,653 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] entry params(setDBType)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] exit with(setDBType)
+2016-04-04 14:12:54,653 TRACE i.c.s.t.JobManager [Thread-7] entry params(getJob (JobManager))
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] entry params(getInstance)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] entry params(getConnection)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] entry params(openConnection)
+2016-04-04 14:12:54,653 TRACE i.c.u.ConnectionManager [Thread-7] Using Micrososft SQL Server.
+2016-04-04 14:12:54,654 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:12:54,953 TRACE i.c.u.ConnectionManager [Thread-7] exit with(true)
+2016-04-04 14:12:54,954 DEBUG i.c.u.ConnectionManager [Thread-7] Connection opened
+2016-04-04 14:12:54,954 TRACE i.c.u.ConnectionManager [Thread-7] exit with(ConnectionID:4 ClientConnectionId: b849cfe1-e144-4eab-a552-c1f462460949)
+2016-04-04 14:12:54,969 TRACE i.c.s.t.JobManager [Thread-7] exit
+2016-04-04 14:12:54,970 TRACE i.c.s.a.ArtDept [Thread-7] entry params(getHighestProofNumber)
+2016-04-04 14:12:54,971 ERROR i.c.s.a.ArtDept [Thread-7] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 14:12:54,971 TRACE i.c.s.a.ArtDept [Thread-7] exit with(0)
+2016-04-04 14:12:54,971 TRACE i.c.s.a.ArtDept [Thread-7] entry params(readText)
+2016-04-04 14:12:54,974 TRACE i.c.s.a.ArtDept [Thread-7] The length of the associated text file is: 6968
+2016-04-04 14:12:54,975 DEBUG i.c.s.a.ArtDept [Thread-7] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 14:12:54,984 TRACE i.c.s.a.ArtDept [Thread-7] Pattern file exists! Reading from it now.
+2016-04-04 14:12:54,986 TRACE i.c.s.a.ArtDept [Thread-7] Upper Pattern is: 
+2016-04-04 14:12:54,986 TRACE i.c.s.a.ArtDept [Thread-7]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Between mods, sb is currently ID America
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] After second mod, sb is: ID America
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Company Name: ID America with a length of 10
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Company PO: 3376716955 with a length of 10
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Shipping Date:  with a length of 0
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] CSR: alex
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Credit Card? true
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Ship Days: 3
+2016-04-04 14:12:54,987 TRACE i.c.s.a.ArtDept [Thread-7] Setting the Job bean's properties.
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] This is an AA order.
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ArtDept [Thread-7] Bean set (inside readText).
+2016-04-04 14:12:54,987 TRACE i.c.s.a.ArtDept [Thread-7] exit with(info.chrismcgee.sky.beans.Job@5654fa08)
+2016-04-04 14:12:54,987 TRACE i.c.s.a.ScriptManager [Thread-7] entry params(scriptRunner)
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ScriptManager [Thread-7] Username will be apache
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ScriptManager [Thread-7] Got pCompany: ACCENTS
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ScriptManager [Thread-7] Got shipDate: 
+2016-04-04 14:12:54,987 DEBUG i.c.s.a.ScriptManager [Thread-7] Got customerName: ID America
+2016-04-04 14:12:54,988 DEBUG i.c.s.a.ScriptManager [Thread-7] Got customerPO: 3376716955
+2016-04-04 14:12:54,988 DEBUG i.c.s.a.ScriptManager [Thread-7] Got overruns: false
+2016-04-04 14:12:54,988 DEBUG i.c.s.a.ScriptManager [Thread-7] Got sampleShelf: false
+2016-04-04 14:12:54,988 DEBUG i.c.s.a.ScriptManager [Thread-7] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 14:12:54,988 TRACE i.c.s.a.ScriptManager [Thread-7] Prepare the AppleScript file to be executed.
+2016-04-04 14:12:54,988 DEBUG i.c.s.a.ScriptManager [Thread-7] scriptFolder and scriptFile variables set.
+2016-04-04 14:12:54,988 ERROR i.c.s.a.ScriptManager [Thread-7] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 14:12:54,988 DEBUG i.c.s.a.ScriptManager [Thread-7] Reading the Proofing script into a string.
+2016-04-04 14:12:54,993 DEBUG i.c.s.a.ScriptManager [Thread-7] Setting the script engine.
+2016-04-04 14:12:54,994 TRACE i.c.s.a.ScriptManager [Thread-7] Running the script and evaluating the result.
+2016-04-04 14:13:04,827 DEBUG i.c.s.a.ScriptManager [Thread-7] 3
+2016-04-04 14:13:04,828 DEBUG i.c.s.a.ScriptManager [Thread-7] 
+2016-04-04 14:13:04,828 TRACE i.c.s.a.ScriptManager [Thread-7] Another type of error returned from Illustrator (besides MRAP).
+2016-04-04 14:13:04,828 TRACE i.c.u.ConnectionManager [Thread-7] entry params(getInstance)
+2016-04-04 14:13:04,828 TRACE i.c.u.ConnectionManager [Thread-7] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:13:04,828 TRACE i.c.u.ConnectionManager [Thread-7] entry params(Closing connection)
+2016-04-04 14:13:04,828 TRACE i.c.s.a.ArtDept [Thread-7] exit with(callScript)
+2016-04-04 14:13:04,829 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:13:04,847 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 14:13:04,848 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:13:04,848 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:13:04,848 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:13:04,848 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:13:04,848 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:29:22,472 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:29:22,472 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:22,472 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:22,472 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:22,473 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:22,728 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:29:22,729 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:22,729 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:22,729 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:22,729 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:22,888 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:29:22,888 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:22,888 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:22,888 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:22,889 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:23,040 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:29:23,040 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:23,040 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:23,040 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:23,041 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:23,161 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:29:23,161 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:23,161 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:23,162 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:23,162 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:23,552 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:29:23,552 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:23,552 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:23,553 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:23,553 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:25,120 TRACE i.c.s.a.ArtDept$7 [AWT-EventQueue-0] Pressed the ScriptManager button
+2016-04-04 14:29:25,120 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 14:29:25,120 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 14:29:25,121 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 14:29:25,121 TRACE i.c.s.a.ArtDept [Thread-8] entry params(callScript)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] entry params(getInstance)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] entry params(setDBType)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] exit with(setDBType)
+2016-04-04 14:29:25,121 TRACE i.c.s.t.JobManager [Thread-8] entry params(getJob (JobManager))
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] entry params(getInstance)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] entry params(getConnection)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] entry params(openConnection)
+2016-04-04 14:29:25,121 TRACE i.c.u.ConnectionManager [Thread-8] Using Micrososft SQL Server.
+2016-04-04 14:29:25,122 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:29:25,123 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:29:25,142 TRACE i.c.u.ConnectionManager [Thread-8] exit with(true)
+2016-04-04 14:29:25,142 DEBUG i.c.u.ConnectionManager [Thread-8] Connection opened
+2016-04-04 14:29:25,142 TRACE i.c.u.ConnectionManager [Thread-8] exit with(ConnectionID:5 ClientConnectionId: f9c5c59f-a4e7-43b8-baa8-282fd39dee6c)
+2016-04-04 14:29:25,158 TRACE i.c.s.t.JobManager [Thread-8] exit
+2016-04-04 14:29:25,159 TRACE i.c.s.a.ArtDept [Thread-8] entry params(getHighestProofNumber)
+2016-04-04 14:29:25,159 ERROR i.c.s.a.ArtDept [Thread-8] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 14:29:25,160 TRACE i.c.s.a.ArtDept [Thread-8] exit with(0)
+2016-04-04 14:29:25,160 TRACE i.c.s.a.ArtDept [Thread-8] entry params(readText)
+2016-04-04 14:29:25,162 TRACE i.c.s.a.ArtDept [Thread-8] The length of the associated text file is: 6968
+2016-04-04 14:29:25,164 DEBUG i.c.s.a.ArtDept [Thread-8] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 14:29:25,171 TRACE i.c.s.a.ArtDept [Thread-8] Pattern file exists! Reading from it now.
+2016-04-04 14:29:25,173 TRACE i.c.s.a.ArtDept [Thread-8] Upper Pattern is: 
+2016-04-04 14:29:25,173 TRACE i.c.s.a.ArtDept [Thread-8]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 14:29:25,173 DEBUG i.c.s.a.ArtDept [Thread-8] Between mods, sb is currently ID America
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] After second mod, sb is: ID America
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Company Name: ID America with a length of 10
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Company PO: 3376716955 with a length of 10
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Shipping Date:  with a length of 0
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] CSR: alex
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Credit Card? true
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Ship Days: 3
+2016-04-04 14:29:25,174 TRACE i.c.s.a.ArtDept [Thread-8] Setting the Job bean's properties.
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] This is an AA order.
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ArtDept [Thread-8] Bean set (inside readText).
+2016-04-04 14:29:25,174 TRACE i.c.s.a.ArtDept [Thread-8] exit with(info.chrismcgee.sky.beans.Job@422e33c0)
+2016-04-04 14:29:25,174 TRACE i.c.s.a.ScriptManager [Thread-8] entry params(scriptRunner)
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ScriptManager [Thread-8] Username will be apache
+2016-04-04 14:29:25,174 DEBUG i.c.s.a.ScriptManager [Thread-8] Got pCompany: ACCENTS
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Got shipDate: 
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Got customerName: ID America
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Got customerPO: 3376716955
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Got overruns: false
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Got sampleShelf: false
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 14:29:25,175 TRACE i.c.s.a.ScriptManager [Thread-8] Prepare the AppleScript file to be executed.
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] scriptFolder and scriptFile variables set.
+2016-04-04 14:29:25,175 ERROR i.c.s.a.ScriptManager [Thread-8] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 14:29:25,175 DEBUG i.c.s.a.ScriptManager [Thread-8] Reading the Proofing script into a string.
+2016-04-04 14:29:25,179 DEBUG i.c.s.a.ScriptManager [Thread-8] Setting the script engine.
+2016-04-04 14:29:25,181 TRACE i.c.s.a.ScriptManager [Thread-8] Running the script and evaluating the result.
+2016-04-04 14:29:42,182 DEBUG i.c.s.a.ScriptManager [Thread-8] 3
+2016-04-04 14:29:42,182 DEBUG i.c.s.a.ScriptManager [Thread-8] 
+2016-04-04 14:29:42,183 TRACE i.c.s.a.ScriptManager [Thread-8] Another type of error returned from Illustrator (besides MRAP).
+2016-04-04 14:29:42,183 TRACE i.c.u.ConnectionManager [Thread-8] entry params(getInstance)
+2016-04-04 14:29:42,183 TRACE i.c.u.ConnectionManager [Thread-8] exit with(info.chrismcgee.util.ConnectionManager@758696d1)
+2016-04-04 14:29:42,183 TRACE i.c.u.ConnectionManager [Thread-8] entry params(Closing connection)
+2016-04-04 14:29:42,183 TRACE i.c.s.a.ArtDept [Thread-8] exit with(callScript)
+2016-04-04 14:29:42,183 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:29:42,203 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 14:29:42,203 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:29:42,204 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:29:42,204 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:29:42,204 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:29:42,204 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:39:05,207 TRACE i.c.s.a.ArtDept$9 [AWT-EventQueue-0] Cancel button pressed
+2016-04-04 14:41:02,269 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] entry params(main)
+2016-04-04 14:41:03,803 TRACE i.c.s.a.ArtDept$1 [AWT-EventQueue-0] exit with(main)
+2016-04-04 14:41:05,821 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:05,821 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:05,822 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:05,822 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:05,822 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:06,014 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:06,014 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:06,015 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:06,015 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:06,015 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:06,174 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:06,174 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:06,175 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:06,175 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:06,175 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:06,342 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:06,342 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:06,343 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:06,343 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:06,343 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:06,446 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:06,446 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:06,447 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:06,447 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:06,447 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:06,614 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:06,614 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:06,615 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:06,615 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:06,615 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:07,630 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:07,630 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-04 14:41:07,631 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:07,631 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:07,631 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-04 14:41:07,830 TRACE i.c.s.a.ArtDept$6 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:41:07,830 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeInitials)
+2016-04-04 14:41:07,831 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:07,831 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:07,831 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeInitials)
+2016-04-04 14:41:09,662 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 14:41:09,662 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 14:41:09,662 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 14:41:09,663 TRACE i.c.s.a.ArtDept [Thread-4] entry params(callScript)
+2016-04-04 14:41:09,664 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:41:09,664 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-04 14:41:09,665 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:41:09,665 TRACE i.c.u.ConnectionManager [Thread-4] entry params(setDBType)
+2016-04-04 14:41:09,665 TRACE i.c.u.ConnectionManager [Thread-4] exit with(setDBType)
+2016-04-04 14:41:09,666 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:41:09,667 TRACE i.c.s.t.JobManager [Thread-4] entry params(getJob (JobManager))
+2016-04-04 14:41:09,667 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-04 14:41:09,667 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:41:09,667 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getConnection)
+2016-04-04 14:41:09,667 TRACE i.c.u.ConnectionManager [Thread-4] entry params(openConnection)
+2016-04-04 14:41:09,691 TRACE i.c.u.ConnectionManager [Thread-4] Using Micrososft SQL Server.
+2016-04-04 14:41:09,945 TRACE i.c.u.ConnectionManager [Thread-4] exit with(true)
+2016-04-04 14:41:09,945 DEBUG i.c.u.ConnectionManager [Thread-4] Connection opened
+2016-04-04 14:41:09,945 TRACE i.c.u.ConnectionManager [Thread-4] exit with(ConnectionID:1 ClientConnectionId: ea84787f-8411-4c33-9e3c-820a323bacd2)
+2016-04-04 14:41:09,997 TRACE i.c.s.t.JobManager [Thread-4] exit
+2016-04-04 14:41:10,006 TRACE i.c.s.a.ArtDept [Thread-4] entry params(getHighestProofNumber)
+2016-04-04 14:41:10,007 ERROR i.c.s.a.ArtDept [Thread-4] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 14:41:10,008 TRACE i.c.s.a.ArtDept [Thread-4] exit with(0)
+2016-04-04 14:41:10,008 TRACE i.c.s.a.ArtDept [Thread-4] entry params(readText)
+2016-04-04 14:41:10,010 TRACE i.c.s.a.ArtDept [Thread-4] The length of the associated text file is: 6968
+2016-04-04 14:41:10,014 DEBUG i.c.s.a.ArtDept [Thread-4] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 14:41:10,033 TRACE i.c.s.a.ArtDept [Thread-4] Pattern file exists! Reading from it now.
+2016-04-04 14:41:10,040 TRACE i.c.s.a.ArtDept [Thread-4] Upper Pattern is: 
+2016-04-04 14:41:10,040 TRACE i.c.s.a.ArtDept [Thread-4]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] Between mods, sb is currently ID America
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] After second mod, sb is: ID America
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] Company Name: ID America with a length of 10
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] Company PO: 3376716955 with a length of 10
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] Shipping Date:  with a length of 0
+2016-04-04 14:41:10,041 DEBUG i.c.s.a.ArtDept [Thread-4] CSR: alex
+2016-04-04 14:41:10,042 DEBUG i.c.s.a.ArtDept [Thread-4] Credit Card? true
+2016-04-04 14:41:10,042 DEBUG i.c.s.a.ArtDept [Thread-4] Ship Days: 3
+2016-04-04 14:41:10,042 TRACE i.c.s.a.ArtDept [Thread-4] Setting the Job bean's properties.
+2016-04-04 14:41:10,042 DEBUG i.c.s.a.ArtDept [Thread-4] This is an AA order.
+2016-04-04 14:41:10,042 DEBUG i.c.s.a.ArtDept [Thread-4] Bean set (inside readText).
+2016-04-04 14:41:10,042 TRACE i.c.s.a.ArtDept [Thread-4] exit with(info.chrismcgee.sky.beans.Job@5406be49)
+2016-04-04 14:41:10,045 TRACE i.c.s.a.ScriptManager [Thread-4] entry params(scriptRunner)
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Username will be apache
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompany: ACCENTS
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got shipDate: 
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerName: ID America
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got customerPO: 3376716955
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got overruns: false
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got sampleShelf: false
+2016-04-04 14:41:10,045 DEBUG i.c.s.a.ScriptManager [Thread-4] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 14:41:10,045 TRACE i.c.s.a.ScriptManager [Thread-4] Prepare the AppleScript file to be executed.
+2016-04-04 14:41:10,046 DEBUG i.c.s.a.ScriptManager [Thread-4] scriptFolder and scriptFile variables set.
+2016-04-04 14:41:10,046 ERROR i.c.s.a.ScriptManager [Thread-4] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 14:41:10,046 DEBUG i.c.s.a.ScriptManager [Thread-4] Reading the Proofing script into a string.
+2016-04-04 14:41:10,049 DEBUG i.c.s.a.ScriptManager [Thread-4] Setting the script engine.
+2016-04-04 14:41:10,098 TRACE i.c.s.a.ScriptManager [Thread-4] Running the script and evaluating the result.
+2016-04-04 14:41:20,192 DEBUG i.c.s.a.ScriptManager [Thread-4] 3
+2016-04-04 14:41:20,192 DEBUG i.c.s.a.ScriptManager [Thread-4] 
+2016-04-04 14:41:20,192 TRACE i.c.s.a.ScriptManager [Thread-4] Another type of error returned from Illustrator (besides MRAP).
+2016-04-04 14:41:20,192 TRACE i.c.u.ConnectionManager [Thread-4] entry params(getInstance)
+2016-04-04 14:41:20,192 TRACE i.c.u.ConnectionManager [Thread-4] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:41:20,193 TRACE i.c.u.ConnectionManager [Thread-4] entry params(Closing connection)
+2016-04-04 14:41:20,194 TRACE i.c.s.a.ArtDept [Thread-4] exit with(callScript)
+2016-04-04 14:41:20,196 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:41:20,206 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 14:41:20,206 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:41:20,206 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:41:20,207 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:41:20,207 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:41:20,207 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:42:50,650 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:42:50,651 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:42:50,651 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:42:50,651 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:42:50,651 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:42:50,802 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:42:50,803 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:42:50,803 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:42:50,803 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:42:50,803 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:42:50,962 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:42:50,963 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:42:50,963 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:42:50,963 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:42:50,963 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:42:51,106 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:42:51,106 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:42:51,107 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:42:51,107 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:42:51,107 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:42:51,194 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:42:51,194 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:42:51,195 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:42:51,195 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:42:51,195 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:42:51,394 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Inserting a character
+2016-04-04 14:42:51,395 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:42:51,395 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:42:51,395 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:42:51,395 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:42:52,307 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] entry params(doProof Action)
+2016-04-04 14:42:52,307 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] Proofing button hit!
+2016-04-04 14:42:52,308 TRACE i.c.s.a.ArtDept$3 [AWT-EventQueue-0] exit with(doProof Action)
+2016-04-04 14:42:52,308 TRACE i.c.s.a.ArtDept [Thread-5] entry params(callScript)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:42:52,308 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] entry params(setDBType)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] exit with(setDBType)
+2016-04-04 14:42:52,308 TRACE i.c.s.t.JobManager [Thread-5] entry params(getJob (JobManager))
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] entry params(openConnection)
+2016-04-04 14:42:52,308 TRACE i.c.u.ConnectionManager [Thread-5] Using Micrososft SQL Server.
+2016-04-04 14:42:52,310 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 14:42:52,655 TRACE i.c.u.ConnectionManager [Thread-5] exit with(true)
+2016-04-04 14:42:52,655 DEBUG i.c.u.ConnectionManager [Thread-5] Connection opened
+2016-04-04 14:42:52,655 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:42:52,675 TRACE i.c.s.t.JobManager [Thread-5] exit
+2016-04-04 14:42:52,676 TRACE i.c.s.a.ArtDept [Thread-5] entry params(getHighestProofNumber)
+2016-04-04 14:42:52,677 ERROR i.c.s.a.ArtDept [Thread-5] Nothing in the OrderDetail List! Returning 0.
+java.lang.NullPointerException
+	at info.chrismcgee.sky.artdept.ArtDept.getHighestProofNumber(ArtDept.java:510) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.callScript(ArtDept.java:458) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept.access$5(ArtDept.java:433) [bin/:?]
+	at info.chrismcgee.sky.artdept.ArtDept$3$1.run(ArtDept.java:178) [bin/:?]
+2016-04-04 14:42:52,677 TRACE i.c.s.a.ArtDept [Thread-5] exit with(0)
+2016-04-04 14:42:52,677 TRACE i.c.s.a.ArtDept [Thread-5] entry params(readText)
+2016-04-04 14:42:52,679 TRACE i.c.s.a.ArtDept [Thread-5] The length of the associated text file is: 6968
+2016-04-04 14:42:52,681 DEBUG i.c.s.a.ArtDept [Thread-5] Path is: /Volumes/ArtDept/Work Orders/466602.TXT
+2016-04-04 14:42:52,686 TRACE i.c.s.a.ArtDept [Thread-5] Pattern file exists! Reading from it now.
+2016-04-04 14:42:52,688 TRACE i.c.s.a.ArtDept [Thread-5] Upper Pattern is: 
+2016-04-04 14:42:52,689 TRACE i.c.s.a.ArtDept [Thread-5]     (?i)^(?!A[dnl{2}]|The|Sir|Bob|Tic|Can|Art|[BPR]e[dn]|Go|New|Pro|Jem|[IO][nf]|Mid|Te[ex]|Jet|Fat|Top|[FS]un|You|Out|Hot|Ace|Sky|Joy|Bay\b)[\w\-]{2,3}(?=[\s\-\+\&])|(?<=\s)(?!Up)\w{2}(?=$)|\b(?!Mkt|Sky)([b-df-hj-np-tv-z]{2,3}|I{2,3}|USA|AP|PPI)\b|(?<!\w)\w{2,3}(?=\))|(?<=[\(\-\+\&])\w
+2016-04-04 14:42:52,689 DEBUG i.c.s.a.ArtDept [Thread-5] Between mods, sb is currently ID America
+2016-04-04 14:42:52,689 DEBUG i.c.s.a.ArtDept [Thread-5] After second mod, sb is: ID America
+2016-04-04 14:42:52,689 DEBUG i.c.s.a.ArtDept [Thread-5] Printing Company: AMERICAN ACCENTS with a length of 16
+2016-04-04 14:42:52,689 DEBUG i.c.s.a.ArtDept [Thread-5] Company Name: ID America with a length of 10
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] Company PO: 3376716955 with a length of 10
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] Shipping Date:  with a length of 0
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] CSR: alex
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] Credit Card? true
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] Ship Days: 3
+2016-04-04 14:42:52,690 TRACE i.c.s.a.ArtDept [Thread-5] Setting the Job bean's properties.
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] This is an AA order.
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ArtDept [Thread-5] Bean set (inside readText).
+2016-04-04 14:42:52,690 TRACE i.c.s.a.ArtDept [Thread-5] exit with(info.chrismcgee.sky.beans.Job@e21d37e)
+2016-04-04 14:42:52,690 TRACE i.c.s.a.ScriptManager [Thread-5] entry params(scriptRunner)
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Username will be apache
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got pCompany: ACCENTS
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got shipDate: 
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got customerName: ID America
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got customerPO: 3376716955
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got overruns: false
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got sampleShelf: false
+2016-04-04 14:42:52,690 DEBUG i.c.s.a.ScriptManager [Thread-5] Got pCompanyEnum: AMERICAN_ACCENTS
+2016-04-04 14:42:52,691 TRACE i.c.s.a.ScriptManager [Thread-5] Prepare the AppleScript file to be executed.
+2016-04-04 14:42:52,691 DEBUG i.c.s.a.ScriptManager [Thread-5] scriptFolder and scriptFile variables set.
+2016-04-04 14:42:52,691 ERROR i.c.s.a.ScriptManager [Thread-5] Null Pointer to the Order Detail List. Creating one now.
+2016-04-04 14:42:52,691 DEBUG i.c.s.a.ScriptManager [Thread-5] Reading the Proofing script into a string.
+2016-04-04 14:42:52,693 DEBUG i.c.s.a.ScriptManager [Thread-5] Setting the script engine.
+2016-04-04 14:42:52,695 TRACE i.c.s.a.ScriptManager [Thread-5] Running the script and evaluating the result.
+2016-04-04 14:45:05,052 DEBUG i.c.s.a.ScriptManager [Thread-5] 253402207200000@466602@ID America@1459795372887@T-N17 - DK BLUE@T-N17-DKBLUE@6@1@1000@0@1@false@3376716955@466602_T-N17-DKBLUE_THUMB.jpg@0@@@25@1000@@@false@CM@
+2016-04-04 14:45:05,052 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:45:05,053 DEBUG i.c.s.a.ScriptManager [Thread-5] 9999-12-30
+2016-04-04 14:45:05,053 DEBUG i.c.s.a.ScriptManager [Thread-5] 466602
+2016-04-04 14:45:05,053 DEBUG i.c.s.a.ScriptManager [Thread-5] ID America
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] Apr 4, 2016 2:42:52 PM EDT
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] T-N17 - DK BLUE
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] T-N17-DKBLUE
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 6
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 1
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 1000
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 0
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 1
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] false
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 3376716955
+2016-04-04 14:45:05,058 DEBUG i.c.s.a.ScriptManager [Thread-5] 466602_T-N17-DKBLUE_THUMB.jpg
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 0
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 25
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 1000
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] false
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] CM
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] null
+2016-04-04 14:45:05,059 DEBUG i.c.s.a.ScriptManager [Thread-5] 
+2016-04-04 14:45:05,059 TRACE i.c.s.a.ScriptManager [Thread-5] First, place the day's info into the Day table.  This should only insert one row.
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,135 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,136 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,137 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,137 DEBUG i.c.s.b.Day [Thread-5] Day of week is: 4
+2016-04-04 14:45:05,137 DEBUG i.c.s.b.Day [Thread-5] Sunday is: 7
+2016-04-04 14:45:05,137 DEBUG i.c.s.b.Day [Thread-5] Saturday is: 6
+2016-04-04 14:45:05,139 TRACE i.c.s.t.DayManager [Thread-5] entry params(dayExists)
+2016-04-04 14:45:05,139 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,140 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,140 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:45:05,140 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:45:05,145 TRACE i.c.s.t.DayManager [Thread-5] exit with(true)
+2016-04-04 14:45:05,146 TRACE i.c.s.a.ScriptManager [Thread-5] 9999-12-30 already exists in the Day table. Setting it to INCOMPLETE.
+2016-04-04 14:45:05,146 TRACE i.c.s.t.DayManager [Thread-5] entry params(Setting the date in the Day table as NOT completed (null the 'day_completed' field.)
+2016-04-04 14:45:05,147 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,147 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,147 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:45:05,147 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:45:05,149 TRACE i.c.s.t.DayManager [Thread-5] exit with(true)
+2016-04-04 14:45:05,150 TRACE i.c.s.a.ScriptManager [Thread-5] Next, set the Job info bean.
+2016-04-04 14:45:05,167 TRACE i.c.s.a.ScriptManager [Thread-5] As part of setting the Job bean, set its OrderDetail List with OrderDetail beans.
+2016-04-04 14:45:05,168 ERROR i.c.s.a.ScriptManager [Thread-5] Could not parse Label Quantity into an integer. Setting it to 0 instead.
+2016-04-04 14:45:05,170 TRACE i.c.s.a.ScriptManager [Thread-5] All of the items in this job are Digital Proofs only: false
+2016-04-04 14:45:05,170 TRACE i.c.s.t.JobManager [Thread-5] entry params(getRow (JobManager))
+2016-04-04 14:45:05,170 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,170 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,170 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:45:05,170 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:45:05,185 TRACE i.c.s.t.JobManager [Thread-5] exit
+2016-04-04 14:45:05,186 DEBUG i.c.s.a.ScriptManager [Thread-5] INSERTing a new Job entry into the Job table.
+2016-04-04 14:45:05,186 TRACE i.c.s.t.JobManager [Thread-5] entry params(insert (JobManager))
+2016-04-04 14:45:05,186 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,186 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,186 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:45:05,186 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:45:05,190 TRACE i.c.s.t.DayManager [Thread-5] entry params(Setting the date in the Day table as NOT completed (null the 'day_completed' field.)
+2016-04-04 14:45:05,190 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,191 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,191 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:45:05,191 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:45:05,193 TRACE i.c.s.t.DayManager [Thread-5] exit with(true)
+2016-04-04 14:45:05,194 TRACE i.c.s.t.JobManager [Thread-5] exit with(true)
+2016-04-04 14:45:05,194 DEBUG i.c.s.a.ScriptManager [Thread-5] Job id 466602 was inserted/updated!
+2016-04-04 14:45:05,194 TRACE i.c.s.a.ScriptManager [Thread-5] entry params(addDummyEntries (when bean doesn't exist yet) (ScriptManager))
+2016-04-04 14:45:05,267 DEBUG i.c.s.a.ScriptManager [Thread-5] Comparing T-N17-DKBLUE (incoming item) to T-N17-DKBLUE (existing file in directory).
+2016-04-04 14:45:05,267 DEBUG i.c.s.a.ScriptManager [Thread-5] Found a match. Removing from the existing File list. (Will not be added as a dummy item to the database.)
+2016-04-04 14:45:05,267 TRACE i.c.s.a.ScriptManager [Thread-5] exit with(addDummyEntries (ScriptManager))
+2016-04-04 14:45:05,267 DEBUG i.c.s.a.ScriptManager [Thread-5] INSERTing a new OrderDetail entry into the Job table.
+2016-04-04 14:45:05,268 TRACE i.c.s.t.OrderDetailManager [Thread-5] entry params(insert (OrderDetail))
+2016-04-04 14:45:05,268 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,268 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,268 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getConnection)
+2016-04-04 14:45:05,268 TRACE i.c.u.ConnectionManager [Thread-5] exit with(ConnectionID:2 ClientConnectionId: 48b48124-eeab-44a9-a22c-99e168d805e7)
+2016-04-04 14:45:05,272 TRACE i.c.s.t.OrderDetailManager [Thread-5] exit with(true)
+2016-04-04 14:45:05,273 DEBUG i.c.s.a.ScriptManager [Thread-5] At least one row was inserted/updated!
+2016-04-04 14:45:05,273 TRACE i.c.s.a.ScriptManager [Thread-5] Completed main section.
+2016-04-04 14:45:05,273 TRACE i.c.s.a.ScriptManager [Thread-5] exit with(true)
+2016-04-04 14:45:05,273 TRACE i.c.u.ConnectionManager [Thread-5] entry params(getInstance)
+2016-04-04 14:45:05,273 TRACE i.c.u.ConnectionManager [Thread-5] exit with(info.chrismcgee.util.ConnectionManager@73a99720)
+2016-04-04 14:45:05,273 TRACE i.c.u.ConnectionManager [Thread-5] entry params(Closing connection)
+2016-04-04 14:45:05,277 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] entry params(setControlsEnabled)
+2016-04-04 14:45:05,277 TRACE i.c.s.a.ArtDept [Thread-5] exit with(callScript)
+2016-04-04 14:45:05,278 TRACE i.c.s.a.ArtDept$5 [AWT-EventQueue-0] Deleting a character
+2016-04-04 14:45:05,278 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(sanitizeOrderNum)
+2016-04-04 14:45:05,278 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] entry params(verifyInputs)
+2016-04-04 14:45:05,278 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(verifyInputs)
+2016-04-04 14:45:05,278 TRACE i.c.s.a.ArtDept [AWT-EventQueue-0] exit with(sanitizeOrderNum)
+2016-04-04 14:45:05,279 TRACE i.c.s.a.ArtDept$10 [AWT-EventQueue-0] exit with(setControlsEnabled)
+2016-04-04 15:18:25,905 TRACE i.c.s.a.ArtDept$9 [AWT-EventQueue-0] Cancel button pressed
