@@ -112,7 +112,7 @@ public class ArtDept extends JDialog {
 					
 					ArtDept dialog = new ArtDept();
 					
-					dialog.setTitle("Art Department v1.85");
+					dialog.setTitle("Art Department v1.89");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationByPlatform(true);
 					
@@ -490,6 +490,12 @@ public class ArtDept extends JDialog {
 		
 		// Re-enable all controls.
 		enableControls(true);
+		
+		// Reset fields. (May make into a separate method later.)
+		customerServiceRep = "";
+		creditCard = false;
+		shipDays = 0;
+		wnaPo = "";
 
 		log.exit("callScript");
 	}
@@ -557,14 +563,17 @@ public class ArtDept extends JDialog {
 		String shipDaysString = "";
 		
 		// Prepare search patterns
+		final Pattern shipDaysPattern = Pattern.compile("SHIP[^W]+WORKING", Pattern.CASE_INSENSITIVE);
 		final Pattern overrunsPattern = Pattern.compile("(?<!DON'T\\s)SEND\\sOVERRUNS", Pattern.CASE_INSENSITIVE);
 		final Pattern noSamplesPattern = Pattern.compile("DON'T\\sPUT\\sSAMPLES", Pattern.CASE_INSENSITIVE);
 		final Pattern creditCardPattern = Pattern.compile("CREDIT\\s?CARD", Pattern.CASE_INSENSITIVE);
-		final String shipDaysPhrasePre = "ORDER WILL SHIP ";
-		final String shipDaysPhraseSuf = " WORKING DAYS";
+		// Removed these two variables since we will no longer be using the "String" method to find the key phrase.
+//		final String shipDaysPhrasePre = "WILL SHIP ";
+//		final String shipDaysPhraseSuf = " WORKING DAYS";
 		final String wnaOrderPoPhrase = "ON WNA ORDER ";
 		
 		// Matchers for the Patterns above. They must be initialized.
+		Matcher shipDaysMatcher = shipDaysPattern.matcher("");
 		Matcher creditCardMatcher = creditCardPattern.matcher("");
 		Matcher overrunsMatcher = overrunsPattern.matcher("");
 		Matcher noSamplesMatcher = noSamplesPattern.matcher("");
@@ -606,17 +615,23 @@ public class ArtDept extends JDialog {
 				}
 				
 				// Then check for the non-line-based items.
-				// This one checks for the number if shipping days.
-				// Check if the concatenated line contains both the prefix and suffix.
-				if (concatLine.contains(shipDaysPhrasePre) && concatLine.contains(shipDaysPhraseSuf)) {
-					shipDaysString = concatLine.substring(concatLine.indexOf(shipDaysPhrasePre) + shipDaysPhrasePre.length(), concatLine.indexOf(shipDaysPhraseSuf));
+				
+				// This one checks for the number of shipping days.
+				// Check if the concatenated line matches our regex..
+				shipDaysMatcher = shipDaysPattern.matcher(concatLine);
+				if (shipDaysMatcher.find()) {
+//				if (concatLine.contains(shipDaysPhrasePre) && concatLine.contains(shipDaysPhraseSuf)) { // Removing this "String" method.
+//					shipDaysString = concatLine.substring(concatLine.indexOf(shipDaysPhrasePre) + shipDaysPhrasePre.length(), concatLine.indexOf(shipDaysPhraseSuf)); // Ditto.
 					// No need to remove linebreaks, because we're reading line by line with BufferedReader.
-					// Remove underscores ("_") in front of and after the digit(s).
 					
 					// Newer, more succinct code for removing underscores (and possibly other characters).
 					//   It might be less efficient, but easier to understand and type.
-					shipDaysString = shipDaysString.replaceAll("\\D+", "");
+					log.debug("Matcher has found: " + shipDaysMatcher.group(0));
+//					shipDaysString = shipDaysString.replaceAll("\\D+", ""); // Removing the "String" method.
+					shipDaysString = shipDaysMatcher.group(0).replaceAll("\\D+", "");
+					log.debug("shipDaysString (from Matcher) is now: " + shipDaysString);
 					
+					// Remove underscores ("_") in front of and after the digit(s).
 					// The following block has been commented out because the numbers we need
 					//   will not always be surrounded by *only* underscores. (There might be other characters.)
 /*					if (shipDaysString.startsWith("_") && shipDaysString.endsWith("_")) {
@@ -640,7 +655,7 @@ public class ArtDept extends JDialog {
 				
 				// Fourth looks for the PO # for WNA orders and saves it.
 				if (concatLine.contains(wnaOrderPoPhrase)) {
-					int poIndex = concatLine.indexOf(wnaOrderPoPhrase) + concatLine.length();
+					int poIndex = concatLine.indexOf(wnaOrderPoPhrase) + wnaOrderPoPhrase.length();
 					wnaPo = StringUtils.trim(concatLine.substring(poIndex, poIndex + 15));
 				}
 				
