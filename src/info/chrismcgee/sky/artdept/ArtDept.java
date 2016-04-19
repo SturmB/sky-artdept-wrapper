@@ -112,7 +112,7 @@ public class ArtDept extends JDialog {
 					
 					ArtDept dialog = new ArtDept();
 					
-					dialog.setTitle("Art Department v1.89");
+					dialog.setTitle("Art Department v1.90");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationByPlatform(true);
 					
@@ -563,7 +563,7 @@ public class ArtDept extends JDialog {
 		String shipDaysString = "";
 		
 		// Prepare search patterns
-		final Pattern shipDaysPattern = Pattern.compile("SHIP[^W]+WORKING", Pattern.CASE_INSENSITIVE);
+		final Pattern shipDaysPattern = Pattern.compile("SHIP\\s[^\\sWORKING]+\\sWORKING", Pattern.CASE_INSENSITIVE);
 		final Pattern overrunsPattern = Pattern.compile("(?<!DON'T\\s)SEND\\sOVERRUNS", Pattern.CASE_INSENSITIVE);
 		final Pattern noSamplesPattern = Pattern.compile("DON'T\\sPUT\\sSAMPLES", Pattern.CASE_INSENSITIVE);
 		final Pattern creditCardPattern = Pattern.compile("CREDIT\\s?CARD", Pattern.CASE_INSENSITIVE);
@@ -640,7 +640,15 @@ public class ArtDept extends JDialog {
 						// After (example): shipDaysString = "5"
 					}*/
 					// Then convert it to an integer.
-					shipDays = Integer.parseInt(shipDaysString);
+					if (shipDaysString.length() > 0) {
+						try {
+							shipDays = Integer.parseInt(shipDaysString);
+						} catch (NumberFormatException nfe) {
+							log.error(nfe);
+							// If the string *still* cannot be parsed to an integer, just do nothing.
+							// This will leave the shipDays variable at its default value of 0.
+						}
+					}
 				}
 				
 				// Second one looks for Overruns.
