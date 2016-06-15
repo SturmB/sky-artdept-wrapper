@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -60,6 +62,7 @@ import info.chrismcgee.sky.enums.PrintingCompany;
 import info.chrismcgee.sky.enums.ScriptType;
 import info.chrismcgee.sky.tables.JobManager;
 import info.chrismcgee.util.ConnectionManager;
+import info.chrismcgee.util.SendMail;
 import net.miginfocom.swing.MigLayout;
 
 public class ArtDept extends JDialog {
@@ -69,19 +72,24 @@ public class ArtDept extends JDialog {
 	 */
 	private static final long serialVersionUID = -185001290066987954L;
 	static final Logger log = LogManager.getLogger(ArtDept.class.getName()); // For logging.
+	// Preferences variables
 	private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
+	private static final String PREFS_EMAIL = "email";
+	private static final String PREFS_INITIALS = "initials";
 	// The location of the window (It's not resizable)
 	private Point windowLocation;
 	private final JPanel contentPanel = new JPanel(); // default.
 	// These fields allow their respective components to be accessed anywhere.
 	private JTextField tfOrderNum;
 	private JTextField tfInitials;
+	private JTextField tfEmail;
 	private JButton btnProof;
 	private JButton btnOutput;
 	private JButton cancelButton;
 	// Simple booleans to state whether or not each text field has passed sanitization.
 	private boolean jobNumberReady = false;
 	private boolean initialsReady = false;
+	private boolean usernameReady = false;
 	private File textFile = null;
 	// Define keystrokes that will be used as shortcuts for the "Proof" and "Output" buttons.
 	private KeyStroke ksMenuP = KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
@@ -98,6 +106,7 @@ public class ArtDept extends JDialog {
 	private boolean creditCard = false;
 	private int shipDays = 0;
 	private String wnaPo = "";
+	private String messageToAddr = "customerservice@skyunlimitedinc.com";
 	
 	/**
 	 * Launch the application.
@@ -112,7 +121,7 @@ public class ArtDept extends JDialog {
 					
 					ArtDept dialog = new ArtDept();
 					
-					dialog.setTitle("Art Department v1.90");
+					dialog.setTitle("Art Department v2.00");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationByPlatform(true);
 					
@@ -229,15 +238,76 @@ public class ArtDept extends JDialog {
 		getRootPane().getActionMap().put("doOutput", doOutput);
 		
 		// Default items created by WindowBuilder.
-		setBounds(100, 100, 350, 150);
+		setBounds(100, 100, 500, 175);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[][grow]", "[][]"));
+		contentPanel.setLayout(new MigLayout("", "[][grow]", "[][][]"));
+		contentPanel.setBackground(Color.DARK_GRAY);
+
+		{ // Simple label describing that the following TextField is for the user's email address.
+			JLabel lblEmail = new JLabel("Email:");
+			lblEmail.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblEmail.setForeground(Color.WHITE);
+			contentPanel.add(lblEmail, "cell 0 0,alignx trailing");
+		}
+		{ // Text field for the user to enter his/her email address.
+			tfEmail = new JTextField(prefs.get(PREFS_EMAIL, ""));
+			tfEmail.setColumns(25);
+			tfEmail.getDocument().addDocumentListener(new DocumentListener() {
+				// When the user types or deletes characters, sanitize the input.
+				@Override
+				public void removeUpdate(DocumentEvent e) {
+					log.trace("Deleting a character");
+					sanitizeUsername();
+				}
+				@Override
+				public void insertUpdate(DocumentEvent e) {
+					log.trace("Inserting a character");
+					sanitizeUsername();
+				}
+				@Override
+				public void changedUpdate(DocumentEvent e) {
+					// Plain text components do not fire these events.
+				}
+			});
+			// Add the Initials TextField to the content panel.
+			contentPanel.add(tfEmail, "cell 1 0,growx");
+		}
+		{ // Simple label describing that the following TextField is for the user's initials.
+			JLabel lblInitials = new JLabel("Initials:");
+			lblInitials.setHorizontalAlignment(SwingConstants.TRAILING);
+			lblInitials.setForeground(Color.WHITE);
+			contentPanel.add(lblInitials, "cell 0 1,alignx trailing");
+		}
+		{ // Text field for the user to enter his/her initials.
+			tfInitials = new JTextField(prefs.get(PREFS_INITIALS, ""));
+			tfInitials.setColumns(3);
+			tfInitials.getDocument().addDocumentListener(new DocumentListener() {
+				// When the user types or deletes characters, sanitize the input.
+				@Override
+				public void removeUpdate(DocumentEvent e) {
+					log.trace("Deleting a character");
+					sanitizeInitials();
+				}
+				@Override
+				public void insertUpdate(DocumentEvent e) {
+					log.trace("Inserting a character");
+					sanitizeInitials();
+				}
+				@Override
+				public void changedUpdate(DocumentEvent e) {
+					// Plain text components do not fire these events.
+				}
+			});
+			// Add the Initials TextField to the content panel.
+			contentPanel.add(tfInitials, "cell 1 1");
+		}
 		{ // Simple label describing that the following TextField is for the Job/Order number.
 			JLabel lblOrderNumber = new JLabel("Order Number:");
 			lblOrderNumber.setHorizontalAlignment(SwingConstants.TRAILING);
-			contentPanel.add(lblOrderNumber, "cell 0 0,alignx trailing");
+			lblOrderNumber.setForeground(Color.WHITE);
+			contentPanel.add(lblOrderNumber, "cell 0 2,alignx trailing");
 		}
 		{ // Text field for the user to enter the job/order number.
 			tfOrderNum = new JTextField();
@@ -260,40 +330,15 @@ public class ArtDept extends JDialog {
 				}
 			});
 			// Add the Order Number TextField to the content panel.
-			contentPanel.add(tfOrderNum, "cell 1 0,growx");
+			contentPanel.add(tfOrderNum, "cell 1 2");
 		}
-		{ // Simple label describing that the following TextField is for the user's initials.
-			JLabel lblInitials = new JLabel("Initials:");
-			lblInitials.setHorizontalAlignment(SwingConstants.TRAILING);
-			contentPanel.add(lblInitials, "cell 0 1,alignx trailing");
-		}
-		{ // Text field for the user to enter his/her initials.
-			tfInitials = new JTextField();
-			tfInitials.setColumns(3);
-			tfInitials.getDocument().addDocumentListener(new DocumentListener() {
-				// When the user types or deletes characters, sanitize the input.
-				@Override
-				public void removeUpdate(DocumentEvent e) {
-					log.trace("Deleting a character");
-					sanitizeInitials();
-				}
-				@Override
-				public void insertUpdate(DocumentEvent e) {
-					log.trace("Inserting a character");
-					sanitizeInitials();
-				}
-				@Override
-				public void changedUpdate(DocumentEvent e) {
-					// Plain text components do not fire these events.
-				}
-			});
-			// Add the Initials TextField to the content panel.
-			contentPanel.add(tfInitials, "cell 1 1");
-		}
+
 		{ // Create the button panel at the bottom of the frame. 
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER)); // Centers the buttons.
 			getContentPane().add(buttonPane, BorderLayout.SOUTH); // Default. Aligns the panel to the bottom.
+			buttonPane.setBackground(Color.DARK_GRAY);
+			
 			{ // Create the "ScriptManager" button plus its listener.
 				btnProof = new JButton("Proof");
 				btnProof.setEnabled(false); // Spawns disabled until input is sanitized.
@@ -326,7 +371,7 @@ public class ArtDept extends JDialog {
 //				getRootPane().setDefaultButton(btnOutput); // default.
 			}
 			{	// Adding an invisible strut to separate the Cancel button from the other two buttons. 
-				Component horizontalStrut = Box.createHorizontalStrut(20);
+				Component horizontalStrut = Box.createHorizontalStrut(180);
 				// Add the strut to the button pane.
 				buttonPane.add(horizontalStrut);
 			}
@@ -345,6 +390,21 @@ public class ArtDept extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		sanitizeInitials();
+		sanitizeUsername();
+		
+		// Set the focus on the appropriate text field.
+		addWindowFocusListener(new WindowAdapter() {
+		    public void windowGainedFocus(WindowEvent e) {
+		        tfOrderNum.requestFocusInWindow();
+		        if (tfInitials.getText().length() == 0) {
+		        	tfInitials.requestFocusInWindow();
+		        }
+		        if (tfEmail.getText().length() == 0) {
+		        	tfEmail.requestFocusInWindow();
+		        }
+		    }
+		});
 	}
 	
 	/**
@@ -357,19 +417,10 @@ public class ArtDept extends JDialog {
 	 * other field need to be checked first, as well, before the buttons can be set as
 	 * enabled or not.
 	 */
-	private void verifyInputs()
-	{
+	private void verifyInputs() {
 		log.entry("verifyInputs");
-		if (jobNumberReady && initialsReady)
-		{
-			btnProof.setEnabled(true);
-			btnOutput.setEnabled(true);
-		}
-		else
-		{
-			btnProof.setEnabled(false);
-			btnOutput.setEnabled(false);
-		}
+		btnProof.setEnabled(jobNumberReady && initialsReady && usernameReady);
+		btnOutput.setEnabled(jobNumberReady && initialsReady && usernameReady);
 		log.exit("verifyInputs");
 	}
 
@@ -402,21 +453,34 @@ public class ArtDept extends JDialog {
 	 * Equivalent to the method above (sanitizeOrderNum()), this method does the exact same things,
 	 * only in reference to the Initials TextField.
 	 */
-	private void sanitizeInitials()
-	{
-		log.entry("sanitizeInitials");
-		if (Sanitizer.checkInitials(tfInitials.getText()))
-		{
+	private void sanitizeInitials() {
+		if (Sanitizer.checkInitials(tfInitials.getText())) {
 			tfInitials.setBackground(Color.GREEN);
 			initialsReady = true;
-		}
-		else
-		{
+			prefs.put(PREFS_INITIALS, tfInitials.getText());
+		} else {
 			tfInitials.setBackground(Color.WHITE);
 			initialsReady = false;
 		}
 		verifyInputs();
 		log.exit("sanitizeInitials");
+	}
+	
+	/**
+	 * Equivalent to the method above (sanitizeOrderNum()), this method does the exact same things,
+	 * only in reference to the Username TextField.
+	 */
+	private void sanitizeUsername() {
+		if (Sanitizer.checkInitials(tfEmail.getText())) {
+			tfEmail.setBackground(Color.GREEN);
+			usernameReady = true;
+			prefs.put(PREFS_EMAIL, tfEmail.getText());
+		} else {
+			tfEmail.setBackground(Color.WHITE);
+			usernameReady = false;
+		}
+		verifyInputs();
+		log.exit("sanitizeUsername");
 	}
 	
 	/**
@@ -460,6 +524,7 @@ public class ArtDept extends JDialog {
 			log.error("Could not obtain data from database.", e);
 		}
 //		log.debug("After database query, Job bean is null? " + (jobBean == null));
+		log.debug("Proof Number from database (if non-zero) is: " + proofNum);
 		
 		// Whether or not the database search was successful,
 		// try getting additional data from a text file.
@@ -477,7 +542,42 @@ public class ArtDept extends JDialog {
 //		log.debug("After text file grab, Job bean is null? " + (jobBean == null));
 		
 		// If this is a proofing job, then pre-add 1 to the proofing number.
-		if (scriptType == ScriptType.PROOF) proofNum++;
+		// Also do some more checks.
+		if (scriptType == ScriptType.PROOF) {
+			proofNum++;
+			if (proofNum == 1 && jobBean == null) {
+				// If the text file doesn't exist during a first proof of a job.
+				SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
+						messageToAddr,
+						"Need text file for " + tfOrderNum.getText() + ".",
+						"I need a text file made for Job #" + tfOrderNum.getText() + ", please.");
+				JOptionPane.showMessageDialog(null,
+						"Text file not found.\nAn email has been sent to have the file created.\n" +
+								"Please keep a close eye on your inbox for a message\n" +
+								"stating that it has been created. Then retry.",
+						"Text File Not Found",
+						JOptionPane.WARNING_MESSAGE);
+				log.exit("Text file not found for this Proof #1; returning prematurely.");
+				enableControls(true);
+				return;
+			} else if (!tfOrderNum.getText().equals(jobBean.getJobId())) {
+				// If the entered job number doesn't match the one retrieved from the text file.
+				SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
+						messageToAddr,
+						"Need text file for " + tfOrderNum.getText() + ".",
+						"The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
+								"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ", please.");
+				JOptionPane.showMessageDialog(null,
+						"The job number you entered and the one read from the text file do not match.\n" +
+								"An email has been sent to have the file corrected.\n" +
+								"Please keep a close eye on your inbox for a message\n" +
+								"stating that it has been created. Then retry.",
+						"Job Number Mismatch!",
+						JOptionPane.WARNING_MESSAGE);
+				enableControls(true);
+				return;
+			}
+		}
 		
 		// Finally, call the method that will run the script on this Job.
 		boolean successfulRun = ScriptManager.scriptRunner(scriptType, tfOrderNum.getText(), tfInitials.getText(), jobBean, proofNum, scriptPath, customerServiceRep, creditCard, shipDays, wnaPo);
@@ -561,6 +661,7 @@ public class ArtDept extends JDialog {
 		String shipDate = "";
 		String printingCompany = "";
 		String shipDaysString = "";
+		String readJobNum = "";
 		
 		// Prepare search patterns
 		final Pattern shipDaysPattern = Pattern.compile("SHIP\\s[^\\sWORKING]+\\sWORKING", Pattern.CASE_INSENSITIVE);
@@ -599,6 +700,8 @@ public class ArtDept extends JDialog {
 				case (0): // The printing company (AA, ACS, AYS). (Line 0 in 0-based index)
 					printingCompany = StringUtils.trim(readLine);
 					break;
+				case (3):
+					readJobNum = StringUtils.trim(StringUtils.substring(readLine, 68));
 				case (4): // The customer service representative. (Line 4 in 0-based index)
 					customerServiceRep = StringUtils.trim(readLine);
 					break;
@@ -719,6 +822,18 @@ public class ArtDept extends JDialog {
 		log.debug("Credit Card? " + creditCard);
 		log.debug("Ship Days: " + shipDays);
 		log.debug("WNA Order: " + wnaPo + " with a length of " + wnaPo.length());
+		log.debug("Job Number read from file: " + readJobNum);
+		log.debug("...compared to the entered job number: " + jobNum);
+		
+		// If the job numbers do not match, then alert the user and quit out of the program.
+/*		if (!jobNum.equals(readJobNum)) {
+			JOptionPane.showMessageDialog(null,
+					"The job number you entered and the one read from the text file do not match. Please correct and try again.",
+					"Job Number Mismatch!",
+					JOptionPane.ERROR_MESSAGE);
+			return log.exit(null);
+		}*/
+		// Commented-out because I currently cannot see a way to have it NOT run the script, even though the bean will be null.
 		
 		// Now set the bean's properties.
 		log.trace("Setting the Job bean's properties.");
@@ -738,7 +853,7 @@ public class ArtDept extends JDialog {
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_ACCENTS);
 					break;
 			}
-			bean.setJobId(jobNum);
+			bean.setJobId(readJobNum);
 			bean.setCustomerName(companyName);
 			bean.setCustomerPO(companyPO);
 			
