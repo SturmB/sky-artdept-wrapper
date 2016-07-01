@@ -101,7 +101,7 @@ public class ArtDept extends JDialog {
 	private Matcher ucMatcher;
 	private Matcher lcMatcher;
 	private File patternFile = null; // Text file that has the two RegEx patterns for fixing capitalizations.
-	private String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
+	private String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/Test/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
 	private String customerServiceRep = "";
 	private boolean creditCard = false;
 	private int shipDays = 0;
@@ -121,7 +121,7 @@ public class ArtDept extends JDialog {
 					
 					ArtDept dialog = new ArtDept();
 					
-					dialog.setTitle("Art Department v2.00");
+					dialog.setTitle("Art Department v2.11 (Test)");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationByPlatform(true);
 					
@@ -547,33 +547,41 @@ public class ArtDept extends JDialog {
 			proofNum++;
 			if (proofNum == 1 && jobBean == null) {
 				// If the text file doesn't exist during a first proof of a job.
-				SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
-						messageToAddr,
-						"Need text file for " + tfOrderNum.getText() + ".",
-						"I need a text file made for Job #" + tfOrderNum.getText() + ", please.");
-				JOptionPane.showMessageDialog(null,
-						"Text file not found.\nAn email has been sent to have the file created.\n" +
-								"Please keep a close eye on your inbox for a message\n" +
-								"stating that it has been created. Then retry.",
-						"Text File Not Found",
-						JOptionPane.WARNING_MESSAGE);
+				if (JOptionPane.showConfirmDialog(null, "Text file not found.\n"
+						+ "Send an email to Customer Service to create it?", "Send Email?",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
+							messageToAddr,
+							"Need text file for " + tfOrderNum.getText() + ".",
+							"I need a text file made for Job #" + tfOrderNum.getText() + ", please.");
+					JOptionPane.showMessageDialog(null,
+							"An email has been sent to have the file created.\n" +
+									"Please keep a close eye on your inbox for a message\n" +
+									"stating that it has been created. Then retry.",
+							"Text File Not Found",
+							JOptionPane.WARNING_MESSAGE);
+				}
 				log.exit("Text file not found for this Proof #1; returning prematurely.");
 				enableControls(true);
 				return;
 			} else if (!tfOrderNum.getText().equals(jobBean.getJobId())) {
 				// If the entered job number doesn't match the one retrieved from the text file.
-				SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
-						messageToAddr,
-						"Need text file for " + tfOrderNum.getText() + ".",
-						"The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
-								"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ", please.");
-				JOptionPane.showMessageDialog(null,
-						"The job number you entered and the one read from the text file do not match.\n" +
-								"An email has been sent to have the file corrected.\n" +
-								"Please keep a close eye on your inbox for a message\n" +
-								"stating that it has been created. Then retry.",
-						"Job Number Mismatch!",
-						JOptionPane.WARNING_MESSAGE);
+				if (JOptionPane.showConfirmDialog(null, "The job number you entered and the one read from the text file do not match.\n"
+						+ "Send an email to Customer Service to fix it?", "Send Email?",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
+							messageToAddr,
+							"Need text file for " + tfOrderNum.getText() + ".",
+							"The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
+									"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ", please.");
+					JOptionPane.showMessageDialog(null, "An email has been sent to have the file corrected.\n" +
+									"Please keep a close eye on your inbox for a message\n" +
+									"stating that it has been created. Then retry.",
+							"Job Number Mismatch!",
+							JOptionPane.WARNING_MESSAGE);
+				}
 				enableControls(true);
 				return;
 			}
@@ -947,9 +955,10 @@ public class ArtDept extends JDialog {
 			@Override
 			public void run() {
 				log.entry("setControlsEnabled");
-				
-				tfOrderNum.setEnabled(b);
+
+				tfEmail.setEnabled(b);
 				tfInitials.setEnabled(b);
+				tfOrderNum.setEnabled(b);
 				btnProof.setEnabled(b);
 				btnOutput.setEnabled(b);
 				cancelButton.setEnabled(b);

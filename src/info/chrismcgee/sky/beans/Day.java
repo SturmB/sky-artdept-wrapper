@@ -1,68 +1,63 @@
 package info.chrismcgee.sky.beans;
 
+import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+import org.simpleframework.xml.stream.Format;
 
+import info.chrismcgee.enums.OSType;
+
+@Root(name="maximumsAvailable")
 public class Day {
 	
-	static final Logger log = LogManager.getLogger(Day.class.getName());
+	private static final String FILE_SYSTEM_PREFIX = OSType.getOSType() == OSType.MAC
+			? "/Volumes"
+			: "//SKYFS";
+	private static final String XML_LOCATION = FILE_SYSTEM_PREFIX + "/ArtDept/ArtDept/Scripts";
+	private static final String XML_FILENAME = "maxes.xml";
+	private static final String XML_PROLOG = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
+	private static final Format XML_FORMAT = new Format(XML_PROLOG);
+	private static File xmlFile = new File(XML_LOCATION + "/" + XML_FILENAME);
 	
 	private Date date;
-	private long availableScreenCups;
-	private long availableScreenNaps;
-	private long availablePad;
-	private long availableDigital;
-	private long availableHotstamp;
-	private long availableOffsetCups;
-	private long availableOffsetNaps;
-	private long availableOutsourced;
-	private long remainScreenCups;
-	private long remainScreenNaps;
-	private long remainPad;
-	private long remainHotstamp;
-	private long remainDigital;
-	private long remainOffsetCups;
-	private long remainOffsetNaps;
-	private long remainOutsourced;
-	private Timestamp dayCompleted;
+	@Element
+	private long availableScreenCups = 50000L;
+	@Element
+	private long availableScreenNaps = 20000L;
+	@Element
+	private long availablePad = 100000L;
+	@Element
+	private long availableHotstamp = 10000L;
+	@Element
+	private long availableDigitalCups = 12000L;
+	@Element
+	private long availableDigitalFlats = 12000L;
+	@Element
+	private long availableOffsetCups = 100000L;
+	@Element
+	private long availableOffsetNaps = 100000L;
+	@Element
+	private long availableOutsourced = 50000L;
 
-/*	public Day() {
-		super();
-	}*/
+	private long remainScreenCups = 0L;
+	private long remainScreenNaps = 0L;
+	private long remainPad = 0L;
+	private long remainHotstamp = 0L;
+	private long remainDigitalCups = 0L;
+	private long remainDigitalFlats = 0L;
+	private long remainOffsetCups = 0L;
+	private long remainOffsetNaps = 0L;
+	private long remainOutsourced = 0L;
+	private Timestamp dayCompleted = null;
+
+	public Day() {
+	}
 	
 	public Day(Date date) {
-		super();
 		this.date = date;
-		this.availableScreenCups = isWeekDay() ? 50000 : 0;
-		this.availableScreenNaps = isWeekDay() ? 20000 : 0;
-		this.availablePad = isWeekDay() ? 100000 : 0;
-		this.availableHotstamp = isWeekDay() ? 10000 : 0;
-		this.availableDigital = isWeekDay() ? 10000 : 0;
-		this.availableOffsetCups = isWeekDay() ? 100000 : 0;
-		this.availableOffsetNaps = isWeekDay() ? 100000 : 0;
-		this.availableOutsourced = isWeekDay() ? 50000 : 0;
-		this.remainScreenCups = 0;
-		this.remainScreenNaps = 0;
-		this.remainPad = 0;
-		this.remainHotstamp = 0;
-		this.remainDigital = 0;
-		this.remainOffsetCups = 0;
-		this.remainOffsetNaps = 0;
-		this.dayCompleted = null;
-	}
-
-	private boolean isWeekDay()
-	{
-		log.debug("Day of week is: " + LocalDate.fromDateFields(date).getDayOfWeek());
-		log.debug("Sunday is: " + DateTimeConstants.SUNDAY);
-		log.debug("Saturday is: " + DateTimeConstants.SATURDAY);
-		return LocalDate.fromDateFields(date).getDayOfWeek() != DateTimeConstants.SUNDAY
-				&& LocalDate.fromDateFields(date).getDayOfWeek() != DateTimeConstants.SATURDAY;
 	}
 	
 
@@ -106,6 +101,22 @@ public class Day {
 		this.availableHotstamp = availableHotstamp;
 	}
 
+	public long getAvailableDigitalCups() {
+		return availableDigitalCups;
+	}
+
+	public void setAvailableDigitalCups(long availableDigitalCups) {
+		this.availableDigitalCups = availableDigitalCups;
+	}
+
+	public long getAvailableDigitalFlats() {
+		return availableDigitalFlats;
+	}
+	
+	public void setAvailableDigitalFlats(long availableDigitalFlats) {
+		this.availableDigitalFlats = availableDigitalFlats;
+	}
+	
 	public long getAvailableOffsetCups() {
 		return availableOffsetCups;
 	}
@@ -120,14 +131,6 @@ public class Day {
 
 	public void setAvailableOffsetNaps(long availableOffsetNaps) {
 		this.availableOffsetNaps = availableOffsetNaps;
-	}
-
-	public long getAvailableDigital() {
-		return availableDigital;
-	}
-
-	public void setAvailableDigital(long availableDigital) {
-		this.availableDigital = availableDigital;
 	}
 
 	public long getAvailableOutsourced() {
@@ -170,6 +173,22 @@ public class Day {
 		this.remainHotstamp = remainHotstamp;
 	}
 
+	public long getRemainDigitalCups() {
+		return remainDigitalCups;
+	}
+
+	public void setRemainDigitalCups(long remainDigitalCups) {
+		this.remainDigitalCups = remainDigitalCups;
+	}
+
+	public long getRemainDigitalFlats() {
+		return remainDigitalFlats;
+	}
+	
+	public void setRemainDigitalFlats(long remainDigitalFlats) {
+		this.remainDigitalFlats = remainDigitalFlats;
+	}
+	
 	public long getRemainOffsetCups() {
 		return remainOffsetCups;
 	}
@@ -186,14 +205,6 @@ public class Day {
 		this.remainOffsetNaps = remainOffsetNaps;
 	}
 
-	public long getRemainDigital() {
-		return remainDigital;
-	}
-
-	public void setRemainDigital(long remainDigital) {
-		this.remainDigital = remainDigital;
-	}
-
 	public long getRemainOutsourced() {
 		return remainOutsourced;
 	}
@@ -208,6 +219,50 @@ public class Day {
 
 	public void setDayCompleted(Timestamp dayCompleted) {
 		this.dayCompleted = dayCompleted;
+	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder("This Day bean consists of: ");
+		sb.append('\n');
+		sb.append("Screen Cups: ");
+		sb.append(availableScreenCups);
+		sb.append('\n');
+		sb.append("Screen Napkins: ");
+		sb.append(availableScreenNaps);
+		sb.append('\n');
+		sb.append("Pad Print: ");
+		sb.append(availablePad);
+		sb.append('\n');
+		sb.append("Hotstamp: ");
+		sb.append(availableHotstamp);
+		sb.append('\n');
+		sb.append("Digital Cups: ");
+		sb.append(availableDigitalCups);
+		sb.append('\n');
+		sb.append("Screen Flats: ");
+		sb.append(availableDigitalFlats);
+		sb.append('\n');
+		sb.append("Offset Cups: ");
+		sb.append(availableOffsetCups);
+		sb.append('\n');
+		sb.append("Offset Napkins: ");
+		sb.append(availableOffsetNaps);
+		sb.append('\n');
+		sb.append("Outsourced: ");
+		sb.append(availableOutsourced);
+		sb.append('\n');
+		
+		return sb.toString();
+	}
+
+	public static File getXmlFile() {
+		return xmlFile;
+	}
+
+	public static Format getXmlFormat() {
+		return XML_FORMAT;
 	}
 
 }

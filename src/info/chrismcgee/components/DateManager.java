@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.joda.time.DateTimeConstants;
 import org.joda.time.Days;
 import org.joda.time.DurationFieldType;
 import org.joda.time.LocalDate;
@@ -20,6 +23,7 @@ public class DateManager {
 	private static LocalDate today = LocalDate.now();
 	private static DateTimeFormatter displayFmt = DateTimeFormat.forPattern("MM/dd/yy");
 	private static DateTimeFormatter sqlFmt = DateTimeFormat.forPattern("yyyy-MM-dd");
+	static final Logger log = LogManager.getLogger(DateManager.class.getName());
 	
 	/**
 	 * Turns a date String into a LocalDate object.
@@ -160,4 +164,10 @@ public class DateManager {
 		proofDateComparator = LocalDate.fromDateFields(sqlDate);
 		return proofDateComparator.equals(PROOF_DATE);
 	}
+	
+	public static boolean isWeekDay(Date date) {
+		return LocalDate.fromDateFields(date).getDayOfWeek() != DateTimeConstants.SUNDAY
+				&& LocalDate.fromDateFields(date).getDayOfWeek() != DateTimeConstants.SATURDAY;
+	}
+
 }

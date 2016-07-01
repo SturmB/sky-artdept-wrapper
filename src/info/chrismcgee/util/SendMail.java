@@ -21,7 +21,7 @@ public class SendMail {
 	public static boolean send(String from, String to, String subject, String body) {
 		
 		// Recipient's email ID needs to be mentioned.
-		to = "christophermcgee@mainserver.com";
+//		to = "christophermcgee@mainserver.com"; // For testing.
 		
 		// Sender's email ID needs to be mentioned.
 //		from = "java@mainserver.com"; // For testing.

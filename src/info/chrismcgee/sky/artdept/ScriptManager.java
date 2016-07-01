@@ -1,16 +1,5 @@
 package info.chrismcgee.sky.artdept;
 
-import info.chrismcgee.components.DateManager;
-import info.chrismcgee.sky.beans.Day;
-import info.chrismcgee.sky.beans.Job;
-import info.chrismcgee.sky.beans.OrderDetail;
-import info.chrismcgee.sky.enums.PrintType;
-import info.chrismcgee.sky.enums.PrintingCompany;
-import info.chrismcgee.sky.enums.ScriptType;
-import info.chrismcgee.sky.tables.DayManager;
-import info.chrismcgee.sky.tables.JobManager;
-import info.chrismcgee.sky.tables.OrderDetailManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -34,6 +23,19 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
+import info.chrismcgee.components.DateManager;
+import info.chrismcgee.sky.beans.Day;
+import info.chrismcgee.sky.beans.Job;
+import info.chrismcgee.sky.beans.OrderDetail;
+import info.chrismcgee.sky.enums.PrintType;
+import info.chrismcgee.sky.enums.PrintingCompany;
+import info.chrismcgee.sky.enums.ScriptType;
+import info.chrismcgee.sky.tables.DayManager;
+import info.chrismcgee.sky.tables.JobManager;
+import info.chrismcgee.sky.tables.OrderDetailManager;
 
 public class ScriptManager {
 	
@@ -321,9 +323,29 @@ public class ScriptManager {
 		// Now to insert the returned data into the database.
 		// First, place the day's info into the Day table.  This should only insert one row.
 		log.trace("First, place the day's info into the Day table.  This should only insert one row.");
-		Day dayBean = new Day(new Date(Long.parseLong(aJobDetails.get(0)[0], 10)));
+		Date jobDate = new Date(Long.parseLong(aJobDetails.get(0)[0], 10));
+		Day dayBean = new Day(jobDate);
 //		dayBean.setDate(Date.valueOf(LocalDate.parse(aJobDetails.get(0)[0]).toString("yyyy-MM-dd")));
-		dayBean.setDate(new Date(Long.parseLong(aJobDetails.get(0)[0])));
+		dayBean.setDate(jobDate);
+		
+		// Add in defaults from the XML file.
+		if (DateManager.isWeekDay(jobDate)) {
+			Serializer serializer = new Persister(Day.getXmlFormat());
+			Day preBean = new Day(jobDate);
+			try {
+				dayBean = serializer.read(preBean, Day.getXmlFile());
+			} catch (Exception e) {
+				// Commented out this block as Art Department users do not set defaults.
+//				String msg = "<html><body>The defaults file does not exist. As soon as possible, please create one<br />"
+//						+ "by going to the menu option <strong>Actions / Set Defaults</strong>.</body></html>";
+//				JLabel message = new JLabel(msg);
+//				JOptionPane.showMessageDialog(null,
+//						message,
+//						"XML File Not Found",
+//						JOptionPane.WARNING_MESSAGE);
+				dayBean = preBean;
+			}
+		}
 		
 		boolean successfulDayInsert = false;
 		try {
