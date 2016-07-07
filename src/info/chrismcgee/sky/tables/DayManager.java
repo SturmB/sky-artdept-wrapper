@@ -90,7 +90,7 @@ public class DayManager {
 				+ "avail_screen_naps, "
 				+ "avail_pad, "
 				+ "avail_hotstamp, "
-				+ "avail_digital_cups"
+				+ "avail_digital_cups, "
 				+ "avail_digital_flats, "
 				+ "avail_offset_cups, "
 				+ "avail_offset_naps, "

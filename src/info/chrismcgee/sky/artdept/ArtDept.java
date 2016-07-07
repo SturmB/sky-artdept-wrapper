@@ -101,7 +101,7 @@ public class ArtDept extends JDialog {
 	private Matcher ucMatcher;
 	private Matcher lcMatcher;
 	private File patternFile = null; // Text file that has the two RegEx patterns for fixing capitalizations.
-	private String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/Test/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
+	private String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
 	private String customerServiceRep = "";
 	private boolean creditCard = false;
 	private int shipDays = 0;
@@ -121,7 +121,7 @@ public class ArtDept extends JDialog {
 					
 					ArtDept dialog = new ArtDept();
 					
-					dialog.setTitle("Art Department v2.11 (Test)");
+					dialog.setTitle("Art Department v2.12");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setLocationByPlatform(true);
 					
