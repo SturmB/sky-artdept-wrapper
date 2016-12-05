@@ -10,6 +10,7 @@ import org.joda.time.LocalDate;
 public class InputHelper {
 
 	public static String getInput(String prompt) {
+		
 		BufferedReader stdin = new BufferedReader(
 				new InputStreamReader(System.in));
 		

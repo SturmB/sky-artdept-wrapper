@@ -14,6 +14,8 @@ import javax.mail.internet.MimeMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import info.chrismcgee.sky.artdept.ArtDept;
+
 public class SendMail {
 	
 	static final Logger log = LogManager.getLogger(SendMail.class.getName()); // For logging.
@@ -71,10 +73,10 @@ public class SendMail {
 			Transport.send(message);
 			
 //			System.out.println("Sent message successfully....");
-			log.debug("Sent message successfully....");
+			if (ArtDept.loggingEnabled) log.debug("Sent message successfully....");
 		
 		} catch (MessagingException e) {
-			log.error("Could not send email message.", e);
+			if (ArtDept.loggingEnabled) log.error("Could not send email message.", e);
 			return false;
 		}
 		

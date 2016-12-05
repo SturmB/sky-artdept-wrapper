@@ -10,19 +10,21 @@ import java.sql.Statement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import info.chrismcgee.sky.artdept.ArtDept;
 import info.chrismcgee.sky.beans.Day;
 import info.chrismcgee.util.ConnectionManager;
 
 public class DayManager {
 	
-	private static Connection conn = ConnectionManager.getInstance().getConnection();
+	private static Connection conn;
 	static final Logger log = LogManager.getLogger(DayManager.class.getName());
 	
 	// This method is currently unused in this project.
 	public static Day getRow(Date theDate) throws SQLException {
 		
-		log.entry("getRow (DayManager)");
+		if (ArtDept.loggingEnabled) log.entry("getRow (DayManager)");
 		
+		conn = ConnectionManager.getInstance().getConnection();
 		ResultSet rs = null;
 		String sql = "SELECT * FROM Day WHERE id_day = ?";
 		
@@ -36,14 +38,14 @@ public class DayManager {
 			if (rs.next()) {
 				Day bean = new Day(rs.getDate("id_day"));
 //				bean.setDate(rs.getDate("id_day"));
-				return log.exit(bean);
+				return bean;
 			} else {
-				return log.exit(null);
+				return null;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			 return log.exit(null);
+			if (ArtDept.loggingEnabled) log.error(e);
+			 return null;
 		} finally {
 			if (rs != null) {
 				rs.close();
@@ -53,8 +55,9 @@ public class DayManager {
 	
 	public static boolean dayExists(Date theDate) throws SQLException
 	{
-		log.entry("dayExists");
+		if (ArtDept.loggingEnabled) log.entry("dayExists");
 		
+		conn = ConnectionManager.getInstance().getConnection();
 		ResultSet rs = null;
 		String sql = "SELECT * FROM Day WHERE id_day = ?";
 		
@@ -65,12 +68,12 @@ public class DayManager {
 			rs = stmt.executeQuery();
 			
 			
-			return log.exit(rs.next());
+			return rs.next();
 			
 			
 		} catch (SQLException e) {
-			log.error(e);
-			 return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			 return false;
 		} finally {
 			if (rs != null) {
 				rs.close();
@@ -82,8 +85,9 @@ public class DayManager {
 	
 	public static boolean insert(Day bean) throws Exception {
 		
-		log.entry("Inserting Day bean into database.");
+		if (ArtDept.loggingEnabled) log.entry("Inserting Day bean into database.");
 		
+		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "INSERT INTO Day ("
 				+ "id_day, "
 				+ "avail_screen_cups, "
@@ -114,7 +118,7 @@ public class DayManager {
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				){
 			
-			log.debug("INSERTing into db. AvailableScreenCups are: " + bean.getAvailableScreenCups());
+			if (ArtDept.loggingEnabled) log.debug("INSERTing into db. AvailableScreenCups are: " + bean.getAvailableScreenCups());
 			stmt.setDate(1, bean.getDate());
 			
 			stmt.setLong(2, bean.getAvailableScreenCups());
@@ -141,16 +145,17 @@ public class DayManager {
 			stmt.executeUpdate();
 						
 		} catch (SQLException e) {
-			log.error(e);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			return false;
 		}
-		return log.exit(true);
+		return true;
 	}
 	
 	public static boolean setNotCompleted(Date theDate)
 	{
-		log.entry("Setting the date in the Day table as NOT completed (null the 'day_completed' field.");
+		if (ArtDept.loggingEnabled) log.entry("Setting the date in the Day table as NOT completed (null the 'day_completed' field.");
 		
+		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "UPDATE Day "
 				+ "SET day_completed = NULL "
 				+ "WHERE id_day = ?";
@@ -163,10 +168,10 @@ public class DayManager {
 			stmt.executeUpdate();
 			
 		} catch (SQLException err) {
-			log.error("Setting the 'day_completed' field to 'NULL' generated an exception.", err);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error("Setting the 'day_completed' field to 'NULL' generated an exception.", err);
+			return false;
 		}
-		return log.exit(true);
+		return true;
 	}
 	
 }

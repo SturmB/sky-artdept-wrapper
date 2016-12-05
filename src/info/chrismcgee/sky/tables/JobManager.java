@@ -1,5 +1,6 @@
 package info.chrismcgee.sky.tables;
 
+import info.chrismcgee.sky.artdept.ArtDept;
 import info.chrismcgee.sky.beans.Job;
 import info.chrismcgee.sky.beans.OrderDetail;
 import info.chrismcgee.sky.enums.PrintType;
@@ -27,7 +28,7 @@ public class JobManager {
 	
 	public static Job getRow(String jobId) throws SQLException {
 		
-		log.entry("getRow (JobManager)");
+		if (ArtDept.loggingEnabled) log.entry("getRow (JobManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "SELECT * FROM Job WHERE job_id = ?";
@@ -53,14 +54,14 @@ public class JobManager {
 				bean.setSampleShelfNote(rs.getBoolean("sample_shelf_note"));
 				bean.setSigProof(rs.getString("sig_proof"));
 				bean.setSigOutput(rs.getString("sig_output"));
-				return log.exit(bean);
+				return bean;
 			} else {
-				return log.exit(null);
+				return null;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			 return log.exit(null);
+			if (ArtDept.loggingEnabled) log.error(e);
+			 return null;
 		} finally {
 			if (rs != null) {
 				rs.close();
@@ -70,7 +71,7 @@ public class JobManager {
 	
 	public static Job getJob (String jobId) throws SQLException
 	{
-		log.entry("getJob (JobManager)");
+		if (ArtDept.loggingEnabled) log.entry("getJob (JobManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "SELECT ship_date, job_id, customer_name, customer_po, proof_spec_date, "
@@ -98,8 +99,8 @@ public class JobManager {
 				bean.setCustomerName(rs.getString("customer_name"));
 				bean.setCustomerPO(rs.getString("customer_po"));
 				bean.setProofSpecDate(new Date(rs.getTimestamp("proof_spec_date").getTime()));
-				log.debug("In the middle of getting a Job.");
-				log.debug("Job_Completed: " + rs.getTimestamp("job_completed"));
+				if (ArtDept.loggingEnabled) log.debug("In the middle of getting a Job.");
+				if (ArtDept.loggingEnabled) log.debug("Job_Completed: " + rs.getTimestamp("job_completed"));
 				bean.setJobCompleted(rs.getTimestamp("job_completed") == null ? null : new Date(rs.getTimestamp("job_completed").getTime()));
 				bean.setPrintingCompany(PrintingCompany.getPrintingCompany(rs.getInt("printing_company")));
 				bean.setOverruns(rs.getBoolean("overruns"));
@@ -131,15 +132,15 @@ public class JobManager {
 				} while (rs.next());
 				bean.setOrderDetailList(odList);
 
-				return log.exit(bean);
+				return bean;
 			}
 			else
 			{
-				return log.exit(null);
+				return null;
 			}
 		} catch (SQLException e) {
-			log.error(e);
-			return log.exit(null);
+			if (ArtDept.loggingEnabled) log.error(e);
+			return null;
 		} finally {
 			if (rs != null) rs.close();
 		}
@@ -147,7 +148,7 @@ public class JobManager {
 
 	public static boolean insert(Job bean) throws Exception {
 		
-		log.entry("insert (JobManager)");
+		if (ArtDept.loggingEnabled) log.entry("insert (JobManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "INSERT INTO Job (ship_date, job_id, customer_name, customer_po, "
@@ -173,8 +174,8 @@ public class JobManager {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			log.error(e);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			return false;
 		}
 
 /*		// Also insert all of the Job's OrderDetail items into its table.
@@ -186,23 +187,33 @@ public class JobManager {
 		// The day is no longer completed.
 		DayManager.setNotCompleted(bean.getShipDate());
 		
-		return log.exit(true);
+		return true;
 	}
 		
 	public static boolean update(Job bean) throws Exception {
 		
-		log.entry("update (JobManager)");
+		if (ArtDept.loggingEnabled) log.entry("update (JobManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql =
-				"UPDATE Job SET ship_date = ?, customer_name = ?, customer_po = ?, "
-				+ "proof_spec_date = ?, job_completed = ?, printing_company = ?, "
-				+ "overruns = ?, sample_shelf_note = ?, sig_proof = ?, sig_output = ? "
+				"UPDATE Job "
+				+ "SET ship_date = ?, "
+				+ "customer_name = ?, "
+				+ "customer_po = ?, "
+				+ "proof_spec_date = ?, "
+				+ "job_completed = ?, "
+				+ "printing_company = ?, "
+				+ "overruns = ?, "
+				+ "sample_shelf_note = ?, "
+				+ "sig_proof = ?, "
+				+ "sig_output = ? "
 				+ "WHERE job_id = ?";
 		
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				){
+			
+			if (ArtDept.loggingEnabled) log.debug("Ship date from the Job bean is: " + bean.getShipDate());
 			
 			stmt.setDate(1, bean.getShipDate());
 			stmt.setString(2, bean.getCustomerName());
@@ -216,34 +227,36 @@ public class JobManager {
 			stmt.setString(10, bean.getSigOutput());
 			stmt.setString(11, bean.getJobId());
 			
+			if (ArtDept.loggingEnabled) log.debug("Native SQL: " + stmt.getConnection().nativeSQL(sql));
+			
 			int affected = stmt.executeUpdate();
 			
 /*			// Now also update the Job's OrderDetail items in its table.
 			boolean successfulODUpdate = true;
 			for (OrderDetail od : bean.getOrderDetailList())
 			{
-				log.trace("Inserting the OrderDetail table after updating the Job table.");
+				if (ArtDept.loggingEnabled) log.trace("Inserting the OrderDetail table after updating the Job table.");
 				if (!OrderDetailManager.insert(od))
 					successfulODUpdate = false;
 			}
 			if (!successfulODUpdate) affected = 0;*/
 			
 			if (affected == 1) {
-				return log.exit(true);
+				return true;
 			} else {
-				return log.exit(false);
+				return false;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			return false;
 		}
 		
 	}
 
 	public static boolean delete(String jobId) throws Exception {
 		
-		log.entry("delete (JobManager)");
+		if (ArtDept.loggingEnabled) log.entry("delete (JobManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "DELETE FROM Job WHERE job_id = ?";
@@ -255,14 +268,14 @@ public class JobManager {
 			int affected = stmt.executeUpdate();
 			
 			if (affected == 1) {
-				return log.exit(true);
+				return true;
 			} else {
-				return log.exit(false);
+				return false;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			 return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			 return false;
 		}
 		
 	}

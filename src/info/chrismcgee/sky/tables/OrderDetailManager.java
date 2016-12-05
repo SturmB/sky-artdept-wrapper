@@ -1,5 +1,6 @@
 package info.chrismcgee.sky.tables;
 
+import info.chrismcgee.sky.artdept.ArtDept;
 import info.chrismcgee.sky.beans.OrderDetail;
 import info.chrismcgee.sky.enums.PrintType;
 import info.chrismcgee.util.ConnectionManager;
@@ -22,7 +23,7 @@ public class OrderDetailManager {
 	
 	public static OrderDetail getRow(int id) throws SQLException {
 		
-		log.entry("getRow (OrderDetailManager)");
+		if (ArtDept.loggingEnabled) log.entry("getRow (OrderDetailManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "SELECT * FROM OrderDetail WHERE id = ?";
@@ -55,14 +56,14 @@ public class OrderDetailManager {
 				bean.setCaseQuantity(rs.getString("case_quantity"));
 				bean.setLabelQuantity(rs.getInt("label_quantity"));
 				bean.setLabelText(rs.getString("label_text"));
-				return log.exit(bean);
+				return bean;
 			} else {
-				return log.exit(null);
+				return null;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			 return log.exit(null);
+			if (ArtDept.loggingEnabled) log.error(e);
+			 return null;
 		} finally {
 			if (rs != null) {
 				rs.close();
@@ -72,7 +73,7 @@ public class OrderDetailManager {
 
 	public static boolean insert(OrderDetail bean) throws Exception {
 		
-		log.entry("insert (OrderDetail)");
+		if (ArtDept.loggingEnabled) log.entry("insert (OrderDetail)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "INSERT INTO OrderDetail ("
@@ -126,22 +127,22 @@ public class OrderDetailManager {
 				int newKey = keys.getInt(1);
 				bean.setId(newKey);
 			} else {
-				log.debug("No rows affected");
-				return log.exit(false);
+				if (ArtDept.loggingEnabled) log.debug("No rows affected");
+				return false;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			return false;
 		} finally {
 			if (keys != null) keys.close();
 		}
-		return log.exit(true);
+		return true;
 	}
 	
 	public static boolean update(OrderDetail bean) throws Exception {
 		
-		log.entry("update (OrderDetail)");
+		if (ArtDept.loggingEnabled) log.entry("update (OrderDetail)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql =
@@ -190,21 +191,21 @@ public class OrderDetailManager {
 			
 			int affected = stmt.executeUpdate();
 			if (affected == 1) {
-				return log.exit(true);
+				return true;
 			} else {
-				return log.exit(false);
+				return false;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			return false;
 		}
 		
 	}
 
 	public static boolean delete(int id) throws Exception {
 		
-		log.entry("delete (OrderDetail)");
+		if (ArtDept.loggingEnabled) log.entry("delete (OrderDetail)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "DELETE FROM OrderDetail WHERE id = ?";
@@ -216,14 +217,14 @@ public class OrderDetailManager {
 			int affected = stmt.executeUpdate();
 			
 			if (affected == 1) {
-				return log.exit(true);
+				return true;
 			} else {
-				return log.exit(false);
+				return false;
 			}
 			
 		} catch (SQLException e) {
-			log.error(e);
-			 return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error(e);
+			 return false;
 		}
 		
 	}

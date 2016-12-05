@@ -11,7 +11,7 @@ public class DBUtil {
 	private static String userName = System.getenv("USER"); // The username of the current logged-in computer.
 
 	// Preparing static Strings for connecting to the database.
-	private static final String USERNAME = userName;
+	public static final String USERNAME = userName;
 	private static final String PASSWORD = (userName.equalsIgnoreCase("Marketing")) ? "marketing" : userName;
 	private static final String M_CONN_STRING = "jdbc:mysql://localhost/job_orders";
 	private static final String H_CONN_STRING = "jdbc:hsqldb:data/job_orders";

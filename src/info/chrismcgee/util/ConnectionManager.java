@@ -1,4 +1,5 @@
 package info.chrismcgee.util;
+import info.chrismcgee.sky.artdept.ArtDept;
 import info.chrismcgee.sky.enums.DBType;
 
 import java.sql.Connection;
@@ -40,20 +41,19 @@ public class ConnectionManager
 	 * @return	{@link ConnectionManager}	A connection to the database. Is a singleton, so only one can exist.
 	 */
 	public static ConnectionManager getInstance() {
-		log.entry("getInstance");
+		if (ArtDept.loggingEnabled) log.entry("getInstance");
 		if (instance == null) {
 			instance = new ConnectionManager();
 		}
-		return log.exit(instance);
+		return instance;
 	}
 
 	/**
 	 * @param dbType	Sets the type of database we'll be working with.
 	 */
 	public void setDBType(DBType dbType) {
-		log.entry("setDBType");
+		if (ArtDept.loggingEnabled) log.entry("setDBType");
 		this.dbType = dbType;
-		log.exit("setDBType");
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class ConnectionManager
 	 */
 	private boolean openConnection() throws ClassNotFoundException
 	{
-		log.entry("openConnection");
+		if (ArtDept.loggingEnabled) log.entry("openConnection");
 
 		// For Java versions below 7.
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -71,27 +71,27 @@ public class ConnectionManager
 			switch (dbType) {
 			// Depending upon which type of database we're using, the parameters will differ for the DriverManager.
 			case MYSQL:
-				log.trace("Using MySQL.");
+				if (ArtDept.loggingEnabled) log.trace("Using MySQL.");
 				conn = DriverManager.getConnection(M_CONN_STRING, USERNAME, PASSWORD);
-				return log.exit(true);
+				return true;
 
 			case HSQLDB:
-				log.trace("Using HyperSQL.");
+				if (ArtDept.loggingEnabled) log.trace("Using HyperSQL.");
 				conn = DriverManager.getConnection(H_CONN_STRING, USERNAME, PASSWORD);
-				return log.exit(true);
+				return true;
 				
 			case MSSQL:
-				log.trace("Using Micrososft SQL Server.");
+				if (ArtDept.loggingEnabled) log.trace("Using Micrososft SQL Server.");
 				conn = DriverManager.getConnection(S_CONN_STRING, USERNAME, PASSWORD);
-				return log.exit(true);
+				return true;
 
 			default: 
-				return log.exit(false);
+				return false;
 			}
 		}
 		catch (SQLException e) {
-			log.error("Exception when trying to open a connection to the database.", e);
-			return log.exit(false);
+			if (ArtDept.loggingEnabled) log.error("Exception when trying to open a connection to the database.", e);
+			return false;
 		}
 
 	}
@@ -101,33 +101,33 @@ public class ConnectionManager
 	 */
 	public Connection getConnection()
 	{
-		log.entry("getConnection");
+		if (ArtDept.loggingEnabled) log.entry("getConnection");
 		if (conn == null) {
 			try {
 				if (openConnection()) {
-					log.debug("Connection opened");
-					return log.exit(conn);
+					if (ArtDept.loggingEnabled) log.debug("Connection opened");
+					return conn;
 				} else {
-					return log.exit(null);
+					return null;
 				}
 			} catch (ClassNotFoundException e) {
-				log.error("ClassNotFound exception", e);
-				return log.exit(null);
+				if (ArtDept.loggingEnabled) log.error("ClassNotFound exception", e);
+				return null;
 			}
 		}
-		return log.exit(conn);
+		return conn;
 	}
 
 	/**
 	 * Just a simple method that closes any open connection to the database.
 	 */
 	public void close() {
-		log.entry("Closing connection");
+		if (ArtDept.loggingEnabled) log.entry("Closing connection");
 		try {
 			conn.close();
 			conn = null;
 		} catch (Exception e) {
-			log.error("Error when closing the database connection.", e);
+			if (ArtDept.loggingEnabled) log.error("Error when closing the database connection.", e);
 		}
 	}
 
@@ -135,11 +135,10 @@ public class ConnectionManager
 	 * @param e	The exception object created when a SQLException is thrown.
 	 */
 	public static void processException(SQLException e) {
-		log.entry("Processing exception...");
-		log.error("Error message: " + e.getMessage());
-		log.error("Error code: " + e.getErrorCode());
-		log.error("SQL state: " + e.getSQLState());
-		log.exit("Finished processing exception");
+		if (ArtDept.loggingEnabled) log.entry("Processing exception...");
+		if (ArtDept.loggingEnabled) log.error("Error message: " + e.getMessage());
+		if (ArtDept.loggingEnabled) log.error("Error code: " + e.getErrorCode());
+		if (ArtDept.loggingEnabled) log.error("SQL state: " + e.getSQLState());
 	}
 	
 }

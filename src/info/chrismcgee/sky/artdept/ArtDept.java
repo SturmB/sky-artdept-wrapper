@@ -3,7 +3,7 @@ package info.chrismcgee.sky.artdept;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -30,12 +30,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
 import javax.swing.Action;
-import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -53,8 +56,16 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.apple.eawt.AboutHandler;
+import com.apple.eawt.AppEvent.AboutEvent;
+import com.apple.eawt.AppEvent.QuitEvent;
+import com.apple.eawt.Application;
+import com.apple.eawt.QuitHandler;
+import com.apple.eawt.QuitResponse;
+
 import info.chrismcgee.components.DateManager;
 import info.chrismcgee.components.Sanitizer;
+import info.chrismcgee.enums.OSType;
 import info.chrismcgee.sky.beans.Job;
 import info.chrismcgee.sky.beans.OrderDetail;
 import info.chrismcgee.sky.enums.DBType;
@@ -65,19 +76,22 @@ import info.chrismcgee.util.ConnectionManager;
 import info.chrismcgee.util.SendMail;
 import net.miginfocom.swing.MigLayout;
 
-public class ArtDept extends JDialog {
+public class ArtDept extends JFrame {
 
 	/**
 	 * Serialize, to keep Eclipse from throwing a warning message.
 	 */
 	private static final long serialVersionUID = -185001290066987954L;
 	static final Logger log = LogManager.getLogger(ArtDept.class.getName()); // For logging.
+	public static boolean loggingEnabled = false;
+	public static String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
 	// Preferences variables
 	private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 	private static final String PREFS_EMAIL = "email";
 	private static final String PREFS_INITIALS = "initials";
 	// The location of the window (It's not resizable)
 	private Point windowLocation;
+	private Dimension windowSize;
 	private final JPanel contentPanel = new JPanel(); // default.
 	// These fields allow their respective components to be accessed anywhere.
 	private JTextField tfOrderNum;
@@ -96,44 +110,67 @@ public class ArtDept extends JDialog {
 	private KeyStroke ksMenuO = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
+	private static String appName = "Sky Script Launcher";
+	private static String appVersion = "3.10";
+	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
 	private Matcher ucMatcher;
 	private Matcher lcMatcher;
 	private File patternFile = null; // Text file that has the two RegEx patterns for fixing capitalizations.
-	private String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
+
 	private String customerServiceRep = "";
 	private boolean creditCard = false;
 	private int shipDays = 0;
 	private String wnaPo = "";
 	private String messageToAddr = "customerservice@skyunlimitedinc.com";
+	private JMenuBar menuBar;
+	private JMenu mnFile;
+	private JCheckBoxMenuItem chckbxmntmTestVersion;
+	private JCheckBoxMenuItem chckbxmntmDebugLog;
+	private JPanel leftButtonsPane;
+	private JPanel rightButtonsPane;
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		// Set some logging properties.
+		
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				log.entry("main");
+				if (loggingEnabled) log.entry("main");
 				try { // Create the dialog window and display it.
+					
+					if (OSType.getOSType() == OSType.MAC) {
+						// Take the menu bar off the JFrame.
+						System.setProperty("apple.laf.useScreenMenuBar", "true");
+						// Set the name of the application menu item.
+						System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Script Launcher");
+					}
+					
+					// Set the look and feel.
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					
-					ArtDept dialog = new ArtDept();
+					// Create the frame and show it.
+					ArtDept frame = new ArtDept();
 					
-					dialog.setTitle("Art Department v2.12");
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setLocationByPlatform(true);
+					frame.setTitle(defaultTitle);
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					frame.setLocationByPlatform(true);
 					
 					// Set the location and size of the window
-					dialog.windowLocation = new Point(dialog.prefs.getInt("x", 100), dialog.prefs.getInt("y", 100));
-					dialog.setLocation(dialog.windowLocation);
+					frame.windowLocation = new Point(frame.prefs.getInt("x", 100), frame.prefs.getInt("y", 100));
+					frame.setLocation(frame.windowLocation);
+					frame.windowSize = new Dimension(frame.prefs.getInt("width", 502), frame.prefs.getInt("height", 200));
+					frame.setSize(frame.windowSize);
 
-					dialog.setVisible(true);
+					frame.setVisible(true);
 				} catch (Exception e) {
-					log.error("Error in Main", e);
+					if (loggingEnabled) log.error("Error in Main", e);
 				}
-				log.exit("main");
 			}
 		});
 	}
@@ -142,7 +179,12 @@ public class ArtDept extends JDialog {
 	 * Create the dialog.
 	 */
 	public ArtDept() {
-		setResizable(false);
+
+		if (OSType.getOSType() == OSType.MAC) {
+			setMinimumSize(new Dimension(502, 176));
+		} else {
+			setMinimumSize(new Dimension(502, 200));
+		}
 
 		addComponentListener(new ComponentAdapter() {
 			@Override
@@ -175,10 +217,10 @@ public class ArtDept extends JDialog {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				log.entry("doProof Action");
+				if (loggingEnabled) log.entry("doProof Action");
 				if (jobNumberReady && initialsReady)
 				{
-					log.trace("Proofing button hit!");
+					if (loggingEnabled) log.trace("Proofing button hit!");
 					Thread proofThread = new Thread()
 					{
 						public void run()
@@ -186,13 +228,12 @@ public class ArtDept extends JDialog {
 							try {
 								callScript(ScriptType.PROOF);
 							} catch (InterruptedException e) {
-								log.error("Interrupted!", e);
+								if (loggingEnabled) log.error("Interrupted!", e);
 							}
 						}
 					};
 					proofThread.start();
 				}
-				log.exit("doProof Action");
 			}
 		};
 		final Action doOutput = new AbstractAction() {
@@ -209,10 +250,10 @@ public class ArtDept extends JDialog {
 			 */
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				log.entry("doOutput Action");
+				if (loggingEnabled) log.entry("doOutput Action");
 				if (jobNumberReady && initialsReady)
 				{
-					log.trace("Output button hit!");
+					if (loggingEnabled) log.trace("Output button hit!");
 					Thread outputThread = new Thread()
 					{
 						public void run()
@@ -220,13 +261,12 @@ public class ArtDept extends JDialog {
 							try {
 								callScript(ScriptType.OUTPUT);
 							} catch (InterruptedException e) {
-								log.error("Interrupted!", e);
+								if (loggingEnabled) log.error("Interrupted!", e);
 							}
 						}
 					};
 					outputThread.start();
 				}
-				log.exit("doOutput Action");
 			}
 		};
 		// Bind the KeyStrokes to the action we want them to perform.
@@ -238,13 +278,44 @@ public class ArtDept extends JDialog {
 		getRootPane().getActionMap().put("doOutput", doOutput);
 		
 		// Default items created by WindowBuilder.
-		setBounds(100, 100, 500, 175);
+//		setBounds(100, 100, 502, 176);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[][grow]", "[][][]"));
 		contentPanel.setBackground(Color.DARK_GRAY);
 
+		{ // Menu bar that holds options for whether or not to run the
+		  // test version of the script as well as to keep a if (loggingEnabled) log.
+			menuBar = new JMenuBar();
+			setJMenuBar(menuBar);
+			{
+				mnFile = new JMenu("Settings");
+				menuBar.add(mnFile);
+				{
+					chckbxmntmTestVersion = new JCheckBoxMenuItem("Test Version");
+					chckbxmntmTestVersion.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							AbstractButton aButton = (AbstractButton) e.getSource();
+							setScriptPath(aButton.getModel().isSelected());
+							setTitle();
+						}
+					});
+					mnFile.add(chckbxmntmTestVersion);
+				}
+				{
+					chckbxmntmDebugLog = new JCheckBoxMenuItem("Debug Log");
+					chckbxmntmDebugLog.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							AbstractButton aButton = (AbstractButton) e.getSource();
+							loggingEnabled = aButton.getModel().isSelected();
+							setTitle();
+						}
+					});
+					mnFile.add(chckbxmntmDebugLog);
+				}
+			}
+		}
 		{ // Simple label describing that the following TextField is for the user's email address.
 			JLabel lblEmail = new JLabel("Email:");
 			lblEmail.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -258,12 +329,12 @@ public class ArtDept extends JDialog {
 				// When the user types or deletes characters, sanitize the input.
 				@Override
 				public void removeUpdate(DocumentEvent e) {
-					log.trace("Deleting a character");
+					if (loggingEnabled) log.trace("Deleting a character");
 					sanitizeUsername();
 				}
 				@Override
 				public void insertUpdate(DocumentEvent e) {
-					log.trace("Inserting a character");
+					if (loggingEnabled) log.trace("Inserting a character");
 					sanitizeUsername();
 				}
 				@Override
@@ -287,12 +358,12 @@ public class ArtDept extends JDialog {
 				// When the user types or deletes characters, sanitize the input.
 				@Override
 				public void removeUpdate(DocumentEvent e) {
-					log.trace("Deleting a character");
+					if (loggingEnabled) log.trace("Deleting a character");
 					sanitizeInitials();
 				}
 				@Override
 				public void insertUpdate(DocumentEvent e) {
-					log.trace("Inserting a character");
+					if (loggingEnabled) log.trace("Inserting a character");
 					sanitizeInitials();
 				}
 				@Override
@@ -316,13 +387,15 @@ public class ArtDept extends JDialog {
 				// When the user types or deletes characters, sanitize the input.
 				@Override
 				public void removeUpdate(DocumentEvent e) {
-					log.trace("Deleting a character");
+					if (loggingEnabled) log.trace("Deleting a character");
 					santizeOrderNum();
+//					log.debug(tfOrderNum.getText());
 				}
 				@Override
 				public void insertUpdate(DocumentEvent e) {
-					log.trace("Inserting a character");
+					if (loggingEnabled) log.trace("Inserting a character");
 					santizeOrderNum();
+//					log.debug(tfOrderNum.getText());
 				}
 				@Override
 				public void changedUpdate(DocumentEvent e) {
@@ -335,59 +408,57 @@ public class ArtDept extends JDialog {
 
 		{ // Create the button panel at the bottom of the frame. 
 			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER)); // Centers the buttons.
 			getContentPane().add(buttonPane, BorderLayout.SOUTH); // Default. Aligns the panel to the bottom.
 			buttonPane.setBackground(Color.DARK_GRAY);
 			
 			{ // Create the "ScriptManager" button plus its listener.
+				buttonPane.setLayout(new BorderLayout(0, 0));
+			}
+			{
+				leftButtonsPane = new JPanel();
+				leftButtonsPane.setBorder(null);
+				leftButtonsPane.setBackground(Color.DARK_GRAY);
+				buttonPane.add(leftButtonsPane, BorderLayout.WEST);
 				btnProof = new JButton("Proof");
+				leftButtonsPane.add(btnProof);
 				btnProof.setEnabled(false); // Spawns disabled until input is sanitized.
+				{	// Create the "Output" button plus its listener.
+					btnOutput = new JButton("Output");
+					leftButtonsPane.add(btnOutput);
+					btnOutput.setEnabled(false); // Spawns disabled until input is sanitized.
+					btnOutput.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							if (loggingEnabled) log.trace("Pressed the Output button");
+							doOutput.actionPerformed(e); // When pressed, call the "doOutput" action.
+						}
+					});
+//				getRootPane().setDefaultButton(btnOutput); // default.
+				}
 				btnProof.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						log.trace("Pressed the ScriptManager button");
+						if (loggingEnabled) log.trace("Pressed the ScriptManager button");
 						doProof.actionPerformed(e); // When pressed, call the "doProof" action.
 					}
 				});
-				// This item has been commented out because I am unsure as to what it does, specifically.
-				// I believe it maps the <ENTER> or <RETURN> key to the button.
-				// If so, I do not want any action to be performed when those buttons are pressed,
-				// so I've commented it out in case that's the case.
-//				btnProof.setActionCommand("OK");
-				// Add the "ScriptManager" button the button pane.
-				buttonPane.add(btnProof);
 			}
-			{	// Create the "Output" button plus its listener.
-				btnOutput = new JButton("Output");
-				btnOutput.setEnabled(false); // Spawns disabled until input is sanitized.
-				btnOutput.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						log.trace("Pressed the Output button");
-						doOutput.actionPerformed(e); // When pressed, call the "doOutput" action.
-					}
-				});
-//				btnOutput.setActionCommand("OK"); // default. But I don't want to set an action command right now. (see above)
-				// Add the "Output" button to the button pane.
-				buttonPane.add(btnOutput);
-//				getRootPane().setDefaultButton(btnOutput); // default.
-			}
-			{	// Adding an invisible strut to separate the Cancel button from the other two buttons. 
-				Component horizontalStrut = Box.createHorizontalStrut(180);
-				// Add the strut to the button pane.
-				buttonPane.add(horizontalStrut);
-			}
-			{	// Create the "Cancel" button plus its listener.
-				cancelButton = new JButton("Close");
-				cancelButton.setActionCommand("Cancel"); // default.
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						// Close this ArtDept window when the button is pressed.
-						log.trace("Cancel button pressed");
-						Window window = SwingUtilities.windowForComponent((Component) e.getSource());
-						window.dispose();
-					}
-				});
-				// Add the "Cancel" button to the button pane.
-				buttonPane.add(cancelButton);
+			{
+				rightButtonsPane = new JPanel();
+				rightButtonsPane.setBorder(null);
+				rightButtonsPane.setBackground(Color.DARK_GRAY);
+				buttonPane.add(rightButtonsPane, BorderLayout.EAST);
+				{	// Create the "Cancel" button plus its listener.
+					cancelButton = new JButton("Close");
+					rightButtonsPane.add(cancelButton);
+					cancelButton.setActionCommand("Cancel"); // default.
+					cancelButton.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							// Close this ArtDept window when the button is pressed.
+							if (loggingEnabled) log.trace("Cancel button pressed");
+							Window window = SwingUtilities.windowForComponent((Component) e.getSource());
+							window.dispose();
+						}
+					});
+				}
 			}
 		}
 		sanitizeInitials();
@@ -405,6 +476,32 @@ public class ArtDept extends JDialog {
 		        }
 		    }
 		});
+		
+		
+		// Handle the Mac OS menu items & events
+		Application macApplication = Application.getApplication();
+		
+		// About menu handler
+		macApplication.setAboutHandler(new AboutHandler() {
+			
+			@Override
+			public void handleAbout(AboutEvent ae) {
+				JOptionPane.showMessageDialog(rootPane,
+						appName + "\nversion " + appVersion + "\nCreated by Chris McGee for Sky Unlimited, Inc.\nhttp://chrismcgee.info\n©2014–2017 Chris McGee",
+						"About the Script Runner",
+						JOptionPane.PLAIN_MESSAGE);
+				
+			}
+		});
+		
+		// Quit menu handler
+		macApplication.setQuitHandler(new QuitHandler() {
+			
+			@Override
+			public void handleQuitRequestWith(QuitEvent qe, QuitResponse qr) {
+				qr.performQuit();
+			}
+		});
 	}
 	
 	/**
@@ -418,10 +515,9 @@ public class ArtDept extends JDialog {
 	 * enabled or not.
 	 */
 	private void verifyInputs() {
-		log.entry("verifyInputs");
+		if (loggingEnabled) log.entry("verifyInputs");
 		btnProof.setEnabled(jobNumberReady && initialsReady && usernameReady);
 		btnOutput.setEnabled(jobNumberReady && initialsReady && usernameReady);
-		log.exit("verifyInputs");
 	}
 
 	/**
@@ -434,7 +530,7 @@ public class ArtDept extends JDialog {
 	 */
 	private void santizeOrderNum()
 	{
-		log.entry("sanitizeOrderNum");
+		if (loggingEnabled) log.entry("sanitizeOrderNum");
 		if (Sanitizer.checkOrderNum(tfOrderNum.getText()))
 		{
 			tfOrderNum.setBackground(Color.GREEN);
@@ -446,7 +542,6 @@ public class ArtDept extends JDialog {
 			jobNumberReady = false;
 		}
 		verifyInputs();
-		log.exit("sanitizeOrderNum");
 	}
 	
 	/**
@@ -463,7 +558,6 @@ public class ArtDept extends JDialog {
 			initialsReady = false;
 		}
 		verifyInputs();
-		log.exit("sanitizeInitials");
 	}
 	
 	/**
@@ -480,7 +574,6 @@ public class ArtDept extends JDialog {
 			usernameReady = false;
 		}
 		verifyInputs();
-		log.exit("sanitizeUsername");
 	}
 	
 	/**
@@ -496,7 +589,7 @@ public class ArtDept extends JDialog {
 	 */
 	private void callScript (ScriptType scriptType) throws InterruptedException
 	{
-		log.entry("callScript");
+		if (loggingEnabled) log.entry("callScript");
 
 		// Disable all controls.
 		enableControls(false);
@@ -521,25 +614,24 @@ public class ArtDept extends JDialog {
 			// for the main proofing window in the script.
 			/*if (jobBean != null) */proofNum = getHighestProofNumber(jobBean);
 		} catch (SQLException e) {
-			log.error("Could not obtain data from database.", e);
+			if (loggingEnabled) log.error("Could not obtain data from database.", e);
 		}
-//		log.debug("After database query, Job bean is null? " + (jobBean == null));
-		log.debug("Proof Number from database (if non-zero) is: " + proofNum);
+//		if (loggingEnabled) log.debug("After database query, Job bean is null? " + (jobBean == null));
+		if (loggingEnabled) log.debug("Proof Number from database (if non-zero) is: " + proofNum);
 		
 		// Whether or not the database search was successful,
 		// try getting additional data from a text file.
 		try {
 			jobBean = readText(tfOrderNum.getText(), jobBean, scriptType);
 		} catch (IOException e) {
-			log.error("Text file not found");
-			log.error(e);
+			if (loggingEnabled) log.error("Text file not found");
+			if (loggingEnabled) log.error(e);
 			JOptionPane.showMessageDialog(null, "Text file not found. Please have it created and retry.", "Text File Not Found", JOptionPane.ERROR_MESSAGE);
-			log.exit("Text file not found, returning prematurely.");
 			enableControls(true);
 			return;
 		} finally {
 		}
-//		log.debug("After text file grab, Job bean is null? " + (jobBean == null));
+//		if (loggingEnabled) log.debug("After text file grab, Job bean is null? " + (jobBean == null));
 		
 		// If this is a proofing job, then pre-add 1 to the proofing number.
 		// Also do some more checks.
@@ -562,7 +654,6 @@ public class ArtDept extends JDialog {
 							"Text File Not Found",
 							JOptionPane.WARNING_MESSAGE);
 				}
-				log.exit("Text file not found for this Proof #1; returning prematurely.");
 				enableControls(true);
 				return;
 			} else if (!tfOrderNum.getText().equals(jobBean.getJobId())) {
@@ -605,7 +696,6 @@ public class ArtDept extends JDialog {
 		shipDays = 0;
 		wnaPo = "";
 
-		log.exit("callScript");
 	}
 	
 	/**
@@ -617,7 +707,7 @@ public class ArtDept extends JDialog {
 	 */
 	private int getHighestProofNumber(Job bean)
 	{
-		log.entry("getHighestProofNumber");
+		if (loggingEnabled) log.entry("getHighestProofNumber");
 		
 		List<Integer> proofNums = new ArrayList<Integer>();
 		try {
@@ -625,11 +715,11 @@ public class ArtDept extends JDialog {
 				proofNums.add(od.getProofNum());
 			}
 		} catch (NullPointerException err) {
-			log.error("Nothing in the OrderDetail List! Returning 0.", err);
-			return log.exit(0);
+			if (loggingEnabled) log.error("Nothing in the OrderDetail List! Returning 0.", err);
+			return 0;
 		}
 
-		return log.exit(Collections.max(proofNums));
+		return Collections.max(proofNums);
 	}
 	
 	/**
@@ -641,7 +731,7 @@ public class ArtDept extends JDialog {
 	 * @throws IOException
 	 */
 	private Job readText (String jobNum, Job bean, ScriptType scriptType) throws IOException {
-		log.entry("readText");
+		if (loggingEnabled) log.entry("readText");
 		
 		// Create a new Job bean.
 		if (bean == null) bean = new Job();
@@ -649,13 +739,13 @@ public class ArtDept extends JDialog {
 		String workOrderFolder = "/Volumes/ArtDept/Work Orders/";
 		textFile = new File(workOrderFolder + jobNum + ".txt");
 		// If the text file is too small, then it is either empty or has some garbage in it.
-		log.trace("The length of the associated text file is: " + textFile.length());
+		if (loggingEnabled) log.trace("The length of the associated text file is: " + textFile.length());
 		if (textFile.length() < 2500)
 		{
 			if (bean.getJobId() != null)
-				return log.exit(bean);
+				return bean;
 			else
-				return log.exit(null);
+				return null;
 		}
 		
 		// Read the text file's contents in two ways.
@@ -690,7 +780,7 @@ public class ArtDept extends JDialog {
 		// Prepare the text file for reading.
 		String cache = null;
 		Path workOrder = Paths.get(workOrderFolder, jobNum + ".TXT");
-		log.debug("Path is: " + workOrder.toString());
+		if (loggingEnabled) log.debug("Path is: " + workOrder.toString());
 		BufferedReader bufferedReader = Files.newBufferedReader(workOrder, StandardCharsets.ISO_8859_1);
 		int lineNumber = -1;
 		
@@ -737,10 +827,10 @@ public class ArtDept extends JDialog {
 					
 					// Newer, more succinct code for removing underscores (and possibly other characters).
 					//   It might be less efficient, but easier to understand and type.
-					log.debug("Matcher has found: " + shipDaysMatcher.group(0));
+					if (loggingEnabled) log.debug("Matcher has found: " + shipDaysMatcher.group(0));
 //					shipDaysString = shipDaysString.replaceAll("\\D+", ""); // Removing the "String" method.
 					shipDaysString = shipDaysMatcher.group(0).replaceAll("\\D+", "");
-					log.debug("shipDaysString (from Matcher) is now: " + shipDaysString);
+					if (loggingEnabled) log.debug("shipDaysString (from Matcher) is now: " + shipDaysString);
 					
 					// Remove underscores ("_") in front of and after the digit(s).
 					// The following block has been commented out because the numbers we need
@@ -755,7 +845,7 @@ public class ArtDept extends JDialog {
 						try {
 							shipDays = Integer.parseInt(shipDaysString);
 						} catch (NumberFormatException nfe) {
-							log.error(nfe);
+							if (loggingEnabled) log.error(nfe);
 							// If the string *still* cannot be parsed to an integer, just do nothing.
 							// This will leave the shipDays variable at its default value of 0.
 						}
@@ -792,11 +882,11 @@ public class ArtDept extends JDialog {
 		try {
 			printingCompany = StringUtils.trim(workOrderLines.get(0));
 		} catch (Exception e) {
-			log.error("It seems the Work Order is blank.", e);
+			if (loggingEnabled) log.error("It seems the Work Order is blank.", e);
 			if (bean.getJobId() != null)
-				return log.exit(bean);
+				return if (loggingEnabled) log.exit(bean);
 			else
-				return log.exit(null);
+				return if (loggingEnabled) log.exit(null);
 		}*/
 //		companyNameRaw = WordUtils.capitalizeFully(StringUtils.trim(StringUtils.substring(workOrderLines.get(8), 1, 39)));
 //		companyPO = StringUtils.trim(StringUtils.substring(workOrderLines.get(14), 25, 39));
@@ -822,16 +912,16 @@ public class ArtDept extends JDialog {
 		final boolean noSamples = noSamplesMatcher.find();
 
 		// Debugging lines to make sure the variables extracted are correct.
-		log.debug("Printing Company: " + printingCompany + " with a length of " + printingCompany.length());
-		log.debug("Company Name: " + companyName + " with a length of " + companyName.length());
-		log.debug("Company PO: " + companyPO + " with a length of " + companyPO.length());
-		log.debug("Shipping Date: " + shipDate + " with a length of " + shipDate.length());
-		log.debug("CSR: " + customerServiceRep + " with a length of " + customerServiceRep.length());
-		log.debug("Credit Card? " + creditCard);
-		log.debug("Ship Days: " + shipDays);
-		log.debug("WNA Order: " + wnaPo + " with a length of " + wnaPo.length());
-		log.debug("Job Number read from file: " + readJobNum);
-		log.debug("...compared to the entered job number: " + jobNum);
+		if (loggingEnabled) log.debug("Printing Company: " + printingCompany + " with a length of " + printingCompany.length());
+		if (loggingEnabled) log.debug("Company Name: " + companyName + " with a length of " + companyName.length());
+		if (loggingEnabled) log.debug("Company PO: " + companyPO + " with a length of " + companyPO.length());
+		if (loggingEnabled) log.debug("Shipping Date: " + shipDate + " with a length of " + shipDate.length());
+		if (loggingEnabled) log.debug("CSR: " + customerServiceRep + " with a length of " + customerServiceRep.length());
+		if (loggingEnabled) log.debug("Credit Card? " + creditCard);
+		if (loggingEnabled) log.debug("Ship Days: " + shipDays);
+		if (loggingEnabled) log.debug("WNA Order: " + wnaPo + " with a length of " + wnaPo.length());
+		if (loggingEnabled) log.debug("Job Number read from file: " + readJobNum);
+		if (loggingEnabled) log.debug("...compared to the entered job number: " + jobNum);
 		
 		// If the job numbers do not match, then alert the user and quit out of the program.
 /*		if (!jobNum.equals(readJobNum)) {
@@ -839,25 +929,25 @@ public class ArtDept extends JDialog {
 					"The job number you entered and the one read from the text file do not match. Please correct and try again.",
 					"Job Number Mismatch!",
 					JOptionPane.ERROR_MESSAGE);
-			return log.exit(null);
+			return if (loggingEnabled) log.exit(null);
 		}*/
 		// Commented-out because I currently cannot see a way to have it NOT run the script, even though the bean will be null.
 		
 		// Now set the bean's properties.
-		log.trace("Setting the Job bean's properties.");
+		if (loggingEnabled) log.trace("Setting the Job bean's properties.");
 		if (scriptType == ScriptType.PROOF)
 		{
 			switch (printingCompany) {
 				case "AMERICAN CABIN SUPPLY":
-					log.debug("This is an ACS order.");
+					if (loggingEnabled) log.debug("This is an ACS order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_CABIN_SUPPLY);
 					break;
 				case "AMERICAN YACHT SUPPLY":
-					log.debug("This is an AYS order.");
+					if (loggingEnabled) log.debug("This is an AYS order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_YACHT_SUPPLY);
 					break;
 				default:
-					log.debug("This is an AA order.");
+					if (loggingEnabled) log.debug("This is an AA order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_ACCENTS);
 					break;
 			}
@@ -868,7 +958,7 @@ public class ArtDept extends JDialog {
 			try {
 				bean.getOrderDetailList();
 			} catch (NullPointerException err) {
-				log.error("No OrderDetail List. Creating one.", err);
+				if (loggingEnabled) log.error("No OrderDetail List. Creating one.", err);
 				OrderDetail odBean = new OrderDetail();
 				List<OrderDetail> odList = new ArrayList<OrderDetail>();
 				odList.add(odBean);
@@ -891,15 +981,15 @@ public class ArtDept extends JDialog {
 			if (shipDate.length() > 0)
 				bean.setShipDate(DateManager.usDateStringToSqlDate(shipDate));
 		} catch (IllegalArgumentException e) {
-			log.error("Date not in the correct format.", e);
-			return log.exit(null);
+			if (loggingEnabled) log.error("Date not in the correct format.", e);
+			return null;
 		}
 
-		log.debug("Bean set (inside readText).");
+		if (loggingEnabled) log.debug("Bean set (inside readText).");
 		// Now delete the text file, since it is no longer needed.
 //		textFile.delete();
 		
-		return log.exit(bean);
+		return bean;
 	}
 	
 	private String fixCapitalization(String companyNameRaw) {
@@ -911,17 +1001,17 @@ public class ArtDept extends JDialog {
 
 		patternFile = new File(scriptPath + "patterns.txt");
 		if (patternFile.exists()) {
-			log.trace("Pattern file exists! Reading from it now.");
+			if (loggingEnabled) log.trace("Pattern file exists! Reading from it now.");
 			try {
 				List<String> patternText = FileUtils.readLines(patternFile);
 				String ucText = patternText.get(0).trim();
 				String lcText = patternText.get(1).trim();
-				log.trace("Upper Pattern is: ");
-				log.trace("    " + ucText);
+				if (loggingEnabled) log.trace("Upper Pattern is: ");
+				if (loggingEnabled) log.trace("    " + ucText);
 				upperPattern = Pattern.compile(ucText);
 				lowerPattern = Pattern.compile(lcText);
 			} catch (IOException e) {
-				log.error("Error when attempting to read from the RegEx pattern file", e);
+				if (loggingEnabled) log.error("Error when attempting to read from the RegEx pattern file", e);
 			}
 		}
 		
@@ -935,7 +1025,7 @@ public class ArtDept extends JDialog {
 		}
 		ucMatcher.appendTail(sb);
 		
-		log.debug("Between mods, sb is currently " + sb.toString());
+		if (loggingEnabled) log.debug("Between mods, sb is currently " + sb.toString());
 		
 		lcMatcher.reset(sb.toString());
 		sb.setLength(0);
@@ -944,7 +1034,7 @@ public class ArtDept extends JDialog {
 		}
 		lcMatcher.appendTail(sb);
 		
-		log.debug("After second mod, sb is: " + sb.toString());
+		if (loggingEnabled) log.debug("After second mod, sb is: " + sb.toString());
 		
 		return sb.toString();
 	}
@@ -954,7 +1044,7 @@ public class ArtDept extends JDialog {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				log.entry("setControlsEnabled");
+				if (loggingEnabled) log.entry("setControlsEnabled");
 
 				tfEmail.setEnabled(b);
 				tfInitials.setEnabled(b);
@@ -970,8 +1060,52 @@ public class ArtDept extends JDialog {
 					tfOrderNum.requestFocusInWindow();
 				}
 
-				log.exit("setControlsEnabled");
 			}
 		});
 	}
+	
+	/**
+	 * Sets the path where the scripts will be used,
+	 * depending on whether or not the user has chosen
+	 * to use the Test scripts.
+	 * 
+	 * @param isTest True if the user has selected the checkbox
+	 *               to use the Test version of the script.
+	 */
+	private void setScriptPath (boolean isTest) {
+		scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/";
+		if (isTest) {
+			scriptPath += "Test/";
+		}
+	}
+	
+	/**
+	 * Sets the title of the JFrame window depending on
+	 * what the user has selected from the menu checkboxes.
+	 * 
+	 */
+	private void setTitle () {
+		StringBuilder title = new StringBuilder(defaultTitle);
+		String endParen = "";
+		boolean bTest = chckbxmntmTestVersion.isSelected();
+		boolean bLog = chckbxmntmDebugLog.isSelected();
+		
+		if (bTest || bLog) {
+			title.append(" (");
+			endParen = ")";
+		}
+		if (bTest) {
+			title.append("Test");
+		}
+		if (bLog) {
+			if (bTest) {
+				title.append(", ");
+			}
+			title.append("Logging");
+		}
+		title.append(endParen);
+		
+		this.setTitle(title.toString());
+	}
+
 }
