@@ -56,6 +56,7 @@ public class OrderDetailManager {
 				bean.setCaseQuantity(rs.getString("case_quantity"));
 				bean.setLabelQuantity(rs.getInt("label_quantity"));
 				bean.setLabelText(rs.getString("label_text"));
+				bean.setDigitalFilename(rs.getString("digital_art_file"));
 				return bean;
 			} else {
 				return null;
@@ -93,8 +94,9 @@ public class OrderDetailManager {
 				+ "package_quantity, "
 				+ "case_quantity, "
 				+ "label_quantity, "
-				+ "label_text) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "label_text, "
+				+ "digital_art_file) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		ResultSet keys = null;
 		
 		try (
@@ -118,6 +120,7 @@ public class OrderDetailManager {
 			stmt.setString(15, bean.getCaseQuantity());
 			stmt.setInt(16, bean.getLabelQuantity());
 			stmt.setString(17, bean.getLabelText());
+			stmt.setString(18, bean.getDigitalFilename());
 			
 			int affected = stmt.executeUpdate();
 			
@@ -163,7 +166,8 @@ public class OrderDetailManager {
 				+ "package_quantity = ?, "
 				+ "case_quantity = ?, "
 				+ "label_quantity = ?, "
-				+ "label_text = ? "
+				+ "label_text = ?, "
+				+ "digital_art_file = ? "
 				+ "WHERE id = ?";
 		
 		try (
@@ -187,7 +191,8 @@ public class OrderDetailManager {
 			stmt.setString(15, bean.getCaseQuantity());
 			stmt.setInt(16, bean.getLabelQuantity());
 			stmt.setString(17, bean.getLabelText());
-			stmt.setInt(18, bean.getId());
+			stmt.setString(18, bean.getDigitalFilename());
+			stmt.setInt(19, bean.getId());
 			
 			int affected = stmt.executeUpdate();
 			if (affected == 1) {

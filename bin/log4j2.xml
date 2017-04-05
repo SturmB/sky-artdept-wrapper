@@ -26,7 +26,7 @@
   </Appenders>
   <Loggers>
     <Root level="trace">
-      <AppenderRef ref="MyFile"/>
+      <AppenderRef ref="DailyRoll"/>
     </Root>
   </Loggers>
 </Configuration>

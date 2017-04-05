@@ -1,6 +1,7 @@
 package info.chrismcgee.sky.tables;
 
 import info.chrismcgee.sky.artdept.ArtDept;
+import info.chrismcgee.sky.beans.Artwork;
 import info.chrismcgee.sky.beans.Job;
 import info.chrismcgee.sky.beans.OrderDetail;
 import info.chrismcgee.sky.enums.PrintType;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -69,30 +71,33 @@ public class JobManager {
 		}
 	}
 	
-	public static Job getJob (String jobId) throws SQLException
-	{
+	public static Job getJob (String jobId) throws SQLException {
 		if (ArtDept.loggingEnabled) log.entry("getJob (JobManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "SELECT ship_date, job_id, customer_name, customer_po, proof_spec_date, "
 				+ "job_completed, printing_company, overruns, sample_shelf_note, sig_proof, sig_output, "
-				+ "id, product_id, product_detail, print_type, num_colors, quantity, "
+				+ "o.id AS od_id, product_id, product_detail, print_type, num_colors, quantity, "
 				+ "item_completed, proof_num, proof_date, thumbnail, flags, reorder_id, "
-				+ "packing_instructions, package_quantity, case_quantity, label_quantity, label_text "
+				+ "packing_instructions, package_quantity, case_quantity, label_quantity, label_text, "
+				+ "a.id AS artwork_id, a.order_detail_id AS artwork_od_id, a.digital_art_file AS artwork_digital_art_file "
 				+ "FROM Job AS j "
 				+ "JOIN OrderDetail AS o "
 				+ "ON j.job_id = o.order_id "
+				+ "LEFT JOIN Artwork AS a "
+				+ "ON a.order_detail_id = o.id "
 				+ "WHERE j.job_id = ? ";
 		ResultSet rs = null;
 		
 		try (
-				PreparedStatement stmt = conn.prepareStatement(sql);
+				PreparedStatement stmt = conn.prepareStatement(sql,
+						ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_READ_ONLY);
 				){
 			stmt.setString(1, jobId);
 			rs = stmt.executeQuery();
 			
-			if (rs.next())
-			{
+			if (rs.next()) {
 				Job bean = new Job();
 				bean.setShipDate(rs.getDate("ship_date"));
 				bean.setJobId(jobId);
@@ -110,7 +115,7 @@ public class JobManager {
 				List<OrderDetail> odList = new ArrayList<OrderDetail>();
 				do {
 					OrderDetail od = new OrderDetail();
-					od.setId(rs.getInt("id"));
+					od.setId(rs.getInt("od_id"));
 					od.setOrderId(jobId);
 					od.setProductId(rs.getString("product_id"));
 					od.setProductDetail(rs.getString("product_detail"));
@@ -128,16 +133,40 @@ public class JobManager {
 					od.setCaseQuantity(rs.getString("case_quantity"));
 					od.setLabelQuantity(rs.getInt("label_quantity"));
 					od.setLabelText(rs.getString("label_text"));
+//					od.setDigitalFilename(rs.getString("digital_art_file"));
+					if (rs.getInt("artwork_id") > 0) {
+						List<Artwork> artworkList = new ArrayList<Artwork>();
+						while (od.getId() == rs.getInt("artwork_od_id")) {
+							Artwork aw = new Artwork();
+							aw.setId(rs.getInt("artwork_id"));
+							aw.setOrderDetailId(rs.getInt("od_id"));
+							aw.setDigitalArtFile(rs.getString("artwork_digital_art_file"));
+							artworkList.add(aw);
+							if (!rs.next()) {
+								break;
+							}
+						}
+						rs.previous();
+						od.setArtworkList(artworkList);
+					}
 					odList.add(od);
 				} while (rs.next());
+				if (ArtDept.loggingEnabled) {
+					log.debug("odList: ");
+					for (Iterator<OrderDetail> iterator = odList.iterator(); iterator
+							.hasNext();) {
+						OrderDetail orderDetail = (OrderDetail) iterator.next();
+						log.debug("  OD: " + orderDetail.toString());
+					}
+				}
 				bean.setOrderDetailList(odList);
 
 				return bean;
-			}
-			else
-			{
+				
+			} else {
 				return null;
 			}
+			
 		} catch (SQLException e) {
 			if (ArtDept.loggingEnabled) log.error(e);
 			return null;
@@ -167,7 +196,7 @@ public class JobManager {
 			stmt.setTimestamp(5, new Timestamp(bean.getProofSpecDate().getTime()));
 			stmt.setTimestamp(6, bean.getJobCompleted() == null ? null : new Timestamp(bean.getJobCompleted().getTime()));
 			stmt.setInt(7, bean.getPrintingCompany().getValue());
-			stmt.setBoolean(8, bean.areOverruns());
+			stmt.setBoolean(8, bean.isOverruns());
 			stmt.setBoolean(9, bean.isSampleShelfNote());
 			stmt.setString(10, bean.getSigProof());
 			stmt.setString(11, bean.getSigOutput());
@@ -221,7 +250,7 @@ public class JobManager {
 			stmt.setTimestamp(4, new Timestamp(bean.getProofSpecDate().getTime()));
 			stmt.setTimestamp(5, bean.getJobCompleted() == null ? null : new Timestamp(bean.getJobCompleted().getTime()));
 			stmt.setInt(6, bean.getPrintingCompany().getValue());
-			stmt.setBoolean(7, bean.areOverruns());
+			stmt.setBoolean(7, bean.isOverruns());
 			stmt.setBoolean(8, bean.isSampleShelfNote());
 			stmt.setString(9, bean.getSigProof());
 			stmt.setString(10, bean.getSigOutput());

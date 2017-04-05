@@ -23,16 +23,20 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import info.chrismcgee.components.DateManager;
+import info.chrismcgee.sky.beans.Artwork;
 import info.chrismcgee.sky.beans.Day;
 import info.chrismcgee.sky.beans.Job;
 import info.chrismcgee.sky.beans.OrderDetail;
 import info.chrismcgee.sky.enums.PrintType;
 import info.chrismcgee.sky.enums.PrintingCompany;
 import info.chrismcgee.sky.enums.ScriptType;
+import info.chrismcgee.sky.tables.ArtworkManager;
 import info.chrismcgee.sky.tables.DayManager;
 import info.chrismcgee.sky.tables.JobManager;
 import info.chrismcgee.sky.tables.OrderDetailManager;
@@ -41,8 +45,8 @@ public class ScriptManager {
 	
 	static final Logger log = LogManager.getLogger(ScriptManager.class.getName());
 	private static String artDeptFolder = "/Volumes/ArtDept/ArtDept/";
-	private static NumberFormat usFormat = NumberFormat.getIntegerInstance(Locale.US);
-	private static DateFormat usDateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.FULL, Locale.US);
+//	private static NumberFormat usFormat = NumberFormat.getIntegerInstance(Locale.US);
+//	private static DateFormat usDateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.FULL, Locale.US);
 
 	public static boolean scriptRunner(ScriptType scriptType, String jobNumber, String initials, Job bean, int proofNum, String scriptFolder, String customerServiceRep, boolean creditCard, int shipDays, String wnaPo) {
 		
@@ -58,7 +62,7 @@ public class ScriptManager {
 		if (ArtDept.loggingEnabled) log.debug("Got customerName: " + customerName);
 		String customerPO = (bean == null || bean.getCustomerPO() == null) ? "" : bean.getCustomerPO();
 		if (ArtDept.loggingEnabled) log.debug("Got customerPO: " + customerPO);
-		boolean overruns = (bean == null) ? false : bean.areOverruns();
+		boolean overruns = (bean == null) ? false : bean.isOverruns();
 		if (ArtDept.loggingEnabled) log.debug("Got overruns: " + overruns);
 		boolean sampleShelf = (bean == null) ? false : bean.isSampleShelfNote();
 		if (ArtDept.loggingEnabled) log.debug("Got sampleShelf: " + sampleShelf);
@@ -79,7 +83,7 @@ public class ScriptManager {
 		
 		// Take all of the Job and Order Detail bean's information and join it together
 		// into a single String that can be parsed in the Proofing script.
-		String orderDetailInfo = "";
+/*		String orderDetailInfo = "";
 		try {
 			for (Iterator<OrderDetail> odIterator = bean.getOrderDetailList().iterator(); odIterator.hasNext();) {
 				OrderDetail od = (OrderDetail) odIterator.next();
@@ -110,28 +114,64 @@ public class ScriptManager {
 		} catch (NullPointerException err) {
 			if (ArtDept.loggingEnabled) log.error("Null Pointer to the Order Detail List. Creating one now.");
 			orderDetailInfo = "@@@@@@@@@@";
-		}
+		}*/
+		
+		// Create a JSON string to pass to the script.
+		JSONObject outgoing = new JSONObject(bean);
+		outgoing.put("thisProofNumber", proofNum);
+		outgoing.put("customerServiceRep", customerServiceRep);
+		outgoing.put("creditCard", creditCard);
+		outgoing.put("shipDays", shipDays);
+		outgoing.put("wnaPo", wnaPo);
+		outgoing.put("userInitials", initials);
+		outgoing.put("shipDate", shipDate);
+//		outgoing.put("loggingEnabled", ArtDept.loggingEnabled);
+		String jsonOut = JSONObject.quote(outgoing.toString());
+//		jsonOut = jsonOut.replaceAll("\\{", "\\\\{");
+//		jsonOut = jsonOut.replaceAll("\\}", "\\\\}");
+		if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
+		
 		
 		// Begin building the String that will be the script we run.
 		// The first few lines are just to add in the arguments from the ArtDept class.
 		// The rest is read from the file defined above.
-		if (scriptType == ScriptType.PROOF) {
-			script = "set jOrderNum to \"" + jobNumber + "\"\n";
-			script += "set jPrintingCompany to \"" + pCompany + "\"\n";
-			script += "set jClientName to \"" + customerName + "\"\n";
-			script += "set jClientPO to \"" + customerPO + "\"\n";
-			script += "set jProofNum to \"" + proofNum + "\"\n";
-			script += "set jOverruns to \"" + overruns + "\"\n";
-			script += "set jSampleShelf to \"" + sampleShelf + "\"\n";
-			script += "set jInitials to \"" + initials + "\"\n";
-			script += "set jOrderDetail to \"" + orderDetailInfo + "\"\n";
-			script += "set jCustomerServiceRep to \"" + customerServiceRep + "\"\n";
-			script += "set jCreditCard to \"" + creditCard + "\"\n";
-			script += "set jShipDays to \"" + shipDays + "\"\n";
-			script += "set jWnaPo to \"" + wnaPo + "\"\n";
+		script = "set json to " + jsonOut + "\n";
+		script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
+		script += "set jPath to \"" + ArtDept.scriptPath + "\"\n";
+		if (ArtDept.loggingEnabled) log.debug("Reading the Proof/Output script into a string.");
+		if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
+		try {
+			script += FileUtils.readFileToString(scriptFile);
+		} catch (IOException e) {
+			if (ArtDept.loggingEnabled) log.error("Could not find the Proof/Output AppleScript file.", e);
+			JOptionPane.showMessageDialog(null, "Could not find the Proof/Output AppleScript file.  Please verify connection to the server.", "File not found", JOptionPane.ERROR_MESSAGE);
+			return false;
+//				ConnectionManager.getInstance().close();
+//				System.exit(1);
+		}
+/*		if (scriptType == ScriptType.PROOF) {
+//			script = "set jOrderNum to \"" + jobNumber + "\"\n";
+//			script += "set jPrintingCompany to \"" + pCompany + "\"\n";
+//			script += "set jClientName to \"" + customerName + "\"\n";
+//			script += "set jClientPO to \"" + customerPO + "\"\n";
+//			script += "set jProofNum to \"" + proofNum + "\"\n";
+//			script += "set jOverruns to \"" + overruns + "\"\n";
+//			script += "set jSampleShelf to \"" + sampleShelf + "\"\n";
+//			script += "set jInitials to \"" + initials + "\"\n";
+//			script += "set jOrderDetail to \"" + orderDetailInfo + "\"\n";
+//			script += "set jCustomerServiceRep to \"" + customerServiceRep + "\"\n";
+//			script += "set jCreditCard to \"" + creditCard + "\"\n";
+//			script += "set jShipDays to \"" + shipDays + "\"\n";
+//			script += "set jWnaPo to \"" + wnaPo + "\"\n";
+			script = "";
+//			script += "tell application \"JSON Helper\"\n";
+			script += 	"set json to " + jsonOut + "\n";
+//			script += 	"set json to make JSON from myRecord\n";
+//			script += "end tell\n";
 			script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
 			script += "set jPath to \"" + ArtDept.scriptPath + "\"\n";
 			if (ArtDept.loggingEnabled) log.debug("Reading the Proofing script into a string.");
+			if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
 			try {
 				script += FileUtils.readFileToString(scriptFile);
 			} catch (IOException e) {
@@ -142,14 +182,16 @@ public class ScriptManager {
 //				System.exit(1);
 			}
 		} else { // Output.
-			script = "set jOrderNum to \"" + jobNumber + "\"\n";
-			script += "set jShipDate to \"" + shipDate + "\"\n";
-			script += "set jOverruns to \"" + overruns + "\"\n";
-			script += "set jInitials to \"" + initials + "\"\n";
-			script += "set jOrderDetail to \"" + orderDetailInfo + "\"\n";
+//			script = "set jOrderNum to \"" + jobNumber + "\"\n";
+//			script += "set jShipDate to \"" + shipDate + "\"\n";
+//			script += "set jOverruns to \"" + overruns + "\"\n";
+//			script += "set jInitials to \"" + initials + "\"\n";
+//			script += "set jOrderDetail to \"" + orderDetailInfo + "\"\n";
+			script = "set json to " + jsonOut + "\n";
 			script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
 			script += "set jPath to \"" + ArtDept.scriptPath + "\"\n";
 			if (ArtDept.loggingEnabled) log.debug("Reading the Output script into a string.");
+			if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
 			try {
 				script += FileUtils.readFileToString(scriptFile);
 			} catch (IOException e) {
@@ -159,7 +201,8 @@ public class ScriptManager {
 //				ConnectionManager.getInstance().close();
 //				System.exit(1);
 			}
-		}
+		}*/
+		
 		
 		// These two lines prepare the scripting engine, ready to run the script.
 		if (ArtDept.loggingEnabled) log.debug("Setting the script engine.");
@@ -278,57 +321,68 @@ public class ScriptManager {
 				return false;
 			}
 		}
+		
+		// Parse the returned string into a JSON Object.
+		JSONObject thisJob = new JSONObject(resultStr);
+		JSONArray items = thisJob.getJSONArray("items");
+		if (ArtDept.loggingEnabled && thisJob != null) log.debug("JSON Object: " + thisJob);
+		
+//		JSONObject firstItem = resultArray.getJSONObject(0);
+//		if (ArtDept.loggingEnabled) log.debug("JSON object: " + firstItem);
+		
+		if (ArtDept.loggingEnabled) log.debug("Ship Date as epoch int: " + thisJob.getLong("shipDate"));
+		
+		
 		String[] aResult = resultStr.split("@");  // Convert the String into an Array of Strings.
-		String[] aTemp = new String[24]; // This temporary Array will hold the twenty-two items common to each product in an order.
+		String[] aTemp = new String[25]; // This temporary Array will hold the items common to each product in an order.
 		ArrayList<String[]> aJobDetails = new ArrayList<String[]>(); // Setting up a two-dimensional ArrayList of Arrays.
-		for (int i = 0; i < aResult.length; i+=24) { // Go through each block of twenty-two items in the list and add them to the ArrayList.
-			aTemp = Arrays.copyOfRange(aResult, i, i+24);
+		for (int i = 0; i < aResult.length; i+=25) { // Go through each block of items in the list and add them to the ArrayList.
+			aTemp = Arrays.copyOfRange(aResult, i, i+25);
 			aJobDetails.add(aTemp);
 		}
 
 		// If we got nothing back, then return with a failure condition.
-		if (aJobDetails.get(0)[0].length() < 1)
-		{
+		if (resultStr.length() < 1) {
 			if (ArtDept.loggingEnabled) log.trace("Nothing returned from script. User possibly cancelled it.");
 			return false;
 		}
 		
 		// Finally, some test sample output.
-		if (ArtDept.loggingEnabled) log.debug(new Date(Long.parseLong(aJobDetails.get(0)[0], 10)).toString());
-//		if (ArtDept.loggingEnabled) log.debug(LocalDate.parse(aJobDetails.get(0)[0]).toString("yyyy-MM-dd")); // Ship Date
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[1]); // Job ID
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[2]); // Customer Name
-		if (ArtDept.loggingEnabled) log.debug(usDateFormat.format(new Date(Long.parseLong(aJobDetails.get(0)[3], 10))));
-//		if (ArtDept.loggingEnabled) log.debug(LocalDateTime.parse(aJobDetails.get(0)[3]).toString("yyyy-MM-dd HH:mm:ss")); // Proof Date / Spec Date
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[4]); // Product ID
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[5]); // Product Detail
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[6]); // Print Type (See Output script or database table schema for description.)
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[7]); // Number of Colors
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[8]); // Quantity
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[9]); // Print Company (Accents / Cabin / Yacht)
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[10]); // Proof Number
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[11]); // Overruns boolean
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[12]); // Customer PO
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[13]); // Thumbnail filename
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[14]); // Flags
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[15]); // Reorder ID
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[16]); // Packing / Labeling Info
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[17]); // Package Quantity
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[18]); // Case Quantity
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[19]); // Label Quantity
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[20]); // Label Text
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[21]); // Sample Shelf Note boolean
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[22]); // Proofer's Initials
-		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[23]); // Outputter's Initials
-		if (ArtDept.loggingEnabled) log.debug("");
+//		if (ArtDept.loggingEnabled) log.debug(new Date(Long.parseLong(aJobDetails.get(0)[0], 10)).toString());
+////		if (ArtDept.loggingEnabled) log.debug(LocalDate.parse(aJobDetails.get(0)[0]).toString("yyyy-MM-dd")); // Ship Date
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[1]); // Job ID
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[2]); // Customer Name
+//		if (ArtDept.loggingEnabled) log.debug(usDateFormat.format(new Date(Long.parseLong(aJobDetails.get(0)[3], 10))));
+////		if (ArtDept.loggingEnabled) log.debug(LocalDateTime.parse(aJobDetails.get(0)[3]).toString("yyyy-MM-dd HH:mm:ss")); // Proof Date / Spec Date
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[4]); // Product ID
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[5]); // Product Detail
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[6]); // Print Type (See Output script or database table schema for description.)
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[7]); // Number of Colors
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[8]); // Quantity
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[9]); // Print Company (Accents / Cabin / Yacht)
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[10]); // Proof Number
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[11]); // Overruns boolean
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[12]); // Customer PO
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[13]); // Thumbnail filename
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[14]); // Flags
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[15]); // Reorder ID
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[16]); // Packing / Labeling Info
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[17]); // Package Quantity
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[18]); // Case Quantity
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[19]); // Label Quantity
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[20]); // Label Text
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[21]); // Sample Shelf Note boolean
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[22]); // Proofer's Initials
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[23]); // Outputter's Initials
+//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[24]); // Digital file name
+//		if (ArtDept.loggingEnabled) log.debug("");
 
 
 		// Now to insert the returned data into the database.
 		// First, place the day's info into the Day table.  This should only insert one row.
 		if (ArtDept.loggingEnabled) log.trace("First, place the day's info into the Day table.  This should only insert one row.");
-		Date jobDate = new Date(Long.parseLong(aJobDetails.get(0)[0], 10));
+		Date jobDate = new Date(thisJob.getLong("shipDate"));
 		Day dayBean = new Day(jobDate);
-//		dayBean.setDate(Date.valueOf(LocalDate.parse(aJobDetails.get(0)[0]).toString("yyyy-MM-dd")));
 		dayBean.setDate(jobDate);
 		
 		// Add in defaults from the XML file.
@@ -373,77 +427,73 @@ public class ScriptManager {
 		
 		// Next, set the Job info bean.
 		if (ArtDept.loggingEnabled) log.trace("Next, set the Job info bean.");
-		if (bean == null)
-		{
+		if (bean == null) {
 			if (ArtDept.loggingEnabled) log.debug("Bean was null; creating new Job bean.");
 			bean = new Job();
-/*			customerName = aJobDetails.get(0)[2];
-			customerPO = aJobDetails.get(0)[12];*/
 		}
-		customerName = aJobDetails.get(0)[2];
-		customerPO = aJobDetails.get(0)[12];
-/*		if (bean.getCustomerName() == null) customerName = aJobDetails.get(0)[2];
-		if (bean.getCustomerPO() == null) customerPO = aJobDetails.get(0)[12];*/
+		customerName = thisJob.getString("customerName");
+		customerPO = thisJob.getString("customerPO");
 		
-		bean.setJobId(aJobDetails.get(0)[1]);
-//		bean.setProofSpecDate(Timestamp.valueOf(LocalDateTime.parse(aJobDetails.get(0)[3]).toString("yyyy-MM-dd HH:mm:ss")));
-		bean.setProofSpecDate(new Date(Long.parseLong(aJobDetails.get(0)[3], 10)));
-		if (scriptType == ScriptType.OUTPUT)
-		{
-			bean.setCustomerName(customerName);
-			bean.setCustomerPO(customerPO);
+		bean.setJobId(thisJob.getString("jobID"));
+		bean.setProofSpecDate(new Date(thisJob.getLong("proofSpecDate")));
+		bean.setCustomerName(customerName);
+		bean.setCustomerPO(customerPO);
+		bean.setSampleShelfNote(thisJob.getBoolean("sampleShelfNote"));
+		if (scriptType == ScriptType.OUTPUT) {
 			bean.setPrintingCompany(pCompanyEnum);
-			bean.setShipDate(new Date(Long.parseLong(aJobDetails.get(0)[0], 10)));
-			bean.setOverruns(areOverruns(aJobDetails.get(0)[11]));
-			bean.setSigOutput(aJobDetails.get(0)[23]);
-		}
-		else // Proofing
-		{
-			bean.setCustomerName(aJobDetails.get(0)[2]);
-			bean.setCustomerPO(aJobDetails.get(0)[12]);
-			bean.setPrintingCompany(PrintingCompany.getPrintingCompany(Integer.parseInt(aJobDetails.get(0)[9])));
+			bean.setShipDate(jobDate);
+			bean.setOverruns(thisJob.getBoolean("overruns"));
+			bean.setSigOutput(thisJob.getString("outputterSignature"));
+		} else { // Proofing
+//			bean.setCustomerName(customerName);
+//			bean.setCustomerPO(customerPO);
+			bean.setPrintingCompany(PrintingCompany.getPrintingCompany(thisJob.getInt("printingCompany")));
 			bean.setShipDate(DateManager.localDateToSqlDate(DateManager.PROOF_DATE));
 			bean.setOverruns(overruns);
 			bean.setSampleShelfNote(false); // Default to false. Will test for the note shortly to possibly change this.
-			bean.setSigProof(aJobDetails.get(0)[22]);
+			bean.setSigProof(thisJob.getString("prooferSignature"));
 		}
 		
 		// As part of setting the Job bean, set its OrderDetail List with OrderDetail beans.
 		if (ArtDept.loggingEnabled) log.trace("As part of setting the Job bean, set its OrderDetail List with OrderDetail beans.");
-		Pattern prProof = Pattern.compile("Proof|NaN", Pattern.CASE_INSENSITIVE);
+//		Pattern prProof = Pattern.compile("Proof|NaN", Pattern.CASE_INSENSITIVE);
 		List<OrderDetail> odList = new ArrayList<OrderDetail>();
 		boolean allDigitalProofs = true; // This boolean will store whether or not all of the items
 										 // in a multi-item proof are digital. If so, it should not be added to the database.
-		for (int i = 0; i < aJobDetails.size(); i++) {
+//		for (int i = 0; i < aJobDetails.size(); i++) {
+		for (int i = 0; i < items.length(); i++) {
+			JSONObject thisItem = (JSONObject) items.get(i);
+			
 			// If ANY of the items has the "Sample Shelf" note, then set the "Sample Shelf" boolean for the entire job.
-			if (aJobDetails.get(i)[21].equalsIgnoreCase("true")) {
-				if (ArtDept.loggingEnabled) log.debug("Sample Shelf String returned from InDesign: " + aJobDetails.get(i)[21] + ". Setting Sample Shelf Note to true.");
-				bean.setSampleShelfNote(true);
-			}
+//			if (aJobDetails.get(i)[21].equalsIgnoreCase("true")) {
+//				if (ArtDept.loggingEnabled) log.debug("Sample Shelf String returned from InDesign: " + aJobDetails.get(i)[21] + ". Setting Sample Shelf Note to true.");
+//				bean.setSampleShelfNote(true);
+//			}
 			OrderDetail detailBean = new OrderDetail();
-			detailBean.setOrderId(aJobDetails.get(i)[1]);
-			detailBean.setProductId(aJobDetails.get(i)[4]);
-			detailBean.setProductDetail(aJobDetails.get(i)[5]);
-			detailBean.setThumbnail(aJobDetails.get(i)[13]);
-			if (scriptType == ScriptType.PROOF)
-			{
-				detailBean.setProofNum(Integer.parseInt(aJobDetails.get(i)[10]));
-				detailBean.setProofDate(new Date(Long.parseLong(aJobDetails.get(i)[3], 10)));
-				detailBean.setFlags(Integer.parseInt(aJobDetails.get(i)[14]));
-				detailBean.setReorderId(aJobDetails.get(i)[15]);
-				detailBean.setPackingInstructions(aJobDetails.get(i)[16]);
-				detailBean.setPackageQuantity(aJobDetails.get(i)[17]);
-				detailBean.setCaseQuantity(aJobDetails.get(i)[18]);
+			detailBean.setOrderId(thisJob.getString("jobID"));
+			detailBean.setProductId(thisItem.getString("productID"));
+			detailBean.setProductDetail(thisItem.getString("productDetail"));
+			detailBean.setThumbnail(thisItem.getString("thumbnail"));
+			if (scriptType == ScriptType.PROOF) {
+				detailBean.setProofNum(thisItem.getInt("proofNumber"));
+				detailBean.setProofDate(new Date(thisJob.getLong("proofSpecDate")));
+				detailBean.setFlags(thisItem.getInt("flags"));
+				detailBean.setReorderId(thisItem.getString("reorderID"));
+				detailBean.setPackingInstructions(thisItem.getString("packingInstructions"));
+				detailBean.setPackageQuantity(thisItem.getString("packageQuantity"));
+				detailBean.setCaseQuantity(thisItem.getString("caseQuantity"));
 				try { // Since the Label Quantity field could be blank
-					detailBean.setLabelQuantity(Integer.parseInt(aJobDetails.get(i)[19]));
+					detailBean.setLabelQuantity(thisItem.getInt("labelQuantity"));
 				} catch (NumberFormatException err) {
 					if (ArtDept.loggingEnabled) log.error("Could not parse Label Quantity into an integer. Setting it to 0 instead.");
 					detailBean.setLabelQuantity(0);
 				}
-				detailBean.setLabelText(aJobDetails.get(i)[20]);
-			}
-			else // Output
-			{
+				detailBean.setLabelText(thisItem.getString("labelText"));
+			} else { // Output
+				if (ArtDept.loggingEnabled) log.info("OUTPUT JOB");
+				if (thisItem.getJSONArray("digitalArtFiles").length() > 0) {
+					if (ArtDept.loggingEnabled) log.info("24: " + thisItem.getJSONArray("digitalArtFiles").getString(0));
+				}
 				detailBean.setProofNum(proofNum);
 				detailBean.setFlags((bean.getOrderDetailList() == null || i >= bean.getOrderDetailList().size()) ? 0 : bean.getOrderDetailList().get(i).getFlags());
 				detailBean.setReorderId((bean.getOrderDetailList() == null || i >= bean.getOrderDetailList().size()) ? "" : bean.getOrderDetailList().get(i).getReorderId());
@@ -452,19 +502,58 @@ public class ScriptManager {
 				detailBean.setCaseQuantity((bean.getOrderDetailList() == null || i >= bean.getOrderDetailList().size()) ? "0" : bean.getOrderDetailList().get(i).getCaseQuantity());
 				detailBean.setLabelQuantity((bean.getOrderDetailList() == null || i >= bean.getOrderDetailList().size()) ? 0 : bean.getOrderDetailList().get(i).getLabelQuantity());
 				detailBean.setLabelText((bean.getOrderDetailList() == null || i >= bean.getOrderDetailList().size()) ? "" : bean.getOrderDetailList().get(i).getLabelText());
-			}
-			try {
-				String correctedQuantity = aJobDetails.get(i)[8];
-				Matcher matcher = prProof.matcher(correctedQuantity);
-				if (matcher.find()) correctedQuantity = "1"; // If the word "proof" (case insensitive) is found for the quantity, change it to "1".
+//				detailBean.setDigitalFilename(thisItem.getJSONArray("digitalArtFiles").getString(0));
+				JSONArray artFiles = thisItem.getJSONArray("digitalArtFiles");
+				List<Artwork> existingArtList = detailBean.getArtworkList();
 				
-				detailBean.setQuantity(NumberFormat.getNumberInstance().parse(correctedQuantity).intValue());
+				// Get all "Artwork" rows from db where the od id matches this od's id. Store in an ArrayList.
+				
+				// Loop through the incoming JSONArray and update any of those rows in the db, one at a time.
+				int j = -1;
+				while (++j < artFiles.length()) {
+					String artFileText = artFiles.getString(j);
+					if (ArtDept.loggingEnabled) log.debug("Storing art file # " + j);
+					if (j < existingArtList.size()) {
+						if (ArtDept.loggingEnabled) log.debug("Replacing existing art bean.");
+						Artwork thisArt = existingArtList.get(j);
+						thisArt.setDigitalArtFile(artFileText);
+					} else { // If we run out of db rows first (including if it was empty to begin with),
+						     // then "add" the remaining items from the JSONArray to the List in the OD item, one at a time.
+						if (ArtDept.loggingEnabled) log.debug("Creating new art bean and adding it to the list.");
+						Artwork thisArt = new Artwork();
+						thisArt.setDigitalArtFile(artFileText);
+						existingArtList.add(thisArt);
+					}
+				}
+				if (ArtDept.loggingEnabled) log.debug("j is now: " + j);
+				// If we run out of JSONArray items first, then delete the remaining db rows, one at a time.
+				while (j < existingArtList.size()) {
+					if (ArtDept.loggingEnabled) log.debug("Removing extraneous art beans from the list.");
+					try {
+						ArtworkManager.delete(existingArtList.get(j++).getId());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			if (ArtDept.loggingEnabled) log.info("Package Quantity in bean: " + detailBean.getPackageQuantity());
+			if (ArtDept.loggingEnabled) log.info("Case Quantity in bean: " + detailBean.getCaseQuantity());
+//			if (ArtDept.loggingEnabled) log.info("Digital Filename in bean: " + detailBean.getDigitalFilename());
+			try {
+//				String correctedQuantity = aJobDetails.get(i)[8];
+//				Matcher matcher = prProof.matcher(correctedQuantity);
+//				if (matcher.find()) correctedQuantity = "1"; // If the word "proof" (case insensitive) is found for the quantity, change it to "1".
+				
+//				detailBean.setQuantity(NumberFormat.getNumberInstance().parse(correctedQuantity).intValue());
+				detailBean.setQuantity(thisItem.getLong("quantity"));
 				// Check that quantity for 0 (Digital Proof) and set the boolean accordingly.
 				if (detailBean.getQuantity() > 0) allDigitalProofs = false;
 				
-				detailBean.setNumColors(Integer.parseInt(aJobDetails.get(i)[7]));
-				detailBean.setPrintType(PrintType.getPrintType(Integer.parseInt(aJobDetails.get(i)[6])));
-			} catch (ParseException e) {
+				detailBean.setNumColors(thisItem.getLong("numberOfColors"));
+				detailBean.setPrintType(PrintType.getPrintType(thisItem.getInt("jobType")));
+			} catch (Exception e) {
 				if (ArtDept.loggingEnabled) log.error("Could not parse the quantity, number of colors, or print type.", e);
 				JOptionPane.showMessageDialog(null, "Could not parse the quantity, number of colors, or print type.  Please fix and run again.", "Parse error", JOptionPane.ERROR_MESSAGE);
 				return false;
@@ -483,13 +572,10 @@ public class ScriptManager {
 		// If the job already exists, though, just update it.
 		boolean successfulJobInsert = false;
 		try {
-			if (JobManager.getRow(bean.getJobId()) == null)
-			{
+			if (JobManager.getRow(bean.getJobId()) == null) {
 				if (ArtDept.loggingEnabled) log.debug("INSERTing a new Job entry into the Job table.");
 				successfulJobInsert = JobManager.insert(bean); // Insert the job & order detail in the database.
-			}
-			else
-			{
+			} else {
 				if (ArtDept.loggingEnabled) log.debug("UPDATing the existing Job in the Job table.");
 				successfulJobInsert = JobManager.update(bean); // Update the job & order detail in the database.
 			}
@@ -499,11 +585,10 @@ public class ScriptManager {
 			return false;
 		}
 
+		// Log the successfulness of the job insertion/updation.
 		if (successfulJobInsert) {
 			if (ArtDept.loggingEnabled) log.debug("Job id " + bean.getJobId() + " was inserted/updated!");
-		}
-		else
-		{
+		} else {
 			if (ArtDept.loggingEnabled) log.debug("One or more items did NOT make it into the database.");
 			return false;
 		}
@@ -511,8 +596,7 @@ public class ScriptManager {
 		
 		// This next section should only run if there are existing OrderDetail items in the database.
 		boolean successfulODInsert = false;
-		if (bean.getOrderDetailList() != null)
-		{
+		if (bean.getOrderDetailList() != null) {
 			// This is where things get tricky. We need to get a list of the .INDD files in the job directory as an ArrayList of Strings first.
 			// We then compare this List of Strings to the incoming OrderDetail List and pop out any matches from the List of Strings.
 			// What we're left with is a list of only those items that have NOT been updated / added to the job.
@@ -530,14 +614,11 @@ public class ScriptManager {
 			// This can happen if InDesign crashed mid-way through a multi-item order or some such.
 			// If this is the case, then go ahead and add dummy entries to the database, so at least SOMETHING is there.
 			addDummyEntries(bean.getOrderDetailList(), protectionList);
-		}
-		else
-		{
+		} else { // No existing OrderDetail items in the database.
 			bean.setOrderDetailList(odList);
 			addDummyEntries(bean.getOrderDetailList(), bean.getJobId());
 			try {
-				for (OrderDetail orderDetail : bean.getOrderDetailList())
-				{
+				for (OrderDetail orderDetail : bean.getOrderDetailList()) {
 					if (ArtDept.loggingEnabled) log.debug("INSERTing a new OrderDetail entry into the Job table.");
 					successfulODInsert = OrderDetailManager.insert(orderDetail); // Insert the order detail in the database.
 				}
@@ -548,11 +629,39 @@ public class ScriptManager {
 			}
 		}
 		
+		
+		// Add the OD's id to each of its Artwork beans, then add them to the db.
+//		if (ArtDept.loggingEnabled) log.debug("Number of ODs in the Job bean's list: " + bean.getOrderDetailList().size());
+//		for (int i = 0; i < bean.getOrderDetailList().size(); i++) {
+		for (int i = 0; i < odList.size(); i++) {
+//			OrderDetail thisOD = bean.getOrderDetailList().get(i);
+			OrderDetail thisOD = odList.get(i);
+			// Change the following 'for' loop so it will insert Artwork items,
+			// even if the ArtworkList is empty. Right now, this loop doesn't
+			// even run at all if that list is empty.
+			if (ArtDept.loggingEnabled) log.debug("Number of Artworks in the OD bean's list: " + thisOD.getArtworkList().size());
+			for (int j = 0; j < thisOD.getArtworkList().size(); j++) {
+				Artwork thisArt = thisOD.getArtworkList().get(j);
+				thisArt.setOrderDetailId(thisOD.getId());
+				try {
+					thisArt.setId(ArtworkManager.getArtworkId(thisArt.getDigitalArtFile()));
+					if (thisArt.getId() > 0) {
+						ArtworkManager.update(thisArt);
+					} else {
+						ArtworkManager.insert(thisArt);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+		// Log the successfulness of the insertion/updation.
 		if (successfulODInsert) {
 			if (ArtDept.loggingEnabled) log.debug("At least one row was inserted/updated!");
-		}
-		else
-		{
+		} else {
 			if (ArtDept.loggingEnabled) log.debug("One or more items did NOT make it into the database.");
 			return false;
 		}
@@ -566,8 +675,7 @@ public class ScriptManager {
 	}
 
 	
-	private static boolean updateTables(List<OrderDetail> incomingList, List<OrderDetail> existingList)
-	{
+	private static boolean updateTables(List<OrderDetail> incomingList, List<OrderDetail> existingList) {
 		if (ArtDept.loggingEnabled) log.entry("updateTables (ScriptManager)");
 
 /*		if (incomingList.size() == 0)
@@ -661,8 +769,7 @@ public class ScriptManager {
 		return clone;
 	}*/
 	
-	private static List<OrderDetail> protectODs(List<OrderDetail> existingList, List<File> protectionList)
-	{
+	private static List<OrderDetail> protectODs(List<OrderDetail> existingList, List<File> protectionList) {
 		if (ArtDept.loggingEnabled) log.entry("protectODs (ScriptManager)");
 
 		List<OrderDetail> trimmedList = new ArrayList<OrderDetail>();
@@ -696,8 +803,7 @@ public class ScriptManager {
 		return trimmedList;
 	}
 
-	private static void addDummyEntries(List<OrderDetail> existingList, List<File> protectionList)
-	{
+	private static void addDummyEntries(List<OrderDetail> existingList, List<File> protectionList) {
 		if (ArtDept.loggingEnabled) log.entry("addDummyEntries (ScriptManager)");
 		
 		Iterator<File> fileIterator = protectionList.iterator();
@@ -718,8 +824,9 @@ public class ScriptManager {
 						|| itemDetail == null
 						|| orderDetail.getProductDetail().equals(itemDetail)
 						|| StringUtils.containsIgnoreCase(itemDetail, "MiniPad")
-						|| StringUtils.containsIgnoreCase(itemDetail, "Carousel"))
-				{
+						|| StringUtils.containsIgnoreCase(itemDetail, "Carousel")
+						|| StringUtils.containsIgnoreCase(itemDetail, "cover")
+						|| StringUtils.containsIgnoreCase(itemDetail, "label")) {
 					if (ArtDept.loggingEnabled) log.debug("Found a match. Removing from the protectionList. (Will NOT be added as a dummy item.)");
 					fileIterator.remove();
 					break;
@@ -727,8 +834,7 @@ public class ScriptManager {
 			}
 		}
 	
-		if (protectionList.size() > 0)
-		{
+		if (protectionList.size() > 0) {
 			for (File file : protectionList) {
 				OrderDetail bean = new OrderDetail();
 				bean.setOrderId(StringUtils.substringBefore(file.getName(), "_"));
@@ -751,8 +857,7 @@ public class ScriptManager {
 	}
 	
 	
-	private static void addDummyEntries(List<OrderDetail> incomingList, String jobNumber)
-	{
+	private static void addDummyEntries(List<OrderDetail> incomingList, String jobNumber) {
 		if (ArtDept.loggingEnabled) log.entry("addDummyEntries (when bean doesn't exist yet) (ScriptManager)");
 		
 		String jobPrefix = jobNumber.substring(0, 3);
@@ -779,8 +884,9 @@ public class ScriptManager {
 						|| itemDetail == null
 						|| orderDetail.getProductDetail().equals(itemDetail)
 						|| StringUtils.containsIgnoreCase(itemDetail, "MiniPad")
-						|| StringUtils.containsIgnoreCase(itemDetail, "Carousel"))
-				{
+						|| StringUtils.containsIgnoreCase(itemDetail, "Carousel")
+						|| StringUtils.containsIgnoreCase(itemDetail, "cover")
+						|| StringUtils.containsIgnoreCase(itemDetail, "label")) {
 					if (ArtDept.loggingEnabled) log.debug("Found a match. Removing from the existing File list. (Will not be added as a dummy item to the database.)");
 					fileIterator.remove();
 					break;
@@ -814,8 +920,7 @@ public class ScriptManager {
 			}
 		}*/
 		
-		if (fileList.size() > 0)
-		{
+		if (fileList.size() > 0) {
 			for (File file : fileList) {
 				OrderDetail bean = new OrderDetail();
 				bean.setOrderId(StringUtils.substringBefore(file.getName(), "_"));
@@ -844,8 +949,7 @@ public class ScriptManager {
 	 * @return List<File> A list of files that will be protected from deletion/updating.
 	 * 	These are files that exist in the folder but are NOT in the incoming list of jobs.
 	 */
-	private static List<File> getProtectionList(String jobNumber, List<OrderDetail> odList)
-	{
+	private static List<File> getProtectionList(String jobNumber, List<OrderDetail> odList) {
 		if (ArtDept.loggingEnabled) log.entry("getProtectionList (ScriptManager)");
 
 		String jobPrefix = jobNumber.substring(0, 3);
@@ -866,8 +970,11 @@ public class ScriptManager {
 				itemDetail = StringUtils.substringBetween(file.getName(), "_", ".");
 				if (itemDetail == null) itemDetail = "";
 				if (ArtDept.loggingEnabled) log.debug("Comparing " + od.getProductDetail() + " (incoming item) to " + itemDetail + " (existing file in directory).");
-				if (itemDetail.equals(od.getProductDetail()) || itemDetail.equals("MiniPad") || itemDetail.equals("Carousel"))
-				{
+				if (itemDetail.equals(od.getProductDetail())
+						|| itemDetail.equals("MiniPad")
+						|| itemDetail.equals("Carousel")
+						|| itemDetail.equals("cover")
+						|| itemDetail.equals("label")) {
 					if (ArtDept.loggingEnabled) log.debug("Found a match. Removing from the protectionList. (Will be deleted/updated later.)");
 					fileIterator.remove();
 //					break;
@@ -878,13 +985,11 @@ public class ScriptManager {
 		return fileList;
 	}
 
-	private static String getPrintCompanyString (PrintingCompany printingCompany)
-	{
+	private static String getPrintCompanyString (PrintingCompany printingCompany) {
 		return StringUtils.substringBefore(StringUtils.substringAfter(printingCompany.toString(), "_"), "_");
 	}
 	
-	public static boolean areOverruns (String str)
-	{
+	public static boolean areOverruns (String str) {
 		if (str.equalsIgnoreCase("true")) return true;
 		return false;
 	}

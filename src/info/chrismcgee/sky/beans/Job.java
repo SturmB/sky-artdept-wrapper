@@ -64,7 +64,7 @@ public class Job {
 	public void setPrintingCompany(PrintingCompany printingCompany) {
 		this.printingCompany = printingCompany;
 	}
-	public boolean areOverruns() {
+	public boolean isOverruns() {
 		return overruns;
 	}
 	public void setOverruns(boolean overruns) {

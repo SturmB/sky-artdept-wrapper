@@ -3,6 +3,8 @@ package info.chrismcgee.sky.beans;
 import info.chrismcgee.sky.enums.PrintType;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDetail {
 	
@@ -24,6 +26,8 @@ public class OrderDetail {
 	private String caseQuantity;
 	private int labelQuantity;
 	private String labelText;
+	private String digitalFilename;
+	private List<Artwork> artworkList = new ArrayList<Artwork>();
 	
 	public int getId() {
 		return id;
@@ -132,6 +136,18 @@ public class OrderDetail {
 	}
 	public void setLabelText(String labelText) {
 		this.labelText = labelText;
+	}
+	public String getDigitalFilename() {
+		return digitalFilename;
+	}
+	public void setDigitalFilename(String digitalFilename) {
+		this.digitalFilename = digitalFilename;
+	}
+	public List<Artwork> getArtworkList() {
+		return artworkList;
+	}
+	public void setArtworkList(List<Artwork> artworkList) {
+		this.artworkList = artworkList;
 	}
 
 }
