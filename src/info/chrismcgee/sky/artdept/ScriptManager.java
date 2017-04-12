@@ -3,16 +3,10 @@ package info.chrismcgee.sky.artdept;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

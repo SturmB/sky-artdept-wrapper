@@ -84,7 +84,7 @@ public class ArtDept extends JFrame {
 	private static final long serialVersionUID = -185001290066987954L;
 	static final Logger log = LogManager.getLogger(ArtDept.class.getName()); // For logging.
 	public static boolean loggingEnabled = false;
-	public static String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
+	public static String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/Production/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
 	// Preferences variables
 	private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 	private static final String PREFS_EMAIL = "email";
@@ -111,7 +111,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Script Launcher";
-	private static String appVersion = "3.30";
+	private static String appVersion = "3.31";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
@@ -1076,6 +1076,8 @@ public class ArtDept extends JFrame {
 		scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/";
 		if (isTest) {
 			scriptPath += "Test/";
+		} else {
+			scriptPath += "Production/";
 		}
 	}
 	
