@@ -111,7 +111,16 @@ public class ScriptManager {
 		}*/
 		
 		// Create a JSON string to pass to the script.
-		JSONObject outgoing = new JSONObject(bean);
+		JSONObject outgoing = new JSONObject();
+		try {
+			outgoing = new JSONObject(bean);
+		} catch (NullPointerException err) {
+			// Likely this is a Proofing job and the user tried running it through Output.
+			if (ArtDept.loggingEnabled) log.error("Could not find the Proof/Output AppleScript file. Likely this is a Proofing job and the user tried running it through Output.", err);
+			JOptionPane.showMessageDialog(null, "This is most likely a Proofing job, not Output. Please try again.", "Job Type Mismatch", JOptionPane.ERROR_MESSAGE);
+			return false;			
+		}
+//		outgoing.put("jobId", jobNumber); // Removed this because if there is no Bean with the proper info, then the Proof was never added to the db.
 		outgoing.put("thisProofNumber", proofNum);
 		outgoing.put("customerServiceRep", customerServiceRep);
 		outgoing.put("creditCard", creditCard);
@@ -457,6 +466,7 @@ public class ScriptManager {
 //		for (int i = 0; i < aJobDetails.size(); i++) {
 		for (int i = 0; i < items.length(); i++) {
 			JSONObject thisItem = (JSONObject) items.get(i);
+			if (ArtDept.loggingEnabled) log.debug("Start: item " + i + ": " + thisItem.getString("productID"));
 			
 			// If ANY of the items has the "Sample Shelf" note, then set the "Sample Shelf" boolean for the entire job.
 //			if (aJobDetails.get(i)[21].equalsIgnoreCase("true")) {
@@ -556,6 +566,11 @@ public class ScriptManager {
 			odList.add(detailBean);
 			
 		}
+		if (ArtDept.loggingEnabled) {
+			for (int k = 0; k < odList.size(); k++) {
+				log.debug("End: item " + k + ": " + odList.get(k).getProductId());
+			}
+		}
 
 		// Now check that boolean to see if all of the items are Digital Proofs only.
 		// If so, just immediately return without putting anything into the database.
@@ -602,7 +617,7 @@ public class ScriptManager {
 			List<OrderDetail> modifiedODList = protectODs(bean.getOrderDetailList(), protectionList);
 			
 			// Now we compare our two Lists of OrderDetail items and add/update/remove, depending upon how many are in each list.
-			successfulODInsert = updateTables(odList, modifiedODList);
+			successfulODInsert = updateTables(odList, modifiedODList, scriptType);
 			
 			// As a final step, check to see if there are some items in the protectionList that do NOT exist in the table.
 			// This can happen if InDesign crashed mid-way through a multi-item order or some such.
@@ -669,7 +684,7 @@ public class ScriptManager {
 	}
 
 	
-	private static boolean updateTables(List<OrderDetail> incomingList, List<OrderDetail> existingList) {
+	private static boolean updateTables(List<OrderDetail> incomingList, List<OrderDetail> existingList, ScriptType scriptType) {
 		if (ArtDept.loggingEnabled) log.entry("updateTables (ScriptManager)");
 
 /*		if (incomingList.size() == 0)
@@ -689,6 +704,7 @@ public class ScriptManager {
 			if (ArtDept.loggingEnabled) log.exit("Items added to database.");
 			return;
 		}*/
+		
 		// Last part here occurs if there are items in both lists. Update until one of them drops to 0.
 		Iterator<OrderDetail> incomingIterator = incomingList.iterator();
 		Iterator<OrderDetail> existingIterator = existingList.iterator();
@@ -697,26 +713,52 @@ public class ScriptManager {
 		if (ArtDept.loggingEnabled) log.debug("Existing list has " + existingList.size() + " elements.");
 
 		try {
-			while (incomingIterator.hasNext() && existingIterator.hasNext()) {
-				if (ArtDept.loggingEnabled) log.debug("Updating an existing OD item.");
-				OrderDetail incomingOD = (OrderDetail) incomingIterator.next();
-				OrderDetail existingOD = (OrderDetail) existingIterator.next();
-				incomingOD.setId(existingOD.getId());
-				if (incomingOD.getProofDate() == null)
-					incomingOD.setProofDate(existingOD.getProofDate());
-				OrderDetailManager.update(incomingOD);
+			if (scriptType == ScriptType.PROOF) {
+				while (incomingIterator.hasNext() && existingIterator.hasNext()) {
+					if (ArtDept.loggingEnabled) log.debug("Updating an existing OD item. (Proofing)");
+					OrderDetail incomingOD = (OrderDetail) incomingIterator.next();
+					OrderDetail existingOD = (OrderDetail) existingIterator.next();
+					incomingOD.setId(existingOD.getId());
+					if (incomingOD.getProofDate() == null)
+						incomingOD.setProofDate(existingOD.getProofDate());
+					OrderDetailManager.update(incomingOD);
+					break;
+				}
+			} else { // Output.
+				while (incomingIterator.hasNext()) {
+					OrderDetail incomingOD = (OrderDetail) incomingIterator.next();
+					while (existingIterator.hasNext()) {
+						OrderDetail existingOD = (OrderDetail) existingIterator.next();
+						if (incomingOD.getProductDetail().equals(existingOD.getProductDetail())
+								&& incomingOD.getProductId().equals(existingOD.getProductId())) {
+							if (ArtDept.loggingEnabled) log.debug("Updating an existing OD item. (Output)");
+							incomingOD.setId(existingOD.getId());
+							if (incomingOD.getProofDate() == null)
+								incomingOD.setProofDate(existingOD.getProofDate());
+							OrderDetailManager.update(incomingOD);
+//							incomingIterator.remove();
+//							existingIterator.remove();
+							existingIterator = existingList.iterator();
+							break;
+						}
+					}
+				}
 			}
+			
 //			incomingIterator = incomingList.iterator();
-			while (incomingIterator.hasNext()) {
-				if (ArtDept.loggingEnabled) log.debug("Inserting a new OD item.");
-				OrderDetail incomingOD = (OrderDetail) incomingIterator.next();
-				OrderDetailManager.insert(incomingOD);
-			}
 //			existingIterator = existingList.iterator();
-			while (existingIterator.hasNext()) {
-				if (ArtDept.loggingEnabled) log.debug("Deleting an existing OD item.");
-				OrderDetail existingOD = (OrderDetail) existingIterator.next();
-				OrderDetailManager.delete(existingOD.getId());
+			
+			if (scriptType == ScriptType.PROOF) {
+				while (incomingIterator.hasNext()) {
+					if (ArtDept.loggingEnabled) log.debug("Inserting a new OD item.");
+					OrderDetail incomingOD = (OrderDetail) incomingIterator.next();
+					OrderDetailManager.insert(incomingOD);
+				}
+				while (existingIterator.hasNext()) {
+					if (ArtDept.loggingEnabled) log.debug("Deleting an existing OD item.");
+					OrderDetail existingOD = (OrderDetail) existingIterator.next();
+					OrderDetailManager.delete(existingOD.getId());
+				}
 			}
 		} catch (Exception err) {
 			if (ArtDept.loggingEnabled) log.error("Error while attempting to update/insert/delete data in database.", err);

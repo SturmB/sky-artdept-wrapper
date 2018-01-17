@@ -111,7 +111,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Script Launcher";
-	private static String appVersion = "3.31";
+	private static String appVersion = "3.41";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
@@ -643,15 +643,35 @@ public class ArtDept extends JFrame {
 						+ "Send an email to Customer Service to create it?", "Send Email?",
 						JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
+					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
 							messageToAddr,
 							"Need text file for " + tfOrderNum.getText() + ".",
-							"I need a text file made for Job #" + tfOrderNum.getText() + ", please.");
+							"I need a text file made for Job #" + tfOrderNum.getText() + ", please. Thank you!");
 					JOptionPane.showMessageDialog(null,
 							"An email has been sent to have the file created.\n" +
 									"Please keep a close eye on your inbox for a message\n" +
 									"stating that it has been created. Then retry.",
 							"Text File Not Found",
+							JOptionPane.WARNING_MESSAGE);
+				}
+				enableControls(true);
+				return;
+			} else if (jobBean.getPrintingCompany() == null) {
+				// If the Printing Company retrieved from the text file is null,
+				// Then it is most likely an Order Acknowledgement text file.
+				if (JOptionPane.showConfirmDialog(null, "The text file appears to be an Order Acknowledgement rather than a Sales Copy.\n"
+						+ "Send an email to Customer Service to fix it?", "Send Email?",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
+							messageToAddr,
+							"Need correct text file for " + tfOrderNum.getText() + ".",
+							"The text file with the name " + tfOrderNum.getText() + ".TXT is an Order Acknowledgement. " +
+									"Please overwrite it with a Sales Copy for that Job number. Thank you!");
+					JOptionPane.showMessageDialog(null, "An email has been sent to have the file corrected.\n" +
+							"Please keep a close eye on your inbox for a message\n" +
+							"stating that it has been created. Then retry.",
+							"Incorrect Type of Text File!",
 							JOptionPane.WARNING_MESSAGE);
 				}
 				enableControls(true);
@@ -662,14 +682,14 @@ public class ArtDept extends JFrame {
 						+ "Send an email to Customer Service to fix it?", "Send Email?",
 						JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@mainserver.com"),
+					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
 							messageToAddr,
 							"Need text file for " + tfOrderNum.getText() + ".",
 							"The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
-									"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ", please.");
+									"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ". Thank you!");
 					JOptionPane.showMessageDialog(null, "An email has been sent to have the file corrected.\n" +
-									"Please keep a close eye on your inbox for a message\n" +
-									"stating that it has been created. Then retry.",
+							"Please keep a close eye on your inbox for a message\n" +
+							"stating that it has been created. Then retry.",
 							"Job Number Mismatch!",
 							JOptionPane.WARNING_MESSAGE);
 				}
@@ -922,6 +942,10 @@ public class ArtDept extends JFrame {
 		if (loggingEnabled) log.debug("WNA Order: " + wnaPo + " with a length of " + wnaPo.length());
 		if (loggingEnabled) log.debug("Job Number read from file: " + readJobNum);
 		if (loggingEnabled) log.debug("...compared to the entered job number: " + jobNum);
+/*		if (printingCompany.toLowerCase().contains("acknowledgement")) {
+			// The text file is an Order Acknowledgement. The program should inform the user and then quit gracefully.
+			return null;
+		}*/
 		
 		// If the job numbers do not match, then alert the user and quit out of the program.
 /*		if (!jobNum.equals(readJobNum)) {
@@ -935,9 +959,12 @@ public class ArtDept extends JFrame {
 		
 		// Now set the bean's properties.
 		if (loggingEnabled) log.trace("Setting the Job bean's properties.");
-		if (scriptType == ScriptType.PROOF)
-		{
+		if (scriptType == ScriptType.PROOF) {
 			switch (printingCompany) {
+				case "AMERICAN ACCENTS":
+					if (loggingEnabled) log.debug("This is an AA order.");
+					bean.setPrintingCompany(PrintingCompany.AMERICAN_ACCENTS);
+					break;
 				case "AMERICAN CABIN SUPPLY":
 					if (loggingEnabled) log.debug("This is an ACS order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_CABIN_SUPPLY);
@@ -946,10 +973,14 @@ public class ArtDept extends JFrame {
 					if (loggingEnabled) log.debug("This is an AYS order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_YACHT_SUPPLY);
 					break;
-				default:
-					if (loggingEnabled) log.debug("This is an AA order.");
-					bean.setPrintingCompany(PrintingCompany.AMERICAN_ACCENTS);
+				case "SKY UNLIMITED, INC.":
+					if (loggingEnabled) log.debug("This is a SKY order. (internal)");
+					bean.setPrintingCompany(PrintingCompany.SKY_UNLIMITED_INC);
 					break;
+				default:
+					if (loggingEnabled) log.debug("Incorrect printing company in text file. "
+							+ "It is probably an Order Acknowledgement.");
+					bean.setPrintingCompany(null);
 			}
 			bean.setJobId(readJobNum);
 			bean.setCustomerName(companyName);
@@ -982,7 +1013,7 @@ public class ArtDept extends JFrame {
 				bean.setShipDate(DateManager.usDateStringToSqlDate(shipDate));
 		} catch (IllegalArgumentException e) {
 			if (loggingEnabled) log.error("Date not in the correct format.", e);
-			return null;
+//			return null;
 		}
 
 		if (loggingEnabled) log.debug("Bean set (inside readText).");
