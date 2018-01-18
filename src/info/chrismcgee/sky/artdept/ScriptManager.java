@@ -508,7 +508,8 @@ public class ScriptManager {
 				detailBean.setLabelText((bean.getOrderDetailList() == null || i >= bean.getOrderDetailList().size()) ? "" : bean.getOrderDetailList().get(i).getLabelText());
 //				detailBean.setDigitalFilename(thisItem.getJSONArray("digitalArtFiles").getString(0));
 				JSONArray artFiles = thisItem.getJSONArray("digitalArtFiles");
-				List<Artwork> existingArtList = detailBean.getArtworkList();
+				List<Artwork> newArtList = detailBean.getArtworkList();
+				if (ArtDept.loggingEnabled) log.debug("existingArtList is: " + newArtList.toString());
 				
 				// Get all "Artwork" rows from db where the od id matches this od's id. Store in an ArrayList.
 				
@@ -517,28 +518,10 @@ public class ScriptManager {
 				while (++j < artFiles.length()) {
 					String artFileText = artFiles.getString(j);
 					if (ArtDept.loggingEnabled) log.debug("Storing art file # " + j);
-					if (j < existingArtList.size()) {
-						if (ArtDept.loggingEnabled) log.debug("Replacing existing art bean.");
-						Artwork thisArt = existingArtList.get(j);
-						thisArt.setDigitalArtFile(artFileText);
-					} else { // If we run out of db rows first (including if it was empty to begin with),
-						     // then "add" the remaining items from the JSONArray to the List in the OD item, one at a time.
-						if (ArtDept.loggingEnabled) log.debug("Creating new art bean and adding it to the list.");
-						Artwork thisArt = new Artwork();
-						thisArt.setDigitalArtFile(artFileText);
-						existingArtList.add(thisArt);
-					}
-				}
-				if (ArtDept.loggingEnabled) log.debug("j is now: " + j);
-				// If we run out of JSONArray items first, then delete the remaining db rows, one at a time.
-				while (j < existingArtList.size()) {
-					if (ArtDept.loggingEnabled) log.debug("Removing extraneous art beans from the list.");
-					try {
-						ArtworkManager.delete(existingArtList.get(j++).getId());
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					if (ArtDept.loggingEnabled) log.debug("Creating new art bean and adding it to the list.");
+					Artwork thisArt = new Artwork();
+					thisArt.setDigitalArtFile(artFileText);
+					newArtList.add(thisArt);
 				}
 				
 			}
@@ -638,23 +621,56 @@ public class ScriptManager {
 			}
 		}
 		
-		
-		// Add the OD's id to each of its Artwork beans, then add them to the db.
-//		if (ArtDept.loggingEnabled) log.debug("Number of ODs in the Job bean's list: " + bean.getOrderDetailList().size());
-//		for (int i = 0; i < bean.getOrderDetailList().size(); i++) {
+		// Insert/Update/Delete Artworks into/from the database.
 		for (int i = 0; i < odList.size(); i++) {
-//			OrderDetail thisOD = bean.getOrderDetailList().get(i);
 			OrderDetail thisOD = odList.get(i);
-			// Change the following 'for' loop so it will insert Artwork items,
-			// even if the ArtworkList is empty. Right now, this loop doesn't
-			// even run at all if that list is empty.
-			if (ArtDept.loggingEnabled) log.debug("Number of Artworks in the OD bean's list: " + thisOD.getArtworkList().size());
-			for (int j = 0; j < thisOD.getArtworkList().size(); j++) {
+			if (ArtDept.loggingEnabled) log.debug("Number of Artworks in this OD bean's list: " + thisOD.getArtworkList().size());
+
+			try {
+				// Get the Artworks fromt he database that are a part of the same OrderDetail that we're looking at.
+				ArrayList<Artwork> existingArtworks = ArtworkManager.getArtworksByOrderId(thisOD.getId());
+				if (ArtDept.loggingEnabled) log.debug("existingArtworks: " + existingArtworks.toString());
+				
+				// Loop through to insert/update/delete Artworks.
+				int j = -1;
+				while (++j < thisOD.getArtworkList().size()) {
+					Artwork thisArt = thisOD.getArtworkList().get(j);
+					if (existingArtworks.get(j) != null) {
+						// If there is an Artwork already in the database at this "slot",
+						// go ahead and replace it with the new one.
+						// This is done by setting the incoming Artwork object's ID
+						// to the old one, then overwriting the old one in the db with the new one.
+						if (ArtDept.loggingEnabled) log.debug("Found an existing artwork in the same \"slot\" (#" + j + ", ID #" + existingArtworks.get(j).getId() + "). Updating it with new Artwork.");
+						thisArt.setId(existingArtworks.get(j).getId());
+						thisArt.setOrderDetailId(existingArtworks.get(j).getOrderDetailId());
+						if (ArtDept.loggingEnabled) log.debug("Updating with Art File: " + thisArt.getDigitalArtFile());
+						ArtworkManager.update(thisArt);
+					} else {
+						// If an Artwork doesn't exist in the database for this "slot",
+						// then create a new one with our new Artwork.
+						if (ArtDept.loggingEnabled) log.debug("No more Artworks found for this OrderDetail in database (Slot #" + j + "). Inserting this new Artwork.");
+						ArtworkManager.insert(thisArt);
+					}
+				}
+				if (ArtDept.loggingEnabled) log.debug("j is now: " + j);
+				while (j < existingArtworks.size()) {
+					// If there are still Artworks in the database after we've already gone through
+					// all of the new Artworks, just delete whatever's left.
+					if (ArtDept.loggingEnabled) log.debug("No more new artworks, so deleting an existing Artwork from the database. Slot #" + j + "; ID #" + existingArtworks.get(j).getId());
+					ArtworkManager.delete(existingArtworks.get(j++).getId());
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+/*			for (int j = 0; j < thisOD.getArtworkList().size(); j++) {
 				Artwork thisArt = thisOD.getArtworkList().get(j);
 				thisArt.setOrderDetailId(thisOD.getId());
 				try {
-					thisArt.setId(ArtworkManager.getArtworkId(thisArt.getDigitalArtFile()));
-					if (thisArt.getId() > 0) {
+//					thisArt.setId(ArtworkManager.getArtworkId(thisArt.getDigitalArtFile()));
+					if (existingArtworks.size() > 0) {
+						
 						ArtworkManager.update(thisArt);
 					} else {
 						ArtworkManager.insert(thisArt);
@@ -664,7 +680,7 @@ public class ScriptManager {
 					e.printStackTrace();
 				}
 			}
-		}
+*/		}
 		
 		
 		// Log the successfulness of the insertion/updation.
