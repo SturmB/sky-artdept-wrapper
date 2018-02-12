@@ -167,6 +167,9 @@ public class ArtworkManager {
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				){
 			
+			if (ArtDept.loggingEnabled) log.debug("odID: " + bean.getOrderDetailId());
+			if (ArtDept.loggingEnabled) log.debug("DAF: " + bean.getDigitalArtFile());
+
 			stmt.setInt(1, bean.getOrderDetailId());
 			stmt.setString(2, bean.getDigitalArtFile());
 			

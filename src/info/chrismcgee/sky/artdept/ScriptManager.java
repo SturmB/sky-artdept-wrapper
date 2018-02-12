@@ -632,10 +632,10 @@ public class ScriptManager {
 				if (ArtDept.loggingEnabled) log.debug("existingArtworks: " + existingArtworks.toString());
 				
 				// Loop through to insert/update/delete Artworks.
-				int j = -1;
-				while (++j < thisOD.getArtworkList().size()) {
+				int j = 0;
+				while (j < thisOD.getArtworkList().size()) {
 					Artwork thisArt = thisOD.getArtworkList().get(j);
-					if (existingArtworks.get(j) != null) {
+					if (existingArtworks.size() > 0 && existingArtworks.get(j) != null) {
 						// If there is an Artwork already in the database at this "slot",
 						// go ahead and replace it with the new one.
 						// This is done by setting the incoming Artwork object's ID
@@ -649,8 +649,10 @@ public class ScriptManager {
 						// If an Artwork doesn't exist in the database for this "slot",
 						// then create a new one with our new Artwork.
 						if (ArtDept.loggingEnabled) log.debug("No more Artworks found for this OrderDetail in database (Slot #" + j + "). Inserting this new Artwork.");
+						thisArt.setOrderDetailId(thisOD.getId());
 						ArtworkManager.insert(thisArt);
 					}
+					j++;
 				}
 				if (ArtDept.loggingEnabled) log.debug("j is now: " + j);
 				while (j < existingArtworks.size()) {
