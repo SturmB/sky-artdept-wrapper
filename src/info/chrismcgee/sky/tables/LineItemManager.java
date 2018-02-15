@@ -1,8 +1,7 @@
 package info.chrismcgee.sky.tables;
 
 import info.chrismcgee.sky.artdept.ArtDept;
-import info.chrismcgee.sky.beans.OrderDetail;
-import info.chrismcgee.sky.enums.PrintType;
+import info.chrismcgee.sky.beans.LineItem;
 import info.chrismcgee.util.ConnectionManager;
 
 import java.sql.Connection;
@@ -16,17 +15,17 @@ import java.sql.Timestamp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class OrderDetailManager {
+public class LineItemManager {
 	
 	private static Connection conn;
-	static final Logger log = LogManager.getLogger(OrderDetailManager.class.getName());
+	static final Logger log = LogManager.getLogger(LineItemManager.class.getName());
 	
-	public static OrderDetail getRow(int id) throws SQLException {
+	public static LineItem getRow(int id) throws SQLException {
 		
-		if (ArtDept.loggingEnabled) log.entry("getRow (OrderDetailManager)");
+		if (ArtDept.loggingEnabled) log.entry("getRow (LineItemManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "SELECT * FROM OrderDetail WHERE id = ?";
+		String sql = "SELECT * FROM line_items WHERE id = ?";
 		ResultSet rs = null;
 		
 		try (
@@ -37,26 +36,26 @@ public class OrderDetailManager {
 			
 			
 			if (rs.next()) {
-				OrderDetail bean = new OrderDetail();
+				LineItem bean = new LineItem();
 				bean.setId(id);
 				bean.setOrderId(rs.getString("order_id"));
-				bean.setProductId(rs.getString("product_id"));
+				bean.setProductNum(rs.getString("product_num"));
 				bean.setProductDetail(rs.getString("product_detail"));
-				bean.setPrintType(PrintType.getPrintType(rs.getInt("print_type")));
-				bean.setNumColors(rs.getLong("num_colors"));
+				bean.setPrintTypeId(rs.getString("print_type_id"));
+				bean.setNumImpressions(rs.getLong("num_impressions"));
 				bean.setQuantity(rs.getLong("quantity"));
 				bean.setItemCompleted(rs.getTimestamp("item_completed") == null ? null : new Date(rs.getTimestamp("item_completed").getTime()));
 				bean.setProofNum(rs.getInt("proof_num"));
 				bean.setProofDate(rs.getTimestamp("proof_date") == null ? null : new Date(rs.getTimestamp("proof_date").getTime()));
 				bean.setThumbnail(rs.getString("thumbnail"));
 				bean.setFlags(rs.getInt("flags"));
-				bean.setReorderId(rs.getString("reorder_id"));
+				bean.setReorderNum(rs.getString("reorder_num"));
 				bean.setPackingInstructions(rs.getString("packing_instructions"));
 				bean.setPackageQuantity(rs.getString("package_quantity"));
 				bean.setCaseQuantity(rs.getString("case_quantity"));
 				bean.setLabelQuantity(rs.getInt("label_quantity"));
 				bean.setLabelText(rs.getString("label_text"));
-				bean.setDigitalFilename(rs.getString("digital_art_file"));
+				bean.setItemStatusId(rs.getString("item_status_id"));
 				return bean;
 			} else {
 				return null;
@@ -72,31 +71,33 @@ public class OrderDetailManager {
 		}
 	}
 
-	public static boolean insert(OrderDetail bean) throws Exception {
+	public static boolean insert(LineItem bean) throws Exception {
 		
-		if (ArtDept.loggingEnabled) log.entry("insert (OrderDetail)");
+		if (ArtDept.loggingEnabled) log.entry("insert (LineItem)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "INSERT INTO OrderDetail ("
+		String sql = "INSERT INTO line_items ("
 				+ "order_id, "
-				+ "product_id, "
+				+ "product_num, "
 				+ "product_detail, "
-				+ "print_type, "
-				+ "num_colors, "
+				+ "print_type_id, "
+				+ "num_impressions, "
 				+ "quantity, "
 				+ "item_completed, "
 				+ "proof_num, "
 				+ "proof_date, "
 				+ "thumbnail, "
 				+ "flags, "
-				+ "reorder_id, "
+				+ "reorder_num, "
 				+ "packing_instructions, "
 				+ "package_quantity, "
 				+ "case_quantity, "
 				+ "label_quantity, "
 				+ "label_text, "
-				+ "digital_art_file) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "item_status_id, "
+				+ "created_at, "
+				+ "updated_at) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		ResultSet keys = null;
 		
 		try (
@@ -104,23 +105,28 @@ public class OrderDetailManager {
 				){
 			
 			stmt.setString(1, bean.getOrderId());
-			stmt.setString(2, bean.getProductId());
+			stmt.setString(2, bean.getProductNum());
 			stmt.setString(3, bean.getProductDetail());
-			stmt.setInt(4, PrintType.getIntValue(bean.getPrintType()));
-			stmt.setLong(5, bean.getNumColors());
+			stmt.setString(4, bean.getPrintTypeId());
+			stmt.setLong(5, bean.getNumImpressions());
 			stmt.setLong(6, bean.getQuantity());
 			stmt.setTimestamp(7, bean.getItemCompleted() == null ? null : new Timestamp(bean.getItemCompleted().getTime()));
 			stmt.setInt(8, bean.getProofNum());
 			stmt.setTimestamp(9, bean.getProofDate() == null ? null : new Timestamp(bean.getProofDate().getTime()));
 			stmt.setString(10, bean.getThumbnail());
 			stmt.setInt(11, bean.getFlags());
-			stmt.setString(12, bean.getReorderId());
+			stmt.setString(12, bean.getReorderNum());
 			stmt.setString(13, bean.getPackingInstructions());
 			stmt.setString(14, bean.getPackageQuantity());
 			stmt.setString(15, bean.getCaseQuantity());
 			stmt.setInt(16, bean.getLabelQuantity());
 			stmt.setString(17, bean.getLabelText());
-			stmt.setString(18, bean.getDigitalFilename());
+			stmt.setString(18, bean.getItemStatusId());
+			
+			stmt.setTimestamp(19, new Timestamp(System.currentTimeMillis()));
+			stmt.setTimestamp(20, new Timestamp(System.currentTimeMillis()));
+			
+			if (ArtDept.loggingEnabled) log.debug("Native SQL: " + stmt.getConnection().nativeSQL(sql));
 			
 			int affected = stmt.executeUpdate();
 			
@@ -143,31 +149,32 @@ public class OrderDetailManager {
 		return true;
 	}
 	
-	public static boolean update(OrderDetail bean) throws Exception {
+	public static boolean update(LineItem bean) throws Exception {
 		
-		if (ArtDept.loggingEnabled) log.entry("update (OrderDetail)");
+		if (ArtDept.loggingEnabled) log.entry("update (LineItem)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql =
-				"UPDATE OrderDetail SET "
+				"UPDATE line_items SET "
 				+ "order_id = ?, "
-				+ "product_id = ?, "
+				+ "product_num = ?, "
 				+ "product_detail = ?, "
-				+ "print_type = ?, "
-				+ "num_colors = ?, "
+				+ "print_type_id = ?, "
+				+ "num_impressions = ?, "
 				+ "quantity = ?, "
 				+ "item_completed = ?, "
 				+ "proof_num = ?, "
 				+ "proof_date = ?, "
 				+ "thumbnail = ?, "
 				+ "flags = ?, "
-				+ "reorder_id = ?, "
+				+ "reorder_num = ?, "
 				+ "packing_instructions = ?, "
 				+ "package_quantity = ?, "
 				+ "case_quantity = ?, "
 				+ "label_quantity = ?, "
 				+ "label_text = ?, "
-				+ "digital_art_file = ? "
+				+ "item_status_id = ?,"
+				+ "updated_at = ? "
 				+ "WHERE id = ?";
 		
 		try (
@@ -175,24 +182,28 @@ public class OrderDetailManager {
 				){
 			
 			stmt.setString(1, bean.getOrderId());
-			stmt.setString(2, bean.getProductId());
+			stmt.setString(2, bean.getProductNum());
 			stmt.setString(3, bean.getProductDetail());
-			stmt.setInt(4, PrintType.getIntValue(bean.getPrintType()));
-			stmt.setLong(5, bean.getNumColors());
+			stmt.setString(4, bean.getPrintTypeId());
+			stmt.setLong(5, bean.getNumImpressions());
 			stmt.setLong(6, bean.getQuantity());
 			stmt.setTimestamp(7, bean.getItemCompleted() == null ? null : new Timestamp(bean.getItemCompleted().getTime()));
 			stmt.setInt(8, bean.getProofNum());
 			stmt.setTimestamp(9, bean.getProofDate() == null ? null : new Timestamp(bean.getProofDate().getTime()));
 			stmt.setString(10, bean.getThumbnail());
 			stmt.setInt(11, bean.getFlags());
-			stmt.setString(12, bean.getReorderId());
+			stmt.setString(12, bean.getReorderNum());
 			stmt.setString(13, bean.getPackingInstructions());
 			stmt.setString(14, bean.getPackageQuantity());
 			stmt.setString(15, bean.getCaseQuantity());
 			stmt.setInt(16, bean.getLabelQuantity());
 			stmt.setString(17, bean.getLabelText());
-			stmt.setString(18, bean.getDigitalFilename());
-			stmt.setInt(19, bean.getId());
+			stmt.setString(18, bean.getItemStatusId());
+			
+			stmt.setTimestamp(19, new Timestamp(System.currentTimeMillis()));
+
+			stmt.setInt(20, bean.getId());
+			
 			
 			int affected = stmt.executeUpdate();
 			if (affected == 1) {
@@ -210,10 +221,10 @@ public class OrderDetailManager {
 
 	public static boolean delete(int id) throws Exception {
 		
-		if (ArtDept.loggingEnabled) log.entry("delete (OrderDetail)");
+		if (ArtDept.loggingEnabled) log.entry("delete (LineItem)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "DELETE FROM OrderDetail WHERE id = ?";
+		String sql = "DELETE FROM line_items WHERE id = ?";
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				){

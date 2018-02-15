@@ -14,19 +14,20 @@ public class ConnectionManager
 	static final Logger log = LogManager.getLogger(ConnectionManager.class.getName()); // For logging.
 	private static ConnectionManager instance = null;
 
-	private String userName = System.getenv("USER"); // The username of the current logged-in computer.
+//	private String userName = System.getenv("USER"); // The username of the current logged-in computer.
 	// The Username and Password below will be used for connecting to the database.
 	// The Password may remain blank, and the Username will be taken from the computer's
 	// logged-in user.
-	private final String USERNAME = userName;
-	private final String PASSWORD = (userName.equalsIgnoreCase("Marketing")) ? "marketing" : userName;
+	private final String USERNAME = "skylauncher";
+	private final String PASSWORD = "sky241";
+//	private final String PASSWORD = (userName.equalsIgnoreCase("Marketing")) ? "marketing" : userName;
 	// Two variables to specify different database types to which to connect. 
 	private final String H_CONN_STRING = "jdbc:hsqldb:data/job_orders";
-	private final String M_CONN_STRING = "jdbc:mysql://192.168.0.135/job_orders";
+	private final String M_CONN_STRING = "jdbc:mysql://192.168.10.10/sky_unlimited";
 	private final String S_CONN_STRING = "jdbc:sqlserver://192.168.0.248;databaseName=job_orders_2014";
 
 	// Using a previously-set enum to specify the type of database we're connecting to.
-	private DBType dbType = DBType.MSSQL;
+	private DBType dbType = DBType.MYSQL;
 
 	// The connection to the database starts out as null.
 	private Connection conn = null;

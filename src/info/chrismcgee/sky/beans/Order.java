@@ -5,34 +5,33 @@ import info.chrismcgee.sky.enums.PrintingCompany;
 import java.sql.Date;
 import java.util.List;
 
-public class Job {
+public class Order {
 
-	private Date shipDate;
-	private String jobId;
+	private Date shipDateId;
+	private String id;
 	private String customerName;
 	private String customerPO;
-//	private Timestamp proofSpecDate;
 	private Date proofSpecDate;
-//	private Timestamp jobCompleted;
 	private Date jobCompleted;
 	private PrintingCompany printingCompany;
 	private boolean overruns;
 	private boolean sampleShelfNote;
 	private String sigProof;
 	private String sigOutput;
-	private List<OrderDetail> orderDetailList;
+	private boolean rush;
+	private List<LineItem> lineItemList;
 	
-	public Date getShipDate() {
-		return shipDate;
+	public Date getShipDateId() {
+		return shipDateId;
 	}
-	public void setShipDate(Date date) {
-		this.shipDate = date;
+	public void setShipDateId(Date date) {
+		this.shipDateId = date;
 	}
-	public String getJobId() {
-		return jobId;
+	public String getId() {
+		return id;
 	}
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getCustomerName() {
 		return customerName;
@@ -88,11 +87,17 @@ public class Job {
 	public void setSigOutput(String sigOutput) {
 		this.sigOutput = sigOutput;
 	}
-	public List<OrderDetail> getOrderDetailList() {
-		return orderDetailList;
+	public boolean isRush() {
+		return rush;
 	}
-	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
-		this.orderDetailList = orderDetailList;
+	public void setRush(boolean rush) {
+		this.rush = rush;
+	}
+	public List<LineItem> getLineItemList() {
+		return lineItemList;
+	}
+	public void setLineItemList(List<LineItem> lineItemList) {
+		this.lineItemList = lineItemList;
 	}
 	
 }

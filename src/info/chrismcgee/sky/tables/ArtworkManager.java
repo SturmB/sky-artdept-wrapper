@@ -25,7 +25,7 @@ public class ArtworkManager {
 		if (ArtDept.loggingEnabled) log.entry("getRow (ArtworkManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "SELECT * FROM Artwork WHERE id = ?";
+		String sql = "SELECT * FROM artworks WHERE id = ?";
 		ResultSet rs = null;
 		
 		try (
@@ -38,7 +38,7 @@ public class ArtworkManager {
 			if (rs.next()) {
 				Artwork bean = new Artwork();
 				bean.setId(id);
-				bean.setOrderDetailId(rs.getInt("order_detail_id"));
+				bean.setLineItemId(rs.getInt("line_item_id"));
 				bean.setDigitalArtFile(rs.getString("digital_art_file"));
 				return bean;
 			} else {
@@ -58,10 +58,10 @@ public class ArtworkManager {
 	
 	public static ArrayList<Artwork> getArtworksByOrderId(int id) throws SQLException {
 		
-		if (ArtDept.loggingEnabled) log.entry("getRowByOrderId (ArtworkManager)");
+		if (ArtDept.loggingEnabled) log.entry("getArtworksByOrderId (ArtworkManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "SELECT * FROM Artwork WHERE order_detail_id = ?";
+		String sql = "SELECT * FROM artworks WHERE line_item_id = ?";
 		ResultSet rs = null;
 		ArrayList<Artwork> artworks = new ArrayList<Artwork>();
 		
@@ -74,7 +74,7 @@ public class ArtworkManager {
 			while (rs.next()) {
 				Artwork bean = new Artwork();
 				bean.setId(rs.getInt("id"));
-				bean.setOrderDetailId(rs.getInt("order_detail_id"));
+				bean.setLineItemId(rs.getInt("line_item_id"));
 				bean.setDigitalArtFile(rs.getString("digital_art_file"));
 				artworks.add(bean);
 			}
@@ -97,7 +97,7 @@ public class ArtworkManager {
 		if (ArtDept.loggingEnabled) log.entry("getRow (ArtworkManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "SELECT * FROM Artwork WHERE id = ?";
+		String sql = "SELECT * FROM artworks WHERE id = ?";
 		ResultSet rs = null;
 		
 		try (
@@ -125,7 +125,7 @@ public class ArtworkManager {
 		if (ArtDept.loggingEnabled) log.entry("getRow (ArtworkManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "SELECT * FROM Artwork WHERE digital_art_file = ?";
+		String sql = "SELECT * FROM artworks WHERE digital_art_file = ?";
 		ResultSet rs = null;
 		
 		try (
@@ -157,8 +157,8 @@ public class ArtworkManager {
 		if (ArtDept.loggingEnabled) log.entry("insert (Artwork)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "INSERT INTO Artwork ("
-				+ "order_detail_id, "
+		String sql = "INSERT INTO artworks ("
+				+ "line_item_id, "
 				+ "digital_art_file) "
 				+ "VALUES (?, ?)";
 		ResultSet keys = null;
@@ -167,10 +167,10 @@ public class ArtworkManager {
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				){
 			
-			if (ArtDept.loggingEnabled) log.debug("odID: " + bean.getOrderDetailId());
+			if (ArtDept.loggingEnabled) log.debug("odID: " + bean.getLineItemId());
 			if (ArtDept.loggingEnabled) log.debug("DAF: " + bean.getDigitalArtFile());
 
-			stmt.setInt(1, bean.getOrderDetailId());
+			stmt.setInt(1, bean.getLineItemId());
 			stmt.setString(2, bean.getDigitalArtFile());
 			
 			if (ArtDept.loggingEnabled) log.debug("stmt: " + stmt.toString());
@@ -202,8 +202,8 @@ public class ArtworkManager {
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql =
-				"UPDATE Artwork SET "
-				+ "order_detail_id = ?, "
+				"UPDATE artworks SET "
+				+ "line_item_id = ?, "
 				+ "digital_art_file = ? "
 				+ "WHERE id = ?";
 		
@@ -211,11 +211,11 @@ public class ArtworkManager {
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				){
 			
-			if (ArtDept.loggingEnabled) log.debug("odID: " + bean.getOrderDetailId());
+			if (ArtDept.loggingEnabled) log.debug("liID: " + bean.getLineItemId());
 			if (ArtDept.loggingEnabled) log.debug("DAF: " + bean.getDigitalArtFile());
 			if (ArtDept.loggingEnabled) log.debug("ID: " + bean.getId());
 			
-			stmt.setInt(1, bean.getOrderDetailId());
+			stmt.setInt(1, bean.getLineItemId());
 			stmt.setString(2, bean.getDigitalArtFile());
 			stmt.setInt(3, bean.getId());
 			
@@ -240,7 +240,7 @@ public class ArtworkManager {
 		if (ArtDept.loggingEnabled) log.entry("delete (Artwork); id #" + id);
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "DELETE FROM Artwork WHERE id = ?";
+		String sql = "DELETE FROM artworks WHERE id = ?";
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				){

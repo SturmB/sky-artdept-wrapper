@@ -3,7 +3,7 @@ package info.chrismcgee.sky.beans;
 public class Artwork {
 
 	private int id;
-	private int orderDetailId;
+	private int lineItemId;
 	private String digitalArtFile;
 	
 	
@@ -13,11 +13,11 @@ public class Artwork {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getOrderDetailId() {
-		return orderDetailId;
+	public int getLineItemId() {
+		return lineItemId;
 	}
-	public void setOrderDetailId(int orderDetailId) {
-		this.orderDetailId = orderDetailId;
+	public void setLineItemId(int lineItemId) {
+		this.lineItemId = lineItemId;
 	}
 	public String getDigitalArtFile() {
 		return digitalArtFile;

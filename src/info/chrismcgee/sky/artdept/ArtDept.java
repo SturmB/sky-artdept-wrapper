@@ -66,12 +66,12 @@ import com.apple.eawt.QuitResponse;
 import info.chrismcgee.components.DateManager;
 import info.chrismcgee.components.Sanitizer;
 import info.chrismcgee.enums.OSType;
-import info.chrismcgee.sky.beans.Job;
-import info.chrismcgee.sky.beans.OrderDetail;
+import info.chrismcgee.sky.beans.Order;
+import info.chrismcgee.sky.beans.LineItem;
 import info.chrismcgee.sky.enums.DBType;
 import info.chrismcgee.sky.enums.PrintingCompany;
 import info.chrismcgee.sky.enums.ScriptType;
-import info.chrismcgee.sky.tables.JobManager;
+import info.chrismcgee.sky.tables.OrderManager;
 import info.chrismcgee.util.ConnectionManager;
 import info.chrismcgee.util.SendMail;
 import net.miginfocom.swing.MigLayout;
@@ -111,7 +111,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Script Launcher";
-	private static String appVersion = "3.46";
+	private static String appVersion = "3.80";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
@@ -602,17 +602,17 @@ public class ArtDept extends JFrame {
 //		Job jobBean = null;
 		// Changed the above line to create a Job object. Thus, it will
 		// never be NULL.
-		Job jobBean = new Job();
+		Order orderBean = new Order();
 		// Connect to the database and set the database type.
-		ConnectionManager.getInstance().setDBType(DBType.MSSQL);
+		ConnectionManager.getInstance().setDBType(DBType.MYSQL);
 		
 		// Try getting the data from the database.
 		try {
-			jobBean = JobManager.getJob(tfOrderNum.getText());
+			orderBean = OrderManager.getOrder(tfOrderNum.getText());
 			// If the job bean is now no longer null, then we have at least one order detail item,
 			// so find the one that has the highest proof number and save that number
 			// for the main proofing window in the script.
-			/*if (jobBean != null) */proofNum = getHighestProofNumber(jobBean);
+			/*if (jobBean != null) */proofNum = getHighestProofNumber(orderBean);
 		} catch (SQLException e) {
 			if (loggingEnabled) log.error("Could not obtain data from database.", e);
 		}
@@ -622,7 +622,7 @@ public class ArtDept extends JFrame {
 		// Whether or not the database search was successful,
 		// try getting additional data from a text file.
 		try {
-			jobBean = readText(tfOrderNum.getText(), jobBean, scriptType);
+			orderBean = readText(tfOrderNum.getText(), orderBean, scriptType);
 		} catch (IOException e) {
 			if (loggingEnabled) log.error("Text file not found");
 			if (loggingEnabled) log.error(e);
@@ -637,7 +637,7 @@ public class ArtDept extends JFrame {
 		// Also do some more checks.
 		if (scriptType == ScriptType.PROOF) {
 			proofNum++;
-			if (proofNum == 1 && jobBean == null) {
+			if (proofNum == 1 && orderBean == null) {
 				// If the text file doesn't exist during a first proof of a job.
 				if (JOptionPane.showConfirmDialog(null, "Text file not found.\n"
 						+ "Send an email to Customer Service to create it?", "Send Email?",
@@ -656,7 +656,7 @@ public class ArtDept extends JFrame {
 				}
 				enableControls(true);
 				return;
-			} else if (jobBean.getPrintingCompany() == null) {
+			} else if (orderBean.getPrintingCompany() == null) {
 				// If the Printing Company retrieved from the text file is null,
 				// Then it is most likely an Order Acknowledgement text file.
 				if (JOptionPane.showConfirmDialog(null, "The text file appears to be an Order Acknowledgement rather than a Sales Copy.\n"
@@ -676,7 +676,7 @@ public class ArtDept extends JFrame {
 				}
 				enableControls(true);
 				return;
-			} else if (!tfOrderNum.getText().equals(jobBean.getJobId())) {
+			} else if (!tfOrderNum.getText().equals(orderBean.getId())) {
 				// If the entered job number doesn't match the one retrieved from the text file.
 				if (JOptionPane.showConfirmDialog(null, "The job number you entered and the one read from the text file do not match.\n"
 						+ "Send an email to Customer Service to fix it?", "Send Email?",
@@ -699,7 +699,7 @@ public class ArtDept extends JFrame {
 		}
 		
 		// Finally, call the method that will run the script on this Job.
-		boolean successfulRun = ScriptManager.scriptRunner(scriptType, tfOrderNum.getText(), tfInitials.getText(), jobBean, proofNum, scriptPath, customerServiceRep, creditCard, shipDays, wnaPo);
+		boolean successfulRun = ScriptManager.scriptRunner(scriptType, tfOrderNum.getText(), tfInitials.getText(), orderBean, proofNum, scriptPath, customerServiceRep, creditCard, shipDays, wnaPo);
 		
 		// Close the connection to the database.
 		ConnectionManager.getInstance().close();
@@ -725,14 +725,14 @@ public class ArtDept extends JFrame {
 	 * @param bean	The Job bean created from the database, so it has at least one OrderDetail item.
 	 * @return	An integer of the highest proof number in the Job.
 	 */
-	private int getHighestProofNumber(Job bean)
+	private int getHighestProofNumber(Order bean)
 	{
 		if (loggingEnabled) log.entry("getHighestProofNumber");
 		
 		List<Integer> proofNums = new ArrayList<Integer>();
 		try {
-			for (OrderDetail od : bean.getOrderDetailList()) {
-				proofNums.add(od.getProofNum());
+			for (LineItem li : bean.getLineItemList()) {
+				proofNums.add(li.getProofNum());
 			}
 		} catch (NullPointerException err) {
 			if (loggingEnabled) log.error("Nothing in the OrderDetail List! Returning 0.", err);
@@ -750,11 +750,11 @@ public class ArtDept extends JFrame {
 	 * @return	Job	A Job bean with the needed input fields filled out.
 	 * @throws IOException
 	 */
-	private Job readText (String jobNum, Job bean, ScriptType scriptType) throws IOException {
+	private Order readText (String jobNum, Order bean, ScriptType scriptType) throws IOException {
 		if (loggingEnabled) log.entry("readText");
 		
 		// Create a new Job bean.
-		if (bean == null) bean = new Job();
+		if (bean == null) bean = new Order();
 		// Define where the ScriptManager text files are located.
 		String workOrderFolder = "/Volumes/ArtDept/Work Orders/";
 		textFile = new File(workOrderFolder + jobNum + ".txt");
@@ -762,7 +762,7 @@ public class ArtDept extends JFrame {
 		if (loggingEnabled) log.trace("The length of the associated text file is: " + textFile.length());
 		if (textFile.length() < 2500)
 		{
-			if (bean.getJobId() != null)
+			if (bean.getId() != null)
 				return bean;
 			else
 				return null;
@@ -786,6 +786,7 @@ public class ArtDept extends JFrame {
 		final Pattern overrunsPattern = Pattern.compile("(?<!DON'T\\s)SEND\\sOVERRUNS", Pattern.CASE_INSENSITIVE);
 		final Pattern noSamplesPattern = Pattern.compile("DON'T\\sPUT\\sSAMPLES", Pattern.CASE_INSENSITIVE);
 		final Pattern creditCardPattern = Pattern.compile("CREDIT\\s?CARD", Pattern.CASE_INSENSITIVE);
+		final Pattern rushPattern = Pattern.compile("QUICKSHIP", Pattern.CASE_INSENSITIVE);
 		// Removed these two variables since we will no longer be using the "String" method to find the key phrase.
 //		final String shipDaysPhrasePre = "WILL SHIP ";
 //		final String shipDaysPhraseSuf = " WORKING DAYS";
@@ -796,6 +797,7 @@ public class ArtDept extends JFrame {
 		Matcher creditCardMatcher = creditCardPattern.matcher("");
 		Matcher overrunsMatcher = overrunsPattern.matcher("");
 		Matcher noSamplesMatcher = noSamplesPattern.matcher("");
+		Matcher rushMatcher = rushPattern.matcher("");
 
 		// Prepare the text file for reading.
 		String cache = null;
@@ -927,9 +929,10 @@ public class ArtDept extends JFrame {
 		// Assign the Credit Card variable the true value from the text file.
 		creditCard = creditCardMatcher.find();
 		
-		// Also assign the other two booleans that will be placed into the Job bean.
+		// Also assign the other three booleans that will be placed into the Job bean.
 		final boolean overruns = overrunsMatcher.find();
 		final boolean noSamples = noSamplesMatcher.find();
+		final boolean rush = rushMatcher.find();
 
 		// Debugging lines to make sure the variables extracted are correct.
 		if (loggingEnabled) log.debug("Printing Company: " + printingCompany + " with a length of " + printingCompany.length());
@@ -982,18 +985,18 @@ public class ArtDept extends JFrame {
 							+ "It is probably an Order Acknowledgement.");
 					bean.setPrintingCompany(null);
 			}
-			bean.setJobId(readJobNum);
+			bean.setId(readJobNum);
 			bean.setCustomerName(companyName);
 			bean.setCustomerPO(companyPO);
 			
 			try {
-				bean.getOrderDetailList();
+				bean.getLineItemList();
 			} catch (NullPointerException err) {
-				if (loggingEnabled) log.error("No OrderDetail List. Creating one.", err);
-				OrderDetail odBean = new OrderDetail();
-				List<OrderDetail> odList = new ArrayList<OrderDetail>();
-				odList.add(odBean);
-				bean.setOrderDetailList(odList);
+				if (loggingEnabled) log.error("No LineItem List. Creating one.", err);
+				LineItem lineItemBean = new LineItem();
+				List<LineItem> lineItemList = new ArrayList<LineItem>();
+				lineItemList.add(lineItemBean);
+				bean.setLineItemList(lineItemList);
 			}
 /*			if (bean.getOrderDetailList().isEmpty()) {
 				OrderDetail odBean = new OrderDetail();
@@ -1007,10 +1010,11 @@ public class ArtDept extends JFrame {
 			bean.setSampleShelfNote(noSamples); // If the magic phrase is found in the text file, set the boolean in the job bean.
 		}
 		bean.setOverruns(overruns); // If the magic phrase is found in the text file, set the boolean in the job bean.
+		bean.setRush(rush);
 		
 		try {
 			if (shipDate.length() > 0)
-				bean.setShipDate(DateManager.usDateStringToSqlDate(shipDate));
+				bean.setShipDateId(DateManager.usDateStringToSqlDate(shipDate));
 		} catch (IllegalArgumentException e) {
 			if (loggingEnabled) log.error("Date not in the correct format.", e);
 //			return null;

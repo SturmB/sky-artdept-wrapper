@@ -11,7 +11,7 @@ import org.simpleframework.xml.stream.Format;
 import info.chrismcgee.enums.OSType;
 
 @Root(name="maximumsAvailable")
-public class Day {
+public class ShipDate {
 	
 	private static final String FILE_SYSTEM_PREFIX = OSType.getOSType() == OSType.MAC
 			? "/Volumes"
@@ -22,7 +22,7 @@ public class Day {
 	private static final Format XML_FORMAT = new Format(XML_PROLOG);
 	private static File xmlFile = new File(XML_LOCATION + "/" + XML_FILENAME);
 	
-	private Date date;
+	private Date id;
 	@Element
 	private long availableScreenCups = 50000L;
 	@Element
@@ -53,20 +53,20 @@ public class Day {
 	private long remainOutsourced = 0L;
 	private Timestamp dayCompleted = null;
 
-	public Day() {
+	public ShipDate() {
 	}
 	
-	public Day(Date date) {
-		this.date = date;
+	public ShipDate(Date date) {
+		this.id = date;
 	}
 	
 
-	public Date getDate() {
-		return date;
+	public Date getId() {
+		return id;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setId(Date id) {
+		this.id = id;
 	}
 
 	public long getAvailableScreenCups() {

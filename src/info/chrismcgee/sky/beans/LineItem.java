@@ -1,32 +1,30 @@
 package info.chrismcgee.sky.beans;
 
-import info.chrismcgee.sky.enums.PrintType;
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetail {
+public class LineItem {
 	
 	private int id;
 	private String orderId;
-	private String productId;
+	private String productNum;
 	private String productDetail;
-	private PrintType printType;
-	private long numColors;
+	private String printTypeId;
+	private long numImpressions;
 	private long quantity;
 	private Date itemCompleted;
 	private int proofNum;
 	private Date proofDate;
 	private String thumbnail;
 	private int flags;
-	private String reorderId;
+	private String reorderNum;
 	private String packingInstructions;
 	private String packageQuantity;
 	private String caseQuantity;
 	private int labelQuantity;
 	private String labelText;
-	private String digitalFilename;
+	private String itemStatusId;
 	private List<Artwork> artworkList = new ArrayList<Artwork>();
 	
 	public int getId() {
@@ -41,11 +39,11 @@ public class OrderDetail {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public String getProductId() {
-		return productId;
+	public String getProductNum() {
+		return productNum;
 	}
-	public void setProductId(String productId) {
-		this.productId = productId;
+	public void setProductNum(String productNum) {
+		this.productNum = productNum;
 	}
 	public String getProductDetail() {
 		return productDetail;
@@ -53,17 +51,17 @@ public class OrderDetail {
 	public void setProductDetail(String productDetail) {
 		this.productDetail = productDetail;
 	}
-	public PrintType getPrintType() {
-		return printType;
+	public String getPrintTypeId() {
+		return printTypeId;
 	}
-	public void setPrintType(PrintType printType) {
-		this.printType = printType;
+	public void setPrintTypeId(String printTypeId) {
+		this.printTypeId = printTypeId;
 	}
-	public long getNumColors() {
-		return numColors;
+	public long getNumImpressions() {
+		return numImpressions;
 	}
-	public void setNumColors(long numColors) {
-		this.numColors = numColors;
+	public void setNumImpressions(long numImpressions) {
+		this.numImpressions = numImpressions;
 	}
 	public long getQuantity() {
 		return quantity;
@@ -101,11 +99,11 @@ public class OrderDetail {
 	public void setFlags(int flags) {
 		this.flags = flags;
 	}
-	public String getReorderId() {
-		return reorderId;
+	public String getReorderNum() {
+		return reorderNum;
 	}
-	public void setReorderId(String reorderId) {
-		this.reorderId = reorderId;
+	public void setReorderNum(String reorderNum) {
+		this.reorderNum = reorderNum;
 	}
 	public String getPackingInstructions() {
 		return packingInstructions;
@@ -137,11 +135,11 @@ public class OrderDetail {
 	public void setLabelText(String labelText) {
 		this.labelText = labelText;
 	}
-	public String getDigitalFilename() {
-		return digitalFilename;
+	public String getItemStatusId() {
+		return itemStatusId;
 	}
-	public void setDigitalFilename(String digitalFilename) {
-		this.digitalFilename = digitalFilename;
+	public void setItemStatusId(String itemStatusId) {
+		this.itemStatusId = itemStatusId;
 	}
 	public List<Artwork> getArtworkList() {
 		return artworkList;

@@ -1,13 +1,14 @@
 package info.chrismcgee.sky.enums;
 
-public enum PrintType {
+public enum PrintTypeEnum {
 	SCREEN_CUPS("Screen Cups"), SCREEN_NAPKINS("Screen Napkins"), PAD("Pad"),
 	HOTSTAMP("Hotstamp"), OFFSET_CUPS("Offset Cups"), OFFSET_NAPKINS("Offset Napkins"),
-	DIGITAL_CUPS("Digital Cups"), DIGITAL_FLATS("Digital Flats"), OUTSOURCED("Outsourced");
+	DIGITAL_CUPS("Digital Cups"), DIGITAL_FLATS("Digital Flats"), OUTSOURCED("Outsourced"),
+	DIGITAL_NAPKINS("Digital Napkins");
 
 	private String value;
 	
-	private PrintType(String value)
+	private PrintTypeEnum(String value)
 	{
 		this.value = value;
 	}
@@ -20,7 +21,7 @@ public enum PrintType {
 		this.value = value;
 	}
 	
-	public static PrintType getPrintType (String x)
+	public static PrintTypeEnum getPrintType (String x)
 	{
 		switch (x)
 		{
@@ -32,12 +33,13 @@ public enum PrintType {
 			case "Offset Napkins": return OFFSET_NAPKINS;
 			case "Digital Cups": return DIGITAL_CUPS;
 			case "Digital Flats": return DIGITAL_FLATS;
+			case "Digital Napkins": return DIGITAL_NAPKINS;
 			case "Outsourced": return OUTSOURCED;
 			default: return null;
 		}
 	}
 	
-	public static PrintType getPrintType (int x)
+	public static PrintTypeEnum getPrintType (int x)
 	{
 		switch (x)
 		{
@@ -50,11 +52,12 @@ public enum PrintType {
 			case 6: return SCREEN_NAPKINS;
 			case 7: return OUTSOURCED;
 			case 8: return DIGITAL_CUPS;
+			case 9: return DIGITAL_NAPKINS;
 			default: return PAD;
 		}
 	}
 
-	public static int getIntValue(PrintType printType)
+	public static int getIntValue(PrintTypeEnum printType)
 	{
 		switch (printType)
 		{
@@ -67,23 +70,25 @@ public enum PrintType {
 			case SCREEN_NAPKINS: return 6;
 			case OUTSOURCED: return 7;
 			case DIGITAL_CUPS: return 8;
+			case DIGITAL_NAPKINS: return 9;
 			default: return 1;
 		}
 	}
 	
-	public static String getSqlAvailValue(PrintType printType) {
+	public static String getSqlValue(PrintTypeEnum printType) {
 		
 		switch (printType) {
-			case SCREEN_CUPS: return "avail_screen";
-			case PAD: return "avail_pad";
-			case HOTSTAMP: return "avail_hotstamp";
-			case OFFSET_CUPS: return "avail_offset_cups";
-			case OFFSET_NAPKINS: return "avail_offset_naps";
-			case DIGITAL_CUPS: return "avail_digital_cups";
-			case DIGITAL_FLATS: return "avail_digital_flats";
-			case SCREEN_NAPKINS: return "avail_screen_naps";
-			case OUTSOURCED: return "avail_outsourced";
-			default: return "avail_pad";
+			case SCREEN_CUPS: return "screen";
+			case PAD: return "pad";
+			case HOTSTAMP: return "hotstamp";
+			case OFFSET_CUPS: return "offset_cups";
+			case OFFSET_NAPKINS: return "offset_napkins";
+			case DIGITAL_CUPS: return "digital_cups";
+			case DIGITAL_FLATS: return "digital_flats";
+			case DIGITAL_NAPKINS: return "digital_napkins";
+			case SCREEN_NAPKINS: return "screen_napkins";
+			case OUTSOURCED: return "outsourced";
+			default: return "pad";
 		}
 	}
 

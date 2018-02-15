@@ -11,22 +11,22 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import info.chrismcgee.sky.artdept.ArtDept;
-import info.chrismcgee.sky.beans.Day;
+import info.chrismcgee.sky.beans.ShipDate;
 import info.chrismcgee.util.ConnectionManager;
 
-public class DayManager {
+public class ShipDateManager {
 	
 	private static Connection conn;
-	static final Logger log = LogManager.getLogger(DayManager.class.getName());
+	static final Logger log = LogManager.getLogger(ShipDateManager.class.getName());
 	
 	// This method is currently unused in this project.
-	public static Day getRow(Date theDate) throws SQLException {
+	public static ShipDate getRow(Date theDate) throws SQLException {
 		
-		if (ArtDept.loggingEnabled) log.entry("getRow (DayManager)");
+		if (ArtDept.loggingEnabled) log.entry("getRow (ShipDateManager)");
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		ResultSet rs = null;
-		String sql = "SELECT * FROM Day WHERE id_day = ?";
+		String sql = "SELECT * FROM ship_dates WHERE id = ?";
 		
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -36,8 +36,8 @@ public class DayManager {
 			
 			
 			if (rs.next()) {
-				Day bean = new Day(rs.getDate("id_day"));
-//				bean.setDate(rs.getDate("id_day"));
+				ShipDate bean = new ShipDate(rs.getDate("id"));
+//				bean.setDate(rs.getDate("id"));
 				return bean;
 			} else {
 				return null;
@@ -59,7 +59,7 @@ public class DayManager {
 		
 		conn = ConnectionManager.getInstance().getConnection();
 		ResultSet rs = null;
-		String sql = "SELECT * FROM Day WHERE id_day = ?";
+		String sql = "SELECT * FROM ship_dates WHERE id = ?";
 		
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -83,13 +83,13 @@ public class DayManager {
 		
 	}
 	
-	public static boolean insert(Day bean) throws Exception {
+	public static boolean insert(ShipDate bean) throws Exception {
 		
-		if (ArtDept.loggingEnabled) log.entry("Inserting Day bean into database.");
+		if (ArtDept.loggingEnabled) log.entry("Inserting ship_dates bean into database.");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "INSERT INTO Day ("
-				+ "id_day, "
+		String sql = "INSERT INTO ship_dates ("
+				+ "id, "
 				+ "avail_screen_cups, "
 				+ "avail_screen_naps, "
 				+ "avail_pad, "
@@ -119,7 +119,7 @@ public class DayManager {
 				){
 			
 			if (ArtDept.loggingEnabled) log.debug("INSERTing into db. AvailableScreenCups are: " + bean.getAvailableScreenCups());
-			stmt.setDate(1, bean.getDate());
+			stmt.setDate(1, bean.getId());
 			
 			stmt.setLong(2, bean.getAvailableScreenCups());
 			stmt.setLong(3, bean.getAvailableScreenNaps());
@@ -153,12 +153,12 @@ public class DayManager {
 	
 	public static boolean setNotCompleted(Date theDate)
 	{
-		if (ArtDept.loggingEnabled) log.entry("Setting the date in the Day table as NOT completed (null the 'day_completed' field.");
+		if (ArtDept.loggingEnabled) log.entry("Setting the date in the ship_dates table as NOT completed (null the 'day_completed' field.");
 		
 		conn = ConnectionManager.getInstance().getConnection();
-		String sql = "UPDATE Day "
+		String sql = "UPDATE ship_dates "
 				+ "SET day_completed = NULL "
-				+ "WHERE id_day = ?";
+				+ "WHERE id = ?";
 		
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql);
