@@ -23,7 +23,7 @@ public class ConnectionManager
 //	private final String PASSWORD = (userName.equalsIgnoreCase("Marketing")) ? "marketing" : userName;
 	// Two variables to specify different database types to which to connect. 
 	private final String H_CONN_STRING = "jdbc:hsqldb:data/job_orders";
-	private final String M_CONN_STRING = "jdbc:mysql://192.168.10.10/sky_unlimited";
+	private final String M_CONN_STRING = "jdbc:mysql://192.168.1.71/sky_schedule";
 	private final String S_CONN_STRING = "jdbc:sqlserver://192.168.0.248;databaseName=job_orders_2014";
 
 	// Using a previously-set enum to specify the type of database we're connecting to.

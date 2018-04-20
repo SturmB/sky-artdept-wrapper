@@ -111,7 +111,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Script Launcher";
-	private static String appVersion = "3.80";
+	private static String appVersion = "3.8.0";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
