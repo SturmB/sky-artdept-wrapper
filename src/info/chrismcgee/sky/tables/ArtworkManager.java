@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -159,8 +160,10 @@ public class ArtworkManager {
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "INSERT INTO artworks ("
 				+ "line_item_id, "
-				+ "digital_art_file) "
-				+ "VALUES (?, ?)";
+				+ "digital_art_file,"
+				+ "created_at,"
+				+ "updated_at) "
+				+ "VALUES (?, ?, ?, ?)";
 		ResultSet keys = null;
 		
 		try (
@@ -172,6 +175,10 @@ public class ArtworkManager {
 
 			stmt.setInt(1, bean.getLineItemId());
 			stmt.setString(2, bean.getDigitalArtFile());
+			
+			stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			stmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+			
 			
 			if (ArtDept.loggingEnabled) log.debug("stmt: " + stmt.toString());
 			
@@ -204,7 +211,8 @@ public class ArtworkManager {
 		String sql =
 				"UPDATE artworks SET "
 				+ "line_item_id = ?, "
-				+ "digital_art_file = ? "
+				+ "digital_art_file = ?, "
+				+ "updated_at = ? "
 				+ "WHERE id = ?";
 		
 		try (
@@ -217,7 +225,10 @@ public class ArtworkManager {
 			
 			stmt.setInt(1, bean.getLineItemId());
 			stmt.setString(2, bean.getDigitalArtFile());
-			stmt.setInt(3, bean.getId());
+			
+			stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+			
+			stmt.setInt(4, bean.getId());
 			
 			int affected = stmt.executeUpdate();
 			if (affected == 1) {

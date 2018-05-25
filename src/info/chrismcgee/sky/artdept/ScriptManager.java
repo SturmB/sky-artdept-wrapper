@@ -530,6 +530,7 @@ public class ScriptManager {
 					if (ArtDept.loggingEnabled) log.info("24: " + thisLineItem.getJSONArray("digitalArtFiles").getString(0));
 				}
 				lineItemBean.setProofNum(proofNum);
+/*
 				lineItemBean.setFlags((bean.getLineItemList() == null || i >= bean.getLineItemList().size()) ? 0 : bean.getLineItemList().get(i).getFlags());
 				lineItemBean.setReorderNum((bean.getLineItemList() == null || i >= bean.getLineItemList().size()) ? "" : bean.getLineItemList().get(i).getReorderNum());
 				lineItemBean.setPackingInstructions((bean.getLineItemList() == null || i >= bean.getLineItemList().size()) ? "" : bean.getLineItemList().get(i).getPackingInstructions());
@@ -537,6 +538,20 @@ public class ScriptManager {
 				lineItemBean.setCaseQuantity((bean.getLineItemList() == null || i >= bean.getLineItemList().size()) ? "0" : bean.getLineItemList().get(i).getCaseQuantity());
 				lineItemBean.setLabelQuantity((bean.getLineItemList() == null || i >= bean.getLineItemList().size()) ? 0 : bean.getLineItemList().get(i).getLabelQuantity());
 				lineItemBean.setLabelText((bean.getLineItemList() == null || i >= bean.getLineItemList().size()) ? "" : bean.getLineItemList().get(i).getLabelText());
+*/
+				lineItemBean.setFlags(thisLineItem.getInt("flags"));
+				lineItemBean.setReorderNum(thisLineItem.getString("reorderNum"));
+				lineItemBean.setPackingInstructions(thisLineItem.getString("packingInstructions"));
+				lineItemBean.setPackageQuantity(thisLineItem.getString("packageQuantity"));
+				lineItemBean.setCaseQuantity(thisLineItem.getString("caseQuantity"));
+				try { // Since the Label Quantity field could be blank
+					lineItemBean.setLabelQuantity(thisLineItem.getInt("labelQuantity"));
+				} catch (NumberFormatException err) {
+					if (ArtDept.loggingEnabled) log.error("Could not parse Label Quantity into an integer. Setting it to 0 instead.");
+					lineItemBean.setLabelQuantity(0);
+				}
+				lineItemBean.setLabelText(thisLineItem.getString("labelText"));
+				
 				lineItemBean.setItemStatusId("screening");
 //				detailBean.setDigitalFilename(thisItem.getJSONArray("digitalArtFiles").getString(0));
 				JSONArray artFiles = thisLineItem.getJSONArray("digitalArtFiles");

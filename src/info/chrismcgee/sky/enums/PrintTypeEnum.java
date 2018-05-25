@@ -3,7 +3,7 @@ package info.chrismcgee.sky.enums;
 public enum PrintTypeEnum {
 	SCREEN_CUPS("Screen Cups"), SCREEN_NAPKINS("Screen Napkins"), PAD("Pad"),
 	HOTSTAMP("Hotstamp"), OFFSET_CUPS("Offset Cups"), OFFSET_NAPKINS("Offset Napkins"),
-	DIGITAL_CUPS("Digital Cups"), DIGITAL_FLATS("Digital Flats"), OUTSOURCED("Outsourced"),
+	DIGITAL_CUPS("Digital Cups"), DIGITAL_OTHER("Digital Other"), OUTSOURCED("Outsourced"),
 	DIGITAL_NAPKINS("Digital Napkins");
 
 	private String value;
@@ -32,7 +32,7 @@ public enum PrintTypeEnum {
 			case "Offset Cups": return OFFSET_CUPS;
 			case "Offset Napkins": return OFFSET_NAPKINS;
 			case "Digital Cups": return DIGITAL_CUPS;
-			case "Digital Flats": return DIGITAL_FLATS;
+			case "Digital Other": return DIGITAL_OTHER;
 			case "Digital Napkins": return DIGITAL_NAPKINS;
 			case "Outsourced": return OUTSOURCED;
 			default: return null;
@@ -48,7 +48,7 @@ public enum PrintTypeEnum {
 			case 2: return HOTSTAMP;
 			case 3: return OFFSET_CUPS;
 			case 4: return OFFSET_NAPKINS;
-			case 5: return DIGITAL_FLATS;
+			case 5: return DIGITAL_OTHER;
 			case 6: return SCREEN_NAPKINS;
 			case 7: return OUTSOURCED;
 			case 8: return DIGITAL_CUPS;
@@ -66,7 +66,7 @@ public enum PrintTypeEnum {
 			case HOTSTAMP: return 2;
 			case OFFSET_CUPS: return 3;
 			case OFFSET_NAPKINS: return 4;
-			case DIGITAL_FLATS: return 5;
+			case DIGITAL_OTHER: return 5;
 			case SCREEN_NAPKINS: return 6;
 			case OUTSOURCED: return 7;
 			case DIGITAL_CUPS: return 8;
@@ -84,7 +84,7 @@ public enum PrintTypeEnum {
 			case OFFSET_CUPS: return "offset_cups";
 			case OFFSET_NAPKINS: return "offset_napkins";
 			case DIGITAL_CUPS: return "digital_cups";
-			case DIGITAL_FLATS: return "digital_flats";
+			case DIGITAL_OTHER: return "digital_other";
 			case DIGITAL_NAPKINS: return "digital_napkins";
 			case SCREEN_NAPKINS: return "screen_napkins";
 			case OUTSOURCED: return "outsourced";
