@@ -337,10 +337,10 @@ public class ScriptManager {
 		
 		
 		String[] aResult = resultStr.split("@");  // Convert the String into an Array of Strings.
-		String[] aTemp = new String[25]; // This temporary Array will hold the items common to each product in an order.
+		String[] aTemp = new String[26]; // This temporary Array will hold the items common to each product in an order.
 		ArrayList<String[]> aJobDetails = new ArrayList<String[]>(); // Setting up a two-dimensional ArrayList of Arrays.
-		for (int i = 0; i < aResult.length; i+=25) { // Go through each block of items in the list and add them to the ArrayList.
-			aTemp = Arrays.copyOfRange(aResult, i, i+25);
+		for (int i = 0; i < aResult.length; i+=26) { // Go through each block of items in the list and add them to the ArrayList.
+			aTemp = Arrays.copyOfRange(aResult, i, i+26);
 			aJobDetails.add(aTemp);
 		}
 
@@ -552,7 +552,7 @@ public class ScriptManager {
 				}
 				lineItemBean.setLabelText(thisLineItem.getString("labelText"));
 				
-				lineItemBean.setItemStatusId("screening");
+				lineItemBean.setItemStatusId(thisLineItem.getString("itemStatusId"));
 //				detailBean.setDigitalFilename(thisItem.getJSONArray("digitalArtFiles").getString(0));
 				JSONArray artFiles = thisLineItem.getJSONArray("digitalArtFiles");
 				List<Artwork> newArtList = lineItemBean.getArtworkList();
