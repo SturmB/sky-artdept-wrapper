@@ -110,7 +110,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksMenuO = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
-	private static String appName = "Sky Script Launcher";
+	private static String appName = "Sky Launcher";
 	private static String appVersion = "3.8.0";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
@@ -756,7 +756,7 @@ public class ArtDept extends JFrame {
 		// Create a new Job bean.
 		if (bean == null) bean = new Order();
 		// Define where the ScriptManager text files are located.
-		String workOrderFolder = "/Volumes/ArtDept/Work Orders/";
+		String workOrderFolder = "/Volumes/ArtDept/Work Orders 2/";
 		textFile = new File(workOrderFolder + jobNum + ".txt");
 		// If the text file is too small, then it is either empty or has some garbage in it.
 		if (loggingEnabled) log.trace("The length of the associated text file is: " + textFile.length());

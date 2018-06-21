@@ -78,7 +78,7 @@ public enum PrintTypeEnum {
 	public static String getSqlValue(PrintTypeEnum printType) {
 		
 		switch (printType) {
-			case SCREEN_CUPS: return "screen";
+			case SCREEN_CUPS: return "screen_cups";
 			case PAD: return "pad";
 			case HOTSTAMP: return "hotstamp";
 			case OFFSET_CUPS: return "offset_cups";

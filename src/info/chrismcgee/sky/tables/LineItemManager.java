@@ -100,6 +100,8 @@ public class LineItemManager {
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		ResultSet keys = null;
 		
+		if (ArtDept.loggingEnabled) log.info("[LineItemManager - insert] Bean's print type: " + bean.getPrintTypeId());
+		
 		try (
 				PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				){
