@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ConnectionManager
 {
+	
 	static final Logger log = LogManager.getLogger(ConnectionManager.class.getName()); // For logging.
 	private static ConnectionManager instance = null;
 
