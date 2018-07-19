@@ -12,6 +12,9 @@ public class LineItem {
 	private String productDetail;
 	private String printTypeId;
 	private long numImpressions;
+	private long impressionsTradition;
+	private long impressionsHiSpeed;
+	private long impressionsDigital;
 	private long quantity;
 	private Date itemCompleted;
 	private int proofNum;
@@ -65,6 +68,24 @@ public class LineItem {
 	}
 	public long getQuantity() {
 		return quantity;
+	}
+	public long getImpressionsTradition() {
+		return impressionsTradition;
+	}
+	public void setImpressionsTradition(long impressionsTradition) {
+		this.impressionsTradition = impressionsTradition;
+	}
+	public long getImpressionsHiSpeed() {
+		return impressionsHiSpeed;
+	}
+	public void setImpressionsHiSpeed(long impressionsHiSpeed) {
+		this.impressionsHiSpeed = impressionsHiSpeed;
+	}
+	public long getImpressionsDigital() {
+		return impressionsDigital;
+	}
+	public void setImpressionsDigital(long impressionsDigital) {
+		this.impressionsDigital = impressionsDigital;
 	}
 	public void setQuantity(long quantity) {
 		this.quantity = quantity;

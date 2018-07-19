@@ -15,7 +15,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/ArtDept/libs/joda-time-2.3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.28-bin.jar"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="lib" path="libs/commons-lang3-3.3.2.jar">
 		<attributes>
@@ -36,5 +35,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/ArtDept/libs/json-20160810-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

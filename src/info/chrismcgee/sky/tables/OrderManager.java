@@ -77,7 +77,8 @@ public class OrderManager {
 		conn = ConnectionManager.getInstance().getConnection();
 		String sql = "SELECT ship_date_id, o.id AS order_id, customer_name, customer_po, proof_spec_date, "
 				+ "job_completed, printing_company, overruns, sample_shelf_note, sig_proof, sig_output, "
-				+ "li.id AS li_id, product_num, product_detail, print_type_id, num_impressions, quantity, "
+				+ "li.id AS li_id, product_num, product_detail, print_type_id, num_impressions, "
+				+ "impressions_tradition, impressions_hispeed, impressions_digital, quantity, "
 				+ "item_completed, proof_num, proof_date, thumbnail, flags, reorder_num, "
 				+ "packing_instructions, package_quantity, case_quantity, label_quantity, label_text, item_status_id, "
 				+ "a.id AS artwork_id, a.line_item_id AS artwork_li_id, a.digital_art_file "
@@ -120,8 +121,11 @@ public class OrderManager {
 					li.setProductNum(rs.getString("product_num"));
 					li.setProductDetail(rs.getString("product_detail"));
 					li.setPrintTypeId(rs.getString("print_type_id"));
-					li.setNumImpressions(rs.getInt("num_impressions"));
-					li.setQuantity(rs.getInt("quantity"));
+					li.setNumImpressions(rs.getLong("num_impressions"));
+					li.setImpressionsTradition(rs.getLong("impressions_tradition"));
+					li.setImpressionsHiSpeed(rs.getLong("impressions_hispeed"));
+					li.setImpressionsDigital(rs.getLong("impressions_digital"));
+					li.setQuantity(rs.getLong("quantity"));
 					li.setItemCompleted(rs.getTimestamp("item_completed") == null ? null : new Date(rs.getTimestamp("item_completed").getTime()));
 					li.setProofNum(rs.getInt("proof_num"));
 					li.setProofDate(rs.getTimestamp("proof_date") == null ? null : new Date(rs.getTimestamp("proof_date").getTime()));

@@ -82,6 +82,9 @@ public class LineItemManager {
 				+ "product_detail, "
 				+ "print_type_id, "
 				+ "num_impressions, "
+				+ "impressions_tradition, "
+				+ "impressions_hispeed, "
+				+ "impressions_digital, "
 				+ "quantity, "
 				+ "item_completed, "
 				+ "proof_num, "
@@ -97,7 +100,7 @@ public class LineItemManager {
 				+ "item_status_id, "
 				+ "created_at, "
 				+ "updated_at) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		ResultSet keys = null;
 		
 		if (ArtDept.loggingEnabled) log.info("[LineItemManager - insert] Bean's print type: " + bean.getPrintTypeId());
@@ -111,22 +114,25 @@ public class LineItemManager {
 			stmt.setString(3, bean.getProductDetail());
 			stmt.setString(4, bean.getPrintTypeId());
 			stmt.setLong(5, bean.getNumImpressions());
-			stmt.setLong(6, bean.getQuantity());
-			stmt.setTimestamp(7, bean.getItemCompleted() == null ? null : new Timestamp(bean.getItemCompleted().getTime()));
-			stmt.setInt(8, bean.getProofNum());
-			stmt.setTimestamp(9, bean.getProofDate() == null ? null : new Timestamp(bean.getProofDate().getTime()));
-			stmt.setString(10, bean.getThumbnail());
-			stmt.setInt(11, bean.getFlags());
-			stmt.setString(12, bean.getReorderNum());
-			stmt.setString(13, bean.getPackingInstructions());
-			stmt.setString(14, bean.getPackageQuantity());
-			stmt.setString(15, bean.getCaseQuantity());
-			stmt.setInt(16, bean.getLabelQuantity());
-			stmt.setString(17, bean.getLabelText());
-			stmt.setString(18, bean.getItemStatusId());
+			stmt.setLong(6, bean.getImpressionsTradition());
+			stmt.setLong(7, bean.getImpressionsHiSpeed());
+			stmt.setLong(8, bean.getImpressionsDigital());
+			stmt.setLong(9, bean.getQuantity());
+			stmt.setTimestamp(10, bean.getItemCompleted() == null ? null : new Timestamp(bean.getItemCompleted().getTime()));
+			stmt.setInt(11, bean.getProofNum());
+			stmt.setTimestamp(12, bean.getProofDate() == null ? null : new Timestamp(bean.getProofDate().getTime()));
+			stmt.setString(13, bean.getThumbnail());
+			stmt.setInt(14, bean.getFlags());
+			stmt.setString(15, bean.getReorderNum());
+			stmt.setString(16, bean.getPackingInstructions());
+			stmt.setString(17, bean.getPackageQuantity());
+			stmt.setString(18, bean.getCaseQuantity());
+			stmt.setInt(19, bean.getLabelQuantity());
+			stmt.setString(20, bean.getLabelText());
+			stmt.setString(21, bean.getItemStatusId());
 			
-			stmt.setTimestamp(19, new Timestamp(System.currentTimeMillis()));
-			stmt.setTimestamp(20, new Timestamp(System.currentTimeMillis()));
+			stmt.setTimestamp(22, new Timestamp(System.currentTimeMillis()));
+			stmt.setTimestamp(23, new Timestamp(System.currentTimeMillis()));
 			
 			if (ArtDept.loggingEnabled) log.debug("Native SQL: " + stmt.getConnection().nativeSQL(sql));
 			
@@ -163,6 +169,9 @@ public class LineItemManager {
 				+ "product_detail = ?, "
 				+ "print_type_id = ?, "
 				+ "num_impressions = ?, "
+				+ "impressions_tradition = ?, "
+				+ "impressions_hispeed = ?, "
+				+ "impressions_digital = ?, "
 				+ "quantity = ?, "
 				+ "item_completed = ?, "
 				+ "proof_num = ?, "
@@ -188,23 +197,26 @@ public class LineItemManager {
 			stmt.setString(3, bean.getProductDetail());
 			stmt.setString(4, bean.getPrintTypeId());
 			stmt.setLong(5, bean.getNumImpressions());
-			stmt.setLong(6, bean.getQuantity());
-			stmt.setTimestamp(7, bean.getItemCompleted() == null ? null : new Timestamp(bean.getItemCompleted().getTime()));
-			stmt.setInt(8, bean.getProofNum());
-			stmt.setTimestamp(9, bean.getProofDate() == null ? null : new Timestamp(bean.getProofDate().getTime()));
-			stmt.setString(10, bean.getThumbnail());
-			stmt.setInt(11, bean.getFlags());
-			stmt.setString(12, bean.getReorderNum());
-			stmt.setString(13, bean.getPackingInstructions());
-			stmt.setString(14, bean.getPackageQuantity());
-			stmt.setString(15, bean.getCaseQuantity());
-			stmt.setInt(16, bean.getLabelQuantity());
-			stmt.setString(17, bean.getLabelText());
-			stmt.setString(18, bean.getItemStatusId());
+			stmt.setLong(6, bean.getImpressionsTradition());
+			stmt.setLong(7, bean.getImpressionsHiSpeed());
+			stmt.setLong(8, bean.getImpressionsDigital());
+			stmt.setLong(9, bean.getQuantity());
+			stmt.setTimestamp(10, bean.getItemCompleted() == null ? null : new Timestamp(bean.getItemCompleted().getTime()));
+			stmt.setInt(11, bean.getProofNum());
+			stmt.setTimestamp(12, bean.getProofDate() == null ? null : new Timestamp(bean.getProofDate().getTime()));
+			stmt.setString(13, bean.getThumbnail());
+			stmt.setInt(14, bean.getFlags());
+			stmt.setString(15, bean.getReorderNum());
+			stmt.setString(16, bean.getPackingInstructions());
+			stmt.setString(17, bean.getPackageQuantity());
+			stmt.setString(18, bean.getCaseQuantity());
+			stmt.setInt(19, bean.getLabelQuantity());
+			stmt.setString(20, bean.getLabelText());
+			stmt.setString(21, bean.getItemStatusId());
 			
-			stmt.setTimestamp(19, new Timestamp(System.currentTimeMillis()));
+			stmt.setTimestamp(22, new Timestamp(System.currentTimeMillis()));
 
-			stmt.setInt(20, bean.getId());
+			stmt.setInt(23, bean.getId());
 			
 			
 			int affected = stmt.executeUpdate();

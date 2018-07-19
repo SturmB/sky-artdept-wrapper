@@ -337,10 +337,10 @@ public class ScriptManager {
 		
 		
 		String[] aResult = resultStr.split("@");  // Convert the String into an Array of Strings.
-		String[] aTemp = new String[26]; // This temporary Array will hold the items common to each product in an order.
+		String[] aTemp = new String[29]; // This temporary Array will hold the items common to each product in an order.
 		ArrayList<String[]> aJobDetails = new ArrayList<String[]>(); // Setting up a two-dimensional ArrayList of Arrays.
-		for (int i = 0; i < aResult.length; i+=26) { // Go through each block of items in the list and add them to the ArrayList.
-			aTemp = Arrays.copyOfRange(aResult, i, i+26);
+		for (int i = 0; i < aResult.length; i+=29) { // Go through each block of items in the list and add them to the ArrayList.
+			aTemp = Arrays.copyOfRange(aResult, i, i+29);
 			aJobDetails.add(aTemp);
 		}
 
@@ -586,6 +586,9 @@ public class ScriptManager {
 				if (lineItemBean.getQuantity() > 0) allDigitalProofs = false;
 				
 				lineItemBean.setNumImpressions(thisLineItem.getLong("numImpressions"));
+				lineItemBean.setImpressionsTradition(thisLineItem.getLong("impressionsTradition"));
+				lineItemBean.setImpressionsHiSpeed(thisLineItem.getLong("impressionsHiSpeed"));
+				lineItemBean.setImpressionsDigital(thisLineItem.getLong("impressionsDigital"));
 				
 				lineItemBean.setPrintTypeId(PrintTypeEnum.getSqlValue(PrintTypeEnum.getPrintType(thisLineItem.getInt("printType"))));
 				
@@ -945,6 +948,9 @@ public class ScriptManager {
 				bean.setProductDetail(StringUtils.substringBetween(file.getName(), "_", "."));
 				bean.setPrintTypeId("pad");
 				bean.setNumImpressions(0);
+				bean.setImpressionsTradition(0);
+				bean.setImpressionsHiSpeed(0);
+				bean.setImpressionsDigital(0);
 				bean.setQuantity(0);
 //				bean.setProofDate(new Timestamp(DateTimeUtils.currentTimeMillis()));
 				bean.setProofDate(new Date(new java.util.Date().getTime()));
@@ -1031,6 +1037,9 @@ public class ScriptManager {
 				bean.setProductDetail(StringUtils.substringBetween(file.getName(), "_", "."));
 				bean.setPrintTypeId("pad");
 				bean.setNumImpressions(0);
+				bean.setImpressionsTradition(0);
+				bean.setImpressionsHiSpeed(0);
+				bean.setImpressionsDigital(0);
 				bean.setQuantity(0);
 //				bean.setProofDate(new Timestamp(DateTimeUtils.currentTimeMillis()));
 				bean.setProofDate(new Date(new java.util.Date().getTime()));
