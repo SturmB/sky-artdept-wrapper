@@ -1,7 +1,9 @@
 package info.chrismcgee.sky.artdept;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import info.chrismcgee.components.DateManager;
+import info.chrismcgee.enums.OSType;
 import info.chrismcgee.sky.beans.Artwork;
 import info.chrismcgee.sky.beans.LineItem;
 import info.chrismcgee.sky.beans.Order;
@@ -38,7 +41,7 @@ import info.chrismcgee.sky.tables.ProductionMaxesManager;
 public class ScriptManager {
 	
 	static final Logger log = LogManager.getLogger(ScriptManager.class.getName());
-	private static String artDeptFolder = "/Volumes/ArtDept/ArtDept/";
+	private static String artDeptFolder = ArtDept.ARTDEPT_DRIVE + "ArtDept/";
 //	private static NumberFormat usFormat = NumberFormat.getIntegerInstance(Locale.US);
 //	private static DateFormat usDateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.FULL, Locale.US);
 
@@ -64,51 +67,23 @@ public class ScriptManager {
 		if (ArtDept.loggingEnabled) log.debug("Got pCompanyEnum: " + pCompanyEnum.toString());
 		
 		// Prepare the AppleScript file to be executed.
-		if (ArtDept.loggingEnabled) log.trace("Prepare the AppleScript file to be executed.");
+		if (ArtDept.loggingEnabled) log.trace("Prepare the intermediate file to be executed.");
 //		String scriptFolder = artDeptFolder + "Scripts/sky-artdept/";
 		File scriptFile;
 		String script = null;
-		if (scriptType == ScriptType.PROOF)
-			scriptFile = new File(scriptFolder + "Proof.applescript");
-		else // Output.
-			scriptFile = new File(scriptFolder + "Output.applescript");
+		// If this is a Mac, then we need to call an AppleScript file.
+		// Otherwise, we call a VBS file.
+		if (scriptType == ScriptType.PROOF) {
+			scriptFile = OSType.getOSType() == OSType.MAC
+					? new File(scriptFolder + "Proof.applescript")
+					: new File(scriptFolder + "Proof.vbs");
+		} else { // Output.
+			scriptFile = OSType.getOSType() == OSType.MAC
+					? new File(scriptFolder + "Output.applescript")
+					: new File(scriptFolder + "Output.vbs");
+		}
 
 		if (ArtDept.loggingEnabled) log.debug("scriptFolder and scriptFile variables set.");
-		
-		// Take all of the Order and Line Item bean's information and join it together
-		// into a single String that can be parsed in the Proofing script.
-/*		String orderDetailInfo = "";
-		try {
-			for (Iterator<OrderDetail> odIterator = bean.getOrderDetailList().iterator(); odIterator.hasNext();) {
-				OrderDetail od = (OrderDetail) odIterator.next();
-				if (ArtDept.loggingEnabled) log.debug("01. Getting Product ID: " + od.getProductId());
-				orderDetailInfo += (od.getProductId() == null ? "" : od.getProductId());
-				if (ArtDept.loggingEnabled) log.debug("02. Getting Product Detail: " + od.getProductDetail());
-				orderDetailInfo += "@" + (od.getProductDetail() == null ? "" : od.getProductDetail());
-				if (ArtDept.loggingEnabled) log.debug("03. Getting Quantity: " + od.getQuantity());
-				orderDetailInfo += "@" + (od.getQuantity() == 0 ? "" : usFormat.format(od.getQuantity()));
-				if (ArtDept.loggingEnabled) log.debug("04. Getting Flags: " + od.getFlags());
-				orderDetailInfo += "@" + (od.getFlags() == 0 ? "" : String.valueOf(od.getFlags()));
-				if (ArtDept.loggingEnabled) log.debug("05. Getting Reorder ID: " + od.getReorderId());
-				orderDetailInfo += "@" + (od.getReorderId() == null ? "" : od.getReorderId());
-				if (ArtDept.loggingEnabled) log.debug("06. Getting Packing Instructions: " + od.getPackingInstructions().replace("\"", "\\\""));
-				orderDetailInfo += "@" + (od.getPackingInstructions() == null ? "" : od.getPackingInstructions().replace("\"", "\\\""));
-				if (ArtDept.loggingEnabled) log.debug("07. Getting Package Quantity: " + od.getPackageQuantity());
-				orderDetailInfo += "@" + (od.getPackageQuantity() == null ? "" : od.getPackageQuantity());
-				if (ArtDept.loggingEnabled) log.debug("08. Getting Case Quantity: " + od.getCaseQuantity());
-				orderDetailInfo += "@" + (od.getCaseQuantity() == null ? "" : od.getCaseQuantity());
-				if (ArtDept.loggingEnabled) log.debug("09. Getting Label Quantity: " + od.getLabelQuantity());
-				orderDetailInfo += "@" + (od.getLabelQuantity() == 0 ? "" : usFormat.format(od.getLabelQuantity()));
-				if (ArtDept.loggingEnabled) log.debug("10. Getting Label Text: " + od.getLabelText().replace("\"", "\\\""));
-				orderDetailInfo += "@" + (od.getLabelText() == null ? "" : od.getLabelText().replace("\"", "\\\""));
-				if (ArtDept.loggingEnabled) log.debug("11. Getting ID (primary key): " + String.valueOf(od.getId()));
-				orderDetailInfo += "@" + (od.getLabelText() == null ? "" : String.valueOf(od.getId()));
-				if (odIterator.hasNext()) orderDetailInfo += "@"; // Place another separator between groups.
-			}
-		} catch (NullPointerException err) {
-			if (ArtDept.loggingEnabled) log.error("Null Pointer to the Line Item List. Creating one now.");
-			orderDetailInfo = "@@@@@@@@@@";
-		}*/
 		
 		// Create a JSON string to pass to the script.
 		JSONObject outgoing = new JSONObject();
@@ -129,135 +104,84 @@ public class ScriptManager {
 		outgoing.put("userInitials", initials);
 		outgoing.put("shipDateId", shipDate);
 //		outgoing.put("loggingEnabled", ArtDept.loggingEnabled);
-		String jsonOut = JSONObject.quote(outgoing.toString());
-//		jsonOut = jsonOut.replaceAll("\\{", "\\\\{");
-//		jsonOut = jsonOut.replaceAll("\\}", "\\\\}");
-		if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
+		String jsonOut = null;
 		
-		
-		// Begin building the String that will be the script we run.
-		// The first few lines are just to add in the arguments from the ArtDept class.
-		// The rest is read from the file defined above.
-		script = "set json to " + jsonOut + "\n";
-		script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
-		script += "set jPath to \"" + ArtDept.scriptPath + "\"\n";
-		if (ArtDept.loggingEnabled) log.debug("Reading the Proof/Output script into a string.");
-		if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
-		try {
-			script += FileUtils.readFileToString(scriptFile);
-		} catch (IOException e) {
-			if (ArtDept.loggingEnabled) log.error("Could not find the Proof/Output AppleScript file.", e);
-			JOptionPane.showMessageDialog(null, "Could not find the Proof/Output AppleScript file.  Please verify connection to the server.", "File not found", JOptionPane.ERROR_MESSAGE);
-			return false;
-//				ConnectionManager.getInstance().close();
-//				System.exit(1);
-		}
-/*		if (scriptType == ScriptType.PROOF) {
-//			script = "set jOrderNum to \"" + jobNumber + "\"\n";
-//			script += "set jPrintingCompany to \"" + pCompany + "\"\n";
-//			script += "set jClientName to \"" + customerName + "\"\n";
-//			script += "set jClientPO to \"" + customerPO + "\"\n";
-//			script += "set jProofNum to \"" + proofNum + "\"\n";
-//			script += "set jOverruns to \"" + overruns + "\"\n";
-//			script += "set jSampleShelf to \"" + sampleShelf + "\"\n";
-//			script += "set jInitials to \"" + initials + "\"\n";
-//			script += "set jOrderDetail to \"" + orderDetailInfo + "\"\n";
-//			script += "set jCustomerServiceRep to \"" + customerServiceRep + "\"\n";
-//			script += "set jCreditCard to \"" + creditCard + "\"\n";
-//			script += "set jShipDays to \"" + shipDays + "\"\n";
-//			script += "set jWnaPo to \"" + wnaPo + "\"\n";
-			script = "";
-//			script += "tell application \"JSON Helper\"\n";
-			script += 	"set json to " + jsonOut + "\n";
-//			script += 	"set json to make JSON from myRecord\n";
-//			script += "end tell\n";
-			script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
-			script += "set jPath to \"" + ArtDept.scriptPath + "\"\n";
-			if (ArtDept.loggingEnabled) log.debug("Reading the Proofing script into a string.");
-			if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
-			try {
-				script += FileUtils.readFileToString(scriptFile);
-			} catch (IOException e) {
-				if (ArtDept.loggingEnabled) log.error("Could not find the Proofing AppleScript file.", e);
-				JOptionPane.showMessageDialog(null, "Could not find the Proofing AppleScript file.  Please verify connection to the server.", "File not found", JOptionPane.ERROR_MESSAGE);
-				return false;
-//				ConnectionManager.getInstance().close();
-//				System.exit(1);
-			}
-		} else { // Output.
-//			script = "set jOrderNum to \"" + jobNumber + "\"\n";
-//			script += "set jShipDate to \"" + shipDate + "\"\n";
-//			script += "set jOverruns to \"" + overruns + "\"\n";
-//			script += "set jInitials to \"" + initials + "\"\n";
-//			script += "set jOrderDetail to \"" + orderDetailInfo + "\"\n";
+		// Call the scripts with the necessary arguments, including the JSON string created in the previous step.
+		String resultUntrimmed = "";
+		if (OSType.getOSType() == OSType.MAC) {
+			// If this is a Mac, then we need to give the AppleScript some initial variables.
+
+			// Begin building the String that will be the script we run.
+			jsonOut = JSONObject.quote(outgoing.toString());
+			if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
+
+			// The first few lines are just to add in the arguments from the ArtDept class.
+			// The rest is read from the file defined above.
 			script = "set json to " + jsonOut + "\n";
 			script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
 			script += "set jPath to \"" + ArtDept.scriptPath + "\"\n";
-			if (ArtDept.loggingEnabled) log.debug("Reading the Output script into a string.");
+			if (ArtDept.loggingEnabled) log.debug("Reading the Proof/Output script into a string.");
 			if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
 			try {
 				script += FileUtils.readFileToString(scriptFile);
 			} catch (IOException e) {
-				if (ArtDept.loggingEnabled) log.error("Could not find the Output AppleScript file.", e);
-				JOptionPane.showMessageDialog(null, "Could not find the Output AppleScript file.  Please verify connection to the server.", "File not found", JOptionPane.ERROR_MESSAGE);
+				if (ArtDept.loggingEnabled) log.error("Could not find the Proof/Output AppleScript file.", e);
+				JOptionPane.showMessageDialog(null, "Could not find the Proof/Output AppleScript file.  Please verify connection to the server.", "File not found", JOptionPane.ERROR_MESSAGE);
 				return false;
-//				ConnectionManager.getInstance().close();
-//				System.exit(1);
 			}
-		}*/
-		
-		
-		// These two lines prepare the scripting engine, ready to run the script.
-		if (ArtDept.loggingEnabled) log.debug("Setting the script engine.");
-		ScriptEngineManager mgr = new ScriptEngineManager();
-		ScriptEngine engine = null;
-		try {
-			engine = mgr.getEngineByName("AppleScriptEngine");
-		} catch (Exception err) {
-			if (ArtDept.loggingEnabled) log.error("Could not find the scripting engine needed.", err);
+			
+			// These two lines prepare the scripting engine, ready to run the script.
+			if (ArtDept.loggingEnabled) log.debug("Setting the script engine.");
+			ScriptEngineManager mgr = new ScriptEngineManager();
+			ScriptEngine engine = null;
+			try {
+				engine = mgr.getEngineByName("AppleScriptEngine");
+			} catch (Exception err) {
+				if (ArtDept.loggingEnabled) log.error("Could not find the scripting engine needed.", err);
+			}
+	
+			// Run the script and evaluate the result.
+			Object result = null;
+			if (ArtDept.loggingEnabled) log.trace("Running the script and evaluating the result.");
+			try {
+				result = engine.eval(script); // Run the script and place the result into an abstract object.
+			} catch (ScriptException e) {
+				if (ArtDept.loggingEnabled) log.error("An error occurred with the script. Line number: " + e.getLineNumber(), e);
+				JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+			if (ArtDept.loggingEnabled) log.debug(result); // Check that we received the correct information back from the script.
+			if (ArtDept.loggingEnabled) log.debug("");
+			resultUntrimmed = result.toString(); // Convert it to a String.
+		} else {
+			// Otherwise, if it's Windows, then we don't need to set up variables ahead of time.
+			String jsonIntermediate = outgoing.toString();
+			jsonOut = jsonIntermediate.replaceAll("\\\"", "~\"");
+			if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
+
+			try {
+				Process returned = null;
+				returned = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + ArtDept.scriptPath);
+				returned.waitFor();
+				BufferedReader input =
+						new BufferedReader(
+								new InputStreamReader(returned.getInputStream()));
+				String line;
+				while ((line = input.readLine()) != null) {
+					resultUntrimmed += line;
+				}
+				input.close();
+			} catch (Exception e) {
+				if (ArtDept.loggingEnabled) log.error("An error occurred with the script.", e);
+				JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
+				return false;
+			}
+			
 		}
 
-		// Add the parameters to the engine so they will be passed to the script.
-/*		if (scriptType == ScriptType.PROOF) {
-			engine.put("javaOrderNum", jobNumber);
-			engine.put("javaPrintCompany", pCompany);
-			engine.put("javaClientName", customerName);
-			engine.put("javaClientPO", customerPO);
-			engine.put("javaProofNum", proofNum);
-			engine.put("javaOverruns", overruns);
-			engine.put("javaSampleShelf", sampleShelf);
-			engine.put("javaInitials", initials);
-			engine.put("javaOrderDetails", orderDetailInfo);
-			engine.put("javaCustomerServiceRep", customerServiceRep);
-			engine.put("javaCreditCard", creditCard);
-			engine.put("javaShipDays", shipDays);
-			engine.put("javaWnaPo", wnaPo);
-			engine.put("javaLogging", ArtDept.loggingEnabled);
-		} else { // Output
-			engine.put("javaOrderNum", jobNumber);
-			engine.put("javaShipDate", shipDate);
-			engine.put("javaOverruns", overruns);
-			engine.put("javaInitials", initials);
-			engine.put("javaOrderDetails", orderDetailInfo);
-			engine.put("javaLogging", ArtDept.loggingEnabled);
-			engine.put("javaPath",  ArtDept.scriptPath);
-		}*/
-		
-		// Run the script and evaluate the result.
-		if (ArtDept.loggingEnabled) log.trace("Running the script and evaluating the result.");
-		Object result = null;
-		try {
-			result = engine.eval(script); // Run the script and place the result into an abstract object.
-		} catch (ScriptException e) {
-			if (ArtDept.loggingEnabled) log.error("An error occurred with the script. Line number: " + e.getLineNumber(), e);
-			JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
-			return false;
-//			ConnectionManager.getInstance().close();
-//			System.exit(1);
-		}
-		if (ArtDept.loggingEnabled) log.debug(result); // Check that we received the correct information back from the script.
-		if (ArtDept.loggingEnabled) log.debug("");
-		String resultStr = result.toString(); // Convert it to a String.
+		String resultStr = resultUntrimmed.trim();
+//		System.out.println(resultStr);
+		if (ArtDept.loggingEnabled) log.debug(resultStr); // Check that we received the correct information back from the script.
 		if (isInteger(resultStr)) {
 			/**
 			 * Result possibilities:
@@ -349,36 +273,6 @@ public class ScriptManager {
 			if (ArtDept.loggingEnabled) log.trace("Nothing returned from script. User possibly cancelled it.");
 			return false;
 		}
-		
-		// Finally, some test sample output.
-//		if (ArtDept.loggingEnabled) log.debug(new Date(Long.parseLong(aJobDetails.get(0)[0], 10)).toString());
-////		if (ArtDept.loggingEnabled) log.debug(LocalDate.parse(aJobDetails.get(0)[0]).toString("yyyy-MM-dd")); // Ship Date
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[1]); // Order ID
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[2]); // Customer Name
-//		if (ArtDept.loggingEnabled) log.debug(usDateFormat.format(new Date(Long.parseLong(aJobDetails.get(0)[3], 10))));
-////		if (ArtDept.loggingEnabled) log.debug(LocalDateTime.parse(aJobDetails.get(0)[3]).toString("yyyy-MM-dd HH:mm:ss")); // Proof Date / Spec Date
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[4]); // Product ID
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[5]); // Product Detail
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[6]); // Print Type (See Output script or database table schema for description.)
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[7]); // Number of Colors
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[8]); // Quantity
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[9]); // Print Company (Accents / Cabin / Yacht)
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[10]); // Proof Number
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[11]); // Overruns boolean
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[12]); // Customer PO
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[13]); // Thumbnail filename
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[14]); // Flags
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[15]); // Reorder ID
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[16]); // Packing / Labeling Info
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[17]); // Package Quantity
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[18]); // Case Quantity
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[19]); // Label Quantity
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[20]); // Label Text
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[21]); // Sample Shelf Note boolean
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[22]); // Proofer's Initials
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[23]); // Outputter's Initials
-//		if (ArtDept.loggingEnabled) log.debug(aJobDetails.get(0)[24]); // Digital file name
-//		if (ArtDept.loggingEnabled) log.debug("");
 
 
 		// Now to insert the returned data into the database.

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -32,6 +33,7 @@ import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
@@ -56,18 +58,18 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.apple.eawt.AboutHandler;
+/*import com.apple.eawt.AboutHandler;
 import com.apple.eawt.AppEvent.AboutEvent;
 import com.apple.eawt.AppEvent.QuitEvent;
 import com.apple.eawt.Application;
 import com.apple.eawt.QuitHandler;
 import com.apple.eawt.QuitResponse;
-
+*/
 import info.chrismcgee.components.DateManager;
 import info.chrismcgee.components.Sanitizer;
 import info.chrismcgee.enums.OSType;
-import info.chrismcgee.sky.beans.Order;
 import info.chrismcgee.sky.beans.LineItem;
+import info.chrismcgee.sky.beans.Order;
 import info.chrismcgee.sky.enums.DBType;
 import info.chrismcgee.sky.enums.PrintingCompany;
 import info.chrismcgee.sky.enums.ScriptType;
@@ -82,9 +84,22 @@ public class ArtDept extends JFrame {
 	 * Serialize, to keep Eclipse from throwing a warning message.
 	 */
 	private static final long serialVersionUID = -185001290066987954L;
+	
+	/**
+	 * Identify our OS and build the scripts location from that.
+	 */
+	private static final String FILE_SYSTEM_PREFIX = OSType.getOSType() == OSType.MAC
+			? File.separator + "Volumes"
+			: File.separator + File.separator + "SKYFS";
+	public static final String ARTDEPT_DRIVE = FILE_SYSTEM_PREFIX + File.separator + "ArtDept" + File.separator;
+
 	static final Logger log = LogManager.getLogger(ArtDept.class.getName()); // For logging.
 	public static boolean loggingEnabled = false;
-	public static String scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/Production/"; // Location of the script files to be run. This is either with or without the "Test/" portion.
+	// Location of the script files to be run. This is either with or without the "Test/" portion.
+	public static String scriptPath = ARTDEPT_DRIVE + "ArtDept" + File.separator
+			+ "Scripts" + File.separator
+			+ "sky-artdept" + File.separator
+			+ "Production" + File.separator;
 	// Preferences variables
 	private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 	private static final String PREFS_EMAIL = "email";
@@ -106,12 +121,12 @@ public class ArtDept extends JFrame {
 	private boolean usernameReady = false;
 	private File textFile = null;
 	// Define keystrokes that will be used as shortcuts for the "Proof" and "Output" buttons.
-	private KeyStroke ksMenuP = KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-	private KeyStroke ksMenuO = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+	private KeyStroke ksMenuP = KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+	private KeyStroke ksMenuO = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Launcher";
-	private static String appVersion = "3.8.6";
+	private static String appVersion = "4.0.0";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
@@ -130,6 +145,7 @@ public class ArtDept extends JFrame {
 	private JCheckBoxMenuItem chckbxmntmDebugLog;
 	private JPanel leftButtonsPane;
 	private JPanel rightButtonsPane;
+	private JFrame frm;
 	
 	/**
 	 * Launch the application.
@@ -156,7 +172,7 @@ public class ArtDept extends JFrame {
 					
 					// Create the frame and show it.
 					ArtDept frame = new ArtDept();
-					
+
 					frame.setTitle(defaultTitle);
 					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					frame.setLocationByPlatform(true);
@@ -179,6 +195,15 @@ public class ArtDept extends JFrame {
 	 * Create the dialog.
 	 */
 	public ArtDept() {
+		
+		List<Image> icons = new ArrayList<Image>();
+		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_16x16.png")).getImage());
+		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_32x32.png")).getImage());
+		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_48x48.png")).getImage());
+		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_256x256.png")).getImage());
+		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_512x512.png")).getImage());
+		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_768x768.png")).getImage());
+		setIconImages(icons);
 
 		if (OSType.getOSType() == OSType.MAC) {
 			setMinimumSize(new Dimension(502, 176));
@@ -477,7 +502,7 @@ public class ArtDept extends JFrame {
 		    }
 		});
 		
-		
+/*		
 		// Handle the Mac OS menu items & events
 		Application macApplication = Application.getApplication();
 		
@@ -502,7 +527,7 @@ public class ArtDept extends JFrame {
 				qr.performQuit();
 			}
 		});
-	}
+*/	}
 	
 	/**
 	 * Checks to see if the Job Number text field has been properly filled out (via the boolean field)
@@ -715,6 +740,23 @@ public class ArtDept extends JFrame {
 		creditCard = false;
 		shipDays = 0;
 		wnaPo = "";
+		
+		if (successfulRun) {
+			Thread dialogThread = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					if (frm == null) {
+						frm = new JFrame();
+					}
+					frm.setVisible(true);
+					frm.setAlwaysOnTop(true);
+					frm.setLocationRelativeTo(null);
+					JOptionPane.showMessageDialog(frm, "Script completed successfully!", "Script Complete", JOptionPane.INFORMATION_MESSAGE);
+					frm.setVisible(false);
+				}
+			});
+			dialogThread.start();
+		}
 
 	}
 	
@@ -756,7 +798,7 @@ public class ArtDept extends JFrame {
 		// Create a new Job bean.
 		if (bean == null) bean = new Order();
 		// Define where the ScriptManager text files are located.
-		String workOrderFolder = "/Volumes/ArtDept/Work Orders/";
+		String workOrderFolder = ARTDEPT_DRIVE + "Work Orders/";
 		textFile = new File(workOrderFolder + jobNum + ".txt");
 		// If the text file is too small, then it is either empty or has some garbage in it.
 		if (loggingEnabled) log.trace("The length of the associated text file is: " + textFile.length());
@@ -1108,11 +1150,13 @@ public class ArtDept extends JFrame {
 	 *               to use the Test version of the script.
 	 */
 	private void setScriptPath (boolean isTest) {
-		scriptPath = "/Volumes/ArtDept/ArtDept/Scripts/sky-artdept/";
+		scriptPath = ARTDEPT_DRIVE + "ArtDept" + File.separator
+				+ "Scripts" + File.separator
+				+ "sky-artdept" + File.separator;
 		if (isTest) {
-			scriptPath += "Test/";
+			scriptPath += "Test" + File.separator;
 		} else {
-			scriptPath += "Production/";
+			scriptPath += "Production" + File.separator;
 		}
 	}
 	
