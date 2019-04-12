@@ -111,7 +111,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Launcher";
-	private static String appVersion = "3.8.6";
+	private static String appVersion = "3.8.7";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
@@ -875,8 +875,12 @@ public class ArtDept extends JFrame {
 				}
 				
 				// Second one looks for Overruns.
-				if (concatLine.contains("OVERRUNS")) {
+				if (concatLine.contains("SEND OVERRUNS")) {
+					if (loggingEnabled) log.debug("Found 'SEND OVERRUNS' in the text file.");
+					if (loggingEnabled) log.debug("concatLine:");
+					if (loggingEnabled) log.debug(concatLine);
 					overrunsMatcher = overrunsPattern.matcher(concatLine);
+//					if (loggingEnabled) log.debug("overrunsMatcher: " + overrunsMatcher.find());
 				}
 				
 				// Third looks for the Sample Shelf note.
@@ -945,6 +949,9 @@ public class ArtDept extends JFrame {
 		if (loggingEnabled) log.debug("WNA Order: " + wnaPo + " with a length of " + wnaPo.length());
 		if (loggingEnabled) log.debug("Job Number read from file: " + readJobNum);
 		if (loggingEnabled) log.debug("...compared to the entered job number: " + jobNum);
+		if (loggingEnabled) log.debug("Overruns: " + overruns);
+		if (loggingEnabled) log.debug("No Sample Shelf: " + noSamples);
+		if (loggingEnabled) log.debug("Rush: " + rush);
 /*		if (printingCompany.toLowerCase().contains("acknowledgement")) {
 			// The text file is an Order Acknowledgement. The program should inform the user and then quit gracefully.
 			return null;
