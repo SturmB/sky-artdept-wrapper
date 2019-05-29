@@ -2,7 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="libs/commons-io-2.4.jar" sourcepath="libs/commons-io-2.4-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/ArtDept/libs/commons-io-2.4-javadoc.jar!/"/>
@@ -28,8 +32,8 @@
 			<attribute name="javadoc_location" value="file:/Users/apache/Downloads/++Development/simple-xml-2.7.1/javadoc/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT.jar" sourcepath="/Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT-sources.jar"/>
-	<classpathentry kind="lib" path="/Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT.jar" sourcepath="/Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/apache/Development/workspace/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT.jar" sourcepath="/Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/apache/Development/workspace/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT.jar" sourcepath="/Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="lib" path="libs/json-20160810.jar" sourcepath="libs/json-20160810-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/ArtDept/libs/json-20160810-javadoc.jar!/"/>
