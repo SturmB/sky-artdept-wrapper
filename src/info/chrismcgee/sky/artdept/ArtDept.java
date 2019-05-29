@@ -126,7 +126,7 @@ public class ArtDept extends JFrame {
 	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 	private static String appName = "Sky Launcher";
-	private static String appVersion = "4.0.0";
+	private static String appVersion = "4.0.1";
 	private static String defaultTitle = appName + " v" + appVersion;
 	private Pattern upperPattern;
 	private Pattern lowerPattern;
@@ -917,7 +917,7 @@ public class ArtDept extends JFrame {
 				}
 				
 				// Second one looks for Overruns.
-				if (concatLine.contains("OVERRUNS")) {
+				if (concatLine.contains("SEND OVERRUNS")) {
 					overrunsMatcher = overrunsPattern.matcher(concatLine);
 				}
 				
