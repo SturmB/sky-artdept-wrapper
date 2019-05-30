@@ -159,13 +159,18 @@ public class ScriptManager {
 			jsonOut = jsonIntermediate.replaceAll("\\\"", "~\"");
 			if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
 
+			Process p = null;
 			try {
-				Process returned = null;
-				returned = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + ArtDept.scriptPath);
-				returned.waitFor();
+				p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + ArtDept.scriptPath);
+				ReadStream s1 = new ReadStream("stdin", p.getInputStream());
+				ReadStream s2 = new ReadStream("stderr", p.getErrorStream());
+				s1.start();
+				s2.start();
+				p.waitFor();
+				if (ArtDept.loggingEnabled) log.debug("Done waiting for the script to execute.");
 				BufferedReader input =
 						new BufferedReader(
-								new InputStreamReader(returned.getInputStream()));
+								new InputStreamReader(p.getInputStream()));
 				String line;
 				while ((line = input.readLine()) != null) {
 					resultUntrimmed += line;
@@ -175,10 +180,15 @@ public class ScriptManager {
 				if (ArtDept.loggingEnabled) log.error("An error occurred with the script.", e);
 				JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
 				return false;
+			} finally {
+				if (p != null) {
+					p.destroy();
+				}
 			}
 			
 		}
 
+		if (ArtDept.loggingEnabled) log.debug("Trimming the result.");
 		String resultStr = resultUntrimmed.trim();
 //		System.out.println(resultStr);
 		if (ArtDept.loggingEnabled) log.debug(resultStr); // Check that we received the correct information back from the script.
