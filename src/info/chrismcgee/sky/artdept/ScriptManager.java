@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -161,21 +164,21 @@ public class ScriptManager {
 
 			Process p = null;
 			try {
+				ExecutorService executor = Executors.newFixedThreadPool(10);
 				p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + ArtDept.scriptPath);
-				ReadStream s1 = new ReadStream("stdin", p.getInputStream());
-				ReadStream s2 = new ReadStream("stderr", p.getErrorStream());
-				s1.start();
-				s2.start();
+				Future<String> fut1 = executor.submit(new ReadStreamWithCall("stdin", p.getInputStream()));
+				Future<String> fut2 = executor.submit(new ReadStreamWithCall("stdin", p.getErrorStream()));
+				resultUntrimmed = fut1.get();
 				p.waitFor();
 				if (ArtDept.loggingEnabled) log.debug("Done waiting for the script to execute.");
-				BufferedReader input =
-						new BufferedReader(
-								new InputStreamReader(p.getInputStream()));
-				String line;
-				while ((line = input.readLine()) != null) {
-					resultUntrimmed += line;
-				}
-				input.close();
+//				BufferedReader input =
+//						new BufferedReader(
+//								new InputStreamReader(p.getInputStream()));
+//				String line;
+//				while ((line = input.readLine()) != null) {
+//					resultUntrimmed += line;
+//				}
+//				input.close();
 			} catch (Exception e) {
 				if (ArtDept.loggingEnabled) log.error("An error occurred with the script.", e);
 				JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
