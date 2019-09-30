@@ -424,7 +424,8 @@ public class ScriptManager {
 				lineItemBean.setPackageQuantity(thisLineItem.getString("packageQuantity"));
 				lineItemBean.setCaseQuantity(thisLineItem.getString("caseQuantity"));
 				try { // Since the Label Quantity field could be blank
-					lineItemBean.setLabelQuantity(thisLineItem.getInt("labelQuantity"));
+					lineItemBean.setLabelQuantity(thisLineItem.optInt("labelQuantity", 0));
+//					lineItemBean.setLabelQuantity(thisLineItem.getInt("labelQuantity"));
 				} catch (NumberFormatException err) {
 					if (ArtDept.loggingEnabled) log.error("Could not parse Label Quantity into an integer. Setting it to 0 instead.");
 					lineItemBean.setLabelQuantity(0);
