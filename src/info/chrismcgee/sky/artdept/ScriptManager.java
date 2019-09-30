@@ -593,8 +593,12 @@ public class ScriptManager {
 				// Loop through to insert/update/delete Artworks.
 				int j = 0;
 				while (j < thisLineItem.getArtworkList().size()) {
+					if (ArtDept.loggingEnabled) log.debug("Checking art number " + j + ".");
 					Artwork thisArt = thisLineItem.getArtworkList().get(j);
-					if (existingArtworks.size() > 0 && existingArtworks.get(j) != null) {
+					if (ArtDept.loggingEnabled) log.debug("This art file's name: " + thisArt.getDigitalArtFile());
+					if (existingArtworks.size() > 0
+							&& existingArtworks.size() - 1 >= j
+							&& existingArtworks.get(j) != null) {
 						// If there is an Artwork already in the database at this "slot",
 						// go ahead and replace it with the new one.
 						// This is done by setting the incoming Artwork object's ID

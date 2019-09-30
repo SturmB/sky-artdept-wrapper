@@ -35,11 +35,12 @@ public class SendMail {
 		// Email server host address.
 		String host = "mail.skyunlimitedinc.com";
 		
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "false");
+//		Properties props = new Properties();
+		Properties props = System.getProperties();
+		props.setProperty("mail.smtp.auth", "false");
 //		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", "25");
+		props.setProperty("mail.smtp.host", host);
+		props.setProperty("mail.smtp.port", "25");
 		
 		// Get the Session object.
 /*		Session session = Session.getDefaultInstance(props,
@@ -48,7 +49,7 @@ public class SendMail {
 						return new PasswordAuthentication(username, password);
 					}
 				});*/
-		Session session = Session.getInstance(props);
+		Session session = Session.getDefaultInstance(props);
 		
 		try {
 			// Create a default MimeMessage object.
@@ -76,7 +77,9 @@ public class SendMail {
 			if (ArtDept.loggingEnabled) log.debug("Sent message successfully....");
 		
 		} catch (MessagingException e) {
-			if (ArtDept.loggingEnabled) log.error("Could not send email message.", e);
+//			if (ArtDept.loggingEnabled) log.error("Could not send email message.", e);
+			System.out.println("Could not send email message.");
+			System.out.println(e);
 			return false;
 		}
 		
