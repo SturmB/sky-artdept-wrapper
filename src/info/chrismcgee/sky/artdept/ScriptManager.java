@@ -1,9 +1,9 @@
 package info.chrismcgee.sky.artdept;
 
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+//import java.io.InputStreamReader;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -167,7 +167,7 @@ public class ScriptManager {
 				ExecutorService executor = Executors.newFixedThreadPool(10);
 				p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + ArtDept.scriptPath);
 				Future<String> fut1 = executor.submit(new ReadStreamWithCall("stdin", p.getInputStream()));
-				Future<String> fut2 = executor.submit(new ReadStreamWithCall("stdin", p.getErrorStream()));
+//				Future<String> fut2 = executor.submit(new ReadStreamWithCall("stdin", p.getErrorStream()));
 				resultUntrimmed = fut1.get();
 				p.waitFor();
 				if (ArtDept.loggingEnabled) log.debug("Done waiting for the script to execute.");
