@@ -3,6 +3,12 @@
  */
 package info.chrismcgee.util;
 
+import java.sql.Connection;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import info.chrismcgee.sky.artdept.ArtDept;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -13,17 +19,65 @@ import io.lettuce.core.api.sync.RedisCommands;
  */
 public class RedisManager {
 
-	public static void main(String[] args) {
+	static final Logger log = LogManager.getLogger(RedisManager.class.getName()); // For logging.
+	private static RedisManager instance = null;
 
-		RedisClient redisClient = RedisClient.create("redis://192.168.1.71:6379");
-		StatefulRedisConnection<String, String> connection = redisClient.connect();
-		RedisCommands<String, String> syncCommands = connection.sync();
-		
-		System.out.println("Connected to Redis");
-		System.out.println("keys - " + syncCommands.keys("*"));
-		System.out.println("laravel:chart:statuses - " + syncCommands.get("laravel:chart:statuses"));
-		
-		connection.close();
-		redisClient.shutdown();
+	private final String CONN_STRING = "redis://192.168.1.71:6379";
+
+	// The connection to the database starts out as null.
+	private RedisClient redisClient = null;
+	private StatefulRedisConnection<String, String> connection = null;
+	private RedisCommands<String, String> syncCommands = null;
+
+	/**
+	 * @return	{@link RedisManager}	A connection to Redis. Is a singleton, so only one can exist.
+	 */
+	public static RedisManager getInstance() {
+		if (instance == null) {
+			instance = new RedisManager();
+		}
+		return instance;
 	}
+	
+	private boolean openConnection() {
+		try {
+			redisClient = RedisClient.create(CONN_STRING);
+			connection = redisClient.connect();
+			syncCommands = connection.sync();
+			return true;
+		} catch (Exception e) {
+			if (ArtDept.loggingEnabled) log.error("Exception when trying to open a connection to Redis.", e);
+			return false;
+		}
+	}
+
+	/**
+	 * @return	{@link Connection}	Gets the RedisCommands object to Redis.
+	 */
+	public RedisCommands<String, String> getCommands() {
+		if (syncCommands == null) {
+			if (openConnection()) {
+				return syncCommands;
+			} else {
+				return null;
+			}
+		}
+		return syncCommands;
+	}
+
+	/**
+	 * Just a simple method that closes any open connection to Redis.
+	 */
+	public void close() {
+		if (ArtDept.loggingEnabled) log.entry("Closing connection");
+		try {
+			connection.close();
+			redisClient.shutdown();
+			connection = null;
+			redisClient = null;
+		} catch (Exception e) {
+			if (ArtDept.loggingEnabled) log.error("Error when closing the Redis connection.", e);
+		}
+	}
+
 }

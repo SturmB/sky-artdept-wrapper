@@ -479,6 +479,7 @@ public class ArtDept extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							// Close this ArtDept window when the button is pressed.
 							if (loggingEnabled) log.trace("Cancel button pressed");
+							ConnectionManager.getInstance().close();
 							Window window = SwingUtilities.windowForComponent((Component) e.getSource());
 							window.dispose();
 						}
