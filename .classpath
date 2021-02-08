@@ -41,5 +41,26 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="lib" path="libs/jakarta.activation-1.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/lettuce-core-6.0.2.RELEASE.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://lettuce.io/core/release/api"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ArtDept/libs/lettuce-core-6.0.2.RELEASE-bin/dependencies"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/commons-pool2-2.8.1.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/HdrHistogram-2.1.12.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/LatencyUtils-2.0.3.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-buffer-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-codec-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-common-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-handler-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-resolver-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-tcnative-2.0.36.Final-osx-x86_64.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-transport-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-transport-native-epoll-4.1.56.Final-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-transport-native-kqueue-4.1.56.Final-osx-x86_64.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-transport-native-unix-common-4.1.56.Final.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/reactive-streams-1.0.3.jar"/>
+	<classpathentry kind="lib" path="libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/reactor-core-3.3.13.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
