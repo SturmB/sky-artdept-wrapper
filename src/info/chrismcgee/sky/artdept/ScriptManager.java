@@ -6,13 +6,19 @@ import java.io.IOException;
 //import java.io.InputStreamReader;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -40,6 +46,7 @@ import info.chrismcgee.sky.tables.LineItemManager;
 import info.chrismcgee.sky.tables.OrderManager;
 import info.chrismcgee.sky.tables.PrintTypeManager;
 import info.chrismcgee.sky.tables.ProductionMaxesManager;
+import info.chrismcgee.util.RedisManager;
 
 public class ScriptManager {
 	
@@ -661,6 +668,45 @@ public class ScriptManager {
 		if (ArtDept.loggingEnabled) log.trace("Completed main section.");
 		
 //		ConnectionManager.getInstance().close();
+		
+		// Get the first day of the week for this order.
+		final DayOfWeek firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
+		LocalDate weekStart = bean.getShipDateId().toLocalDate().with(TemporalAdjusters.previousOrSame(firstDayOfWeek));
+		if (ArtDept.loggingEnabled) log.info("current ship date id: " + bean.getShipDateId().toString());
+		if (ArtDept.loggingEnabled) log.info("weekStart: " + weekStart.toString());
+		
+		// Pluck all of the Item Statuses and Print Types from the order's LineItems.
+		List<String> itemStatuses = bean.getLineItemList().stream().map(x -> x.getItemStatusId()).collect(Collectors.toList());
+		List<String> itemPrintTypes = bean.getLineItemList().stream().map(x -> x.getPrintTypeId()).collect(Collectors.toList());
+		
+		final String cachePrefix = "sky_schedule_database_sky_schedule_cache:";
+
+		// Flush certain keys from the Redis data store.
+		if (ArtDept.loggingEnabled) log.info("Before deleting, order-by-id for " + bean.getId() + " is: " +
+				RedisManager.getInstance().getCommands().get(cachePrefix + "order-by-id:" + bean.getId()));
+
+		RedisManager.getInstance().getCommands().del(
+				cachePrefix + "chart:print-type-pie:" + firstDayOfWeek,
+				cachePrefix + "chart:impressions-per-print-type",
+				cachePrefix + "production-maxes:" + bean.getShipDateId().toString(),
+				cachePrefix + "daily-totals:" + bean.getShipDateId().toString(),
+				cachePrefix + "weekly-totals:" + weekStart.toString(),
+				cachePrefix + "weekly-order-progress:" + weekStart.toString(),
+				cachePrefix + "weekly-line-item-progress:" + weekStart.toString(),
+				cachePrefix + "orders-by-date:" + bean.getShipDateId().toString(),
+				cachePrefix + "recent-orders",
+				cachePrefix + "order-by-id:" + bean.getId()
+				);
+
+		if (ArtDept.loggingEnabled) log.info("After deleting, order-by-id for " + bean.getId() + " is: " +
+				RedisManager.getInstance().getCommands().get(cachePrefix + "order-by-id:" + bean.getId()));
+
+		for (String status : itemStatuses) {
+			RedisManager.getInstance().getCommands().del(cachePrefix + "orders-by-status:" + status);
+		}
+		for (String printType : itemPrintTypes) {
+			RedisManager.getInstance().getCommands().del(cachePrefix + "orders-by-print-type:" + printType);
+		}
 
 		return true;
 	}

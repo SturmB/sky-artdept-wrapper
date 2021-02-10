@@ -22,13 +22,19 @@ public class RedisManager {
 	static final Logger log = LogManager.getLogger(RedisManager.class.getName()); // For logging.
 	private static RedisManager instance = null;
 
-	private final String CONN_STRING = "redis://192.168.1.71:6379";
+	private final String REMOTE_CONN_STRING = "redis://192.168.1.71:6379/1";
+	private final String LOCAL_CONN_STRING = "redis://127.0.0.1:6379/1";
 
 	// The connection to the database starts out as null.
 	private RedisClient redisClient = null;
 	private StatefulRedisConnection<String, String> connection = null;
 	private RedisCommands<String, String> syncCommands = null;
 
+	public static void main(String[] args) {
+		System.out.println(RedisManager.getInstance().getCommands().keys("*chedule*"));
+		RedisManager.getInstance().close();
+	}
+	
 	/**
 	 * @return	{@link RedisManager}	A connection to Redis. Is a singleton, so only one can exist.
 	 */
@@ -41,7 +47,7 @@ public class RedisManager {
 	
 	private boolean openConnection() {
 		try {
-			redisClient = RedisClient.create(CONN_STRING);
+			redisClient = RedisClient.create(REMOTE_CONN_STRING);
 			connection = redisClient.connect();
 			syncCommands = connection.sync();
 			return true;
