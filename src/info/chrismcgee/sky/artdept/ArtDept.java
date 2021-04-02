@@ -1,70 +1,5 @@
 package info.chrismcgee.sky.artdept;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.prefs.Preferences;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-/*import com.apple.eawt.AboutHandler;
-import com.apple.eawt.AppEvent.AboutEvent;
-import com.apple.eawt.AppEvent.QuitEvent;
-import com.apple.eawt.Application;
-import com.apple.eawt.QuitHandler;
-import com.apple.eawt.QuitResponse;
-*/
 import info.chrismcgee.components.DateManager;
 import info.chrismcgee.components.Sanitizer;
 import info.chrismcgee.enums.OSType;
@@ -77,12 +12,40 @@ import info.chrismcgee.sky.tables.OrderManager;
 import info.chrismcgee.util.ConnectionManager;
 import info.chrismcgee.util.SendMail;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serial;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.prefs.Preferences;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ArtDept extends JFrame {
 
 	/**
 	 * Serialize, to keep Eclipse from throwing a warning message.
 	 */
+	@Serial
 	private static final long serialVersionUID = -185001290066987954L;
 	
 	/**
@@ -101,50 +64,34 @@ public class ArtDept extends JFrame {
 			+ "sky-artdept" + File.separator
 			+ "Production" + File.separator;
 	// Preferences variables
-	private Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
+	private final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 	private static final String PREFS_EMAIL = "email";
 	private static final String PREFS_INITIALS = "initials";
 	// The location of the window (It's not resizable)
 	private Point windowLocation;
 	private Dimension windowSize;
-	private final JPanel contentPanel = new JPanel(); // default.
 	// These fields allow their respective components to be accessed anywhere.
-	private JTextField tfOrderNum;
-	private JTextField tfInitials;
-	private JTextField tfEmail;
-	private JButton btnProof;
-	private JButton btnOutput;
-	private JButton cancelButton;
+	private final JTextField tfOrderNum;
+	private final JTextField tfInitials;
+	private final JTextField tfEmail;
+	private final JButton btnProof;
+	private final JButton btnOutput;
+	private final JButton cancelButton;
 	// Simple booleans to state whether or not each text field has passed sanitization.
 	private boolean jobNumberReady = false;
 	private boolean initialsReady = false;
 	private boolean usernameReady = false;
 	private File textFile = null;
-	// Define keystrokes that will be used as shortcuts for the "Proof" and "Output" buttons.
-	private KeyStroke ksMenuP = KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
-	private KeyStroke ksMenuO = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
-	private KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
-	private KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
-	private static String appName = "Sky Launcher";
-	private static String appVersion = "4.1.0";
-	private static String defaultTitle = appName + " v" + appVersion;
-	private Pattern upperPattern;
-	private Pattern lowerPattern;
-	private Matcher ucMatcher;
-	private Matcher lcMatcher;
-	private File patternFile = null; // Text file that has the two RegEx patterns for fixing capitalizations.
+	private static final String appName = "Sky Launcher";
+	private static final String appVersion = "4.1.0";
+	private static final String defaultTitle = appName + " v" + appVersion;
 
 	private String customerServiceRep = "";
 	private boolean creditCard = false;
 	private int shipDays = 0;
 	private String wnaPo = "";
-	private String messageToAddr = "customerservice@skyunlimitedinc.com";
-	private JMenuBar menuBar;
-	private JMenu mnFile;
-	private JCheckBoxMenuItem chckbxmntmTestVersion;
-	private JCheckBoxMenuItem chckbxmntmDebugLog;
-	private JPanel leftButtonsPane;
-	private JPanel rightButtonsPane;
+	private final JCheckBoxMenuItem chckbxmntmTestVersion;
+	private final JCheckBoxMenuItem chckbxmntmDebugLog;
 	private JFrame frm;
 	
 	/**
@@ -154,39 +101,36 @@ public class ArtDept extends JFrame {
 		// Set some logging properties.
 		
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				if (loggingEnabled) log.entry("main");
-				try { // Create the dialog window and display it.
-					
-					if (OSType.getOSType() == OSType.MAC) {
-						// Take the menu bar off the JFrame.
-						System.setProperty("apple.laf.useScreenMenuBar", "true");
-						// Set the name of the application menu item.
-						System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Script Launcher");
-					}
-					
-					// Set the look and feel.
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					
-					// Create the frame and show it.
-					ArtDept frame = new ArtDept();
+		SwingUtilities.invokeLater(() -> {
+			if (loggingEnabled) log.entry("main");
+			try { // Create the dialog window and display it.
 
-					frame.setTitle(defaultTitle);
-					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					frame.setLocationByPlatform(true);
-					
-					// Set the location and size of the window
-					frame.windowLocation = new Point(frame.prefs.getInt("x", 100), frame.prefs.getInt("y", 100));
-					frame.setLocation(frame.windowLocation);
-					frame.windowSize = new Dimension(frame.prefs.getInt("width", 502), frame.prefs.getInt("height", 200));
-					frame.setSize(frame.windowSize);
-
-					frame.setVisible(true);
-				} catch (Exception e) {
-					if (loggingEnabled) log.error("Error in Main", e);
+				if (OSType.getOSType() == OSType.MAC) {
+					// Take the menu bar off the JFrame.
+					System.setProperty("apple.laf.useScreenMenuBar", "true");
+					// Set the name of the application menu item.
+					System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Script Launcher");
 				}
+
+				// Set the look and feel.
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+				// Create the frame and show it.
+				ArtDept frame = new ArtDept();
+
+				frame.setTitle(defaultTitle);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setLocationByPlatform(true);
+
+				// Set the location and size of the window
+				frame.windowLocation = new Point(frame.prefs.getInt("x", 100), frame.prefs.getInt("y", 100));
+				frame.setLocation(frame.windowLocation);
+				frame.windowSize = new Dimension(frame.prefs.getInt("width", 502), frame.prefs.getInt("height", 200));
+				frame.setSize(frame.windowSize);
+
+				frame.setVisible(true);
+			} catch (Exception e) {
+				if (loggingEnabled) log.error("Error in Main", e);
 			}
 		});
 	}
@@ -196,7 +140,7 @@ public class ArtDept extends JFrame {
 	 */
 	public ArtDept() {
 		
-		List<Image> icons = new ArrayList<Image>();
+		List<Image> icons = new ArrayList<>();
 		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_16x16.png")).getImage());
 		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_32x32.png")).getImage());
 		icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_48x48.png")).getImage());
@@ -229,6 +173,7 @@ public class ArtDept extends JFrame {
 			/**
 			 * Serialize, to keep Eclipse from throwing a warning message.
 			 */
+			@Serial
 			private static final long serialVersionUID = -3718879213082545441L;
 
 			/* (non-Javadoc)
@@ -246,17 +191,13 @@ public class ArtDept extends JFrame {
 				if (jobNumberReady && initialsReady)
 				{
 					if (loggingEnabled) log.trace("Proofing button hit!");
-					Thread proofThread = new Thread()
-					{
-						public void run()
-						{
-							try {
-								callScript(ScriptType.PROOF);
-							} catch (InterruptedException e) {
-								if (loggingEnabled) log.error("Interrupted!", e);
-							}
+					Thread proofThread = new Thread(() -> {
+						try {
+							callScript(ScriptType.PROOF);
+						} catch (InterruptedException e) {
+							if (loggingEnabled) log.error("Interrupted!", e);
 						}
-					};
+					});
 					proofThread.start();
 				}
 			}
@@ -265,6 +206,7 @@ public class ArtDept extends JFrame {
 			/**
 			 * Serialize, to keep Eclipse from throwing a warning message.
 			 */
+			@Serial
 			private static final long serialVersionUID = -1892240535496986876L;
 
 			/* (non-Javadoc)
@@ -279,25 +221,26 @@ public class ArtDept extends JFrame {
 				if (jobNumberReady && initialsReady)
 				{
 					if (loggingEnabled) log.trace("Output button hit!");
-					Thread outputThread = new Thread()
-					{
-						public void run()
-						{
-							try {
-								callScript(ScriptType.OUTPUT);
-							} catch (InterruptedException e) {
-								if (loggingEnabled) log.error("Interrupted!", e);
-							}
+					Thread outputThread = new Thread(() -> {
+						try {
+							callScript(ScriptType.OUTPUT);
+						} catch (InterruptedException e) {
+							if (loggingEnabled) log.error("Interrupted!", e);
 						}
-					};
+					});
 					outputThread.start();
 				}
 			}
 		};
 		// Bind the KeyStrokes to the action we want them to perform.
+		// Define keystrokes that will be used as shortcuts for the "Proof" and "Output" buttons.
+		KeyStroke ksMenuP = KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
 		getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ksMenuP, "doProof");
+		KeyStroke ksF1 = KeyStroke.getKeyStroke("F1");
 		getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ksF1, "doProof");
+		KeyStroke ksMenuO = KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
 		getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ksMenuO, "doOutput");
+		KeyStroke ksF2 = KeyStroke.getKeyStroke("F2");
 		getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ksF2, "doOutput");
 		getRootPane().getActionMap().put("doProof", doProof);
 		getRootPane().getActionMap().put("doOutput", doOutput);
@@ -305,6 +248,8 @@ public class ArtDept extends JFrame {
 		// Default items created by WindowBuilder.
 //		setBounds(100, 100, 502, 176);
 		getContentPane().setLayout(new BorderLayout());
+		// default.
+		JPanel contentPanel = new JPanel();
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[][grow]", "[][][]"));
@@ -312,30 +257,26 @@ public class ArtDept extends JFrame {
 
 		{ // Menu bar that holds options for whether or not to run the
 		  // test version of the script as well as to keep a if (loggingEnabled) log.
-			menuBar = new JMenuBar();
+			JMenuBar menuBar = new JMenuBar();
 			setJMenuBar(menuBar);
 			{
-				mnFile = new JMenu("Settings");
+				JMenu mnFile = new JMenu("Settings");
 				menuBar.add(mnFile);
 				{
 					chckbxmntmTestVersion = new JCheckBoxMenuItem("Test Version");
-					chckbxmntmTestVersion.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							AbstractButton aButton = (AbstractButton) e.getSource();
-							setScriptPath(aButton.getModel().isSelected());
-							setTitle();
-						}
+					chckbxmntmTestVersion.addActionListener(e -> {
+						AbstractButton aButton = (AbstractButton) e.getSource();
+						setScriptPath(aButton.getModel().isSelected());
+						setTitle();
 					});
 					mnFile.add(chckbxmntmTestVersion);
 				}
 				{
 					chckbxmntmDebugLog = new JCheckBoxMenuItem("Debug Log");
-					chckbxmntmDebugLog.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							AbstractButton aButton = (AbstractButton) e.getSource();
-							loggingEnabled = aButton.getModel().isSelected();
-							setTitle();
-						}
+					chckbxmntmDebugLog.addActionListener(e -> {
+						AbstractButton aButton = (AbstractButton) e.getSource();
+						loggingEnabled = aButton.getModel().isSelected();
+						setTitle();
 					});
 					mnFile.add(chckbxmntmDebugLog);
 				}
@@ -440,7 +381,7 @@ public class ArtDept extends JFrame {
 				buttonPane.setLayout(new BorderLayout(0, 0));
 			}
 			{
-				leftButtonsPane = new JPanel();
+				JPanel leftButtonsPane = new JPanel();
 				leftButtonsPane.setBorder(null);
 				leftButtonsPane.setBackground(Color.DARK_GRAY);
 				buttonPane.add(leftButtonsPane, BorderLayout.WEST);
@@ -451,23 +392,19 @@ public class ArtDept extends JFrame {
 					btnOutput = new JButton("Output");
 					leftButtonsPane.add(btnOutput);
 					btnOutput.setEnabled(false); // Spawns disabled until input is sanitized.
-					btnOutput.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							if (loggingEnabled) log.trace("Pressed the Output button");
-							doOutput.actionPerformed(e); // When pressed, call the "doOutput" action.
-						}
+					btnOutput.addActionListener(e -> {
+						if (loggingEnabled) log.trace("Pressed the Output button");
+						doOutput.actionPerformed(e); // When pressed, call the "doOutput" action.
 					});
 //				getRootPane().setDefaultButton(btnOutput); // default.
 				}
-				btnProof.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (loggingEnabled) log.trace("Pressed the ScriptManager button");
-						doProof.actionPerformed(e); // When pressed, call the "doProof" action.
-					}
+				btnProof.addActionListener(e -> {
+					if (loggingEnabled) log.trace("Pressed the ScriptManager button");
+					doProof.actionPerformed(e); // When pressed, call the "doProof" action.
 				});
 			}
 			{
-				rightButtonsPane = new JPanel();
+				JPanel rightButtonsPane = new JPanel();
 				rightButtonsPane.setBorder(null);
 				rightButtonsPane.setBackground(Color.DARK_GRAY);
 				buttonPane.add(rightButtonsPane, BorderLayout.EAST);
@@ -475,14 +412,12 @@ public class ArtDept extends JFrame {
 					cancelButton = new JButton("Close");
 					rightButtonsPane.add(cancelButton);
 					cancelButton.setActionCommand("Cancel"); // default.
-					cancelButton.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-							// Close this ArtDept window when the button is pressed.
-							if (loggingEnabled) log.trace("Cancel button pressed");
-							ConnectionManager.getInstance().close();
-							Window window = SwingUtilities.windowForComponent((Component) e.getSource());
-							window.dispose();
-						}
+					cancelButton.addActionListener(e -> {
+						// Close this ArtDept window when the button is pressed.
+						if (loggingEnabled) log.trace("Cancel button pressed");
+						ConnectionManager.getInstance().close();
+						Window window = SwingUtilities.windowForComponent((Component) e.getSource());
+						window.dispose();
 					});
 				}
 			}
@@ -502,33 +437,8 @@ public class ArtDept extends JFrame {
 		        }
 		    }
 		});
-		
-/*		
-		// Handle the Mac OS menu items & events
-		Application macApplication = Application.getApplication();
-		
-		// About menu handler
-		macApplication.setAboutHandler(new AboutHandler() {
-			
-			@Override
-			public void handleAbout(AboutEvent ae) {
-				JOptionPane.showMessageDialog(rootPane,
-						appName + "\nversion " + appVersion + "\nCreated by Chris McGee for Sky Unlimited, Inc.\nhttp://chrismcgee.info\n©2014–2017 Chris McGee",
-						"About the Script Runner",
-						JOptionPane.PLAIN_MESSAGE);
-				
-			}
-		});
-		
-		// Quit menu handler
-		macApplication.setQuitHandler(new QuitHandler() {
-			
-			@Override
-			public void handleQuitRequestWith(QuitEvent qe, QuitResponse qr) {
-				qr.performQuit();
-			}
-		});
-*/	}
+
+	}
 	
 	/**
 	 * Checks to see if the Job Number text field has been properly filled out (via the boolean field)
@@ -611,7 +521,7 @@ public class ArtDept extends JFrame {
 	 * generated from Customer Service. If the text file does not exist, then
 	 * the Job bean will be NULL, and the ScriptManager class's proofRunner() method will
 	 * just leave the customer fields blank, ready for the user to fill them out.
-	 * @throws InterruptedException 
+	 * @throws InterruptedException Description for the exception goes here.
 	 */
 	private void callScript (ScriptType scriptType) throws InterruptedException
 	{
@@ -655,7 +565,6 @@ public class ArtDept extends JFrame {
 			JOptionPane.showMessageDialog(null, "Text file not found. Please have it created and retry.", "Text File Not Found", JOptionPane.ERROR_MESSAGE);
 			enableControls(true);
 			return;
-		} finally {
 		}
 //		if (loggingEnabled) log.debug("After text file grab, Job bean is null? " + (jobBean == null));
 		
@@ -663,6 +572,7 @@ public class ArtDept extends JFrame {
 		// Also do some more checks.
 		if (scriptType == ScriptType.PROOF) {
 			proofNum++;
+			String messageToAddr = "customerservice@skyunlimitedinc.com";
 			if (proofNum == 1 && orderBean == null) {
 				// If the text file doesn't exist during a first proof of a job.
 				if (JOptionPane.showConfirmDialog(null, "Text file not found.\n"
@@ -674,53 +584,59 @@ public class ArtDept extends JFrame {
 							"Need text file for " + tfOrderNum.getText() + ".",
 							"I need a text file made for Job #" + tfOrderNum.getText() + ", please. Thank you!");
 					JOptionPane.showMessageDialog(null,
-							"An email has been sent to have the file created.\n" +
-									"Please keep a close eye on your inbox for a message\n" +
-									"stating that it has been created. Then retry.",
+							"""
+									An email has been sent to have the file created.
+									Please keep a close eye on your inbox for a message
+									stating that it has been created. Then retry.""",
 							"Text File Not Found",
 							JOptionPane.WARNING_MESSAGE);
 				}
 				enableControls(true);
 				return;
-			} else if (orderBean.getPrintingCompany() == null) {
-				// If the Printing Company retrieved from the text file is null,
-				// Then it is most likely an Order Acknowledgement text file.
-				if (JOptionPane.showConfirmDialog(null, "The text file appears to be an Order Acknowledgement rather than a Sales Copy.\n"
-						+ "Send an email to Customer Service to fix it?", "Send Email?",
-						JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
-							messageToAddr,
-							"Need correct text file for " + tfOrderNum.getText() + ".",
-							"The text file with the name " + tfOrderNum.getText() + ".TXT is an Order Acknowledgement. " +
-									"Please overwrite it with a Sales Copy for that Job number. Thank you!");
-					JOptionPane.showMessageDialog(null, "An email has been sent to have the file corrected.\n" +
-							"Please keep a close eye on your inbox for a message\n" +
-							"stating that it has been created. Then retry.",
-							"Incorrect Type of Text File!",
-							JOptionPane.WARNING_MESSAGE);
+			} else {
+				assert orderBean != null;
+				if (orderBean.getPrintingCompany() == null) {
+					// If the Printing Company retrieved from the text file is null,
+					// Then it is most likely an Order Acknowledgement text file.
+					if (JOptionPane.showConfirmDialog(null, "The text file appears to be an Order Acknowledgement rather than a Sales Copy.\n"
+							+ "Send an email to Customer Service to fix it?", "Send Email?",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+						SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
+								messageToAddr,
+								"Need correct text file for " + tfOrderNum.getText() + ".",
+								"The text file with the name " + tfOrderNum.getText() + ".TXT is an Order Acknowledgement. " +
+										"Please overwrite it with a Sales Copy for that Job number. Thank you!");
+						JOptionPane.showMessageDialog(null, """
+										An email has been sent to have the file corrected.
+										Please keep a close eye on your inbox for a message
+										stating that it has been created. Then retry.""",
+								"Incorrect Type of Text File!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+					enableControls(true);
+					return;
+				} else if (!tfOrderNum.getText().equals(orderBean.getId())) {
+					// If the entered job number doesn't match the one retrieved from the text file.
+					if (JOptionPane.showConfirmDialog(null, "The job number you entered and the one read from the text file do not match.\n"
+							+ "Send an email to Customer Service to fix it?", "Send Email?",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+						SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
+								messageToAddr,
+								"Need text file for " + tfOrderNum.getText() + ".",
+								"The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
+										"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ". Thank you!");
+						JOptionPane.showMessageDialog(null, """
+										An email has been sent to have the file corrected.
+										Please keep a close eye on your inbox for a message
+										stating that it has been created. Then retry.""",
+								"Job Number Mismatch!",
+								JOptionPane.WARNING_MESSAGE);
+					}
+					enableControls(true);
+					return;
 				}
-				enableControls(true);
-				return;
-			} else if (!tfOrderNum.getText().equals(orderBean.getId())) {
-				// If the entered job number doesn't match the one retrieved from the text file.
-				if (JOptionPane.showConfirmDialog(null, "The job number you entered and the one read from the text file do not match.\n"
-						+ "Send an email to Customer Service to fix it?", "Send Email?",
-						JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					SendMail.send(prefs.get(PREFS_EMAIL, "skyartdept@main.skyunlimitedinc.com"),
-							messageToAddr,
-							"Need text file for " + tfOrderNum.getText() + ".",
-							"The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
-									"Please overwrite it with one made for Job #" + tfOrderNum.getText() + ". Thank you!");
-					JOptionPane.showMessageDialog(null, "An email has been sent to have the file corrected.\n" +
-							"Please keep a close eye on your inbox for a message\n" +
-							"stating that it has been created. Then retry.",
-							"Job Number Mismatch!",
-							JOptionPane.WARNING_MESSAGE);
-				}
-				enableControls(true);
-				return;
 			}
 		}
 		
@@ -731,7 +647,9 @@ public class ArtDept extends JFrame {
 		ConnectionManager.getInstance().close();
 		
 		// Delete the text file, if it exists.
-		if (successfulRun && textFile.exists()) textFile.delete();
+		if (successfulRun && textFile.exists()) {
+			textFile.delete();
+		}
 		
 		// Re-enable all controls.
 		enableControls(true);
@@ -743,18 +661,15 @@ public class ArtDept extends JFrame {
 		wnaPo = "";
 		
 		if (successfulRun) {
-			Thread dialogThread = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					if (frm == null) {
-						frm = new JFrame();
-					}
-					frm.setVisible(true);
-					frm.setAlwaysOnTop(true);
-					frm.setLocationRelativeTo(null);
-					JOptionPane.showMessageDialog(frm, "Script completed successfully!", "Script Complete", JOptionPane.INFORMATION_MESSAGE);
-					frm.setVisible(false);
+			Thread dialogThread = new Thread(() -> {
+				if (frm == null) {
+					frm = new JFrame();
 				}
+				frm.setVisible(true);
+				frm.setAlwaysOnTop(true);
+				frm.setLocationRelativeTo(null);
+				JOptionPane.showMessageDialog(frm, "Script completed successfully!", "Script Complete", JOptionPane.INFORMATION_MESSAGE);
+				frm.setVisible(false);
 			});
 			dialogThread.start();
 		}
@@ -772,7 +687,7 @@ public class ArtDept extends JFrame {
 	{
 		if (loggingEnabled) log.entry("getHighestProofNumber");
 		
-		List<Integer> proofNums = new ArrayList<Integer>();
+		List<Integer> proofNums = new ArrayList<>();
 		try {
 			for (LineItem li : bean.getLineItemList()) {
 				proofNums.add(li.getProofNum());
@@ -791,7 +706,7 @@ public class ArtDept extends JFrame {
 	 * 
 	 * @param jobNum	The Job number.
 	 * @return	Job	A Job bean with the needed input fields filled out.
-	 * @throws IOException
+	 * @throws IOException Exception description goes here.
 	 */
 	private Order readText (String jobNum, Order bean, ScriptType scriptType) throws IOException {
 		if (loggingEnabled) log.entry("readText");
@@ -810,10 +725,6 @@ public class ArtDept extends JFrame {
 			else
 				return null;
 		}
-		
-		// Read the text file's contents in two ways.
-/*		List<String> workOrderLines = FileUtils.readLines(textFile);
-		String workOrderText = FileUtils.readFileToString(textFile);*/
 
 		// Declare variables to be filled by reading the text file
 		// and (mostly) stored in the Job bean.
@@ -821,7 +732,6 @@ public class ArtDept extends JFrame {
 		String companyPO = "";
 		String shipDate = "";
 		String printingCompany = "";
-		String shipDaysString = "";
 		String readJobNum = "";
 		
 		// Prepare search patterns
@@ -830,13 +740,9 @@ public class ArtDept extends JFrame {
 		final Pattern noSamplesPattern = Pattern.compile("DON'T\\sPUT\\sSAMPLES", Pattern.CASE_INSENSITIVE);
 		final Pattern creditCardPattern = Pattern.compile("CREDIT\\s?CARD", Pattern.CASE_INSENSITIVE);
 		final Pattern rushPattern = Pattern.compile("QUICKSHIP", Pattern.CASE_INSENSITIVE);
-		// Removed these two variables since we will no longer be using the "String" method to find the key phrase.
-//		final String shipDaysPhrasePre = "WILL SHIP ";
-//		final String shipDaysPhraseSuf = " WORKING DAYS";
 		final String wnaOrderPoPhrase = "ON WNA ORDER ";
 		
 		// Matchers for the Patterns above. They must be initialized.
-		Matcher shipDaysMatcher = shipDaysPattern.matcher("");
 		Matcher creditCardMatcher = creditCardPattern.matcher("");
 		Matcher overrunsMatcher = overrunsPattern.matcher("");
 		Matcher noSamplesMatcher = noSamplesPattern.matcher("");
@@ -884,7 +790,7 @@ public class ArtDept extends JFrame {
 				
 				// This one checks for the number of shipping days.
 				// Check if the concatenated line matches our regex..
-				shipDaysMatcher = shipDaysPattern.matcher(concatLine);
+				Matcher shipDaysMatcher = shipDaysPattern.matcher(concatLine);
 				if (shipDaysMatcher.find()) {
 //				if (concatLine.contains(shipDaysPhrasePre) && concatLine.contains(shipDaysPhraseSuf)) { // Removing this "String" method.
 //					shipDaysString = concatLine.substring(concatLine.indexOf(shipDaysPhrasePre) + shipDaysPhrasePre.length(), concatLine.indexOf(shipDaysPhraseSuf)); // Ditto.
@@ -894,17 +800,9 @@ public class ArtDept extends JFrame {
 					//   It might be less efficient, but easier to understand and type.
 					if (loggingEnabled) log.debug("Matcher has found: " + shipDaysMatcher.group(0));
 //					shipDaysString = shipDaysString.replaceAll("\\D+", ""); // Removing the "String" method.
-					shipDaysString = shipDaysMatcher.group(0).replaceAll("\\D+", "");
+					String shipDaysString = shipDaysMatcher.group(0).replaceAll("\\D+", "");
 					if (loggingEnabled) log.debug("shipDaysString (from Matcher) is now: " + shipDaysString);
 					
-					// Remove underscores ("_") in front of and after the digit(s).
-					// The following block has been commented out because the numbers we need
-					//   will not always be surrounded by *only* underscores. (There might be other characters.)
-/*					if (shipDaysString.startsWith("_") && shipDaysString.endsWith("_")) {
-						// Before (example): shipDaysString = "_5_"
-						shipDaysString = shipDaysString.substring(1, shipDaysString.length()-1);
-						// After (example): shipDaysString = "5"
-					}*/
 					// Then convert it to an integer.
 					if (shipDaysString.length() > 0) {
 						try {
@@ -988,11 +886,7 @@ public class ArtDept extends JFrame {
 		if (loggingEnabled) log.debug("WNA Order: " + wnaPo + " with a length of " + wnaPo.length());
 		if (loggingEnabled) log.debug("Job Number read from file: " + readJobNum);
 		if (loggingEnabled) log.debug("...compared to the entered job number: " + jobNum);
-/*		if (printingCompany.toLowerCase().contains("acknowledgement")) {
-			// The text file is an Order Acknowledgement. The program should inform the user and then quit gracefully.
-			return null;
-		}*/
-		
+
 		// If the job numbers do not match, then alert the user and quit out of the program.
 /*		if (!jobNum.equals(readJobNum)) {
 			JOptionPane.showMessageDialog(null,
@@ -1007,26 +901,27 @@ public class ArtDept extends JFrame {
 		if (loggingEnabled) log.trace("Setting the Job bean's properties.");
 		if (scriptType == ScriptType.PROOF) {
 			switch (printingCompany) {
-				case "AMERICAN ACCENTS":
+				case "AMERICAN ACCENTS" -> {
 					if (loggingEnabled) log.debug("This is an AA order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_ACCENTS);
-					break;
-				case "AMERICAN CABIN SUPPLY":
+				}
+				case "AMERICAN CABIN SUPPLY" -> {
 					if (loggingEnabled) log.debug("This is an ACS order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_CABIN_SUPPLY);
-					break;
-				case "AMERICAN YACHT SUPPLY":
+				}
+				case "AMERICAN YACHT SUPPLY" -> {
 					if (loggingEnabled) log.debug("This is an AYS order.");
 					bean.setPrintingCompany(PrintingCompany.AMERICAN_YACHT_SUPPLY);
-					break;
-				case "SKY UNLIMITED, INC.":
+				}
+				case "SKY UNLIMITED, INC." -> {
 					if (loggingEnabled) log.debug("This is a SKY order. (internal)");
 					bean.setPrintingCompany(PrintingCompany.SKY_UNLIMITED_INC);
-					break;
-				default:
+				}
+				default -> {
 					if (loggingEnabled) log.debug("Incorrect printing company in text file. "
 							+ "It is probably an Order Acknowledgement.");
 					bean.setPrintingCompany(null);
+				}
 			}
 			bean.setId(readJobNum);
 			bean.setCustomerName(companyName);
@@ -1037,7 +932,7 @@ public class ArtDept extends JFrame {
 			} catch (NullPointerException err) {
 				if (loggingEnabled) log.error("No LineItem List. Creating one.", err);
 				LineItem lineItemBean = new LineItem();
-				List<LineItem> lineItemList = new ArrayList<LineItem>();
+				List<LineItem> lineItemList = new ArrayList<>();
 				lineItemList.add(lineItemBean);
 				bean.setLineItemList(lineItemList);
 			}
@@ -1073,11 +968,12 @@ public class ArtDept extends JFrame {
 	private String fixCapitalization(String companyNameRaw) {
 		
 		String companyName = WordUtils.capitalizeFully(companyNameRaw);
-		
-		upperPattern = Pattern.compile("(?i)(^(?!The\\b)(?!An\\b)(?![IO][nf]\\b)(?!Sir\\b)(?!Bob\\b)[\\w\\-]{2,3}(?=[\\s\\-\\+\\&])|(?<=\\s)\\w{2}(?=$)|\\b[b-df-hj-np-tv-z]{3}\\b|(?<!\\w)\\w{2,3}(?=\\))|(?<=[\\(\\-\\+\\&])\\w)");
-		lowerPattern = Pattern.compile("(?i)(?!^)(?<!\\-)\\b(of|and|an?)\\b");
 
-		patternFile = new File(scriptPath + "patterns.txt");
+		Pattern upperPattern = Pattern.compile("(?i)(^(?!The\\b)(?!An\\b)(?![IO][nf]\\b)(?!Sir\\b)(?!Bob\\b)[\\w\\-]{2,3}(?=[\\s\\-+&])|(?<=\\s)\\w{2}(?=$)|\\b[b-df-hj-np-tv-z]{3}\\b|(?<!\\w)\\w{2,3}(?=\\))|(?<=[(\\-+&])\\w)");
+		Pattern lowerPattern = Pattern.compile("(?i)(?!^)(?<!-)\\b(of|and|an?)\\b");
+
+		// Text file that has the two RegEx patterns for fixing capitalizations.
+		File patternFile = new File(scriptPath + "patterns.txt");
 		if (patternFile.exists()) {
 			if (loggingEnabled) log.trace("Pattern file exists! Reading from it now.");
 			try {
@@ -1092,9 +988,9 @@ public class ArtDept extends JFrame {
 				if (loggingEnabled) log.error("Error when attempting to read from the RegEx pattern file", e);
 			}
 		}
-		
-		ucMatcher = upperPattern.matcher("abc");
-		lcMatcher = lowerPattern.matcher("abc");
+
+		Matcher ucMatcher = upperPattern.matcher("abc");
+		Matcher lcMatcher = lowerPattern.matcher("abc");
 
 		StringBuffer sb = new StringBuffer();
 		ucMatcher.reset(companyName);
@@ -1119,26 +1015,23 @@ public class ArtDept extends JFrame {
 
 	private void enableControls (final boolean b)
 	{
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				if (loggingEnabled) log.entry("setControlsEnabled");
+		SwingUtilities.invokeLater(() -> {
+			if (loggingEnabled) log.entry("setControlsEnabled");
 
-				tfEmail.setEnabled(b);
-				tfInitials.setEnabled(b);
-				tfOrderNum.setEnabled(b);
-				btnProof.setEnabled(b);
-				btnOutput.setEnabled(b);
-				cancelButton.setEnabled(b);
-				
-				if (b)
-				{
-					// Blank out the order number and put the focus on it.
-					tfOrderNum.setText("");
-					tfOrderNum.requestFocusInWindow();
-				}
+			tfEmail.setEnabled(b);
+			tfInitials.setEnabled(b);
+			tfOrderNum.setEnabled(b);
+			btnProof.setEnabled(b);
+			btnOutput.setEnabled(b);
+			cancelButton.setEnabled(b);
 
+			if (b)
+			{
+				// Blank out the order number and put the focus on it.
+				tfOrderNum.setText("");
+				tfOrderNum.requestFocusInWindow();
 			}
+
 		});
 	}
 	
