@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class FsTest {
 
 	public static void main(String[] args) {
-		Process returned = null;
-		String processed = "";
+		Process returned;
+		StringBuilder processed = new StringBuilder();
 		String netPath = File.separator + File.separator
 				+ "SKYFS" + File.separator
 				+ "ArtDept" + File.separator
@@ -37,15 +38,15 @@ public class FsTest {
 							new InputStreamReader(returned.getInputStream()));
 			String line;
 			while ((line = input.readLine()) != null) {
-				processed += line;
+				processed.append(line);
 			}
 			input.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 			System.exit(0);
 		}
 		
-	    System.out.println(processed.trim());
+	    System.out.println(processed.toString().trim());
 	}
 
 }
