@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: info.chrismcgee.sky.artdept.ArtDept
+Class-Path: ArtDept\bin\
+
