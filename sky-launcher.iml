@@ -146,22 +146,22 @@
     <orderEntry type="module-library">
       <library name="log4j-core-2.7.1-SNAPSHOT.jar">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../reference/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file:///Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT-sources.jar" />
+          <root url="jar://$MODULE_DIR$/../../reference/logging-log4j2/log4j-core/target/log4j-core-2.7.1-SNAPSHOT-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="log4j-api-2.7.1-SNAPSHOT.jar">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../reference/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file:///Users/apache/Dropbox/eclipse/workspace/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT-sources.jar" />
+          <root url="jar://$MODULE_DIR$/../../reference/logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
