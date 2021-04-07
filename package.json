@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SturmB/sky-artdept-wrapper.git"
+    "url": "git+ssh://git@github.com:skyunlimitedinc/sky-launcher.git"
   },
   "keywords": [
     "java",

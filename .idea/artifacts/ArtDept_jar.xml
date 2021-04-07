@@ -2,7 +2,7 @@
   <artifact type="jar" name="ArtDept:jar">
     <output-path>$PROJECT_DIR$/../../projects/Sky Launcher</output-path>
     <root id="archive" name="Sky Launcher.jar">
-      <element id="module-output" name="ArtDept" />
+      <element id="module-output" name="sky-launcher" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/netty-transport-native-epoll-4.1.56.Final-linux-x86_64.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lettuce-core-6.0.2.RELEASE-bin/dependencies/reactor-core-3.3.13.RELEASE.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../logging-log4j2/log4j-api/target/log4j-api-2.7.1-SNAPSHOT.jar" path-in-jar="/" />

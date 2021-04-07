@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ArtDept.iml" filepath="$PROJECT_DIR$/ArtDept.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sky-launcher.iml" filepath="$PROJECT_DIR$/sky-launcher.iml" />
     </modules>
   </component>
 </project>
