@@ -1,0 +1,25 @@
+{
+  "name": "sky-launcher",
+  "version": "4.2.0",
+  "description": "Java wrapper application for the Proofing and Output scripts.",
+  "main": "src/info/chrismcgee/sky/artdept/ArtDept.java",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SturmB/sky-artdept-wrapper.git"
+  },
+  "keywords": [
+    "java",
+    "artdept",
+    "wrapper",
+    "launcher"
+  ],
+  "author": "Chris McGee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SturmB/sky-artdept-wrapper/issues"
+  },
+  "homepage": "https://github.com/SturmB/sky-artdept-wrapper#readme"
+}
