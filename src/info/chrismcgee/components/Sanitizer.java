@@ -12,7 +12,7 @@ public class Sanitizer {
         return orderNumMatcher.lookingAt();
     }
 
-    public static boolean checkInitials(String initials) {
+    public static boolean isNotEmpty(String initials) {
         return initials.length() > 0;
     }
 

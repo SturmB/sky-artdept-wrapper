@@ -153,7 +153,7 @@ public class Settings extends JDialog {
     }
 
     private boolean validateInitials() {
-        if (Sanitizer.checkInitials(tfInitials.getText())) {
+        if (Sanitizer.isNotEmpty(tfInitials.getText())) {
             tfInitials.setBackground(Color.WHITE);
             tfInitials.setForeground(Color.BLACK);
             return true;

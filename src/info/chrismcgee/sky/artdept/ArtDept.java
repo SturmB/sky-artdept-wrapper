@@ -36,6 +36,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -141,12 +142,12 @@ public class ArtDept extends JFrame {
     public ArtDept() {
 
         List<Image> icons = new ArrayList<>();
-        icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_16x16.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_32x32.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_48x48.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_256x256.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_512x512.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/images/sky_launcher-02_768x768.png")).getImage());
+        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_16x16.png"))).getImage());
+        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_32x32.png"))).getImage());
+        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_48x48.png"))).getImage());
+        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_256x256.png"))).getImage());
+        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_512x512.png"))).getImage());
+        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_768x768.png"))).getImage());
         setIconImages(icons);
 
         if (OSType.getOSType() == OSType.MAC) {
@@ -490,7 +491,7 @@ public class ArtDept extends JFrame {
      * only in reference to the Initials TextField.
      */
     private void sanitizeInitials() {
-        if (Sanitizer.checkInitials(tfInitials.getText())) {
+        if (Sanitizer.isNotEmpty(tfInitials.getText())) {
             tfInitials.setBackground(Color.GREEN);
             initialsReady = true;
             prefs.put(PREFS_INITIALS, tfInitials.getText());
@@ -506,7 +507,7 @@ public class ArtDept extends JFrame {
      * only in reference to the Username TextField.
      */
     private void sanitizeUsername() {
-        if (Sanitizer.checkInitials(tfEmail.getText())) {
+        if (Sanitizer.isNotEmpty(tfEmail.getText())) {
             tfEmail.setBackground(Color.GREEN);
             usernameReady = true;
             prefs.put(PREFS_EMAIL, tfEmail.getText());
@@ -761,7 +762,7 @@ public class ArtDept extends JFrame {
         // Prepare the text file for reading.
         String cache = null;
         Path workOrder = Paths.get(workOrderFolder, jobNum + ".TXT");
-        if (loggingEnabled) log.debug("Path is: " + workOrder.toString());
+        if (loggingEnabled) log.debug("Path is: " + workOrder);
         BufferedReader bufferedReader = Files.newBufferedReader(workOrder, StandardCharsets.ISO_8859_1);
         int lineNumber = -1;
 
@@ -996,14 +997,14 @@ public class ArtDept extends JFrame {
         Matcher ucMatcher = upperPattern.matcher("abc");
         Matcher lcMatcher = lowerPattern.matcher("abc");
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         ucMatcher.reset(companyName);
         while (ucMatcher.find()) {
             ucMatcher.appendReplacement(sb, ucMatcher.group().toUpperCase());
         }
         ucMatcher.appendTail(sb);
 
-        if (loggingEnabled) log.debug("Between mods, sb is currently " + sb.toString());
+        if (loggingEnabled) log.debug("Between mods, sb is currently " + sb);
 
         lcMatcher.reset(sb.toString());
         sb.setLength(0);
@@ -1012,7 +1013,7 @@ public class ArtDept extends JFrame {
         }
         lcMatcher.appendTail(sb);
 
-        if (loggingEnabled) log.debug("After second mod, sb is: " + sb.toString());
+        if (loggingEnabled) log.debug("After second mod, sb is: " + sb);
 
         return sb.toString();
     }
