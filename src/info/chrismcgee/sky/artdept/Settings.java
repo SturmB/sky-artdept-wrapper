@@ -1,9 +1,13 @@
 package info.chrismcgee.sky.artdept;
 
+import info.chrismcgee.components.Sanitizer;
+
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -33,8 +37,9 @@ public class Settings extends JDialog {
     private JButton buttonCancel;
     private JLabel lblPcName;
     private JComboBox<String> cbPrinterName;
+    private JTextField tfEmail;
 
-    public final Preferences userPrefs = Preferences.userRoot().node(this.getClass().getName());
+    public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 
     public static final String PREFS_PRINTER_KEY = "printer";
     public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
@@ -54,19 +59,40 @@ public class Settings extends JDialog {
 
         buttonCancel.addActionListener(e -> onCancel());
 
+        // Populate the PC Name label
         try {
             lblPcName.setText(InetAddress.getLocalHost().getHostName());
         } catch (UnknownHostException e) {
             lblPcName.setText("Unknown");
         }
 
+        // Populate the Printer list and select the default one
         PrintService[] printers = PrintServiceLookup.lookupPrintServices(null, null);
         for (PrintService printer:
                 printers) {
             cbPrinterName.addItem(printer.getName());
         }
-        cbPrinterName.addActionListener(e -> onPrinterChange(e));
-        cbPrinterName.setSelectedItem(userPrefs.get(PREFS_PRINTER_KEY, PREFS_PRINTER_DEFAULT));
+//        cbPrinterName.addActionListener(this::onPrinterChange);
+        cbPrinterName.setSelectedItem(prefs.get(PREFS_PRINTER_KEY, PREFS_PRINTER_DEFAULT));
+
+        // Initialize the Email text field
+        tfEmail.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateAll();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateAll();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // Plain text components do not fire these events.
+            }
+        });
+        tfEmail.setText(prefs.get(PREFS_EMAIL_KEY, PREFS_EMAIL_DEFAULT));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -78,10 +104,15 @@ public class Settings extends JDialog {
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        // Validate upon initializing this dialog
+        validateAll();
     }
 
     private void onOK() {
-        // add your code here
+        // Save all settings
+        prefs.put(PREFS_PRINTER_KEY, (String) cbPrinterName.getSelectedItem());
+        prefs.put(PREFS_EMAIL_KEY, tfEmail.getText());
         dispose();
     }
 
@@ -90,8 +121,23 @@ public class Settings extends JDialog {
         dispose();
     }
 
-    private void onPrinterChange(ActionEvent e) {
-        userPrefs.put(PREFS_PRINTER_KEY, (String) cbPrinterName.getSelectedItem());
+//    private void onPrinterChange(ActionEvent e) {
+//        userPrefs.put(PREFS_PRINTER_KEY, (String) cbPrinterName.getSelectedItem());
+//    }
+
+    private void validateAll() {
+        buttonOK.setEnabled(validateEmail());
+    }
+
+    private boolean validateEmail() {
+        if (Sanitizer.isValidEmail(tfEmail.getText())) {
+            tfEmail.setBackground(Color.WHITE);
+            tfEmail.setForeground(Color.BLACK);
+            return true;
+        }
+        tfEmail.setBackground(Color.RED);
+        tfEmail.setForeground(Color.WHITE);
+        return false;
     }
 
     public static void main(String[] args) {
