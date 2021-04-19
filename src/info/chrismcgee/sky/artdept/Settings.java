@@ -3,12 +3,14 @@ package info.chrismcgee.sky.artdept;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
+import java.util.prefs.Preferences;
+
 
 /**
  * TODO: Settings that need to be included
@@ -30,10 +32,18 @@ public class Settings extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JLabel lblPcName;
-    private JComboBox cbPrinterName;
+    private JComboBox<String> cbPrinterName;
 
-    private PrintService[] printers = PrintServiceLookup.lookupPrintServices(null, null);
-    private PrintService defaultPrinter = PrintServiceLookup.lookupDefaultPrintService();
+    public final Preferences userPrefs = Preferences.userRoot().node(this.getClass().getName());
+
+    public static final String PREFS_PRINTER_KEY = "printer";
+    public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
+
+    public static final String PREFS_EMAIL_KEY = "email";
+    public static final String PREFS_EMAIL_DEFAULT = "";
+
+    public static final String PREFS_INITIALS_KEY = "initials";
+    public static final String PREFS_INITIALS_DEFAULT = "";
 
     public Settings() {
         setContentPane(contentPane);
@@ -50,11 +60,13 @@ public class Settings extends JDialog {
             lblPcName.setText("Unknown");
         }
 
+        PrintService[] printers = PrintServiceLookup.lookupPrintServices(null, null);
         for (PrintService printer:
-             printers) {
+                printers) {
             cbPrinterName.addItem(printer.getName());
         }
-        cbPrinterName.setSelectedItem(defaultPrinter.getName());
+        cbPrinterName.addActionListener(e -> onPrinterChange(e));
+        cbPrinterName.setSelectedItem(userPrefs.get(PREFS_PRINTER_KEY, PREFS_PRINTER_DEFAULT));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -76,6 +88,10 @@ public class Settings extends JDialog {
     private void onCancel() {
         // add your code here if necessary
         dispose();
+    }
+
+    private void onPrinterChange(ActionEvent e) {
+        userPrefs.put(PREFS_PRINTER_KEY, (String) cbPrinterName.getSelectedItem());
     }
 
     public static void main(String[] args) {
