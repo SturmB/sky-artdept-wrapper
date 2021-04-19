@@ -18,17 +18,17 @@ import java.util.prefs.Preferences;
 
 /**
  * TODO: Settings that need to be included
- * - return email address [christopher.mcgee@main.skyunlimitedinc.com]
- * - initials [CM]
- * - email address to be notified of a broken text file [customerservice@skyunlimitedinc.com]
- * - which script to run:
- * - local copy (on local HDD)
- * - server, test version (beta)
- * - server, production version (main)
- * - directory/location of local script
- * - directory/location of server scripts
- * - PC name (pre-fill)
- * - printer name (drop-down?)
+ *  - return email address [christopher.mcgee@main.skyunlimitedinc.com]
+ *  - initials [CM]
+ *  - email address to be notified of a broken text file [customerservice@skyunlimitedinc.com]
+ *  - which script to run:
+ *      - local copy (on local HDD)
+ *      - server, test version (beta)
+ *      - server, production version (main)
+ *  - directory/location of local script
+ *  - directory/location of server scripts
+ *  - PC name (pre-fill)
+ *  - printer name (drop-down?)
  */
 
 public class Settings extends JDialog {
@@ -37,24 +37,45 @@ public class Settings extends JDialog {
     private JButton buttonCancel;
     private JLabel lblPcName;
     private JComboBox<String> cbPrinterName;
-    private JTextField tfEmail;
+    private JTextField tfNotifyEmail;
+    private JTextField tfYourEmail;
     private JTextField tfInitials;
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 
-    public static final String PREFS_PRINTER_KEY = "printer";
+    public static final String PREFS_PRINTER_KEY = "Printer";
     public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
 
-    public static final String PREFS_EMAIL_KEY = "email";
-    public static final String PREFS_EMAIL_DEFAULT = "";
+    public static final String PREFS_NOTIFY_EMAIL_KEY = "NotifyEmail";
+    public static final String PREFS_NOTIFY_EMAIL_DEFAULT = "customerservice@skyunlimitedinc.com";
 
-    public static final String PREFS_INITIALS_KEY = "initials";
+    public static final String PREFS_YOUR_EMAIL_KEY = "YourEmail";
+    public static final String PREFS_YOUR_EMAIL_DEFAULT = "";
+
+    public static final String PREFS_INITIALS_KEY = "YourInitials";
     public static final String PREFS_INITIALS_DEFAULT = "";
 
     public Settings() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        DocumentListener tfListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateAll();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateAll();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // Plain text components do not fire these events.
+            }
+        };
 
         buttonOK.addActionListener(e -> onOK());
 
@@ -75,25 +96,13 @@ public class Settings extends JDialog {
         }
         cbPrinterName.setSelectedItem(prefs.get(PREFS_PRINTER_KEY, PREFS_PRINTER_DEFAULT));
 
-        // Initialize the Email text field
-        DocumentListener tfListener = new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                validateAll();
-            }
+        // Initialize the notification Email text field
+        tfNotifyEmail.getDocument().addDocumentListener(tfListener);
+        tfNotifyEmail.setText(prefs.get(PREFS_NOTIFY_EMAIL_KEY, PREFS_NOTIFY_EMAIL_DEFAULT));
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                validateAll();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                // Plain text components do not fire these events.
-            }
-        };
-        tfEmail.getDocument().addDocumentListener(tfListener);
-        tfEmail.setText(prefs.get(PREFS_EMAIL_KEY, PREFS_EMAIL_DEFAULT));
+        // Initialize the user's Email text field
+        tfYourEmail.getDocument().addDocumentListener(tfListener);
+        tfYourEmail.setText(prefs.get(PREFS_YOUR_EMAIL_KEY, PREFS_YOUR_EMAIL_DEFAULT));
 
         // Initialize the Initials text field
         tfInitials.getDocument().addDocumentListener(tfListener);
@@ -117,7 +126,9 @@ public class Settings extends JDialog {
     private void onOK() {
         // Save all settings
         prefs.put(PREFS_PRINTER_KEY, (String) cbPrinterName.getSelectedItem());
-        prefs.put(PREFS_EMAIL_KEY, tfEmail.getText());
+        prefs.put(PREFS_NOTIFY_EMAIL_KEY, tfNotifyEmail.getText());
+        prefs.put(PREFS_YOUR_EMAIL_KEY, tfYourEmail.getText());
+        prefs.put(PREFS_INITIALS_KEY, tfInitials.getText());
         dispose();
     }
 
@@ -127,17 +138,17 @@ public class Settings extends JDialog {
     }
 
     private void validateAll() {
-        buttonOK.setEnabled(validateEmail() & validateInitials());
+        buttonOK.setEnabled(validateEmail(tfNotifyEmail) & validateEmail(tfYourEmail) & validateInitials());
     }
 
-    private boolean validateEmail() {
-        if (Sanitizer.isValidEmail(tfEmail.getText())) {
-            tfEmail.setBackground(Color.WHITE);
-            tfEmail.setForeground(Color.BLACK);
+    private boolean validateEmail(JTextField textField) {
+        if (Sanitizer.isValidEmail(textField.getText())) {
+            textField.setBackground(Color.WHITE);
+            textField.setForeground(Color.BLACK);
             return true;
         }
-        tfEmail.setBackground(Color.RED);
-        tfEmail.setForeground(Color.WHITE);
+        textField.setBackground(Color.RED);
+        textField.setForeground(Color.WHITE);
         return false;
     }
 
