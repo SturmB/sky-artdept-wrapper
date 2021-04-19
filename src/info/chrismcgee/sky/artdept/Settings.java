@@ -18,17 +18,17 @@ import java.util.prefs.Preferences;
 
 /**
  * TODO: Settings that need to be included
- *  - return email address [christopher.mcgee@main.skyunlimitedinc.com]
- *  - initials [CM]
- *  - email address to be notified of a broken text file [customerservice@skyunlimitedinc.com]
- *  - which script to run:
- *      - local copy (on local HDD)
- *      - server, test version (beta)
- *      - server, production version (main)
- *  - directory/location of local script
- *  - directory/location of server scripts
- *  - PC name (pre-fill)
- *  - printer name (drop-down?)
+ * - return email address [christopher.mcgee@main.skyunlimitedinc.com]
+ * - initials [CM]
+ * - email address to be notified of a broken text file [customerservice@skyunlimitedinc.com]
+ * - which script to run:
+ * - local copy (on local HDD)
+ * - server, test version (beta)
+ * - server, production version (main)
+ * - directory/location of local script
+ * - directory/location of server scripts
+ * - PC name (pre-fill)
+ * - printer name (drop-down?)
  */
 
 public class Settings extends JDialog {
@@ -38,6 +38,7 @@ public class Settings extends JDialog {
     private JLabel lblPcName;
     private JComboBox<String> cbPrinterName;
     private JTextField tfEmail;
+    private JTextField tfInitials;
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 
@@ -68,15 +69,14 @@ public class Settings extends JDialog {
 
         // Populate the Printer list and select the default one
         PrintService[] printers = PrintServiceLookup.lookupPrintServices(null, null);
-        for (PrintService printer:
+        for (PrintService printer :
                 printers) {
             cbPrinterName.addItem(printer.getName());
         }
-//        cbPrinterName.addActionListener(this::onPrinterChange);
         cbPrinterName.setSelectedItem(prefs.get(PREFS_PRINTER_KEY, PREFS_PRINTER_DEFAULT));
 
         // Initialize the Email text field
-        tfEmail.getDocument().addDocumentListener(new DocumentListener() {
+        DocumentListener tfListener = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 validateAll();
@@ -91,8 +91,13 @@ public class Settings extends JDialog {
             public void changedUpdate(DocumentEvent e) {
                 // Plain text components do not fire these events.
             }
-        });
+        };
+        tfEmail.getDocument().addDocumentListener(tfListener);
         tfEmail.setText(prefs.get(PREFS_EMAIL_KEY, PREFS_EMAIL_DEFAULT));
+
+        // Initialize the Initials text field
+        tfInitials.getDocument().addDocumentListener(tfListener);
+        tfInitials.setText(prefs.get(PREFS_INITIALS_KEY, PREFS_INITIALS_DEFAULT));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -121,12 +126,8 @@ public class Settings extends JDialog {
         dispose();
     }
 
-//    private void onPrinterChange(ActionEvent e) {
-//        userPrefs.put(PREFS_PRINTER_KEY, (String) cbPrinterName.getSelectedItem());
-//    }
-
     private void validateAll() {
-        buttonOK.setEnabled(validateEmail());
+        buttonOK.setEnabled(validateEmail() & validateInitials());
     }
 
     private boolean validateEmail() {
@@ -137,6 +138,17 @@ public class Settings extends JDialog {
         }
         tfEmail.setBackground(Color.RED);
         tfEmail.setForeground(Color.WHITE);
+        return false;
+    }
+
+    private boolean validateInitials() {
+        if (Sanitizer.checkInitials(tfInitials.getText())) {
+            tfInitials.setBackground(Color.WHITE);
+            tfInitials.setForeground(Color.BLACK);
+            return true;
+        }
+        tfInitials.setBackground(Color.RED);
+        tfInitials.setForeground(Color.WHITE);
         return false;
     }
 
