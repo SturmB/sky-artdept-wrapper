@@ -65,7 +65,6 @@ public class ArtDept extends JFrame {
             + "Production" + File.separator;
     // Preferences variables
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
-    public static final String PREFS_PRINTER = "printer";
     private static final String PREFS_EMAIL = "email";
     private static final String PREFS_INITIALS = "initials";
     // The location of the window (It's not resizable)
