@@ -10,12 +10,14 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Enumeration;
 import java.util.prefs.Preferences;
 
 
@@ -52,6 +54,7 @@ public class Settings extends JDialog {
     private JRadioButton rbLocal;
     private JTextField tfDirLocal;
     private JButton btnLocalBrowse;
+    private ButtonGroup scriptGroup;
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
     public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
@@ -150,6 +153,17 @@ public class Settings extends JDialog {
         btnTestBrowse.addActionListener(e -> onBrowse(tfDirTest));
         btnLocalBrowse.addActionListener(e -> onBrowse(tfDirLocal));
 
+        // Initialize Radio Buttons and their group
+        scriptGroup = new ButtonGroup();
+        scriptGroup.add(rbProd);
+        scriptGroup.add(rbTest);
+        scriptGroup.add(rbLocal);
+        rbProd.addActionListener(e -> onRadioButton());
+        rbTest.addActionListener(e -> onRadioButton());
+        rbLocal.addActionListener(e -> onRadioButton());
+        rbProd.setSelected(true);
+        onRadioButton();
+
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -163,6 +177,15 @@ public class Settings extends JDialog {
 
         // Validate upon initializing this dialog
         validateAll();
+    }
+
+    public void onRadioButton() {
+        tfDirProd.setEnabled(rbProd.isSelected());
+        tfDirTest.setEnabled(rbTest.isSelected());
+        tfDirLocal.setEnabled(rbLocal.isSelected());
+        btnProdBrowse.setEnabled(rbProd.isSelected());
+        btnTestBrowse.setEnabled(rbTest.isSelected());
+        btnLocalBrowse.setEnabled(rbLocal.isSelected());
     }
 
     private void onOK() {
@@ -195,7 +218,11 @@ public class Settings extends JDialog {
     }
 
     private void validateAll() {
-        buttonOK.setEnabled(validateEmail(tfNotifyEmail) & validateEmail(tfYourEmail) & validateInitials());
+        buttonOK.setEnabled(
+                validateEmail(tfNotifyEmail)
+                        & validateEmail(tfYourEmail)
+                        & validateInitials()
+        );
     }
 
     private boolean validateEmail(JTextField textField) {
@@ -221,13 +248,13 @@ public class Settings extends JDialog {
     }
 
     public static void main(String[] args) {
-
         // Set the look and feel.
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         Settings dialog = new Settings();
         dialog.pack();
         dialog.setVisible(true);
