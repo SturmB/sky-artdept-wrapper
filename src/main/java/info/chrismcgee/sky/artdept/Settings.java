@@ -44,12 +44,14 @@ public class Settings extends JDialog {
     private JTextField tfYourEmail;
     private JTextField tfInitials;
     private JRadioButton rbProd;
-    private JTextField tfProd;
+    private JTextField tfDirProd;
     private JButton btnProdBrowse;
     private JRadioButton rbTest;
-    private JTextField tfTest;
+    private JTextField tfDirTest;
+    private JButton btnTestBrowse;
     private JRadioButton rbLocal;
-    private JTextField tfLocal;
+    private JTextField tfDirLocal;
+    private JButton btnLocalBrowse;
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
     public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
@@ -72,7 +74,13 @@ public class Settings extends JDialog {
     public static final String PREFS_INITIALS_DEFAULT = "";
 
     public static final String PREFS_DIR_PROD_KEY = "ScriptDirProd";
-    public static final String PREFS_DIR_PROD_DEFAULT = PATH_SERVER + File.separator + "Production";;
+    public static final String PREFS_DIR_PROD_DEFAULT = PATH_SERVER + File.separator + "Production";
+
+    public static final String PREFS_DIR_TEST_KEY = "ScriptDirTest";
+    public static final String PREFS_DIR_TEST_DEFAULT = PATH_SERVER + File.separator + "Test";
+
+    public static final String PREFS_DIR_LOCAL_KEY = "ScriptDirLocal";
+    public static final String PREFS_DIR_LOCAL_DEFAULT = "";
 
     public Settings() {
         setContentPane(contentPane);
@@ -127,14 +135,20 @@ public class Settings extends JDialog {
         tfInitials.getDocument().addDocumentListener(tfListener);
         tfInitials.setText(prefs.get(PREFS_INITIALS_KEY, PREFS_INITIALS_DEFAULT));
 
-        // Initialize the Production Path field
-        tfProd.setText(prefs.get(PREFS_DIR_PROD_KEY, PREFS_DIR_PROD_DEFAULT));
+        // Initialize the Path fields
+        tfDirProd.setText(prefs.get(PREFS_DIR_PROD_KEY, PREFS_DIR_PROD_DEFAULT));
+        tfDirTest.setText(prefs.get(PREFS_DIR_TEST_KEY, PREFS_DIR_TEST_DEFAULT));
+        tfDirLocal.setText(prefs.get(PREFS_DIR_LOCAL_KEY, PREFS_DIR_LOCAL_DEFAULT));
 
         // Decorate and add listeners to the browse buttons
         IconFontSwing.register(FontAwesome.getIconFont());
         Icon iconFolder = IconFontSwing.buildIcon(FontAwesome.FOLDER_OPEN, 12);
         btnProdBrowse.setIcon(iconFolder);
-        btnProdBrowse.addActionListener(e -> onProdBrowse());
+        btnTestBrowse.setIcon(iconFolder);
+        btnLocalBrowse.setIcon(iconFolder);
+        btnProdBrowse.addActionListener(e -> onBrowse(tfDirProd));
+        btnTestBrowse.addActionListener(e -> onBrowse(tfDirTest));
+        btnLocalBrowse.addActionListener(e -> onBrowse(tfDirLocal));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -157,7 +171,9 @@ public class Settings extends JDialog {
         prefs.put(PREFS_NOTIFY_EMAIL_KEY, tfNotifyEmail.getText());
         prefs.put(PREFS_YOUR_EMAIL_KEY, tfYourEmail.getText());
         prefs.put(PREFS_INITIALS_KEY, tfInitials.getText());
-        prefs.put(PREFS_DIR_PROD_KEY, tfProd.getText());
+        prefs.put(PREFS_DIR_PROD_KEY, tfDirProd.getText());
+        prefs.put(PREFS_DIR_TEST_KEY, tfDirTest.getText());
+        prefs.put(PREFS_DIR_LOCAL_KEY, tfDirLocal.getText());
         dispose();
     }
 
@@ -166,18 +182,16 @@ public class Settings extends JDialog {
         dispose();
     }
 
-    private void onProdBrowse() {
-//        FileDialog fd = new FileDialog(this, "Script Folder", FileDialog.LOAD);
-//        fd.setDirectory(System.getProperty("user.home"));
-//        fd.setType();
+    private void onBrowse(JTextField textField) {
+        String startDir = textField.getText().length() > 0 ? textField.getText() : System.getProperty("user.home");
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        chooser.setCurrentDirectory(new File(startDir));
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
             return;
         }
         File chosenDir = chooser.getSelectedFile();
-        tfProd.setText(chosenDir.getPath());
+        textField.setText(chosenDir.getPath());
     }
 
     private void validateAll() {
