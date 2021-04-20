@@ -1,6 +1,8 @@
 package info.chrismcgee.sky.artdept;
 
 import info.chrismcgee.components.Sanitizer;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -11,6 +13,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.prefs.Preferences;
@@ -42,13 +45,19 @@ public class Settings extends JDialog {
     private JTextField tfInitials;
     private JRadioButton rbProd;
     private JTextField tfProd;
+    private JButton btnProdBrowse;
     private JRadioButton rbTest;
     private JTextField tfTest;
     private JRadioButton rbLocal;
     private JTextField tfLocal;
-    private JButton bProdBrowse;
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
+    public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
+            + File.separator + "ArtDept"
+            + File.separator + "ArtDept"
+            + File.separator + "Scripts"
+            + File.separator + "sky-artdept";
+    public static final String PATH_TEST = PATH_SERVER + File.separator + "Test";
 
     public static final String PREFS_PRINTER_KEY = "Printer";
     public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
@@ -61,6 +70,9 @@ public class Settings extends JDialog {
 
     public static final String PREFS_INITIALS_KEY = "YourInitials";
     public static final String PREFS_INITIALS_DEFAULT = "";
+
+    public static final String PREFS_DIR_PROD_KEY = "ScriptDirProd";
+    public static final String PREFS_DIR_PROD_DEFAULT = PATH_SERVER + File.separator + "Production";;
 
     public Settings() {
         setContentPane(contentPane);
@@ -115,6 +127,15 @@ public class Settings extends JDialog {
         tfInitials.getDocument().addDocumentListener(tfListener);
         tfInitials.setText(prefs.get(PREFS_INITIALS_KEY, PREFS_INITIALS_DEFAULT));
 
+        // Initialize the Production Path field
+        tfProd.setText(prefs.get(PREFS_DIR_PROD_KEY, PREFS_DIR_PROD_DEFAULT));
+
+        // Decorate and add listeners to the browse buttons
+        IconFontSwing.register(FontAwesome.getIconFont());
+        Icon iconFolder = IconFontSwing.buildIcon(FontAwesome.FOLDER_OPEN, 12);
+        btnProdBrowse.setIcon(iconFolder);
+        btnProdBrowse.addActionListener(e -> onProdBrowse());
+
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -136,12 +157,27 @@ public class Settings extends JDialog {
         prefs.put(PREFS_NOTIFY_EMAIL_KEY, tfNotifyEmail.getText());
         prefs.put(PREFS_YOUR_EMAIL_KEY, tfYourEmail.getText());
         prefs.put(PREFS_INITIALS_KEY, tfInitials.getText());
+        prefs.put(PREFS_DIR_PROD_KEY, tfProd.getText());
         dispose();
     }
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
+    }
+
+    private void onProdBrowse() {
+//        FileDialog fd = new FileDialog(this, "Script Folder", FileDialog.LOAD);
+//        fd.setDirectory(System.getProperty("user.home"));
+//        fd.setType();
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        File chosenDir = chooser.getSelectedFile();
+        tfProd.setText(chosenDir.getPath());
     }
 
     private void validateAll() {
@@ -171,6 +207,13 @@ public class Settings extends JDialog {
     }
 
     public static void main(String[] args) {
+
+        // Set the look and feel.
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Settings dialog = new Settings();
         dialog.pack();
         dialog.setVisible(true);
