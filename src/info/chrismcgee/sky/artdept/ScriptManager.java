@@ -1,7 +1,5 @@
 package info.chrismcgee.sky.artdept;
 
-//import java.io.BufferedReader;
-
 import info.chrismcgee.components.DateManager;
 import info.chrismcgee.enums.OSType;
 import info.chrismcgee.sky.beans.Artwork;
@@ -40,8 +38,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
-
-//import java.io.InputStreamReader;
 
 public class ScriptManager {
 
@@ -546,7 +542,7 @@ public class ScriptManager {
                 ArrayList<Artwork> existingArtworks = ArtworkManager.getArtworksByOrderId(thisLineItem.getId());
                 if (ArtDept.loggingEnabled) {
                     assert existingArtworks != null;
-                    log.debug("existingArtworks: " + existingArtworks.toString());
+                    log.debug("existingArtworks: " + existingArtworks);
                 }
 
                 // Loop through to insert/update/delete Artworks.
@@ -630,8 +626,8 @@ public class ScriptManager {
                 cachePrefix + "production-maxes:" + bean.getShipDateId().toString(),
                 cachePrefix + "daily-totals:" + bean.getShipDateId().toString(),
                 cachePrefix + "weekly-totals:" + weekStart.toString(),
-                cachePrefix + "weekly-order-progress:" + weekStart.toString(),
-                cachePrefix + "weekly-line-item-progress:" + weekStart.toString(),
+                cachePrefix + "weekly-order-progress:" + weekStart,
+                cachePrefix + "weekly-line-item-progress:" + weekStart,
                 cachePrefix + "orders-by-date:" + bean.getShipDateId().toString(),
                 cachePrefix + "recent-orders",
                 cachePrefix + "order-by-id:" + bean.getId()
