@@ -17,6 +17,7 @@ public class Sanitizer {
     }
 
     public static boolean isValidEmail(String email) {
+        //noinspection RegExpRedundantEscape - Escapes are necessary here.
         String EMAIL_PATTERN =
                 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
