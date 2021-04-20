@@ -40,6 +40,13 @@ public class Settings extends JDialog {
     private JTextField tfNotifyEmail;
     private JTextField tfYourEmail;
     private JTextField tfInitials;
+    private JRadioButton rbProd;
+    private JTextField tfProd;
+    private JRadioButton rbTest;
+    private JTextField tfTest;
+    private JRadioButton rbLocal;
+    private JTextField tfLocal;
+    private JButton bProdBrowse;
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 
