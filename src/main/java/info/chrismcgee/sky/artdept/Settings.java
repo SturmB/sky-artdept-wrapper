@@ -74,14 +74,17 @@ public class Settings extends JDialog {
     public static final String PREFS_INITIALS_KEY = "YourInitials";
     public static final String PREFS_INITIALS_DEFAULT = "";
 
-    public static final String PREFS_DIR_PROD_KEY = "ScriptDirProd";
-    public static final String PREFS_DIR_PROD_DEFAULT = PATH_SERVER + File.separator + "Production";
+    private static final String PREFS_DIR_PROD_KEY = "ScriptDirProd";
+    private static final String PREFS_DIR_PROD_DEFAULT = PATH_SERVER + File.separator + "Production";
 
-    public static final String PREFS_DIR_TEST_KEY = "ScriptDirTest";
-    public static final String PREFS_DIR_TEST_DEFAULT = PATH_SERVER + File.separator + "Test";
+    private static final String PREFS_DIR_TEST_KEY = "ScriptDirTest";
+    private static final String PREFS_DIR_TEST_DEFAULT = PATH_SERVER + File.separator + "Test";
 
-    public static final String PREFS_DIR_LOCAL_KEY = "ScriptDirLocal";
-    public static final String PREFS_DIR_LOCAL_DEFAULT = "";
+    private static final String PREFS_DIR_LOCAL_KEY = "ScriptDirLocal";
+    private static final String PREFS_DIR_LOCAL_DEFAULT = "";
+
+    public static final String PREFS_DIR_KEY = "ScriptDir";
+    public static final String PREFS_DIR_DEFAULT = PREFS_DIR_PROD_DEFAULT;
 
     public Settings() {
         setContentPane(contentPane);
@@ -201,6 +204,14 @@ public class Settings extends JDialog {
         prefs.put(PREFS_DIR_PROD_KEY, tfDirProd.getText());
         prefs.put(PREFS_DIR_TEST_KEY, tfDirTest.getText());
         prefs.put(PREFS_DIR_LOCAL_KEY, tfDirLocal.getText());
+        // Production
+        if (tfDirTest.isEnabled()) {
+            prefs.put(PREFS_DIR_KEY, prefs.get(PREFS_DIR_TEST_KEY, PREFS_DIR_TEST_DEFAULT));
+        } else if (tfDirLocal.isEnabled()) {
+            prefs.put(PREFS_DIR_KEY, prefs.get(PREFS_DIR_LOCAL_KEY, PREFS_DIR_LOCAL_DEFAULT));
+        } else { // tfDirProd is enabled
+            prefs.put(PREFS_DIR_KEY, prefs.get(PREFS_DIR_PROD_KEY, PREFS_DIR_PROD_DEFAULT));
+        }
         dispose();
     }
 
