@@ -143,9 +143,8 @@ public class Settings extends JDialog {
 
         // Add listeners to the Path fields
         tfDirProd.getDocument().addDocumentListener(tfListener);
-//        tfDirProd.addActionListener(e -> onPathChange(tfDirProd));
-        tfDirTest.addActionListener(e -> validateAll());
-        tfDirLocal.addActionListener(e -> validateAll());
+        tfDirTest.getDocument().addDocumentListener(tfListener);
+        tfDirLocal.getDocument().addDocumentListener(tfListener);
 
         // Decorate and add listeners to the browse buttons
         IconFontSwing.register(FontAwesome.getIconFont());
@@ -190,6 +189,7 @@ public class Settings extends JDialog {
         btnProdBrowse.setEnabled(rbProd.isSelected());
         btnTestBrowse.setEnabled(rbTest.isSelected());
         btnLocalBrowse.setEnabled(rbLocal.isSelected());
+        validateAll();
     }
 
     private void onOK() {
