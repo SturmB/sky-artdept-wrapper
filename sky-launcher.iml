@@ -385,5 +385,6 @@
     <orderEntry type="library" name="Maven: com.github.jiconfont:jiconfont-elusive:2.0.3" level="project" />
     <orderEntry type="library" name="Maven: com.github.jiconfont:jiconfont-entypo:2.0.3" level="project" />
     <orderEntry type="library" name="Maven: com.github.jiconfont:jiconfont-typicons:2.0.7.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:20.1.0" level="project" />
   </component>
 </module>

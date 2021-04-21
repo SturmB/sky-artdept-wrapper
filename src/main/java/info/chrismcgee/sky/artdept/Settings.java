@@ -10,14 +10,12 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
+import java.util.function.Function;
 import java.util.prefs.Preferences;
 
 
@@ -143,6 +141,12 @@ public class Settings extends JDialog {
         tfDirTest.setText(prefs.get(PREFS_DIR_TEST_KEY, PREFS_DIR_TEST_DEFAULT));
         tfDirLocal.setText(prefs.get(PREFS_DIR_LOCAL_KEY, PREFS_DIR_LOCAL_DEFAULT));
 
+        // Add listeners to the Path fields
+        tfDirProd.getDocument().addDocumentListener(tfListener);
+//        tfDirProd.addActionListener(e -> onPathChange(tfDirProd));
+        tfDirTest.addActionListener(e -> validateAll());
+        tfDirLocal.addActionListener(e -> validateAll());
+
         // Decorate and add listeners to the browse buttons
         IconFontSwing.register(FontAwesome.getIconFont());
         Icon iconFolder = IconFontSwing.buildIcon(FontAwesome.FOLDER_OPEN, 12);
@@ -205,6 +209,22 @@ public class Settings extends JDialog {
         dispose();
     }
 
+    private boolean fieldValidated(JTextField textField, boolean valid) {
+        if (valid) {
+            textField.setBackground(Color.WHITE);
+            textField.setForeground(Color.BLACK);
+            return true;
+        }
+        textField.setBackground(Color.RED);
+        textField.setForeground(Color.WHITE);
+        return false;
+    }
+
+    private boolean onPathChange(JTextField textField) {
+        File file = new File(textField.getText());
+        return fieldValidated(textField, !textField.isEnabled() || file.exists());
+    }
+
     private void onBrowse(JTextField textField) {
         String startDir = textField.getText().length() > 0 ? textField.getText() : System.getProperty("user.home");
         JFileChooser chooser = new JFileChooser();
@@ -222,29 +242,18 @@ public class Settings extends JDialog {
                 validateEmail(tfNotifyEmail)
                         & validateEmail(tfYourEmail)
                         & validateInitials()
+                        & onPathChange(tfDirProd)
+                        & onPathChange(tfDirTest)
+                        & onPathChange(tfDirLocal)
         );
     }
 
     private boolean validateEmail(JTextField textField) {
-        if (Sanitizer.isValidEmail(textField.getText())) {
-            textField.setBackground(Color.WHITE);
-            textField.setForeground(Color.BLACK);
-            return true;
-        }
-        textField.setBackground(Color.RED);
-        textField.setForeground(Color.WHITE);
-        return false;
+        return fieldValidated(textField, Sanitizer.isValidEmail(textField.getText()));
     }
 
     private boolean validateInitials() {
-        if (Sanitizer.isNotEmpty(tfInitials.getText())) {
-            tfInitials.setBackground(Color.WHITE);
-            tfInitials.setForeground(Color.BLACK);
-            return true;
-        }
-        tfInitials.setBackground(Color.RED);
-        tfInitials.setForeground(Color.WHITE);
-        return false;
+        return fieldValidated(tfInitials, Sanitizer.isNotEmpty(tfInitials.getText()));
     }
 
     public static void main(String[] args) {
