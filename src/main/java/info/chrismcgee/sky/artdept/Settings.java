@@ -14,8 +14,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Enumeration;
-import java.util.function.Function;
+import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 
@@ -52,7 +51,8 @@ public class Settings extends JDialog {
     private JRadioButton rbLocal;
     private JTextField tfDirLocal;
     private JButton btnLocalBrowse;
-    private ButtonGroup scriptGroup;
+
+    private static ResourceBundle settingsBundle = ResourceBundle.getBundle("settingsBundle");
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
     public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
@@ -160,10 +160,6 @@ public class Settings extends JDialog {
         btnLocalBrowse.addActionListener(e -> onBrowse(tfDirLocal));
 
         // Initialize Radio Buttons and their group
-        scriptGroup = new ButtonGroup();
-        scriptGroup.add(rbProd);
-        scriptGroup.add(rbTest);
-        scriptGroup.add(rbLocal);
         rbProd.addActionListener(e -> onRadioButton());
         rbTest.addActionListener(e -> onRadioButton());
         rbLocal.addActionListener(e -> onRadioButton());
