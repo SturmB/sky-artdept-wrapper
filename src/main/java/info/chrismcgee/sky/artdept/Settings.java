@@ -56,7 +56,7 @@ public class Settings extends JDialog {
 
     private static final ResourceBundle settingsBundle = ResourceBundle.getBundle("Settings");
 
-    public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
+    private final Preferences prefs = Preferences.userNodeForPackage(this.getClass());
     public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
             + File.separator + "ArtDept"
             + File.separator + "ArtDept"
