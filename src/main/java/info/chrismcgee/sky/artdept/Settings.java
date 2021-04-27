@@ -52,7 +52,7 @@ public class Settings extends JDialog {
     private JTextField tfDirLocal;
     private JButton btnLocalBrowse;
 
-    private static ResourceBundle settingsBundle = ResourceBundle.getBundle("settingsBundle");
+    private static final ResourceBundle settingsBundle = ResourceBundle.getBundle("Settings");
 
     public final Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
     public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
