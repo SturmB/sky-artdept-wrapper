@@ -51,6 +51,8 @@ public class Settings extends JDialog {
     private JRadioButton rbLocal;
     private JTextField tfDirLocal;
     private JButton btnLocalBrowse;
+    private JTextField tfPatternsFile;
+    private JButton btnPatternsBrowse;
 
     private static final ResourceBundle settingsBundle = ResourceBundle.getBundle("Settings");
 
@@ -85,6 +87,9 @@ public class Settings extends JDialog {
 
     public static final String PREFS_DIR_KEY = "ScriptDir";
     public static final String PREFS_DIR_DEFAULT = PREFS_DIR_PROD_DEFAULT;
+
+    public static final String PREFS_PATTERNS_KEY = "PatternsFile";
+    public static final String PREFS_PATTERNS_DEFAULT = PREFS_DIR_DEFAULT + File.separator + "patterns.txt";
 
     public Settings() {
         setContentPane(contentPane);
@@ -155,16 +160,24 @@ public class Settings extends JDialog {
         btnProdBrowse.setIcon(iconFolder);
         btnTestBrowse.setIcon(iconFolder);
         btnLocalBrowse.setIcon(iconFolder);
-        btnProdBrowse.addActionListener(e -> onBrowse(tfDirProd));
-        btnTestBrowse.addActionListener(e -> onBrowse(tfDirTest));
-        btnLocalBrowse.addActionListener(e -> onBrowse(tfDirLocal));
+        btnProdBrowse.addActionListener(e -> onBrowse(tfDirProd, JFileChooser.DIRECTORIES_ONLY));
+        btnTestBrowse.addActionListener(e -> onBrowse(tfDirTest, JFileChooser.DIRECTORIES_ONLY));
+        btnLocalBrowse.addActionListener(e -> onBrowse(tfDirLocal, JFileChooser.DIRECTORIES_ONLY));
 
-        // Initialize Radio Buttons and their group
+        // Initialize Radio Buttons
         rbProd.addActionListener(e -> onRadioButton());
         rbTest.addActionListener(e -> onRadioButton());
         rbLocal.addActionListener(e -> onRadioButton());
         rbProd.setSelected(true);
         onRadioButton();
+
+        // Initialize the Patterns text field
+        tfPatternsFile.getDocument().addDocumentListener(tfListener);
+        tfPatternsFile.setText(prefs.get(PREFS_PATTERNS_KEY, PREFS_PATTERNS_DEFAULT));
+
+        // Initialize the Patterns browse button
+        btnPatternsBrowse.setIcon(iconFolder);
+        btnPatternsBrowse.addActionListener(e -> onBrowse(tfPatternsFile, JFileChooser.FILES_ONLY));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -232,13 +245,13 @@ public class Settings extends JDialog {
         return fieldValidated(textField, !textField.isEnabled() || file.exists());
     }
 
-    private void onBrowse(JTextField textField) {
+    private void onBrowse(JTextField textField, int mode) {
         String startDir = textField.getText().length() > 0 ? textField.getText() : System.getProperty("user.home");
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(startDir));
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setFileSelectionMode(mode);
         if (chooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
-            return;
+            return; // If the user cancels the dialog
         }
         File chosenDir = chooser.getSelectedFile();
         textField.setText(chosenDir.getPath());
@@ -252,6 +265,7 @@ public class Settings extends JDialog {
                         & onPathChange(tfDirProd)
                         & onPathChange(tfDirTest)
                         & onPathChange(tfDirLocal)
+                        & onPathChange(tfPatternsFile)
         );
     }
 
