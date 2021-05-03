@@ -18,6 +18,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
@@ -99,10 +100,8 @@ public class ArtDept extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
-        // Set some logging properties.
-
-
         SwingUtilities.invokeLater(() -> {
+            // Set some logging properties.
             if (loggingEnabled) log.entry("main");
             try { // Create the dialog window and display it.
 
@@ -142,12 +141,16 @@ public class ArtDept extends JFrame {
     public ArtDept() {
 
         List<Image> icons = new ArrayList<>();
-        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_16x16.png"))).getImage());
-        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_32x32.png"))).getImage());
-        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_48x48.png"))).getImage());
-        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_256x256.png"))).getImage());
-        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_512x512.png"))).getImage());
-        icons.add(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/sky_launcher-02_768x768.png"))).getImage());
+        try {
+            icons.add(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResource("images/sky_launcher-02_16x16.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResource("images/sky_launcher-02_32x32.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResource("images/sky_launcher-02_48x48.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResource("images/sky_launcher-02_256x256.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResource("images/sky_launcher-02_512x512.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResource("images/sky_launcher-02_768x768.png"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setIconImages(icons);
 
         if (OSType.getOSType() == OSType.MAC) {
