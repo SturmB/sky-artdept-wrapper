@@ -14,24 +14,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ResourceBundle;
+//import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
-
-/**
- * TODO: Settings that need to be included
- *  - return email address [christopher.mcgee@main.skyunlimitedinc.com]
- *  - initials [CM]
- *  - email address to be notified of a broken text file [customerservice@skyunlimitedinc.com]
- *  - which script to run:
- *      - local copy (on local HDD)
- *      - server, test version (beta)
- *      - server, production version (main)
- *  - directory/location of local script
- *  - directory/location of server scripts
- *  - PC name (pre-fill)
- *  - printer name (drop-down?)
- */
 
 public class Settings extends JDialog {
     private JPanel contentPane;
@@ -53,16 +38,20 @@ public class Settings extends JDialog {
     private JButton btnLocalBrowse;
     private JTextField tfPatternsFile;
     private JButton btnPatternsBrowse;
+    private JTextField tfWorkOrdersDir;
+    private JButton btnWorkOrdersBrowse;
+    private JCheckBox debugLogCheckBox;
 
-    private static final ResourceBundle settingsBundle = ResourceBundle.getBundle("Settings");
+//    private static final ResourceBundle settingsBundle = ResourceBundle.getBundle("Settings");
 
     private final Preferences prefs = Preferences.userNodeForPackage(this.getClass());
-    public static final String PATH_SERVER = File.separator + File.separator + "SKYFS"
-            + File.separator + "ArtDept"
+    public static final String PATH_ARTDEPT = File.separator + File.separator + "SKYFS"
+            + File.separator + "ArtDept";
+    public static final String PATH_SCRIPTS_ROOT = PATH_ARTDEPT
             + File.separator + "ArtDept"
             + File.separator + "Scripts"
             + File.separator + "sky-artdept";
-    public static final String PATH_TEST = PATH_SERVER + File.separator + "Test";
+//    public static final String PATH_TEST = PATH_SCRIPTS_ROOT + File.separator + "Test";
 
     public static final String PREFS_PRINTER_KEY = "Printer";
     public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
@@ -77,10 +66,10 @@ public class Settings extends JDialog {
     public static final String PREFS_INITIALS_DEFAULT = "";
 
     private static final String PREFS_DIR_PROD_KEY = "ScriptDirProd";
-    private static final String PREFS_DIR_PROD_DEFAULT = PATH_SERVER + File.separator + "Production";
+    private static final String PREFS_DIR_PROD_DEFAULT = PATH_SCRIPTS_ROOT + File.separator + "Production";
 
     private static final String PREFS_DIR_TEST_KEY = "ScriptDirTest";
-    private static final String PREFS_DIR_TEST_DEFAULT = PATH_SERVER + File.separator + "Test";
+    private static final String PREFS_DIR_TEST_DEFAULT = PATH_SCRIPTS_ROOT + File.separator + "Test";
 
     private static final String PREFS_DIR_LOCAL_KEY = "ScriptDirLocal";
     private static final String PREFS_DIR_LOCAL_DEFAULT = "";
@@ -90,6 +79,12 @@ public class Settings extends JDialog {
 
     public static final String PREFS_PATTERNS_KEY = "PatternsFile";
     public static final String PREFS_PATTERNS_DEFAULT = PREFS_DIR_DEFAULT + File.separator + "patterns.txt";
+
+    public static final String PREFS_WORK_ORDERS_KEY = "WorkOrdersDir";
+    public static final String PREFS_WORK_ORDERS_DEFAULT = PATH_ARTDEPT + File.separator + "Work Orders";
+
+    public static final String PREFS_LOGGING_KEY = "DebugLog";
+    public static final boolean PREFS_LOGGING_DEFAULT = false;
 
     public Settings() {
         setContentPane(contentPane);
@@ -144,6 +139,13 @@ public class Settings extends JDialog {
         tfInitials.getDocument().addDocumentListener(tfListener);
         tfInitials.setText(prefs.get(PREFS_INITIALS_KEY, PREFS_INITIALS_DEFAULT));
 
+        // Initialize the Debug Log checkbox
+//        debugLogCheckBox.addActionListener(e -> {
+//            AbstractButton aButton = (AbstractButton) e.getSource();
+//            prefs.putBoolean(PREFS_LOGGING_KEY, aButton.getModel().isSelected());
+//        });
+        debugLogCheckBox.setSelected(prefs.getBoolean(PREFS_LOGGING_KEY, PREFS_LOGGING_DEFAULT));
+
         // Initialize the Path fields
         tfDirProd.setText(prefs.get(PREFS_DIR_PROD_KEY, PREFS_DIR_PROD_DEFAULT));
         tfDirTest.setText(prefs.get(PREFS_DIR_TEST_KEY, PREFS_DIR_TEST_DEFAULT));
@@ -179,6 +181,14 @@ public class Settings extends JDialog {
         btnPatternsBrowse.setIcon(iconFolder);
         btnPatternsBrowse.addActionListener(e -> onBrowse(tfPatternsFile, JFileChooser.FILES_ONLY));
 
+        // Initialize the Work Orders Dir text field
+        tfWorkOrdersDir.getDocument().addDocumentListener(tfListener);
+        tfWorkOrdersDir.setText(prefs.get(PREFS_WORK_ORDERS_KEY, PREFS_WORK_ORDERS_DEFAULT));
+
+        // Initialize the Work Orders Dir browse button
+        btnWorkOrdersBrowse.setIcon(iconFolder);
+        btnWorkOrdersBrowse.addActionListener(e -> onBrowse(tfWorkOrdersDir, JFileChooser.DIRECTORIES_ONLY));
+
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -213,6 +223,9 @@ public class Settings extends JDialog {
         prefs.put(PREFS_DIR_PROD_KEY, tfDirProd.getText());
         prefs.put(PREFS_DIR_TEST_KEY, tfDirTest.getText());
         prefs.put(PREFS_DIR_LOCAL_KEY, tfDirLocal.getText());
+        prefs.put(PREFS_PATTERNS_KEY, tfPatternsFile.getText());
+        prefs.put(PREFS_WORK_ORDERS_KEY, tfWorkOrdersDir.getText());
+        prefs.putBoolean(PREFS_LOGGING_KEY, debugLogCheckBox.isSelected());
         // Production
         if (tfDirTest.isEnabled()) {
             prefs.put(PREFS_DIR_KEY, prefs.get(PREFS_DIR_TEST_KEY, PREFS_DIR_TEST_DEFAULT));
@@ -266,6 +279,7 @@ public class Settings extends JDialog {
                         & onPathChange(tfDirTest)
                         & onPathChange(tfDirLocal)
                         & onPathChange(tfPatternsFile)
+                        & onPathChange(tfWorkOrdersDir)
         );
     }
 
