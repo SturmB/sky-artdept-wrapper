@@ -22,6 +22,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
@@ -34,10 +36,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,8 +58,6 @@ public class ArtDeptNew extends JFrame {
     public static boolean loggingEnabled = false;
     // Preferences variables
     public final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
-    // Simple booleans to state whether or not the text field has passed sanitization
-    private boolean jobNumberReady = false;
     // The order's text file and its variables, pre-defined here
     private File textFile = null;
     private String customerServiceRep = "";
@@ -146,18 +144,43 @@ public class ArtDeptNew extends JFrame {
         contentPane.registerKeyboardAction(e -> onOutput(), KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         contentPane.registerKeyboardAction(e -> onOutput(), KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-//        contentPane.setBackground(Color.DARK_GRAY);
+        // Menu bar that allows access to the Settings dialog
+        JMenu mnSettings = new JMenu("Settings");
+        mnSettings.setMnemonic('s');
+        mnSettings.addMenuListener(settingsListener);
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.add(mnSettings);
+        setJMenuBar(menuBar);
 
-        { // Menu bar that allows access to the Settings dialog
-            JMenuBar menuBar = new JMenuBar();
-            setJMenuBar(menuBar);
-            {
-                JMenu mnSettings = new JMenu("Settings");
-                mnSettings.setMnemonic('s');
-                mnSettings.addMenuListener(settingsListener);
-                menuBar.add(mnSettings);
+        // Text field for the user to enter the job/order number
+        tfOrderNum.getDocument().addDocumentListener(new DocumentListener() {
+            // When the user types or deletes characters, validate the input
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                validateAll();
             }
-        }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                validateAll();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // Plain text components do not fire these events
+            }
+        });
+
+        // Set the focus on the Order Number text field.
+        addWindowFocusListener(new WindowAdapter() {
+            public void windowGainedFocus(WindowEvent e) {
+                tfOrderNum.requestFocusInWindow();
+            }
+        });
+
+        // Validate upon initializing this dialog
+        validateAll();
+
     }
 
     private void openSettings() {
@@ -173,8 +196,7 @@ public class ArtDeptNew extends JFrame {
     }
 
     private void onProof() {
-        if (loggingEnabled) log.entry("doProof Action");
-        if (jobNumberReady) {
+        if (validateAll()) {
             if (loggingEnabled) log.trace("Proofing button hit!");
             Thread proofThread = new Thread(() -> {
                 try {
@@ -188,8 +210,7 @@ public class ArtDeptNew extends JFrame {
     }
 
     private void onOutput() {
-        if (loggingEnabled) log.entry("doOutput Action");
-        if (jobNumberReady) {
+        if (validateAll()) {
             if (loggingEnabled) log.trace("Output button hit!");
             Thread outputThread = new Thread(() -> {
                 try {
@@ -711,40 +732,17 @@ public class ArtDeptNew extends JFrame {
         return Collections.max(proofNumbers);
     }
 
-    /**
-     * Checks to see if the Job Number text field has been properly filled out (via the boolean field)
-     * and enables the "ScriptManager" and "Output" buttons if so. Otherwise, it disables them.
-     * <p>
-     * This method should be called every time a change is made to the Job Number TextField.
-     * <p>
-     * In addition, this method is separate from the sanitizeOrderNum() method below in case
-     * other field need to be checked first, as well, before the buttons can be set as
-     * enabled or not.
-     */
-    private void verifyInputs() {
-        if (loggingEnabled) log.entry("verifyInputs");
-        buttonProof.setEnabled(jobNumberReady);
-        buttonOutput.setEnabled(jobNumberReady);
+    private boolean validateAll() {
+        boolean orderNumOkay = validateOrderNum();
+        buttonProof.setEnabled(orderNumOkay);
+        buttonOutput.setEnabled(orderNumOkay);
+        return orderNumOkay;
     }
 
-    /**
-     * Checks to see if the Job Number TextField has been properly filled out by calling the checkOrderNum()
-     * method in the Sanitizer class. It then changes the TextField's background accordingly (red for incorrect,
-     * white for correct) and sets the jobNumberReady boolean. It finally calls the verifyInputs() method
-     * to enable / disable the buttons as needed.
-     * <p>
-     * This method should be called every time a change is made to the Job Number TextField.
-     */
-    private void sanitizeOrderNum() {
-        if (loggingEnabled) log.entry("sanitizeOrderNum");
-        if (Sanitizer.checkOrderNum(tfOrderNum.getText())) {
-            tfOrderNum.setBackground(Color.GREEN);
-            jobNumberReady = true;
-        } else {
-            tfOrderNum.setBackground(Color.WHITE);
-            jobNumberReady = false;
-        }
-        verifyInputs();
+    private boolean validateOrderNum() {
+        boolean isOrderNum = Sanitizer.checkOrderNum(tfOrderNum.getText());
+        Settings.validateField(tfOrderNum, isOrderNum);
+        return isOrderNum;
     }
 
     private void enableControls(final boolean b) {

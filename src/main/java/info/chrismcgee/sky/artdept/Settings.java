@@ -112,7 +112,7 @@ public class Settings extends JDialog {
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                // Plain text components do not fire these events.
+                // Plain text components do not fire these events
             }
         };
 
@@ -251,8 +251,8 @@ public class Settings extends JDialog {
         dispose();
     }
 
-    private void validateField(JTextField textField, boolean valid) {
-        textField.putClientProperty(FlatClientProperties.OUTLINE, valid? null : FlatClientProperties.OUTLINE_ERROR);
+    public static void validateField(JTextField textField, boolean valid) {
+        textField.putClientProperty(FlatClientProperties.OUTLINE, valid ? null : FlatClientProperties.OUTLINE_ERROR);
     }
 
     private boolean onPathChange(JTextField textField) {
