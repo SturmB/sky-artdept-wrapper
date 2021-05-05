@@ -1,6 +1,7 @@
 package info.chrismcgee.sky.artdept;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.jthemedetecor.OsThemeDetector;
@@ -143,10 +144,6 @@ public class Settings extends JDialog {
         tfInitials.setText(prefs.get(PREFS_INITIALS_KEY, PREFS_INITIALS_DEFAULT));
 
         // Initialize the Debug Log checkbox
-//        debugLogCheckBox.addActionListener(e -> {
-//            AbstractButton aButton = (AbstractButton) e.getSource();
-//            prefs.putBoolean(PREFS_LOGGING_KEY, aButton.getModel().isSelected());
-//        });
         debugLogCheckBox.setSelected(prefs.getBoolean(PREFS_LOGGING_KEY, PREFS_LOGGING_DEFAULT));
 
         // Initialize the Path fields
@@ -297,18 +294,18 @@ private boolean validateInitials(){
         // Set the look and feel.
         // Set the look and feel
         FlatCarbonIJTheme.install();
+
         final OsThemeDetector detector = OsThemeDetector.getDetector();
-        detector.registerListener(isDark -> {
+        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> {
             if (isDark) {
                 // The OS switched to a dark theme
                 FlatCarbonIJTheme.install();
-                FlatCarbonIJTheme.updateUI();
             } else {
                 // The OS switched to a light theme
                 FlatCyanLightIJTheme.install();
-                FlatCyanLightIJTheme.updateUI();
             }
-        });
+            FlatLaf.updateUI();
+        }));
 
         Settings dialog = new Settings();
         dialog.pack();

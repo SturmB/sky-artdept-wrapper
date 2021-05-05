@@ -1,6 +1,6 @@
 package info.chrismcgee.sky.artdept;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.jthemedetecor.OsThemeDetector;
@@ -34,8 +34,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -208,17 +210,16 @@ public class ArtDeptNew extends JFrame {
         // Set the look and feel
         FlatCarbonIJTheme.install();
         final OsThemeDetector detector = OsThemeDetector.getDetector();
-        detector.registerListener(isDark -> {
+        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> {
             if (isDark) {
                 // The OS switched to a dark theme
                 FlatCarbonIJTheme.install();
-                FlatCarbonIJTheme.updateUI();
             } else {
                 // The OS switched to a light theme
                 FlatCyanLightIJTheme.install();
-                FlatCyanLightIJTheme.updateUI();
             }
-        });
+            FlatLaf.updateUI();
+        }));
 
         // Create the frame
         ArtDeptNew frame = new ArtDeptNew();
