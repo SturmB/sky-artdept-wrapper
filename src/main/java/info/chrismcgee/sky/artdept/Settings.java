@@ -13,7 +13,6 @@ import javax.print.PrintServiceLookup;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.net.InetAddress;
@@ -246,18 +245,15 @@ public class Settings extends JDialog {
         dispose();
     }
 
-    private boolean fieldValidated(JTextField textField, boolean valid) {
-        if (valid) {
-            textField.putClientProperty(FlatClientProperties.OUTLINE, FlatClientProperties.OUTLINE);
-            return true;
-        }
-        textField.putClientProperty(FlatClientProperties.OUTLINE, FlatClientProperties.OUTLINE_ERROR);
-        return false;
+    private void validateField(JTextField textField, boolean valid) {
+        textField.putClientProperty(FlatClientProperties.OUTLINE, valid? null : FlatClientProperties.OUTLINE_ERROR);
     }
 
     private boolean onPathChange(JTextField textField) {
         File file = new File(textField.getText());
-        return fieldValidated(textField, !textField.isEnabled() || file.exists());
+        boolean valid = !textField.isEnabled() || file.exists();
+        validateField(textField, valid);
+        return valid;
     }
 
     private void onBrowse(JTextField textField, int mode) {
@@ -286,11 +282,15 @@ public class Settings extends JDialog {
     }
 
     private boolean validateEmail(JTextField textField) {
-        return fieldValidated(textField, Sanitizer.isValidEmail(textField.getText()));
+        boolean validEmail = Sanitizer.isValidEmail(textField.getText());
+        validateField(textField, validEmail);
+        return validEmail;
     }
 
-    private boolean validateInitials() {
-        return fieldValidated(tfInitials, Sanitizer.isNotEmpty(tfInitials.getText()));
+private boolean validateInitials(){
+        boolean notEmpty = Sanitizer.isNotEmpty(tfInitials.getText());
+        validateField(tfInitials, notEmpty);
+        return notEmpty;
     }
 
     public static void main(String[] args) {
