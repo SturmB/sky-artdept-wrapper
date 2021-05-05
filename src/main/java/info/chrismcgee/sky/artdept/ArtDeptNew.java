@@ -43,6 +43,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ArtDeptNew extends JFrame {
+    private JPanel contentPane;
+    private JButton buttonProof;
+    private JButton buttonOutput;
+    private JButton buttonCancel;
+    private JTextField tfOrderNum;
+
     // App identification
     private static final String APP_NAME = "Sky Launcher";
     private static final String APP_VERSION = "5.0.0";
@@ -52,9 +58,6 @@ public class ArtDeptNew extends JFrame {
     public static boolean loggingEnabled = false;
     // Preferences variables
     public final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
-    // The location of the window
-    private Point windowLocation;
-    private Dimension windowSize;
     // Simple booleans to state whether or not the text field has passed sanitization
     private boolean jobNumberReady = false;
     // The order's text file and its variables, pre-defined here
@@ -67,12 +70,17 @@ public class ArtDeptNew extends JFrame {
     private JFrame frm;
     public static List<Image> icons = new ArrayList<>();
 
-    // These fields allow their respective components to be accessed anywhere
-    private JPanel contentPane;
-    private JButton buttonProof;
-    private JButton buttonOutput;
-    private JButton buttonCancel;
-    private JTextField tfOrderNum;
+    private static final String PREFS_ARTDEPT_X_KEY = "artdept_x";
+    private static final int PREFS_ARTDEPT_X_DEFAULT = 100;
+
+    private static final String PREFS_ARTDEPT_Y_KEY = "artdept_y";
+    private static final int PREFS_ARTDEPT_Y_DEFAULT = 100;
+
+    private static final String PREFS_ARTDEPT_WIDTH_KEY = "artdept_width";
+    private static final int PREFS_ARTDEPT_WIDTH_DEFAULT = 400;
+
+    private static final String PREFS_ARTDEPT_HEIGHT_KEY = "artdept_height";
+    private static final int PREFS_ARTDEPT_HEIGHT_DEFAULT = 120;
 
     public ArtDeptNew() {
         setContentPane(contentPane);
@@ -98,21 +106,18 @@ public class ArtDeptNew extends JFrame {
         // Set the application icons
         setIconImages(icons);
 
-        // Set the minimum size of the dialog
-        setMinimumSize(new Dimension(502, 200));
-
         // Save the location and size of the dialog whenever either are changed
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentMoved(ComponentEvent evt) {
-                prefs.putInt("x", getX());
-                prefs.putInt("y", getY());
+                prefs.putInt(PREFS_ARTDEPT_X_KEY, getX());
+                prefs.putInt(PREFS_ARTDEPT_Y_KEY, getY());
             }
 
             @Override
             public void componentResized(ComponentEvent evt) {
-                prefs.putInt("width", getWidth());
-                prefs.putInt("height", getHeight());
+                prefs.putInt(PREFS_ARTDEPT_WIDTH_KEY, getWidth());
+                prefs.putInt(PREFS_ARTDEPT_HEIGHT_KEY, getHeight());
             }
         });
 
@@ -156,8 +161,14 @@ public class ArtDeptNew extends JFrame {
     }
 
     private void openSettings() {
+        // Create the Settings dialog
         Settings settings = new Settings();
+
+        // Set the location of the Settings dialog
         settings.pack();
+        settings.setLocationRelativeTo(this);
+
+        // Show the Settings dialog
         settings.setVisible(true);
     }
 
@@ -226,10 +237,14 @@ public class ArtDeptNew extends JFrame {
         // Set the location and size of the window
         frame.setLocationByPlatform(true);
         frame.pack();
-        frame.windowLocation = new Point(frame.prefs.getInt("x", 100), frame.prefs.getInt("y", 100));
-        frame.setLocation(frame.windowLocation);
-        frame.windowSize = new Dimension(frame.prefs.getInt("width", 502), frame.prefs.getInt("height", 200));
-        frame.setSize(frame.windowSize);
+        frame.setMinimumSize(new Dimension(
+                frame.prefs.getInt(PREFS_ARTDEPT_WIDTH_KEY, PREFS_ARTDEPT_WIDTH_DEFAULT),
+                frame.prefs.getInt(PREFS_ARTDEPT_HEIGHT_KEY, PREFS_ARTDEPT_HEIGHT_DEFAULT)
+        ));
+        frame.setLocation(new Point(
+                frame.prefs.getInt(PREFS_ARTDEPT_X_KEY, PREFS_ARTDEPT_X_DEFAULT),
+                frame.prefs.getInt(PREFS_ARTDEPT_Y_KEY, PREFS_ARTDEPT_Y_DEFAULT)
+        ));
 
         // Show the frame
         frame.setVisible(true);

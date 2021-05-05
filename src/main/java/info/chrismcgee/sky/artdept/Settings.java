@@ -1,9 +1,6 @@
 package info.chrismcgee.sky.artdept;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
 import com.jthemedetecor.OsThemeDetector;
 import info.chrismcgee.components.Sanitizer;
 import jiconfont.icons.font_awesome.FontAwesome;
@@ -14,12 +11,16 @@ import javax.print.PrintServiceLookup;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-//import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
+
+//import java.util.ResourceBundle;
 
 
 public class Settings extends JDialog {
@@ -57,38 +58,41 @@ public class Settings extends JDialog {
             + File.separator + "sky-artdept";
 //    public static final String PATH_TEST = PATH_SCRIPTS_ROOT + File.separator + "Test";
 
-    public static final String PREFS_PRINTER_KEY = "Printer";
+    public static final String PREFS_PRINTER_KEY = "printer";
     public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
 
-    public static final String PREFS_NOTIFY_EMAIL_KEY = "NotifyEmail";
+    public static final String PREFS_NOTIFY_EMAIL_KEY = "notify_email";
     public static final String PREFS_NOTIFY_EMAIL_DEFAULT = "customerservice@skyunlimitedinc.com";
 
-    public static final String PREFS_YOUR_EMAIL_KEY = "YourEmail";
+    public static final String PREFS_YOUR_EMAIL_KEY = "your_email";
     public static final String PREFS_YOUR_EMAIL_DEFAULT = "";
 
-    public static final String PREFS_INITIALS_KEY = "YourInitials";
+    public static final String PREFS_INITIALS_KEY = "your_initials";
     public static final String PREFS_INITIALS_DEFAULT = "";
 
-    private static final String PREFS_DIR_PROD_KEY = "ScriptDirProd";
+    private static final String PREFS_DIR_PROD_KEY = "script_dir_prod";
     private static final String PREFS_DIR_PROD_DEFAULT = PATH_SCRIPTS_ROOT + File.separator + "Production";
 
-    private static final String PREFS_DIR_TEST_KEY = "ScriptDirTest";
+    private static final String PREFS_DIR_TEST_KEY = "script_dir_test";
     private static final String PREFS_DIR_TEST_DEFAULT = PATH_SCRIPTS_ROOT + File.separator + "Test";
 
-    private static final String PREFS_DIR_LOCAL_KEY = "ScriptDirLocal";
+    private static final String PREFS_DIR_LOCAL_KEY = "script_dir_local";
     private static final String PREFS_DIR_LOCAL_DEFAULT = "";
 
-    public static final String PREFS_DIR_KEY = "ScriptDir";
+    public static final String PREFS_DIR_KEY = "script_dir";
     public static final String PREFS_DIR_DEFAULT = PREFS_DIR_PROD_DEFAULT;
 
-    public static final String PREFS_PATTERNS_KEY = "PatternsFile";
+    public static final String PREFS_PATTERNS_KEY = "patterns_file";
     public static final String PREFS_PATTERNS_DEFAULT = PREFS_DIR_DEFAULT + File.separator + "patterns.txt";
 
-    public static final String PREFS_WORK_ORDERS_KEY = "WorkOrdersDir";
+    public static final String PREFS_WORK_ORDERS_KEY = "work_orders_dir";
     public static final String PREFS_WORK_ORDERS_DEFAULT = PATH_ARTDEPT + File.separator + "Work Orders";
 
-    public static final String PREFS_LOGGING_KEY = "DebugLog";
+    public static final String PREFS_LOGGING_KEY = "debug_log";
     public static final boolean PREFS_LOGGING_DEFAULT = false;
+
+    public static final int SETTINGS_WIDTH = 450;
+    public static final int SETTINGS_HEIGHT = 695;
 
     public Settings() {
         setContentPane(contentPane);
@@ -289,7 +293,7 @@ public class Settings extends JDialog {
         return validEmail;
     }
 
-private boolean validateInitials(){
+    private boolean validateInitials() {
         boolean notEmpty = Sanitizer.isNotEmpty(tfInitials.getText());
         validateField(tfInitials, notEmpty);
         return notEmpty;
@@ -306,7 +310,13 @@ private boolean validateInitials(){
         detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> ArtDeptNew.installTheme(isDark)));
 
         Settings dialog = new Settings();
+
+        // Set the location and size of the window
+        dialog.setLocationByPlatform(true);
         dialog.pack();
+        dialog.setMinimumSize(new Dimension(SETTINGS_WIDTH, SETTINGS_HEIGHT));
+
+        // Show the frame
         dialog.setVisible(true);
         System.exit(0);
     }
