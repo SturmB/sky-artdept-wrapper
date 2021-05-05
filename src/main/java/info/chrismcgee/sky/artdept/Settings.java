@@ -112,6 +112,11 @@ public class Settings extends JDialog {
             }
         };
 
+        // Set the application icons
+        if (!ArtDeptNew.icons.isEmpty()) {
+            setIconImages(ArtDeptNew.icons);
+        }
+
         buttonOK.addActionListener(e -> onOK());
 
         buttonCancel.addActionListener(e -> onCancel());
