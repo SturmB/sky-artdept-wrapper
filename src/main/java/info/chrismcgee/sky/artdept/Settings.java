@@ -291,21 +291,14 @@ private boolean validateInitials(){
     }
 
     public static void main(String[] args) {
-        // Set the look and feel.
         // Set the look and feel
-        FlatCarbonIJTheme.install();
-
         final OsThemeDetector detector = OsThemeDetector.getDetector();
-        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> {
-            if (isDark) {
-                // The OS switched to a dark theme
-                FlatCarbonIJTheme.install();
-            } else {
-                // The OS switched to a light theme
-                FlatCyanLightIJTheme.install();
-            }
-            FlatLaf.updateUI();
-        }));
+
+        // Setting the base look and feel
+        ArtDeptNew.installTheme(detector.isDark());
+
+        // Detect OS theme changes
+        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> ArtDeptNew.installTheme(isDark)));
 
         Settings dialog = new Settings();
         dialog.pack();

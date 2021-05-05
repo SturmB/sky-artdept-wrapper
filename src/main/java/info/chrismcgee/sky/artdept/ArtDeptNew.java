@@ -208,18 +208,13 @@ public class ArtDeptNew extends JFrame {
 
     public static void main(String[] args) {
         // Set the look and feel
-        FlatCarbonIJTheme.install();
         final OsThemeDetector detector = OsThemeDetector.getDetector();
-        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> {
-            if (isDark) {
-                // The OS switched to a dark theme
-                FlatCarbonIJTheme.install();
-            } else {
-                // The OS switched to a light theme
-                FlatCyanLightIJTheme.install();
-            }
-            FlatLaf.updateUI();
-        }));
+
+        // Setting the base look and feel
+        installTheme(detector.isDark());
+
+        // Detect OS theme changes
+        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> installTheme(isDark)));
 
         // Create the frame
         ArtDeptNew frame = new ArtDeptNew();
@@ -752,5 +747,14 @@ public class ArtDeptNew extends JFrame {
             }
 
         });
+    }
+
+    public static void installTheme(boolean darkTheme) {
+        if (darkTheme) {
+            FlatCarbonIJTheme.install();
+        } else {
+            FlatCyanLightIJTheme.install();
+        }
+        FlatLaf.updateUI();
     }
 }
