@@ -1,5 +1,9 @@
 package info.chrismcgee.sky.artdept;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.jthemedetecor.OsThemeDetector;
 import info.chrismcgee.components.Sanitizer;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
@@ -244,12 +248,10 @@ public class Settings extends JDialog {
 
     private boolean fieldValidated(JTextField textField, boolean valid) {
         if (valid) {
-            textField.setBackground(Color.WHITE);
-            textField.setForeground(Color.BLACK);
+            textField.putClientProperty(FlatClientProperties.OUTLINE, FlatClientProperties.OUTLINE);
             return true;
         }
-        textField.setBackground(Color.RED);
-        textField.setForeground(Color.WHITE);
+        textField.putClientProperty(FlatClientProperties.OUTLINE, FlatClientProperties.OUTLINE_ERROR);
         return false;
     }
 
@@ -293,11 +295,20 @@ public class Settings extends JDialog {
 
     public static void main(String[] args) {
         // Set the look and feel.
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // Set the look and feel
+        FlatCarbonIJTheme.install();
+        final OsThemeDetector detector = OsThemeDetector.getDetector();
+        detector.registerListener(isDark -> {
+            if (isDark) {
+                // The OS switched to a dark theme
+                FlatCarbonIJTheme.install();
+                FlatCarbonIJTheme.updateUI();
+            } else {
+                // The OS switched to a light theme
+                FlatCyanLightIJTheme.install();
+                FlatCyanLightIJTheme.updateUI();
+            }
+        });
 
         Settings dialog = new Settings();
         dialog.pack();

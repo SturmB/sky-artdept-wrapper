@@ -1,5 +1,9 @@
 package info.chrismcgee.sky.artdept;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.jthemedetecor.OsThemeDetector;
 import info.chrismcgee.components.DateManager;
 import info.chrismcgee.components.Sanitizer;
 import info.chrismcgee.sky.beans.LineItem;
@@ -202,11 +206,19 @@ public class ArtDeptNew extends JFrame {
 
     public static void main(String[] args) {
         // Set the look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FlatCarbonIJTheme.install();
+        final OsThemeDetector detector = OsThemeDetector.getDetector();
+        detector.registerListener(isDark -> {
+            if (isDark) {
+                // The OS switched to a dark theme
+                FlatCarbonIJTheme.install();
+                FlatCarbonIJTheme.updateUI();
+            } else {
+                // The OS switched to a light theme
+                FlatCyanLightIJTheme.install();
+                FlatCyanLightIJTheme.updateUI();
+            }
+        });
 
         // Create the frame
         ArtDeptNew frame = new ArtDeptNew();
