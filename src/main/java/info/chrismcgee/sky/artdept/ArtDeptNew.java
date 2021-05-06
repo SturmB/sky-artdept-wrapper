@@ -38,6 +38,8 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
 import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -84,6 +86,15 @@ public class ArtDeptNew extends JFrame {
     public ArtDeptNew() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonProof);
+
+        // Set whether logging has been enabled
+        loggingEnabled = prefs.getBoolean(Settings.PREFS_LOGGING_KEY, Settings.PREFS_LOGGING_DEFAULT);
+        // Add a listener for the debug log preference
+        prefs.addPreferenceChangeListener(evt -> {
+            if (evt.getKey().equals(Settings.PREFS_LOGGING_KEY)) {
+                loggingEnabled = prefs.getBoolean(Settings.PREFS_LOGGING_KEY, Settings.PREFS_LOGGING_DEFAULT);
+            }
+        });
 
         MenuListener settingsListener = new MenuListener() {
             @Override
