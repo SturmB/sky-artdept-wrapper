@@ -416,7 +416,8 @@ public class ArtDept extends JFrame {
                 customerServiceRep,
                 creditCard,
                 shipDays,
-                wnaPo
+                wnaPo,
+                prefs.get(Settings.PREFS_PRINTER_KEY, Settings.PREFS_PRINTER_DEFAULT)
         );
 
         // Close the connection to the database.

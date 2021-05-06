@@ -46,7 +46,7 @@ public class ScriptManager {
     private static final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
     private static final String artDeptFolder = Settings.PATH_ARTDEPT + File.separator;
 
-    public static boolean scriptRunner(ScriptType scriptType, String jobNumber, String initials, Order bean, int proofNum, String scriptFolder, String customerServiceRep, boolean creditCard, int shipDays, String wnaPo) {
+    public static boolean scriptRunner(ScriptType scriptType, String jobNumber, String initials, Order bean, int proofNum, String scriptFolder, String customerServiceRep, boolean creditCard, int shipDays, String wnaPo, String printerName) {
 
         if (ArtDept.loggingEnabled) log.entry("scriptRunner");
         if (ArtDept.loggingEnabled) log.debug("Username will be " + System.getenv("USER"));
@@ -98,7 +98,6 @@ public class ScriptManager {
             JOptionPane.showMessageDialog(null, "This is most likely a Proofing job, not Output. Please try again.", "Order Type Mismatch", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-//		outgoing.put("jobId", jobNumber); // Removed this because if there is no Bean with the proper info, then the Proof was never added to the db.
         outgoing.put("thisProofNumber", proofNum);
         outgoing.put("customerServiceRep", customerServiceRep);
         outgoing.put("creditCard", creditCard);
@@ -106,7 +105,7 @@ public class ScriptManager {
         outgoing.put("wnaPo", wnaPo);
         outgoing.put("userInitials", initials);
         outgoing.put("shipDateId", shipDate);
-//		outgoing.put("loggingEnabled", ArtDept.loggingEnabled);
+        outgoing.put("printerName", printerName);
         String jsonOut;
 
         // Call the scripts with the necessary arguments, including the JSON string created in the previous step.
