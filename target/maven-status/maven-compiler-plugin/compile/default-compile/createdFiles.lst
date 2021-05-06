@@ -6,7 +6,6 @@ info\chrismcgee\sky\enums\PrintTypeEnum.class
 info\chrismcgee\sky\artdept\MailTest.class
 info\chrismcgee\sky\tables\ProductionMaxesManager.class
 info\chrismcgee\sky\enums\PrintTypeEnum$1.class
-info\chrismcgee\sky\artdept\ArtDept$7.class
 info\chrismcgee\sky\tables\ArtworkManager.class
 info\chrismcgee\sky\enums\ScriptType.class
 info\chrismcgee\sky\beans\Artwork.class
@@ -16,7 +15,6 @@ info\chrismcgee\sky\tables\ShipDateManager.class
 info\chrismcgee\sky\artdept\EnginesAvailable.class
 info\chrismcgee\util\SendMail.class
 info\chrismcgee\sky\artdept\ArtDept.class
-info\chrismcgee\sky\artdept\ArtDept$6.class
 info\chrismcgee\sky\beans\ShipDate.class
 info\chrismcgee\util\ConnectionManager$1.class
 info\chrismcgee\sky\tables\PrintTypeManager.class
