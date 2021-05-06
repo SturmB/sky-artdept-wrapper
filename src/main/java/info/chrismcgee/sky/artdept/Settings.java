@@ -52,6 +52,9 @@ public class Settings extends JDialog {
     private final Preferences prefs = Preferences.userNodeForPackage(this.getClass());
     public static final String PATH_ARTDEPT = File.separator + File.separator + "SKYFS"
             + File.separator + "ArtDept";
+    public static final String PATH_JOBS = PATH_ARTDEPT
+            + File.separator + "ArtDept"
+            + File.separator + "JOBS";
     public static final String PATH_SCRIPTS_ROOT = PATH_ARTDEPT
             + File.separator + "ArtDept"
             + File.separator + "Scripts"

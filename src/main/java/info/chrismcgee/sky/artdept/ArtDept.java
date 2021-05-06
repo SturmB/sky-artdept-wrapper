@@ -472,7 +472,7 @@ public class ArtDept extends JFrame {
         // Create a new Job bean.
         if (bean == null) bean = new Order();
         // Define where the ScriptManager text files are located.
-        String workOrderFolder = prefs.get(Settings.PREFS_WORK_ORDERS_KEY, Settings.PREFS_WORK_ORDERS_DEFAULT);
+        String workOrderFolder = prefs.get(Settings.PREFS_WORK_ORDERS_KEY, Settings.PREFS_WORK_ORDERS_DEFAULT) + File.separator;
         textFile = new File(workOrderFolder + jobNum + ".txt");
         // If the text file is too small, then it is either empty or has some garbage in it.
         if (loggingEnabled) log.trace("The length of the associated text file is: " + textFile.length());

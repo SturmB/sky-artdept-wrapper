@@ -44,7 +44,6 @@ public class ScriptManager {
 
     static final Logger log = LogManager.getLogger(ScriptManager.class.getName());
     private static final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
-    private static final String artDeptFolder = Settings.PATH_ARTDEPT + File.separator;
 
     public static boolean scriptRunner(ScriptType scriptType, String jobNumber, String initials, Order bean, int proofNum, String scriptFolder, String customerServiceRep, boolean creditCard, int shipDays, String wnaPo, String printerName) {
 
@@ -69,19 +68,18 @@ public class ScriptManager {
 
         // Prepare the AppleScript file to be executed.
         if (ArtDept.loggingEnabled) log.trace("Prepare the intermediate file to be executed.");
-//		String scriptFolder = artDeptFolder + "Scripts/sky-artdept/";
         File scriptFile;
         String script;
         // If this is a Mac, then we need to call an AppleScript file.
         // Otherwise, we call a VBS file.
         if (scriptType == ScriptType.PROOF) {
             scriptFile = OSType.getOSType() == OSType.MAC
-                    ? new File(scriptFolder + "Proof.applescript")
-                    : new File(scriptFolder + "Proof.vbs");
+                    ? new File(scriptFolder + File.separator + "Proof.applescript")
+                    : new File(scriptFolder + File.separator + "Proof.vbs");
         } else { // Output.
             scriptFile = OSType.getOSType() == OSType.MAC
-                    ? new File(scriptFolder + "Output.applescript")
-                    : new File(scriptFolder + "Output.vbs");
+                    ? new File(scriptFolder + File.separator + "Output.applescript")
+                    : new File(scriptFolder + File.separator + "Output.vbs");
         }
 
         if (ArtDept.loggingEnabled) log.debug("scriptFolder and scriptFile variables set.");
@@ -169,7 +167,7 @@ public class ScriptManager {
             try {
                 ExecutorService executor = Executors.newFixedThreadPool(10);
                 //noinspection SpellCheckingInspection
-                p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + prefs.get(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT) + File.separator);
+                p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + (prefs.get(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT) + File.separator));
                 Future<String> fut1 = executor.submit(new ReadStreamWithCall("stdin", p.getInputStream()));
 //				Future<String> fut2 = executor.submit(new ReadStreamWithCall("stdin", p.getErrorStream()));
                 resultUntrimmed = fut1.get();
@@ -807,7 +805,8 @@ public class ScriptManager {
         if (ArtDept.loggingEnabled) log.entry("addDummyEntries (when bean doesn't exist yet) (ScriptManager)");
 
         String jobPrefix = jobNumber.substring(0, 3);
-        String jobFolderBeginning = artDeptFolder + "JOBS/" + jobPrefix + "000-" + jobPrefix + "999/";
+        String jobFolderBeginning = Settings.PATH_JOBS + File.separator + jobPrefix + "000-" + jobPrefix + "999" + File.separator;
+        if (ArtDept.loggingEnabled) log.info("[addDummyEntries] jobFolderBeginning: " + jobFolderBeginning);
         File searchFolder = new File(jobFolderBeginning + jobNumber + "/");
         if (!searchFolder.exists()) searchFolder = new File(jobFolderBeginning + jobNumber + " Folder/");
 
@@ -879,7 +878,7 @@ public class ScriptManager {
         if (ArtDept.loggingEnabled) log.entry("getProtectionList (ScriptManager)");
 
         String jobPrefix = jobNumber.substring(0, 3);
-        String jobFolderBeginning = artDeptFolder + "JOBS/" + jobPrefix + "000-" + jobPrefix + "999/";
+        String jobFolderBeginning = Settings.PATH_JOBS + File.separator + jobPrefix + "000-" + jobPrefix + "999" + File.separator;
         File searchFolder = new File(jobFolderBeginning + jobNumber + "/");
         if (!searchFolder.exists()) searchFolder = new File(jobFolderBeginning + jobNumber + " Folder/");
 
