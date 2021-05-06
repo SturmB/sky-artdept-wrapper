@@ -182,7 +182,15 @@ public class Settings extends JDialog {
         rbProd.addActionListener(e -> onRadioButton());
         rbTest.addActionListener(e -> onRadioButton());
         rbLocal.addActionListener(e -> onRadioButton());
-        rbProd.setSelected(true);
+        rbProd.setSelected(
+                prefs.get(PREFS_DIR_KEY, PREFS_DIR_DEFAULT).equals(prefs.get(PREFS_DIR_PROD_KEY, PREFS_DIR_PROD_DEFAULT))
+        );
+        rbTest.setSelected(
+                prefs.get(PREFS_DIR_KEY, PREFS_DIR_DEFAULT).equals(prefs.get(PREFS_DIR_TEST_KEY, PREFS_DIR_TEST_DEFAULT))
+        );
+        rbLocal.setSelected(
+                prefs.get(PREFS_DIR_KEY, PREFS_DIR_DEFAULT).equals(prefs.get(PREFS_DIR_LOCAL_KEY, PREFS_DIR_LOCAL_DEFAULT))
+        );
         onRadioButton();
 
         // Initialize the Patterns text field
