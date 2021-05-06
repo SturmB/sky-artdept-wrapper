@@ -48,27 +48,27 @@ public class ScriptManager {
 
     public static boolean scriptRunner(ScriptType scriptType, String jobNumber, String initials, Order bean, int proofNum, String scriptFolder, String customerServiceRep, boolean creditCard, int shipDays, String wnaPo) {
 
-        if (ArtDeptNew.loggingEnabled) log.entry("scriptRunner");
-        if (ArtDeptNew.loggingEnabled) log.debug("Username will be " + System.getenv("USER"));
+        if (ArtDept.loggingEnabled) log.entry("scriptRunner");
+        if (ArtDept.loggingEnabled) log.debug("Username will be " + System.getenv("USER"));
 
         // A few variables to help get the information we need into a properly-formatted String.
         String pCompany = (bean == null || bean.getPrintingCompany() == null) ? "ACCENTS" : getPrintCompanyString(bean.getPrintingCompany());
-        if (ArtDeptNew.loggingEnabled) log.debug("Got pCompany: " + pCompany);
+        if (ArtDept.loggingEnabled) log.debug("Got pCompany: " + pCompany);
         String shipDate = (bean == null || bean.getShipDateId() == null) ? "" : DateManager.getDisplayDate(bean.getShipDateId());
-        if (ArtDeptNew.loggingEnabled) log.debug("Got shipDate: " + shipDate);
+        if (ArtDept.loggingEnabled) log.debug("Got shipDate: " + shipDate);
         String customerName = (bean == null || bean.getCustomerName() == null) ? "" : bean.getCustomerName();
-        if (ArtDeptNew.loggingEnabled) log.debug("Got customerName: " + customerName);
+        if (ArtDept.loggingEnabled) log.debug("Got customerName: " + customerName);
         String customerPO = (bean == null || bean.getCustomerPO() == null) ? "" : bean.getCustomerPO();
-        if (ArtDeptNew.loggingEnabled) log.debug("Got customerPO: " + customerPO);
+        if (ArtDept.loggingEnabled) log.debug("Got customerPO: " + customerPO);
         boolean overruns = bean != null && bean.isOverruns();
-        if (ArtDeptNew.loggingEnabled) log.debug("Got overruns: " + overruns);
+        if (ArtDept.loggingEnabled) log.debug("Got overruns: " + overruns);
         boolean sampleShelf = bean != null && bean.isSampleShelfNote();
-        if (ArtDeptNew.loggingEnabled) log.debug("Got sampleShelf: " + sampleShelf);
+        if (ArtDept.loggingEnabled) log.debug("Got sampleShelf: " + sampleShelf);
         PrintingCompany pCompanyEnum = (bean == null || bean.getPrintingCompany() == null) ? PrintingCompany.AMERICAN_ACCENTS : bean.getPrintingCompany();
-        if (ArtDeptNew.loggingEnabled) log.debug("Got pCompanyEnum: " + pCompanyEnum.toString());
+        if (ArtDept.loggingEnabled) log.debug("Got pCompanyEnum: " + pCompanyEnum.toString());
 
         // Prepare the AppleScript file to be executed.
-        if (ArtDeptNew.loggingEnabled) log.trace("Prepare the intermediate file to be executed.");
+        if (ArtDept.loggingEnabled) log.trace("Prepare the intermediate file to be executed.");
 //		String scriptFolder = artDeptFolder + "Scripts/sky-artdept/";
         File scriptFile;
         String script;
@@ -84,7 +84,7 @@ public class ScriptManager {
                     : new File(scriptFolder + "Output.vbs");
         }
 
-        if (ArtDeptNew.loggingEnabled) log.debug("scriptFolder and scriptFile variables set.");
+        if (ArtDept.loggingEnabled) log.debug("scriptFolder and scriptFile variables set.");
 
         // Create a JSON string to pass to the script.
         JSONObject outgoing;
@@ -93,7 +93,7 @@ public class ScriptManager {
             outgoing = new JSONObject(bean);
         } catch (NullPointerException err) {
             // Likely this is a Proofing job and the user tried running it through Output.
-            if (ArtDeptNew.loggingEnabled)
+            if (ArtDept.loggingEnabled)
                 log.error("Could not find the Proof/Output AppleScript file. Likely this is a Proofing job and the user tried running it through Output.", err);
             JOptionPane.showMessageDialog(null, "This is most likely a Proofing job, not Output. Please try again.", "Order Type Mismatch", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -106,7 +106,7 @@ public class ScriptManager {
         outgoing.put("wnaPo", wnaPo);
         outgoing.put("userInitials", initials);
         outgoing.put("shipDateId", shipDate);
-//		outgoing.put("loggingEnabled", ArtDeptNew.loggingEnabled);
+//		outgoing.put("loggingEnabled", ArtDept.loggingEnabled);
         String jsonOut;
 
         // Call the scripts with the necessary arguments, including the JSON string created in the previous step.
@@ -116,68 +116,68 @@ public class ScriptManager {
 
             // Begin building the String that will be the script we run.
             jsonOut = JSONObject.quote(outgoing.toString());
-            if (ArtDeptNew.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
+            if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
 
-            // The first few lines are just to add in the arguments from the ArtDeptNew class.
+            // The first few lines are just to add in the arguments from the ArtDept class.
             // The rest is read from the file defined above.
             script = "set json to " + jsonOut + "\n";
-            script += "set jLogging to \"" + ArtDeptNew.loggingEnabled + "\"\n";
+            script += "set jLogging to \"" + ArtDept.loggingEnabled + "\"\n";
             script += "set jPath to \"" + prefs.get(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT) + File.separator + "\"\n";
-            if (ArtDeptNew.loggingEnabled) log.debug("Reading the Proof/Output script into a string.");
-            if (ArtDeptNew.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
+            if (ArtDept.loggingEnabled) log.debug("Reading the Proof/Output script into a string.");
+            if (ArtDept.loggingEnabled) log.debug("Before adding the script, here are the variables:\n" + script);
             try {
                 script += FileUtils.readFileToString(scriptFile);
             } catch (IOException e) {
-                if (ArtDeptNew.loggingEnabled) log.error("Could not find the Proof/Output AppleScript file.", e);
+                if (ArtDept.loggingEnabled) log.error("Could not find the Proof/Output AppleScript file.", e);
                 JOptionPane.showMessageDialog(null, "Could not find the Proof/Output AppleScript file.  Please verify connection to the server.", "File not found", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
 
             // These two lines prepare the scripting engine, ready to run the script.
-            if (ArtDeptNew.loggingEnabled) log.debug("Setting the script engine.");
+            if (ArtDept.loggingEnabled) log.debug("Setting the script engine.");
             ScriptEngineManager mgr = new ScriptEngineManager();
             ScriptEngine engine = null;
             try {
                 engine = mgr.getEngineByName("AppleScriptEngine");
             } catch (Exception err) {
-                if (ArtDeptNew.loggingEnabled) log.error("Could not find the scripting engine needed.", err);
+                if (ArtDept.loggingEnabled) log.error("Could not find the scripting engine needed.", err);
             }
 
             // Run the script and evaluate the result.
             Object result;
-            if (ArtDeptNew.loggingEnabled) log.trace("Running the script and evaluating the result.");
+            if (ArtDept.loggingEnabled) log.trace("Running the script and evaluating the result.");
             try {
                 assert engine != null;
                 result = engine.eval(script); // Run the script and place the result into an abstract object.
             } catch (ScriptException e) {
-                if (ArtDeptNew.loggingEnabled)
+                if (ArtDept.loggingEnabled)
                     log.error("An error occurred with the script. Line number: " + e.getLineNumber(), e);
                 JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            if (ArtDeptNew.loggingEnabled)
+            if (ArtDept.loggingEnabled)
                 log.debug(result); // Check that we received the correct information back from the script.
-            if (ArtDeptNew.loggingEnabled) log.debug("");
+            if (ArtDept.loggingEnabled) log.debug("");
             resultUntrimmed = result.toString(); // Convert it to a String.
         } else {
             // Otherwise, if it's Windows, then we don't need to set up variables ahead of time.
             String jsonIntermediate = outgoing.toString();
             //noinspection RegExpRedundantEscape
             jsonOut = jsonIntermediate.replaceAll("\\\"", "~\"");
-            if (ArtDeptNew.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
+            if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
 
             Process p = null;
             try {
                 ExecutorService executor = Executors.newFixedThreadPool(10);
                 //noinspection SpellCheckingInspection
-                p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDeptNew.loggingEnabled + " " + prefs.get(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT) + File.separator);
+                p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + prefs.get(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT) + File.separator);
                 Future<String> fut1 = executor.submit(new ReadStreamWithCall("stdin", p.getInputStream()));
 //				Future<String> fut2 = executor.submit(new ReadStreamWithCall("stdin", p.getErrorStream()));
                 resultUntrimmed = fut1.get();
                 p.waitFor();
-                if (ArtDeptNew.loggingEnabled) log.debug("Done waiting for the script to execute.");
+                if (ArtDept.loggingEnabled) log.debug("Done waiting for the script to execute.");
             } catch (Exception e) {
-                if (ArtDeptNew.loggingEnabled) log.error("An error occurred with the script.", e);
+                if (ArtDept.loggingEnabled) log.error("An error occurred with the script.", e);
                 JOptionPane.showMessageDialog(null, "An error occurred with the script.", "Script error / cancel", JOptionPane.ERROR_MESSAGE);
                 return false;
             } finally {
@@ -188,10 +188,10 @@ public class ScriptManager {
 
         }
 
-        if (ArtDeptNew.loggingEnabled) log.debug("Trimming the result.");
+        if (ArtDept.loggingEnabled) log.debug("Trimming the result.");
         String resultStr = resultUntrimmed.trim();
 //		System.out.println(resultStr);
-        if (ArtDeptNew.loggingEnabled)
+        if (ArtDept.loggingEnabled)
             log.debug(resultStr); // Check that we received the correct information back from the script.
         if (isInteger(resultStr)) {
             /*
@@ -213,67 +213,67 @@ public class ScriptManager {
             int x = Integer.parseInt(resultStr);
             switch (x) {
                 case 0 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("The unused '0' error code was returned!");
+                    if (ArtDept.loggingEnabled) log.trace("The unused '0' error code was returned!");
                     return false;
                 }
                 case 1 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Connection to server not found.");
+                    if (ArtDept.loggingEnabled) log.trace("Connection to server not found.");
                     return false;
                 }
                 case 2 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("MRAP error returned from Illustrator.");
+                    if (ArtDept.loggingEnabled) log.trace("MRAP error returned from Illustrator.");
                     return false;
                 }
                 case 3 -> {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.trace("Another type of error returned from Illustrator (besides MRAP).");
                     return false;
                 }
                 case 4 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("No files with the given order number were found.");
+                    if (ArtDept.loggingEnabled) log.trace("No files with the given order number were found.");
                     return false;
                 }
                 case 5 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Product type (multicolor) does not exist in script.");
+                    if (ArtDept.loggingEnabled) log.trace("Product type (multicolor) does not exist in script.");
                     return false;
                 }
                 case 6 -> {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.trace("Tried to create a new 'thousands' folder and failed. If problem persists, create the folder manually.");
                     return false;
                 }
                 case 7 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Cancel button pressed.");
+                    if (ArtDept.loggingEnabled) log.trace("Cancel button pressed.");
                     return false;
                 }
                 case 8 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Could not find existing files to rename them.");
+                    if (ArtDept.loggingEnabled) log.trace("Could not find existing files to rename them.");
                     return false;
                 }
                 case 9 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Could not find InDesign template file.");
+                    if (ArtDept.loggingEnabled) log.trace("Could not find InDesign template file.");
                     return false;
                 }
                 case 10 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("InDesign is crashing / has crashed.");
+                    if (ArtDept.loggingEnabled) log.trace("InDesign is crashing / has crashed.");
                     return false;
                 }
                 case 11 -> {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.trace("Script could not continue because another InDesign file was open.");
                     return false;
                 }
                 case 12 -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Extra files/folders in the job folder.");
+                    if (ArtDept.loggingEnabled) log.trace("Extra files/folders in the job folder.");
                     return false;
                 }
                 case 100 -> {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.trace("Script did not return any info to the Applescript script, so it was undefined.");
                     return false;
                 }
                 default -> {
-                    if (ArtDeptNew.loggingEnabled) log.trace("Script exited by some other means.");
+                    if (ArtDept.loggingEnabled) log.trace("Script exited by some other means.");
                     return false;
                 }
             }
@@ -282,9 +282,9 @@ public class ScriptManager {
         // Parse the returned string into a JSON Object.
         JSONObject thisOrder = new JSONObject(resultStr);
         JSONArray lineItems = thisOrder.getJSONArray("lineItems");
-        if (ArtDeptNew.loggingEnabled) log.debug("JSON Object: " + thisOrder);
+        if (ArtDept.loggingEnabled) log.debug("JSON Object: " + thisOrder);
 
-        if (ArtDeptNew.loggingEnabled) log.debug("Ship Date as epoch int: " + thisOrder.getLong("shipDate"));
+        if (ArtDept.loggingEnabled) log.debug("Ship Date as epoch int: " + thisOrder.getLong("shipDate"));
 
 
 //		String[] aResult = resultStr.split("@");  // Convert the String into an Array of Strings.
@@ -297,7 +297,7 @@ public class ScriptManager {
 
         // If we got nothing back, then return with a failure condition.
         if (resultStr.length() < 1) {
-            if (ArtDeptNew.loggingEnabled) log.trace("Nothing returned from script. User possibly cancelled it.");
+            if (ArtDept.loggingEnabled) log.trace("Nothing returned from script. User possibly cancelled it.");
             return false;
         }
 
@@ -311,7 +311,7 @@ public class ScriptManager {
         try {
             printTypes = PrintTypeManager.getAllPrintTypes();
         } catch (SQLException err) {
-            if (ArtDeptNew.loggingEnabled) log.error(err);
+            if (ArtDept.loggingEnabled) log.error(err);
             err.printStackTrace();
             return false;
         }
@@ -326,11 +326,11 @@ public class ScriptManager {
                     successfulProductionMaxInsertion = ProductionMaxesManager.insert(orderDate, printType);
                 }
                 if (successfulProductionMaxInsertion) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.debug("New production_max row with date of " + orderDate + " and printType of " + printType.getId() + " was inserted!");
                 }
             } catch (SQLException err) {
-                if (ArtDeptNew.loggingEnabled) log.error(err);
+                if (ArtDept.loggingEnabled) log.error(err);
                 err.printStackTrace();
                 return false;
             }
@@ -338,7 +338,7 @@ public class ScriptManager {
 
 
         // Next, set the Order info bean.
-        if (ArtDeptNew.loggingEnabled) log.trace("Next, set the Order info bean.");
+        if (ArtDept.loggingEnabled) log.trace("Next, set the Order info bean.");
         customerName = thisOrder.getString("customerName");
         customerPO = thisOrder.getString("customerPO");
 
@@ -361,7 +361,7 @@ public class ScriptManager {
         }
 
         // As part of setting the Order bean, set its LineItem List with LineItem beans.
-        if (ArtDeptNew.loggingEnabled)
+        if (ArtDept.loggingEnabled)
             log.trace("As part of setting the Order bean, set its LineItem List with LineItem beans.");
 //		Pattern prProof = Pattern.compile("Proof|NaN", Pattern.CASE_INSENSITIVE);
         List<LineItem> lineItemList = new ArrayList<>();
@@ -370,7 +370,7 @@ public class ScriptManager {
 //		for (int i = 0; i < aJobDetails.size(); i++) {
         for (int i = 0; i < lineItems.length(); i++) {
             JSONObject thisLineItem = (JSONObject) lineItems.get(i);
-            if (ArtDeptNew.loggingEnabled) log.debug("Start: item " + i + ": " + thisLineItem.getString("productNum"));
+            if (ArtDept.loggingEnabled) log.debug("Start: item " + i + ": " + thisLineItem.getString("productNum"));
 
             LineItem lineItemBean = new LineItem();
             lineItemBean.setOrderId(thisOrder.getString("id"));
@@ -389,16 +389,16 @@ public class ScriptManager {
                     lineItemBean.setLabelQuantity(thisLineItem.optInt("labelQuantity", 0));
 //					lineItemBean.setLabelQuantity(thisLineItem.getInt("labelQuantity"));
                 } catch (NumberFormatException err) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.error("Could not parse Label Quantity into an integer. Setting it to 0 instead.");
                     lineItemBean.setLabelQuantity(0);
                 }
                 lineItemBean.setLabelText(thisLineItem.getString("labelText"));
                 lineItemBean.setItemStatusId("woa");
             } else { // Output
-                if (ArtDeptNew.loggingEnabled) log.info("OUTPUT JOB");
+                if (ArtDept.loggingEnabled) log.info("OUTPUT JOB");
                 if (thisLineItem.getJSONArray("digitalArtFiles").length() > 0) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.info("24: " + thisLineItem.getJSONArray("digitalArtFiles").getString(0));
                 }
                 lineItemBean.setProofNum(proofNum);
@@ -410,7 +410,7 @@ public class ScriptManager {
                 try { // Since the Label Quantity field could be blank
                     lineItemBean.setLabelQuantity(thisLineItem.getInt("labelQuantity"));
                 } catch (NumberFormatException err) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.error("Could not parse Label Quantity into an integer. Setting it to 0 instead.");
                     lineItemBean.setLabelQuantity(0);
                 }
@@ -420,7 +420,7 @@ public class ScriptManager {
 //				detailBean.setDigitalFilename(thisItem.getJSONArray("digitalArtFiles").getString(0));
                 JSONArray artFiles = thisLineItem.getJSONArray("digitalArtFiles");
                 List<Artwork> newArtList = lineItemBean.getArtworkList();
-                if (ArtDeptNew.loggingEnabled) log.debug("existingArtList is: " + newArtList.toString());
+                if (ArtDept.loggingEnabled) log.debug("existingArtList is: " + newArtList.toString());
 
                 // Get all "Artwork" rows from db where the od id matches this od's id. Store in an ArrayList.
 
@@ -428,17 +428,17 @@ public class ScriptManager {
                 int j = -1;
                 while (++j < artFiles.length()) {
                     String artFileText = artFiles.getString(j);
-                    if (ArtDeptNew.loggingEnabled) log.debug("Storing art file # " + j);
-                    if (ArtDeptNew.loggingEnabled) log.debug("Creating new art bean and adding it to the list.");
+                    if (ArtDept.loggingEnabled) log.debug("Storing art file # " + j);
+                    if (ArtDept.loggingEnabled) log.debug("Creating new art bean and adding it to the list.");
                     Artwork thisArt = new Artwork();
                     thisArt.setDigitalArtFile(artFileText);
                     newArtList.add(thisArt);
                 }
 
             }
-            if (ArtDeptNew.loggingEnabled) log.info("Package Quantity in bean: " + lineItemBean.getPackageQuantity());
-            if (ArtDeptNew.loggingEnabled) log.info("Case Quantity in bean: " + lineItemBean.getCaseQuantity());
-//			if (ArtDeptNew.loggingEnabled) log.info("Digital Filename in bean: " + detailBean.getDigitalFilename());
+            if (ArtDept.loggingEnabled) log.info("Package Quantity in bean: " + lineItemBean.getPackageQuantity());
+            if (ArtDept.loggingEnabled) log.info("Case Quantity in bean: " + lineItemBean.getCaseQuantity());
+//			if (ArtDept.loggingEnabled) log.info("Digital Filename in bean: " + detailBean.getDigitalFilename());
             try {
                 lineItemBean.setQuantity(thisLineItem.getLong("quantity"));
                 // Check that quantity for 0 (Digital Proof) and set the boolean accordingly.
@@ -452,7 +452,7 @@ public class ScriptManager {
                 lineItemBean.setPrintTypeId(PrintTypeEnum.getSqlValue(PrintTypeEnum.getPrintType(thisLineItem.getInt("printType"))));
 
             } catch (Exception e) {
-                if (ArtDeptNew.loggingEnabled)
+                if (ArtDept.loggingEnabled)
                     log.error("Could not parse the quantity, number of colors, or print type.", e);
                 JOptionPane.showMessageDialog(null, "Could not parse the quantity, number of colors, or print type.  Please fix and run again.", "Parse error", JOptionPane.ERROR_MESSAGE);
                 return false;
@@ -461,7 +461,7 @@ public class ScriptManager {
             lineItemList.add(lineItemBean);
 
         }
-        if (ArtDeptNew.loggingEnabled) {
+        if (ArtDept.loggingEnabled) {
             for (int k = 0; k < lineItemList.size(); k++) {
                 log.debug("End: item " + k + ": " + lineItemList.get(k).getProductNum());
             }
@@ -469,7 +469,7 @@ public class ScriptManager {
 
         // Now check that boolean to see if all of the items are Digital Proofs only.
         // If so, just immediately return without putting anything into the database.
-        if (ArtDeptNew.loggingEnabled)
+        if (ArtDept.loggingEnabled)
             log.trace("All of the items in this job are Digital Proofs only: " + allDigitalProofs);
         if (allDigitalProofs) return true;
 
@@ -478,23 +478,23 @@ public class ScriptManager {
         boolean successfulOrderInsertion;
         try {
             if (OrderManager.getRow(bean.getId()) == null) {
-                if (ArtDeptNew.loggingEnabled) log.debug("INSERTing a new Order entry into the Order table.");
+                if (ArtDept.loggingEnabled) log.debug("INSERTing a new Order entry into the Order table.");
                 successfulOrderInsertion = OrderManager.insert(bean); // Insert the job & order detail in the database.
             } else {
-                if (ArtDeptNew.loggingEnabled) log.debug("UPDATing the existing Order in the Order table.");
+                if (ArtDept.loggingEnabled) log.debug("UPDATing the existing Order in the Order table.");
                 successfulOrderInsertion = OrderManager.update(bean); // Update the job & order detail in the database.
             }
         } catch (Exception e) {
-            if (ArtDeptNew.loggingEnabled) log.error("Error inserting/updating Order data in the database", e);
+            if (ArtDept.loggingEnabled) log.error("Error inserting/updating Order data in the database", e);
             JOptionPane.showMessageDialog(null, "Error inserting Order data into database", "Database error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         // Log the successfulness of the job insertion/update-ion.
         if (successfulOrderInsertion) {
-            if (ArtDeptNew.loggingEnabled) log.debug("Order id " + bean.getId() + " was inserted/updated!");
+            if (ArtDept.loggingEnabled) log.debug("Order id " + bean.getId() + " was inserted/updated!");
         } else {
-            if (ArtDeptNew.loggingEnabled) log.debug("One or more items did NOT make it into the database.");
+            if (ArtDept.loggingEnabled) log.debug("One or more items did NOT make it into the database.");
             return false;
         }
 
@@ -524,11 +524,11 @@ public class ScriptManager {
             addDummyEntries(bean.getLineItemList(), bean.getId());
             try {
                 for (LineItem lineItem : bean.getLineItemList()) {
-                    if (ArtDeptNew.loggingEnabled) log.debug("INSERTing a new LineItem entry into the LineItem table.");
+                    if (ArtDept.loggingEnabled) log.debug("INSERTing a new LineItem entry into the LineItem table.");
                     successfulLineItemInsertion = LineItemManager.insert(lineItem); // Insert the order detail in the database.
                 }
             } catch (Exception err) {
-                if (ArtDeptNew.loggingEnabled) log.error("Error inserting LineItem data in the database", err);
+                if (ArtDept.loggingEnabled) log.error("Error inserting LineItem data in the database", err);
                 JOptionPane.showMessageDialog(null, "Error inserting Line Item data into database", "Database error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
@@ -536,13 +536,13 @@ public class ScriptManager {
 
         // Insert/Update/Delete Artworks into/from the database.
         for (LineItem thisLineItem : lineItemList) {
-            if (ArtDeptNew.loggingEnabled)
+            if (ArtDept.loggingEnabled)
                 log.debug("Number of Artworks in this Line Item bean's list: " + thisLineItem.getArtworkList().size());
 
             try {
                 // Get the Artworks from the database that are a part of the same LineItem that we're looking at.
                 ArrayList<Artwork> existingArtworks = ArtworkManager.getArtworksByOrderId(thisLineItem.getId());
-                if (ArtDeptNew.loggingEnabled) {
+                if (ArtDept.loggingEnabled) {
                     assert existingArtworks != null;
                     log.debug("existingArtworks: " + existingArtworks);
                 }
@@ -550,9 +550,9 @@ public class ScriptManager {
                 // Loop through to insert/update/delete Artworks.
                 int j = 0;
                 while (j < thisLineItem.getArtworkList().size()) {
-                    if (ArtDeptNew.loggingEnabled) log.debug("Checking art number " + j + ".");
+                    if (ArtDept.loggingEnabled) log.debug("Checking art number " + j + ".");
                     Artwork thisArt = thisLineItem.getArtworkList().get(j);
-                    if (ArtDeptNew.loggingEnabled) log.debug("This art file's name: " + thisArt.getDigitalArtFile());
+                    if (ArtDept.loggingEnabled) log.debug("This art file's name: " + thisArt.getDigitalArtFile());
                     assert existingArtworks != null;
                     if (existingArtworks.size() > 0
                             && existingArtworks.size() - 1 >= j
@@ -561,29 +561,29 @@ public class ScriptManager {
                         // go ahead and replace it with the new one.
                         // This is done by setting the incoming Artwork object's ID
                         // to the old one, then overwriting the old one in the db with the new one.
-                        if (ArtDeptNew.loggingEnabled)
+                        if (ArtDept.loggingEnabled)
                             log.debug("Found an existing artwork in the same \"slot\" (#" + j + ", ID #" + existingArtworks.get(j).getId() + "). Updating it with new Artwork.");
                         thisArt.setId(existingArtworks.get(j).getId());
                         thisArt.setLineItemId(existingArtworks.get(j).getLineItemId());
-                        if (ArtDeptNew.loggingEnabled) log.debug("Updating with Art File: " + thisArt.getDigitalArtFile());
+                        if (ArtDept.loggingEnabled) log.debug("Updating with Art File: " + thisArt.getDigitalArtFile());
                         ArtworkManager.update(thisArt);
                     } else {
                         // If an Artwork doesn't exist in the database for this "slot",
                         // then create a new one with our new Artwork.
-                        if (ArtDeptNew.loggingEnabled)
+                        if (ArtDept.loggingEnabled)
                             log.debug("No more Artworks found for this LineItem in database (Slot #" + j + "). Inserting this new Artwork.");
                         thisArt.setLineItemId(thisLineItem.getId());
                         ArtworkManager.insert(thisArt);
                     }
                     j++;
                 }
-                if (ArtDeptNew.loggingEnabled) log.debug("j is now: " + j);
+                if (ArtDept.loggingEnabled) log.debug("j is now: " + j);
                 while (true) {
                     assert existingArtworks != null;
                     if (!(j < existingArtworks.size())) break;
                     // If there are still Artworks in the database after we've already gone through
                     // all of the new Artworks, just delete whatever is left.
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.debug("No more new artworks, so deleting an existing Artwork from the database. Slot #" + j + "; ID #" + existingArtworks.get(j).getId());
                     ArtworkManager.delete(existingArtworks.get(j++).getId());
                 }
@@ -595,22 +595,22 @@ public class ScriptManager {
 
         // Log the successfulness of the insertion/update-ion.
         if (successfulLineItemInsertion) {
-            if (ArtDeptNew.loggingEnabled) log.debug("At least one row was inserted/updated!");
+            if (ArtDept.loggingEnabled) log.debug("At least one row was inserted/updated!");
         } else {
-            if (ArtDeptNew.loggingEnabled) log.debug("One or more items did NOT make it into the database.");
+            if (ArtDept.loggingEnabled) log.debug("One or more items did NOT make it into the database.");
             return false;
         }
 
 
-        if (ArtDeptNew.loggingEnabled) log.trace("Completed main section.");
+        if (ArtDept.loggingEnabled) log.trace("Completed main section.");
 
 //		ConnectionManager.getInstance().close();
 
         // Get the first day of the week for this order.
         final DayOfWeek firstDayOfWeek = WeekFields.of(Locale.US).getFirstDayOfWeek();
         LocalDate weekStart = bean.getShipDateId().toLocalDate().with(TemporalAdjusters.previousOrSame(firstDayOfWeek));
-        if (ArtDeptNew.loggingEnabled) log.info("current ship date id: " + bean.getShipDateId().toString());
-        if (ArtDeptNew.loggingEnabled) log.info("weekStart: " + weekStart.toString());
+        if (ArtDept.loggingEnabled) log.info("current ship date id: " + bean.getShipDateId().toString());
+        if (ArtDept.loggingEnabled) log.info("weekStart: " + weekStart.toString());
 
         // Pluck all of the Item Statuses and Print Types from the order's LineItems.
         List<String> itemStatuses = bean.getLineItemList().stream().map(LineItem::getItemStatusId).collect(Collectors.toList());
@@ -619,7 +619,7 @@ public class ScriptManager {
         final String cachePrefix = "sky_schedule_database_sky_schedule_cache:";
 
         // Flush certain keys from the Redis data store.
-        if (ArtDeptNew.loggingEnabled) log.info("Before deleting, order-by-id for " + bean.getId() + " is: " +
+        if (ArtDept.loggingEnabled) log.info("Before deleting, order-by-id for " + bean.getId() + " is: " +
                 RedisManager.getInstance().getCommands().get(cachePrefix + "order-by-id:" + bean.getId()));
 
         RedisManager.getInstance().getCommands().del(
@@ -635,7 +635,7 @@ public class ScriptManager {
                 cachePrefix + "order-by-id:" + bean.getId()
         );
 
-        if (ArtDeptNew.loggingEnabled) log.info("After deleting, order-by-id for " + bean.getId() + " is: " +
+        if (ArtDept.loggingEnabled) log.info("After deleting, order-by-id for " + bean.getId() + " is: " +
                 RedisManager.getInstance().getCommands().get(cachePrefix + "order-by-id:" + bean.getId()));
 
         for (String status : itemStatuses) {
@@ -650,19 +650,19 @@ public class ScriptManager {
 
 
     private static boolean updateTables(List<LineItem> incomingList, List<LineItem> existingList, ScriptType scriptType) {
-        if (ArtDeptNew.loggingEnabled) log.entry("updateTables (ScriptManager)");
+        if (ArtDept.loggingEnabled) log.entry("updateTables (ScriptManager)");
 
         // Last part here occurs if there are items in both lists. Update until one of them drops to 0.
         Iterator<LineItem> incomingIterator = incomingList.iterator();
         Iterator<LineItem> existingIterator = existingList.iterator();
 
-        if (ArtDeptNew.loggingEnabled) log.debug("Incoming list has " + incomingList.size() + " elements.");
-        if (ArtDeptNew.loggingEnabled) log.debug("Existing list has " + existingList.size() + " elements.");
+        if (ArtDept.loggingEnabled) log.debug("Incoming list has " + incomingList.size() + " elements.");
+        if (ArtDept.loggingEnabled) log.debug("Existing list has " + existingList.size() + " elements.");
 
         try {
             if (scriptType == ScriptType.PROOF) {
                 while (incomingIterator.hasNext() && existingIterator.hasNext()) {
-                    if (ArtDeptNew.loggingEnabled) log.debug("Updating an existing Line Item. (Proofing)");
+                    if (ArtDept.loggingEnabled) log.debug("Updating an existing Line Item. (Proofing)");
                     LineItem incomingOD = incomingIterator.next();
                     LineItem existingOD = existingIterator.next();
                     incomingOD.setId(existingOD.getId());
@@ -679,7 +679,7 @@ public class ScriptManager {
                         LineItem existingOD = existingIterator.next();
                         if (incomingOD.getProductDetail().equals(existingOD.getProductDetail())
                                 && incomingOD.getProductNum().equals(existingOD.getProductNum())) {
-                            if (ArtDeptNew.loggingEnabled) log.debug("Updating an existing Line Item. (Output)");
+                            if (ArtDept.loggingEnabled) log.debug("Updating an existing Line Item. (Output)");
                             incomingOD.setId(existingOD.getId());
                             if (incomingOD.getProofDate() == null)
                                 incomingOD.setProofDate(existingOD.getProofDate());
@@ -693,18 +693,18 @@ public class ScriptManager {
 
             if (scriptType == ScriptType.PROOF) {
                 while (incomingIterator.hasNext()) {
-                    if (ArtDeptNew.loggingEnabled) log.debug("Inserting a new Line Item.");
+                    if (ArtDept.loggingEnabled) log.debug("Inserting a new Line Item.");
                     LineItem incomingOD = incomingIterator.next();
                     LineItemManager.insert(incomingOD);
                 }
                 while (existingIterator.hasNext()) {
-                    if (ArtDeptNew.loggingEnabled) log.debug("Deleting an existing Line Item.");
+                    if (ArtDept.loggingEnabled) log.debug("Deleting an existing Line Item.");
                     LineItem existingOD = existingIterator.next();
                     LineItemManager.delete(existingOD.getId());
                 }
             }
         } catch (Exception err) {
-            if (ArtDeptNew.loggingEnabled)
+            if (ArtDept.loggingEnabled)
                 log.error("Error while attempting to update/insert/delete data in database.", err);
             return false;
         }
@@ -713,7 +713,7 @@ public class ScriptManager {
     }
 
     private static List<LineItem> protectODs(List<LineItem> existingList, List<File> protectionList) {
-        if (ArtDeptNew.loggingEnabled) log.entry("protectODs (ScriptManager)");
+        if (ArtDept.loggingEnabled) log.entry("protectODs (ScriptManager)");
 
         List<LineItem> trimmedList = new ArrayList<>(existingList);
         Iterator<File> fileIterator = protectionList.iterator();
@@ -729,10 +729,10 @@ public class ScriptManager {
             odIterator = trimmedList.iterator();
             while (odIterator.hasNext()) {
                 LineItem orderDetail = odIterator.next();
-                if (ArtDeptNew.loggingEnabled)
+                if (ArtDept.loggingEnabled)
                     log.debug("Comparing " + orderDetail.getProductDetail() + " (existing item in db) to " + itemDetail + " (item in protection list).");
                 if (itemDetail != null && (orderDetail.getProductDetail().equals("") && !itemDetail.equals("")) || orderDetail.getProductDetail().equals(itemDetail)) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.debug("Found a match. Removing from trimmed list. (Item protected)");
                     odIterator.remove();
 //					fileIterator.remove();
@@ -745,7 +745,7 @@ public class ScriptManager {
     }
 
     private static void addDummyEntries(List<LineItem> existingList, List<File> protectionList) {
-        if (ArtDeptNew.loggingEnabled) log.entry("addDummyEntries (ScriptManager)");
+        if (ArtDept.loggingEnabled) log.entry("addDummyEntries (ScriptManager)");
 
         Iterator<File> fileIterator = protectionList.iterator();
         Iterator<LineItem> odIterator;
@@ -760,7 +760,7 @@ public class ScriptManager {
             odIterator = existingList.iterator();
             while (odIterator.hasNext()) {
                 LineItem orderDetail = odIterator.next();
-                if (ArtDeptNew.loggingEnabled)
+                if (ArtDept.loggingEnabled)
                     log.debug("Comparing " + orderDetail.getProductDetail() + " to " + itemDetail);
                 if (itemDetail != null && (orderDetail.getProductDetail().equals("") && !itemDetail.equals(""))
                         || itemDetail == null
@@ -769,7 +769,7 @@ public class ScriptManager {
                         || StringUtils.containsIgnoreCase(itemDetail, "Carousel")
                         || StringUtils.containsIgnoreCase(itemDetail, "cover")
                         || StringUtils.containsIgnoreCase(itemDetail, "label")) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.debug("Found a match. Removing from the protectionList. (Will NOT be added as a dummy item.)");
                     fileIterator.remove();
                     break;
@@ -795,7 +795,7 @@ public class ScriptManager {
                 try {
                     LineItemManager.insert(bean);
                 } catch (Exception err) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.error("Exception when trying to insert a dummy LineItem into the database.", err);
                 }
             }
@@ -805,7 +805,7 @@ public class ScriptManager {
 
 
     private static void addDummyEntries(List<LineItem> incomingList, String jobNumber) {
-        if (ArtDeptNew.loggingEnabled) log.entry("addDummyEntries (when bean doesn't exist yet) (ScriptManager)");
+        if (ArtDept.loggingEnabled) log.entry("addDummyEntries (when bean doesn't exist yet) (ScriptManager)");
 
         String jobPrefix = jobNumber.substring(0, 3);
         String jobFolderBeginning = artDeptFolder + "JOBS/" + jobPrefix + "000-" + jobPrefix + "999/";
@@ -826,7 +826,7 @@ public class ScriptManager {
             odIterator = incomingList.iterator();
             while (odIterator.hasNext()) {
                 LineItem orderDetail = odIterator.next();
-                if (ArtDeptNew.loggingEnabled)
+                if (ArtDept.loggingEnabled)
                     log.debug("Comparing " + orderDetail.getProductDetail() + " (incoming item) to " + itemDetail + " (existing file in directory).");
                 if (itemDetail != null && (orderDetail.getProductDetail().equals("") && !itemDetail.equals(""))
                         || itemDetail == null
@@ -835,7 +835,7 @@ public class ScriptManager {
                         || StringUtils.containsIgnoreCase(itemDetail, "Carousel")
                         || StringUtils.containsIgnoreCase(itemDetail, "cover")
                         || StringUtils.containsIgnoreCase(itemDetail, "label")) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.debug("Found a match. Removing from the existing File list. (Will not be added as a dummy item to the database.)");
                     fileIterator.remove();
                     break;
@@ -861,7 +861,7 @@ public class ScriptManager {
                 try {
                     LineItemManager.insert(bean);
                 } catch (Exception err) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.error("Exception when trying to insert a dummy LineItem into the database.", err);
                 }
             }
@@ -877,7 +877,7 @@ public class ScriptManager {
      * These are files that exist in the folder but are NOT in the incoming list of jobs.
      */
     private static List<File> getProtectionList(String jobNumber, List<LineItem> odList) {
-        if (ArtDeptNew.loggingEnabled) log.entry("getProtectionList (ScriptManager)");
+        if (ArtDept.loggingEnabled) log.entry("getProtectionList (ScriptManager)");
 
         String jobPrefix = jobNumber.substring(0, 3);
         String jobFolderBeginning = artDeptFolder + "JOBS/" + jobPrefix + "000-" + jobPrefix + "999/";
@@ -895,14 +895,14 @@ public class ScriptManager {
                 File file = fileIterator.next();
                 itemDetail = StringUtils.substringBetween(file.getName(), "_", ".");
                 if (itemDetail == null) itemDetail = "";
-                if (ArtDeptNew.loggingEnabled)
+                if (ArtDept.loggingEnabled)
                     log.debug("Comparing " + od.getProductDetail() + " (incoming item) to " + itemDetail + " (existing file in directory).");
                 if (itemDetail.equals(od.getProductDetail())
                         || itemDetail.equals("MiniPad")
                         || itemDetail.equals("Carousel")
                         || itemDetail.equals("cover")
                         || itemDetail.equals("label")) {
-                    if (ArtDeptNew.loggingEnabled)
+                    if (ArtDept.loggingEnabled)
                         log.debug("Found a match. Removing from the protectionList. (Will be deleted/updated later.)");
                     fileIterator.remove();
 //					break;

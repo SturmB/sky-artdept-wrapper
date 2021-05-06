@@ -44,7 +44,7 @@ import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArtDeptNew extends JFrame {
+public class ArtDept extends JFrame {
     private JPanel contentPane;
     private JButton buttonProof;
     private JButton buttonOutput;
@@ -56,7 +56,7 @@ public class ArtDeptNew extends JFrame {
     private static final String APP_VERSION = "5.0.0";
     private static final String DEFAULT_TITLE = APP_NAME + " v" + APP_VERSION;
     // Logging
-    static final Logger log = LogManager.getLogger(ArtDeptNew.class.getName());
+    static final Logger log = LogManager.getLogger(ArtDept.class.getName());
     public static boolean loggingEnabled = false;
     // Preferences variables
     private final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
@@ -83,7 +83,7 @@ public class ArtDeptNew extends JFrame {
     private static final String PREFS_ARTDEPT_HEIGHT_KEY = "artdept_height";
     private static final int PREFS_ARTDEPT_HEIGHT_DEFAULT = 120;
 
-    public ArtDeptNew() {
+    public ArtDept() {
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonProof);
 
@@ -251,18 +251,18 @@ public class ArtDeptNew extends JFrame {
 
         // Set the icons to be used for the Frame. This MUST come before the frame is instantiated.
         try {
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDeptNew.class.getClassLoader().getResource("images/sky_launcher-02_16x16.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDeptNew.class.getClassLoader().getResource("images/sky_launcher-02_32x32.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDeptNew.class.getClassLoader().getResource("images/sky_launcher-02_48x48.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDeptNew.class.getClassLoader().getResource("images/sky_launcher-02_256x256.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDeptNew.class.getClassLoader().getResource("images/sky_launcher-02_512x512.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDeptNew.class.getClassLoader().getResource("images/sky_launcher-02_768x768.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_16x16.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_32x32.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_48x48.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_256x256.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_512x512.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_768x768.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // Create the frame
-        ArtDeptNew frame = new ArtDeptNew();
+        ArtDept frame = new ArtDept();
         frame.setTitle(DEFAULT_TITLE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

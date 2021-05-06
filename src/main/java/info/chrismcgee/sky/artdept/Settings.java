@@ -117,8 +117,8 @@ public class Settings extends JDialog {
         };
 
         // Set the application icons
-        if (!ArtDeptNew.icons.isEmpty()) {
-            setIconImages(ArtDeptNew.icons);
+        if (!ArtDept.icons.isEmpty()) {
+            setIconImages(ArtDept.icons);
         }
 
         buttonOK.addActionListener(e -> onOK());
@@ -304,10 +304,10 @@ public class Settings extends JDialog {
         final OsThemeDetector detector = OsThemeDetector.getDetector();
 
         // Setting the base look and feel
-        ArtDeptNew.installTheme(detector.isDark());
+        ArtDept.installTheme(detector.isDark());
 
         // Detect OS theme changes
-        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> ArtDeptNew.installTheme(isDark)));
+        detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> ArtDept.installTheme(isDark)));
 
         Settings dialog = new Settings();
 
