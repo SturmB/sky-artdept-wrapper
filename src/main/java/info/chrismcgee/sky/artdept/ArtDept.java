@@ -448,6 +448,12 @@ public class ArtDept extends JFrame {
                 if (frm == null) {
                     frm = new JFrame();
                 }
+
+                // Set the dialog's icons
+                if (!icons.isEmpty()) {
+                    frm.setIconImages(ArtDept.icons);
+                }
+
                 frm.setVisible(true);
                 frm.setAlwaysOnTop(true);
                 frm.setLocationRelativeTo(null);
