@@ -96,6 +96,10 @@ public class ArtDept extends JFrame {
             }
         });
 
+        // Reset the logging and script directory prefs
+        prefs.put(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT);
+        prefs.putBoolean(Settings.PREFS_LOGGING_KEY, Settings.PREFS_LOGGING_DEFAULT);
+
         MenuListener settingsListener = new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
