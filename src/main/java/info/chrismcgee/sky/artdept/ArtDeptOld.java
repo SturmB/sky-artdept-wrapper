@@ -42,7 +42,7 @@ import java.util.prefs.Preferences;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArtDept extends JFrame {
+public class ArtDeptOld extends JFrame {
 
     /**
      * Serialize, to keep Eclipse from throwing a warning message.
@@ -58,7 +58,7 @@ public class ArtDept extends JFrame {
             : File.separator + File.separator + "SKYFS";
     public static final String ARTDEPT_DRIVE = FILE_SYSTEM_PREFIX + File.separator + "ArtDept" + File.separator;
 
-    static final Logger log = LogManager.getLogger(ArtDept.class.getName()); // For logging.
+    static final Logger log = LogManager.getLogger(ArtDeptOld.class.getName()); // For logging.
     public static boolean loggingEnabled = false;
     // Location of the script files to be run. This is either with or without the "Test/" portion.
     public static String scriptPath = ARTDEPT_DRIVE + "ArtDept" + File.separator
@@ -116,7 +116,7 @@ public class ArtDept extends JFrame {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
                 // Create the frame and show it.
-                ArtDept frame = new ArtDept();
+                ArtDeptOld frame = new ArtDeptOld();
 
                 frame.setTitle(defaultTitle);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -138,7 +138,7 @@ public class ArtDept extends JFrame {
     /**
      * Create the dialog.
      */
-    public ArtDept() {
+    public ArtDeptOld() {
 
         List<Image> icons = new ArrayList<>();
         try {

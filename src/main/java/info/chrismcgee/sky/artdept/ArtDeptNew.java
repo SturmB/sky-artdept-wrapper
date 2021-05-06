@@ -59,7 +59,7 @@ public class ArtDeptNew extends JFrame {
     static final Logger log = LogManager.getLogger(ArtDeptNew.class.getName());
     public static boolean loggingEnabled = false;
     // Preferences variables
-    public final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
+    private final Preferences prefs = Preferences.userNodeForPackage(Settings.class);
     // The order's text file and its variables, pre-defined here
     private File textFile = null;
     private String customerServiceRep = "";
