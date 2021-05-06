@@ -65,7 +65,7 @@ public class Settings extends JDialog {
     public static final String PREFS_NOTIFY_EMAIL_DEFAULT = "customerservice@skyunlimitedinc.com";
 
     public static final String PREFS_YOUR_EMAIL_KEY = "your_email";
-    public static final String PREFS_YOUR_EMAIL_DEFAULT = "";
+    public static final String PREFS_YOUR_EMAIL_DEFAULT = "skyartdept@main.skyunlimitedinc.com";
 
     public static final String PREFS_INITIALS_KEY = "your_initials";
     public static final String PREFS_INITIALS_DEFAULT = "";

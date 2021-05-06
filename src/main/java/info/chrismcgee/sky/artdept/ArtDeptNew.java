@@ -66,6 +66,7 @@ public class ArtDeptNew extends JFrame {
     private String wnaPo = "";
     // "Job Complete" JFrame
     private JFrame frm;
+    // List of app icon images
     public static List<Image> icons = new ArrayList<>();
 
     private static final String PREFS_ARTDEPT_X_KEY = "artdept_x";
@@ -180,7 +181,6 @@ public class ArtDeptNew extends JFrame {
 
         // Validate upon initializing this dialog
         validateAll();
-
     }
 
     private void openSettings() {
@@ -321,18 +321,19 @@ public class ArtDeptNew extends JFrame {
             return;
         }
 
-        // If this is a proofing job, then pre-add 1 to the proofing number.
-        // Also do some more checks.
+        // Validate information retrieved from db and text file
         if (scriptType == ScriptType.PROOF) {
+            // If this is a proofing job, then pre-add 1 to the proofing number.
             proofNum++;
-            String messageToAddress = "customerservice@skyunlimitedinc.com";
+            String messageFromAddress = prefs.get(Settings.PREFS_YOUR_EMAIL_KEY, Settings.PREFS_YOUR_EMAIL_DEFAULT);
+            String messageToAddress = prefs.get(Settings.PREFS_NOTIFY_EMAIL_KEY, Settings.PREFS_NOTIFY_EMAIL_DEFAULT);
             if (proofNum == 1 && orderBean == null) {
                 // If the text file doesn't exist during a first proof of a job.
                 if (JOptionPane.showConfirmDialog(null, "Text file not found.\n"
                                 + "Send an email to Customer Service to create it?", "Send Email?",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    SendMail.send(prefs.get(Settings.PREFS_NOTIFY_EMAIL_KEY, Settings.PREFS_NOTIFY_EMAIL_DEFAULT),
+                    SendMail.send(messageFromAddress,
                             messageToAddress,
                             "Need text file for " + tfOrderNum.getText() + ".",
                             "I need a text file made for Job #" + tfOrderNum.getText() + ", please. Thank you!");
@@ -340,7 +341,7 @@ public class ArtDeptNew extends JFrame {
                             """
                                     An email has been sent to have the file created.
                                     Please keep a close eye on your inbox for a message
-                                    stating that it has been created. Then retry.""",
+                                    stating that it has been created, then retry.""",
                             "Text File Not Found",
                             JOptionPane.WARNING_MESSAGE);
                 }
@@ -355,7 +356,7 @@ public class ArtDeptNew extends JFrame {
                                     + "Send an email to Customer Service to fix it?", "Send Email?",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                        SendMail.send(prefs.get(Settings.PREFS_NOTIFY_EMAIL_KEY, Settings.PREFS_NOTIFY_EMAIL_DEFAULT),
+                        SendMail.send(messageFromAddress,
                                 messageToAddress,
                                 "Need correct text file for " + tfOrderNum.getText() + ".",
                                 "The text file with the name " + tfOrderNum.getText() + ".TXT is an Order Acknowledgement. " +
@@ -375,7 +376,7 @@ public class ArtDeptNew extends JFrame {
                                     + "Send an email to Customer Service to fix it?", "Send Email?",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                        SendMail.send(prefs.get(Settings.PREFS_NOTIFY_EMAIL_KEY, Settings.PREFS_NOTIFY_EMAIL_DEFAULT),
+                        SendMail.send(messageFromAddress,
                                 messageToAddress,
                                 "Need text file for " + tfOrderNum.getText() + ".",
                                 "The text file with the name " + tfOrderNum.getText() + ".TXT is not for that job number. " +
