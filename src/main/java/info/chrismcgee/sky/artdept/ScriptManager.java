@@ -164,8 +164,9 @@ public class ScriptManager {
             if (ArtDept.loggingEnabled) log.debug("JSON-Out:\n" + jsonOut);
 
             Process p = null;
+            ExecutorService executor = null;
             try {
-                ExecutorService executor = Executors.newFixedThreadPool(10);
+                executor = Executors.newFixedThreadPool(10);
                 //noinspection SpellCheckingInspection
                 p = Runtime.getRuntime().exec("cscript //NoLogo " + scriptFile + " " + jsonOut + " " + ArtDept.loggingEnabled + " " + (prefs.get(Settings.PREFS_DIR_KEY, Settings.PREFS_DIR_DEFAULT) + File.separator));
                 Future<String> fut1 = executor.submit(new ReadStreamWithCall("stdin", p.getInputStream()));
@@ -180,6 +181,9 @@ public class ScriptManager {
             } finally {
                 if (p != null) {
                     p.destroy();
+                }
+                if (executor != null) {
+                    executor.shutdown();
                 }
             }
 

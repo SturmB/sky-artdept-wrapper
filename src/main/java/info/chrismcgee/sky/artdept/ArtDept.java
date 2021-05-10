@@ -220,6 +220,7 @@ public class ArtDept extends JFrame {
                     if (loggingEnabled) log.error("Interrupted!", e);
                 }
             });
+            proofThread.setName("onProof");
             proofThread.start();
         }
     }
@@ -234,6 +235,7 @@ public class ArtDept extends JFrame {
                     if (loggingEnabled) log.error("Interrupted!", e);
                 }
             });
+            outputThread.setName("onOutput");
             outputThread.start();
         }
     }
@@ -241,6 +243,8 @@ public class ArtDept extends JFrame {
     private void onCancel() {
         // add your code here if necessary
         dispose();
+        // Only use System.exit() if the app still doesn't completely close.
+//        System.exit(0);
     }
 
     public static void main(String[] args) {
