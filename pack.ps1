@@ -14,5 +14,4 @@ jpackage  `
 --app-version 5.0.0 `
 --description "Launcher for the Proofing and Output scripts for Sky Unlimited, Inc.'s Art Department" `
 --vendor "Sky Unlimited, Inc." `
---copyright "Copyright ©2021, All rights reserved" `
---verbose
+--copyright "Copyright ©2021, All rights reserved"
