@@ -1,6 +1,6 @@
 ### Eclipse template
 .metadata
-#bin/ # See bottom of file
+bin/
 tmp/
 *.tmp
 *.bak
@@ -102,11 +102,11 @@ Temporary Items
 .mtj.tmp/
 
 # Package Files #
-#*.jar
+*.jar
 *.war
 *.nar
 *.ear
-#*.zip
+*.zip
 *.tar.gz
 *.rar
 
@@ -223,8 +223,22 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
 ### Miscellaneous
 logs
 /bin/*
 !/bin/images
 !/bin/log4j2.xml
+*.exe
