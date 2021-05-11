@@ -6,7 +6,7 @@ jpackage  `
 --main-class info.chrismcgee.sky.artdept.ArtDept `
 --type exe `
 --dest target\ `
---icon src\main\resources\images\sky_launcher-02.ico `
+--icon src\main\resources\images\sky_launcher-04.ico `
 --win-shortcut `
 --win-menu `
 --win-menu-group "Sky Unlimited, Inc." `

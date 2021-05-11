@@ -259,12 +259,12 @@ public class ArtDept extends JFrame {
 
         // Set the icons to be used for the Frame. This MUST come before the frame is instantiated.
         try {
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_16x16.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_32x32.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_48x48.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_256x256.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_512x512.png"))));
-            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-02_768x768.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-04_16x16.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-04_32x32.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-04_48x48.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-04_256x256.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-04_512x512.png"))));
+            icons.add(ImageIO.read(Objects.requireNonNull(ArtDept.class.getClassLoader().getResource("images/sky_launcher-04_768x768.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
