@@ -52,7 +52,7 @@ public class ArtDept extends JFrame {
     private JTextField tfOrderNum;
 
     // App identification
-    private static final String APP_NAME = "Sky Launcher";
+    public static final String APP_NAME = "Sky Launcher";
     private static final String APP_VERSION = "5.0.0";
     private static final String DEFAULT_TITLE = APP_NAME + " v" + APP_VERSION;
     // Logging
@@ -201,6 +201,7 @@ public class ArtDept extends JFrame {
     private void openSettings() {
         // Create the Settings dialog
         Settings settings = new Settings();
+        settings.setTitle(Settings.SETTINGS_TITLE);
 
         // Set the location of the Settings dialog
         settings.pack();

@@ -59,7 +59,8 @@ public class Settings extends JDialog {
             + File.separator + "ArtDept"
             + File.separator + "Scripts"
             + File.separator + "sky-artdept";
-//    public static final String PATH_TEST = PATH_SCRIPTS_ROOT + File.separator + "Test";
+
+    public static final String SETTINGS_TITLE = ArtDept.APP_NAME + " Settings";
 
     public static final String PREFS_PRINTER_KEY = "printer";
     public static final String PREFS_PRINTER_DEFAULT = PrintServiceLookup.lookupDefaultPrintService().getName();
@@ -320,7 +321,9 @@ public class Settings extends JDialog {
         // Detect OS theme changes
         detector.registerListener(isDark -> SwingUtilities.invokeLater(() -> ArtDept.installTheme(isDark)));
 
+        // Create the dialog
         Settings dialog = new Settings();
+        dialog.setTitle(SETTINGS_TITLE);
 
         // Set the location and size of the window
         dialog.setLocationByPlatform(true);
