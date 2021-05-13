@@ -1,5 +1,90 @@
 # Changelog
 
+<a name="5.0.0"></a>
+## 5.0.0 (2021-05-11)
+
+This update redesigns most of the interface, adding a new coat of paint as well as adding many more settings. Also, the settings have been moved to their own dialog. The app reacts to the color mode that Windows is using (dark vs. light). Finally, the hanging bug that caused the app to still be running in the background even after being closed has (hopefully) been fixed.
+
+### Added
+
+- ✨ Adds Printer Name to arguments for the scripts [[26344b3](https://github.com/skyunlimitedinc/sky-launcher/commit/26344b39004901d9748d0015b2755c7b59f0c20c)]
+- 🔊 Fix debug log preference [[c3506d6](https://github.com/skyunlimitedinc/sky-launcher/commit/c3506d68c8e5408e609a4cf18454a968cfbfb5bc)]
+- ✨ Adds Patterns file setting [[c88cdfc](https://github.com/skyunlimitedinc/sky-launcher/commit/c88cdfc3ecff7cfe82d6cfcde72747d2a0257023)]
+- ✨ Adds Maven [[4384da8](https://github.com/skyunlimitedinc/sky-launcher/commit/4384da8798b71652f522bef1afd29da554f27149)]
+- ✨ Adds Settings dialog with a few controls [[5707f0e](https://github.com/skyunlimitedinc/sky-launcher/commit/5707f0e2957d42f3a33a7c132d459bdbd4cc76eb)]
+
+### Changed
+
+- 💄 Adds a title to the Settings dialog [[77509f8](https://github.com/skyunlimitedinc/sky-launcher/commit/77509f8c04f26d620b7f169ef865509a581f3f47)]
+- 💄 Updates icons [[61bf1b9](https://github.com/skyunlimitedinc/sky-launcher/commit/61bf1b95deef9681dca38fce4b29a52dcfe8b92c)]
+- 🚚 Organizes dependencies [[a9b1bf0](https://github.com/skyunlimitedinc/sky-launcher/commit/a9b1bf0b2f60de5f6e7af1e7f8719f433919ca25)]
+- 🎨 Tiny format fix in `pom.xml` [[70bf625](https://github.com/skyunlimitedinc/sky-launcher/commit/70bf625d2a9d8d2988e95a40dd756319524ce6bf)]
+- 🔧 JetBrains config files updated [[15687c7](https://github.com/skyunlimitedinc/sky-launcher/commit/15687c74eed37159c2093977e29d1f3b69005335)]
+- 📌 Fixes version of JetBrains Annotation dependency in Maven [[e227e1d](https://github.com/skyunlimitedinc/sky-launcher/commit/e227e1df8cee8b42c79c909e7a56b0d0c554c83b)]
+- 🚸 Resets the logging and script directory prefs upon launch [[332f239](https://github.com/skyunlimitedinc/sky-launcher/commit/332f239160a1ffa10e63a173c6076723061d3992)]
+- 💄 Adds the app icons to the "Finished!" dialog [[73a927c](https://github.com/skyunlimitedinc/sky-launcher/commit/73a927cb9d61a0f6376d4dfcde8dd32811e68b66)]
+- 🚚 Refactors ArtDept to become the standard main one now [[85688ae](https://github.com/skyunlimitedinc/sky-launcher/commit/85688ae7aa5a6caa7762cafd4e620c32eea9d2da)]
+- 🚚 Adjusts ScriptManager to use new ArtDept class [[4462658](https://github.com/skyunlimitedinc/sky-launcher/commit/4462658ba5a03feca7268985c62662205a2c21c7)]
+- 🎨 Optimizes imports [[27e2b87](https://github.com/skyunlimitedinc/sky-launcher/commit/27e2b873944b54843b89b7fa5dde03a6bcc612ae)]
+- ♻️ Updates Order Number validation [[8420bcf](https://github.com/skyunlimitedinc/sky-launcher/commit/8420bcf8dac45b408e61fc06db7688f938d8a152)]
+- 💄 Refines size, location, and layout of windows [[c308268](https://github.com/skyunlimitedinc/sky-launcher/commit/c30826898ba1b69f86d87c8f7905e16491b428e4)]
+- 💄 Sets app icon for both windows [[47b6250](https://github.com/skyunlimitedinc/sky-launcher/commit/47b6250b88185e6ad0ee283e54b3c7000b901cce)]
+- ♻️ Refactors how the FlatLaf library is invoked once more [[dbc50f3](https://github.com/skyunlimitedinc/sky-launcher/commit/dbc50f396c72becb3f492ed1726a08716b232503)]
+- ♻️ Refactors how the FlatLaf library is invoked [[ba5fb7a](https://github.com/skyunlimitedinc/sky-launcher/commit/ba5fb7a4d24902c3a830a5c32a69ce4c314c71b6)]
+- ♻️ Refactors field validation in Settings [[0c27ca7](https://github.com/skyunlimitedinc/sky-launcher/commit/0c27ca761f8e1a638ef6a99695a69747ecbb01c7)]
+- 💄 Adds Light and Dark Modes [[738885e](https://github.com/skyunlimitedinc/sky-launcher/commit/738885ebd850bbe1249ab6230e6b5ffebed87de6)]
+- 🚸 Adds new, experimental main ArtDept form [[3833a4e](https://github.com/skyunlimitedinc/sky-launcher/commit/3833a4ed6401aad9931dda8152b97b56b8b64c9f)]
+- 🏗️ Path TextField validator working [[50c9436](https://github.com/skyunlimitedinc/sky-launcher/commit/50c94364ee62ec61e4d2fbc5d4280f23d64c3e8a)]
+- 🚚 Moves log4j2 config file [[fc75244](https://github.com/skyunlimitedinc/sky-launcher/commit/fc752448a13fc40caf83798ca399ff9f97963141)]
+- 🚨 Removes linter warning about RegExp escapes [[cdef3f4](https://github.com/skyunlimitedinc/sky-launcher/commit/cdef3f415e479dd1175a354aa0af727cf90c5649)]
+- 🚨 Some cleanup [[7803e91](https://github.com/skyunlimitedinc/sky-launcher/commit/7803e915b10532438226a7f33051de19f37b1d93)]
+- ♻️ Some cleanup and renaming [[891b5c2](https://github.com/skyunlimitedinc/sky-launcher/commit/891b5c2df6289ab489707c200c9cd1a518f63fa7)]
+- 🎨 Cleans up formatting in the Sanitizer [[c57578a](https://github.com/skyunlimitedinc/sky-launcher/commit/c57578aaa95ed44aa865c2e1d8e9ac40e5bb9c08)]
+
+### Removed
+
+- 🔥 Removes old Eclipse files [[2952434](https://github.com/skyunlimitedinc/sky-launcher/commit/2952434275ebd2ee9cdb03612fed7de203fda092)]
+- 🔥 Removes unnecessary variable [[381b7ed](https://github.com/skyunlimitedinc/sky-launcher/commit/381b7ed74568e39dc6b1721f9a49e7f79fc1157f)]
+
+### Fixed
+
+- 🐛 Fixes the hanging thread issue [[7970aee](https://github.com/skyunlimitedinc/sky-launcher/commit/7970aee1bea138a1d98559d29fc499c3967efe98)]
+- 🐛 Sets the correct radio button in Settings upon dialog opening [[cae3728](https://github.com/skyunlimitedinc/sky-launcher/commit/cae3728dbba34be21582d301599d39490f6c0c41)]
+- 🐛 Fixes some pathname bugs [[cd8739b](https://github.com/skyunlimitedinc/sky-launcher/commit/cd8739b860512fca3ffae8f8fc0da5f7c73be110)]
+- 🐛 Clean-up and bugfix [[f31c212](https://github.com/skyunlimitedinc/sky-launcher/commit/f31c212be64b17b7210876c75c9b117562da27c7)]
+- 🚑 Fix app icons [[5cfc766](https://github.com/skyunlimitedinc/sky-launcher/commit/5cfc76636235cdeb1c705e5cbb7d4775e9582f69)]
+- 🐛 Fixes references to log4j [[ebb49a2](https://github.com/skyunlimitedinc/sky-launcher/commit/ebb49a2009347adeae2dc55297e510eaf81ae48f)]
+
+### Miscellaneous
+
+- 🙈 Cleans up ignored files [[b9acb67](https://github.com/skyunlimitedinc/sky-launcher/commit/b9acb6769ae953af6a485ec3f797192e43becfe1)]
+- 🙈 Ignores Maven files and executables [[df8c5ab](https://github.com/skyunlimitedinc/sky-launcher/commit/df8c5ab75cd23de93c77315d7ca55f48659e6694)]
+- 📦 Stops the packager from being verbose [[848672e](https://github.com/skyunlimitedinc/sky-launcher/commit/848672e6572f6e1795c14678b9bc06eb3ebbd5cf)]
+- 📦 Quote mark replacement and re-package [[7e25536](https://github.com/skyunlimitedinc/sky-launcher/commit/7e255361c8217e26320855801185bf5585cfa95b)]
+- 📦 Uses `jpackage` to generate Windows executable and installer [[ef41dc6](https://github.com/skyunlimitedinc/sky-launcher/commit/ef41dc64292b37905ff735fc682de360a19a1a5f)]
+- 📦 Creates executable JAR with Maven [[311ddd4](https://github.com/skyunlimitedinc/sky-launcher/commit/311ddd4f2d6b56e55a928863f6e770a1ce663934)]
+- 📦 Further sets up executable JAR creation in IDEA [[671cc07](https://github.com/skyunlimitedinc/sky-launcher/commit/671cc07d4fd004e0d055084197f26a0c867ce344)]
+- 📦 Setting up executable JAR creation in IDEA [[9943216](https://github.com/skyunlimitedinc/sky-launcher/commit/994321639a5014bacc796001402fa7a261ed2854)]
+- 📸 Minor updates to `pom.xml` [[3e71127](https://github.com/skyunlimitedinc/sky-launcher/commit/3e711275380d84bb71e38df98c0f2fc8c45ff58c)]
+- 🌐 I18nizes some more text in the Settings dialog [[e1af3ca](https://github.com/skyunlimitedinc/sky-launcher/commit/e1af3ca9d8378235aafdd4163ae431e9b363b612)]
+- 🚧 Adds more settings [[6ffd56f](https://github.com/skyunlimitedinc/sky-launcher/commit/6ffd56fcbc0dbd9056808a4ffed36137ec15cff2)]
+- 🤡 Whatever. [[69879f9](https://github.com/skyunlimitedinc/sky-launcher/commit/69879f9a94a2673b81080f8a8eefb4da34e0928b)]
+- 🚧 Allow two classes to reference the same Preferences object [[a4fcdc2](https://github.com/skyunlimitedinc/sky-launcher/commit/a4fcdc242552b671a324b0e270dc63820ae61bb0)]
+- 🌐 Adds compiled version of I18nizing properties file [[48e5eb3](https://github.com/skyunlimitedinc/sky-launcher/commit/48e5eb301d3b7879352312f3d097cbbb1dfcaef8)]
+- 🌐 I18nizes hard-coded text in Settings form [[9017e7c](https://github.com/skyunlimitedinc/sky-launcher/commit/9017e7cc0af0e45d4983db3010a58f508e649da0)]
+- 🚧 Assigning the active Script choice directory to a universal pref [[e5c61d1](https://github.com/skyunlimitedinc/sky-launcher/commit/e5c61d12b53ef0947ce6ff08f34140567b37dec1)]
+- 🚧 Trying to get JTextField validators to work [[ca37b2c](https://github.com/skyunlimitedinc/sky-launcher/commit/ca37b2c52692329127807e9f8c59e5ac33a8d77b)]
+- 🚧 Radio buttons mostly implemented [[7c56ef8](https://github.com/skyunlimitedinc/sky-launcher/commit/7c56ef8e679abcba90251c50627e681b69685d36)]
+- 🚧 Implements all file choosers [[2f6e421](https://github.com/skyunlimitedinc/sky-launcher/commit/2f6e421a41c2b03ca6306d7e4fa649ed7f764d4f)]
+- 🚧 Initial work on file chooser [[be55bc4](https://github.com/skyunlimitedinc/sky-launcher/commit/be55bc41bc26b6973dfe0cd639d821093c0075b7)]
+- 🔨 Fixes Maven installation (hopefully) [[89a7b7a](https://github.com/skyunlimitedinc/sky-launcher/commit/89a7b7aefb751afdb3d1bfb8ff7b91199e3f7cdc)]
+- 🚧 Begin work on the Script Location part of Settings [[694ec8f](https://github.com/skyunlimitedinc/sky-launcher/commit/694ec8f63aa9c74be7360ded651493f13e769a98)]
+- 🚧 Adds Notification Email field & logic [[0c384d7](https://github.com/skyunlimitedinc/sky-launcher/commit/0c384d77b7759abf884b0add013280891e9fe8fc)]
+- 🚧 Adds Initials field & logic to Settings [[e05eca2](https://github.com/skyunlimitedinc/sky-launcher/commit/e05eca2adc888d7a1c1671dd54631030e3d64c7b)]
+- 🚧 Adds email text field and updates sanitizer [[9bcb0e3](https://github.com/skyunlimitedinc/sky-launcher/commit/9bcb0e3d005c418920af0bc8ecee3ea5ab320e7b)]
+- 🚧 Moving Preferences to Settings class [[f618331](https://github.com/skyunlimitedinc/sky-launcher/commit/f61833107d5537c6df3ab2e158e9060c9c3ee17e)]
+
+
 <a name="4.2.0"></a>
 ## 4.2.0 (2021-04-05)
 

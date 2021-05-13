@@ -1,6 +1,6 @@
 {
   "name": "sky-launcher",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "description": "Java wrapper application for the Proofing and Output scripts.",
   "main": "src/info/chrismcgee/sky/artdept/ArtDept.java",
   "scripts": {

@@ -2,7 +2,7 @@ Set-ItemProperty -Path target\*.exe -Name IsReadOnly -Value $false
 Remove-Item target\*.exe
 jpackage  `
 --input target\ `
---main-jar sky-launcher-5.0.0-SNAPSHOT.jar `
+--main-jar sky-launcher-5.0.0.jar `
 --main-class info.chrismcgee.sky.artdept.ArtDept `
 --type exe `
 --dest target\ `
